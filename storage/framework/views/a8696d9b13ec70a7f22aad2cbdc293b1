@@ -1,0 +1,62 @@
+
+
+<?php $__env->startSection('title', 'My Listing'); ?>
+
+<?php $__env->startSection('content'); ?>
+	<ol class="breadcrumb">
+	    <li class="">Listing Wizard</li>
+	</ol>
+	<div class="container-fluid">
+		<div data-widget-group="group1">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel panel-info" data-widget='{"draggable": "false"}'>
+						<div class="panel-heading">
+							<h2>Buy / Renews Listing</h2>
+							<div class="panel-ctrls" data-actions-container="" data-action-collapse='{"target": ".panel-body"}'></div>
+						</div>
+						<div class="panel-body">
+							<div class="btn-wrapper">
+								<div class="col-md-2 text-center">
+									<a href="<?php echo e(url('account/listings/buy')); ?>" class="btn btn-success btn-block">BUY</a>
+								</div>
+								<div class="col-md-2 text-center">
+									<a href="<?php echo e(url('account/listings/renew')); ?>" class="btn btn-info btn-block">RENEW</a>
+								</div>
+							</div>
+						</div>
+					</div>
+			    </div>
+			</div>
+		</div>
+	</div>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('page-styles'); ?>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('page-scripts'); ?>
+	<!-- Load page level scripts-->
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('inline-script'); ?>
+	<script type="text/javascript">
+	$(function(){
+		
+	});
+
+		
+	</script>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('inline-style'); ?>
+<style type="text/css">
+	.buy-listing {
+		display: none;
+	}
+	.renew-listing {
+		display: none;
+	}
+</style>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('customer.base', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

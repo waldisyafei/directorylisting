@@ -1,0 +1,140 @@
+
+
+<?php $__env->startSection('title', 'Edit Category'); ?>
+
+<?php $__env->startSection('content'); ?>
+	<ol class="breadcrumb">
+	    <li class=""><a href="<?php echo e(url('app-admin/listings/categories')); ?>">Listings Categories</a></li>
+	    <li>Edit Category</li>
+	</ol>
+	<div class="container-fluid">
+		<div class="row">
+			<?php if(Session::has('error')): ?>
+				<div class="col-md-12">
+					<div class="alert alert-dismissable alert-danger">
+						<i class="ti ti-check"></i>&nbsp; <strong>Oh snap!</strong> <?php echo e(Session::get('error')); ?>.
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+					</div>
+				</div>
+			<?php endif; ?>
+			<?php if(Session::has('success')): ?>
+				<div class="col-md-12">
+					<div class="alert alert-dismissable alert-success">
+						<i class="ti ti-check"></i>&nbsp; <strong>Well Done!</strong> <?php echo e(Session::get('success')); ?>.
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+					</div>
+				</div>
+			<?php endif; ?>
+			<?php if($errors->has()): ?>
+				<div class="col-md-12">
+					<div class="alert alert-dismissable alert-danger">
+						<i class="ti ti-close"></i>&nbsp; <strong>Oh snap!</strong>
+						<ul>
+							<?php foreach($errors->all() as $error): ?>
+								<li><?php echo e($error); ?></li>
+							<?php endforeach; ?>
+						</ul>
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+					</div>
+				</div>
+			<?php endif; ?>
+
+			<form method="post" action="<?php echo e(url('app-admin/listings/categories/edit', $category->id)); ?>" class="form-horizontal" id="form-category">
+				<input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+				<div class="col-md-12">
+					<div class="panel panel-blue">
+						<div class="panel-heading">
+							<h2>Edit Category Form</h2>
+						</div>
+						<div class="panel-body">
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Title</label>
+								<div class="col-sm-8">
+									<input type="text" name="title" value="<?php echo e($category->title); ?>" class="form-control">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Is Main Category?</label>
+								<div class="col-xs-8">
+									<div class="radio">
+										<label>
+											<input type="radio" name="main_cat" class="is-main-cat" value="main"<?php echo $category->parent == 0 ? ' checked' : null; ?>>
+											Main Category
+										</label>
+									</div>
+									<div class="radio">
+										<label>
+											<input type="radio" name="main_cat" class="is-main-cat" value="sub"<?php echo $category->parent > 0 ? ' checked' : null; ?>>
+											Sub Category
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group" id="select-main-cat">
+								<label class="col-sm-2 control-label">Parent</label>
+								<div class="col-sm-8">
+									<select class="form-control" name="parent" autocomplete="off">
+										<option value="choose-category"<?php echo e($category->parent == null ? ' selected' : null); ?>>-- SELECT CATEGORY --</option>
+										<?php
+										$categories = \App\Models\ListingCategory::where('parent', 0)->get();
+										?>
+										<?php foreach($categories as $cat): ?>
+											<option value="<?php echo e($cat->id); ?>"<?php echo $category->parent == $cat->id ? ' selected' : null; ?>><?php echo e($cat->title); ?></option>
+										<?php endforeach; ?>
+									</select>
+								</div>
+							</div>
+						</div>
+						<!-- ./End panel body -->
+
+						<!-- Panel Footer -->
+						<div class="panel-footer">
+							<div class="row">
+								<div class="col-sm-8 col-sm-offset-2">
+									<a href="<?php echo e(url('account/listings')); ?>" class="btn-default btn">Cancel</a>&nbsp;&nbsp;&nbsp;
+									<button class="btn-primary btn">Update</button>
+								</div>
+							</div>
+						</div>
+						<!-- ./End Panel Footer -->
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('page-styles'); ?>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('page-scripts'); ?>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('inline-script'); ?>
+	<script type="text/javascript">
+	$(function(){
+
+		var isMainVal = $('input[name="main_cat"]:checked', '#form-category').val();
+
+		if (isMainVal === 'sub') {
+			$('#select-main-cat').css('display', 'block');
+		} else {
+			$('#select-main-cat').css('display', 'none');
+		}
+
+		$('.is-main-cat').click(function(){
+			if ($(this).val() == 'sub') {
+				$('#select-main-cat').css('display', 'block');
+			} else {
+				$('#select-main-cat').css('display', 'none');
+			}
+		});
+	});
+	</script>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('inline-style'); ?>
+<style type="text/css">
+</style>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('backend.base', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

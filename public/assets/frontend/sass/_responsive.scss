@@ -1,0 +1,74 @@
+
+
+@media(min-width: 992px) {
+	
+	#logo {
+		position: relative;
+		margin-bottom: 0;
+		padding-bottom: 0;
+		z-index: 100;
+	}
+	.ads-spot {
+		margin-bottom: 0;
+	}
+	footer {
+		.footer-menu {
+			float: left;
+			text-align: left;
+			margin-bottom: 0;
+
+			li {
+				display: inline;
+				margin-right: 32px;
+				margin-bottom: 0;
+
+				&:last-child {
+					margin-right: 0;
+				}
+			}
+		}
+		.footer-right {
+			display: inline;
+			float: right;
+			text-align: left;
+		}
+	}
+
+	#search-section {
+		.search-in-cat {
+			float: left;
+			width: 67%;
+			margin-bottom: 0;
+	    	@include border-radius(4px 0 0 4px);
+
+			form {
+				button {
+					padding-left: 21px;
+					padding-right: 21px;
+				}
+
+				input[type="text"] {
+			    	width: 84%;
+				}
+			}
+		}
+		.subscribe {
+			float: right;
+			width: 33%;
+	    	@include border-radius(0 4px 4px 0);
+
+			form {
+				input[type="text"] {
+					width: 62%;
+				}
+			}
+		}
+	}
+}
+
+// Change container size
+@media (min-width: 1200px) {
+	.container {
+		width: 970px;
+	}
+}

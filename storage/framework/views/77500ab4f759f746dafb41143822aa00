@@ -1,0 +1,59 @@
+
+
+<?php $__env->startSection('title', 'Listings Settings'); ?>
+
+<?php $__env->startSection('content'); ?>
+	<ol class="breadcrumb">
+		<li>Settings</li>
+		<li>Listings Settings</li>
+	</ol>
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<?php if(Session::has('success')): ?>
+					<div class="alert alert-success">
+						<?php echo e(Session::get('success')); ?>
+
+					</div>
+				<?php endif; ?>
+				<?php if($errors->has()): ?>
+					<div class="alert alert-danger">
+						<ul>
+							<?php foreach($errors->all() as $error): ?>
+								<li><?php echo e($error); ?></li>
+							<?php endforeach; ?>
+						</ul>
+					</div>
+				<?php endif; ?>
+				<div class="panel panel-blue">
+					<form method="post" action="<?php echo e(url('app-admin/settings/listings')); ?>" class="form-horizontal">
+						<input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+						<div class="panel-heading">
+							<h2>Listings Settings</h2>
+						</div>
+						<div class="panel-body">
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Max content length</label>
+								<div class="col-sm-2">
+									<input type="number" name="content_length" class="form-control" value="<?php echo e(Setting::get('listings.content_length')); ?>">
+								</div>
+							</div>
+						</div>
+
+						<!-- Panel Footer -->
+						<div class="panel-footer">
+							<div class="row">
+								<div class="col-sm-8 col-sm-offset-2">
+									<button class="btn-primary btn">Save</button>
+								</div>
+							</div>
+						</div>
+						<!-- ./End Panel Footer -->
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('backend.base', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
