@@ -8,6 +8,9 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-touch-fullscreen" content="yes">
 
+<!-- Re-Captcha -->
+<script src='https://www.google.com/recaptcha/api.js'></script>
+
 <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600' rel='stylesheet' type='text/css'>
 <link type="text/css" href="{{ asset('assets/backend/plugins/iCheck/skins/minimal/blue.css') }}" rel="stylesheet">
 <link type="text/css" href="{{ asset('assets/backend/fonts/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">

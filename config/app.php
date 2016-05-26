@@ -96,6 +96,7 @@ return [
     */
 
     'log' => 'single',
+    'NoCaptcha' => 'Anhskohbo\NoCaptcha\Facades\NoCaptcha',
 
     /*
     |--------------------------------------------------------------------------
@@ -138,6 +139,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
 
         /*
          * Application Service Providers...

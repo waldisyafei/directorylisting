@@ -1,4 +1,4 @@
-@extends('customer.base')
+@extends('backend.base')
 
 @section('title', 'Edit Listing')
 
@@ -39,7 +39,7 @@
 				</div>
 			@endif
 
-			<form method="post" action="{{ url('account/listings/edit', $listing->id) }}" class="form-horizontal">
+			<form method="post" action="{{ url('app-admin/listings/edit', $listing->id) }}" class="form-horizontal">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				<div class="col-md-12">
 					<div class="panel panel-blue">
@@ -120,7 +120,7 @@
 							<div class="row">
 								<div class="col-sm-8 col-sm-offset-2">
 									<a href="{{ url('account/listings') }}" class="btn-default btn">Cancel</a>&nbsp;&nbsp;&nbsp;
-									<button class="btn-primary btn">Create</button>
+									<button class="btn-primary btn">Update</button>
 								</div>
 							</div>
 						</div>
@@ -159,29 +159,39 @@
 
 		$(document).on('change', '#image-selector', function(e){
 			var file = e.target.files[0];
+			console.log(file);
 			var data = new FormData();
+			var token = '{{ csrf_token() }}';
 
-			data.append('_token', '{{ csrf_token() }}');
+			data.append('_token', token);
 			data.append('image', file);
-
+			data.append('title', 'just title');
+			console.log('{{ url('account/listings/upload_image/') }}' + '{{ csrf_token() }}');
 			$.ajax({
 				method: 'POST',
-				url: '{{ url('account/listings/upload_image') }}',
 				data: data,
+				/*headers:
+   				{
+        			'X-CSRF-Token': $('input[name="_token"]').val()
+    			},*/
+				url: '{{ url('account/listings/upload_image/') }}',
 				cache: false,
-				dataType: 'json',
+				dataType: 'text',
 				processData: false,
 				contentType: false,
 				success: function(data, textStatus, jqXHR) {
-					if (data.status == 'success') {
+					console.log(data);
+					if (textStatus == 'success') {
 						var thumbDom = null;
-
+						console.log('success');
 						thumbDom = '<div class="col-md-3"><div class="thumbnail image-entry">';
 						thumbDom += '<img src="/' +data.relative_thumb_admin_path+'" alt="">';
 						thumbDom += '<input type="hidden" name="images[]" value="'+ data.relative_path +'">';
 						thumbDom += '</div></div>';
 
 						$('.images-list .row').prepend(thumbDom);
+					} else {
+						console.log('not success');
 					}
 				},
 				error: function(jqXHR, textStatus, errorThrown) {

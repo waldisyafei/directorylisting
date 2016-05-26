@@ -1,0 +1,27 @@
+<?php $__env->startSection('title', 'Category'); ?>
+
+<?php $__env->startSection('content'); ?>
+
+	<div class="content">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<br />
+					<div class="alert alert-danger">
+						<h3 style="margin-top: 0;">404, Not Found</h3>
+						<p>The page you're looking is not found.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('page-styles'); ?>
+	<?php /* expr */ ?>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('page-scripts'); ?>
+	<?php /* expr */ ?>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('frontend.base', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

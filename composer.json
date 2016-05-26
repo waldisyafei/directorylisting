@@ -11,8 +11,11 @@
         "kbwebs/multiauth": "~1.0",
         "intervention/image": "^2.3",
         "cviebrock/eloquent-sluggable": "^3.1",
-        "anlutro/l4-settings": "^0.4.5"
+        "anlutro/l4-settings": "^0.4.5",
+        "anhskohbo/no-captcha": "2.*",
+        "mews/captcha": "~2.0"
     },
+    "minimum-stability": "dev",
     "require-dev": {
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",

@@ -251,6 +251,8 @@ class ListingsController extends Controller
 
     public function upload_image(Request $request)
     {
+        //return "berhasil ke server";
+    /*
         if ($request->hasFile('image')) {
             $dir = storage_path().'/app/listings/assets/';
             $file = $request->file('image');
@@ -274,7 +276,7 @@ class ListingsController extends Controller
                 'relative_path' => $relative_path,
                 'relative_thumb_admin_path' => $relative_thumb_admin_path
                 ]);
-        }
+        }*/
     }
 
 

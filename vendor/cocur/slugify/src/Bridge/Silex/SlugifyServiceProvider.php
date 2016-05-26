@@ -32,11 +32,11 @@ class SlugifyServiceProvider implements ServiceProviderInterface
      */
     public function register(Application $app)
     {
-        $app['slugify.options']  = [];
-        $app['slugify.provider'] = null;
+        $app['slugify.regex'] = null;
+        $app['slugify.options'] = array();
 
         $app['slugify'] = $app->share(function ($app) {
-            return new Slugify($app['slugify.options'], $app['slugify.provider']);
+            return new Slugify($app['slugify.regex'], $app['slugify.options']);
         });
 
         if (isset($app['twig'])) {

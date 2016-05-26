@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Listing;
+use Validator;
+use Auth;
+use Storage;
+use Image;
 
 class ListingsController extends Controller
 {
@@ -88,7 +92,15 @@ class ListingsController extends Controller
      */
     public function edit($id)
     {
-        //
+        if (!Auth::user()->get()->can('can_edit_listing')) {
+            return redirect()->back();
+        }
+
+        $listing = Listing::find($id);
+
+        if ($listing) {
+            return view('backend.pages.listing.edit', ['listing' => $listing]);
+        }
     }
 
     /**
@@ -100,7 +112,38 @@ class ListingsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if (!Auth::user()->get()->can('can_edit_listing')) {
+            return redirect()->back();
+        }
+
+        $validation = Validator::make($request->all(), [
+            'title' => 'required'
+            ]);
+
+        if ($validation->fails()) {
+            return redirect()->back()->withInput()->withErrors($validation);
+        }
+        
+        $listing = Listing::find($id);
+
+        if (!$listing) {
+            return abort(404);
+        }
+
+        $listing->title = $request->input('title');
+        if ($request->input('category') != 'choose-category') {
+            $listing->category = $request->input('category');
+        } else {
+            $listing->category = 0;
+        }
+        $listing->content = $request->input('content');
+        $listing->keywords = $request->input('keywords');
+        $listing->tags = $request->input('tags');
+        //$listing->assets = $request->input('assets');
+
+        if ($listing->save()) {
+            return redirect('app-admin/listings/edit/'. $listing->id)->with('success', 'Listing created successfully.');
+        }
     }
 
     /**

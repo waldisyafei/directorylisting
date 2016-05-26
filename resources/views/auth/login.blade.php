@@ -67,6 +67,19 @@
 		                        </div>
 							</div>
 
+							<div class="form-group mb-md">
+		                        <div class="col-xs-12">
+		                        	<div class="input-group">
+										{!! app('captcha')->display(); !!}
+										@if ($errors->has('g-recapchta-response'))
+											<div class="alert alert-dismissable alert-danger">
+												<p>{{ $errors->first('g-recapchta-response') }}</p>
+											</div>
+										@endif
+									</div>
+		                        </div>
+							</div>
+
 							@if ($action !== url('noncust-ads/login'))
 								<div class="form-group mb-n">
 									<div class="col-xs-12">
