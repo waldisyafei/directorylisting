@@ -59,7 +59,11 @@ class ListingsController extends Controller
      */
     public function create()
     {
-        //
+        if (!Auth::user()->get()->can('can_create_listing')) {
+            return redirect()->back();
+        }
+
+        return view('backend.pages.listing.create');
     }
 
     /**
@@ -70,7 +74,34 @@ class ListingsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         if (!Auth::user()->get()->can('can_create_listing')) {
+            return redirect()->back();
+        }
+
+        $validation = Validator::make($request->all(), [
+            'title' => 'required'
+            ]);
+
+        if ($validation->fails()) {
+            return redirect()->back()->withInput()->withErrors($validation);
+        }
+
+        $listing = new Listing;
+
+        $listing->title = $request->input('title');
+        if ($request->input('category') != 'choose-category') {
+            $listing->category = $request->input('category');
+        } else {
+            $listing->category = 0;
+        }
+        $listing->content = $request->input('content');
+        $listing->keywords = $request->input('keywords');
+        $listing->tags = $request->input('tags');
+        //$listing->assets = $request->input('assets');
+
+        if ($listing->save()) {
+            return redirect('app-admin/listings/edit/'. $listing->id)->with('success', 'Listing created successfully.');
+        }
     }
 
     /**

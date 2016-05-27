@@ -90,19 +90,20 @@
 								<div class="col-sm-8">
 									<div class="images-list">
 										<div class="row">
-											<?php $images = json_decode($listing->assets); ?>
-
-											@foreach ($images as $image)
+											<!--<?php //$images = json_decode($listing->assets); ?>
+											
+											@//foreach ($images as $image)
 											<div class="col-sm-3">
 												<div class="thumbnail image-entry">
 													<?php
-													$filename = substr($image, strrpos($image, '/') + 1);
-													$img_entry = str_replace($filename, 'thumb-admin-'.$filename, $image);
+													//$filename = substr($image, strrpos($image, '/') + 1);
+													//$img_entry = str_replace($filename, 'thumb-admin-'.$filename, $image);
 													?>
-													<img src="{{ url($img_entry) }}" alt="">
+													<img src="//------- url($img_entry) }}" alt="">
 												</div>
 											</div>
-											@endforeach
+											@//endforeach-->
+											
 											<div class="col-sm-3">
 												<div class="thumbnail image-entry">
 													<a href="#" id="add-image" class="tooltips" data-trigger="hover" data-original-title="Click to add image(s)"><i class="ti ti-plus"></i></a>

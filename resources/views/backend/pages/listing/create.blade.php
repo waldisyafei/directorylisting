@@ -1,4 +1,4 @@
-@extends('customer.base')
+@extends('backend.base')
 
 @section('title', 'Create New Listing')
 
@@ -31,7 +31,7 @@
 				</div>
 			@endif
 
-			<form method="post" action="{{ url('account/listings/create') }}" class="form-horizontal">
+			<form method="post" action="{{ url('app-admin/listings/create') }}" class="form-horizontal">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				<div class="col-md-12">
 					<div class="panel panel-blue">
