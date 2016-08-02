@@ -40,6 +40,7 @@
 						$action = url('app-admin/auth/login');
 					}
 					?>
+
 					<form method="post" action="<?php echo e($action); ?>" class="form-horizontal" id="validate-form">
 						<input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
 						<div class="panel-body">
@@ -82,7 +83,7 @@
 							<?php if($action !== url('noncust-ads/login')): ?>
 								<div class="form-group mb-n">
 									<div class="col-xs-12">
-										<a href="<?php echo e(url('password/email')); ?>" class="pull-left">Forgot password?</a>
+										<a href="<?php echo e(url('app-admin/password/email')); ?>" class="pull-left">Forgot password?</a>
 										<div class="checkbox-inline icheck pull-right p-n">
 											<label for="">
 												<input type="checkbox" name="remember"></input>

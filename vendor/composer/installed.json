@@ -3771,5 +3771,183 @@
             "no-captcha",
             "recaptcha"
         ]
+    },
+    {
+        "name": "mews/captcha",
+        "version": "2.1.2",
+        "version_normalized": "2.1.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/mewebstudio/captcha.git",
+            "reference": "15d3ddc92c99d4e2cc5aa68afa701c73ad52d75b"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/mewebstudio/captcha/zipball/15d3ddc92c99d4e2cc5aa68afa701c73ad52d75b",
+            "reference": "15d3ddc92c99d4e2cc5aa68afa701c73ad52d75b",
+            "shasum": ""
+        },
+        "require": {
+            "ext-gd": "*",
+            "illuminate/config": "~5.0",
+            "illuminate/filesystem": "~5.0",
+            "illuminate/hashing": "~5.0",
+            "illuminate/support": "~5.0",
+            "intervention/image": "~2.2",
+            "php": ">=5.4"
+        },
+        "require-dev": {
+            "mockery/mockery": "0.9.*",
+            "phpunit/phpunit": "~4.1"
+        },
+        "time": "2016-03-15 12:59:02",
+        "type": "package",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Mews\\Captcha\\": "src/"
+            },
+            "files": [
+                "src/helpers.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Muharrem ERİN",
+                "email": "me@mewebstudio.com",
+                "homepage": "https://github.com/mewebstudio",
+                "role": "Developer"
+            }
+        ],
+        "description": "Laravel 5 Captcha Package",
+        "homepage": "https://github.com/mewebstudio/captcha",
+        "keywords": [
+            "captcha",
+            "laravel5 Captcha",
+            "laravel5 Security"
+        ]
+    },
+    {
+        "name": "maximebf/debugbar",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/maximebf/php-debugbar.git",
+            "reference": "e634fbd32cd6bc3fa0e8c972b52d4bf49bab3988"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/e634fbd32cd6bc3fa0e8c972b52d4bf49bab3988",
+            "reference": "e634fbd32cd6bc3fa0e8c972b52d4bf49bab3988",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0",
+            "psr/log": "^1.0",
+            "symfony/var-dumper": "^2.6|^3.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^4.0|^5.0"
+        },
+        "suggest": {
+            "kriswallsmith/assetic": "The best way to manage assets",
+            "monolog/monolog": "Log using Monolog",
+            "predis/predis": "Redis storage"
+        },
+        "time": "2016-05-15 13:11:34",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.12-dev"
+            }
+        },
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "DebugBar\\": "src/DebugBar/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Maxime Bouroumeau-Fuseau",
+                "email": "maxime.bouroumeau@gmail.com",
+                "homepage": "http://maximebf.com"
+            },
+            {
+                "name": "Barry vd. Heuvel",
+                "email": "barryvdh@gmail.com"
+            }
+        ],
+        "description": "Debug bar in the browser for php application",
+        "homepage": "https://github.com/maximebf/php-debugbar",
+        "keywords": [
+            "debug",
+            "debugbar"
+        ]
+    },
+    {
+        "name": "barryvdh/laravel-debugbar",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/barryvdh/laravel-debugbar.git",
+            "reference": "6f108313617315923f86e89a522ff5f547f5e5c7"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/6f108313617315923f86e89a522ff5f547f5e5c7",
+            "reference": "6f108313617315923f86e89a522ff5f547f5e5c7",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/support": "5.1.*|5.2.*",
+            "maximebf/debugbar": "~1.11.0|~1.12.0",
+            "php": ">=5.5.9",
+            "symfony/finder": "~2.7|~3.0"
+        },
+        "time": "2016-05-18 08:35:04",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.2-dev"
+            }
+        },
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "Barryvdh\\Debugbar\\": "src/"
+            },
+            "files": [
+                "src/helpers.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Barry vd. Heuvel",
+                "email": "barryvdh@gmail.com"
+            }
+        ],
+        "description": "PHP Debugbar integration for Laravel",
+        "keywords": [
+            "debug",
+            "debugbar",
+            "laravel",
+            "profiler",
+            "webprofiler"
+        ]
     }
 ]

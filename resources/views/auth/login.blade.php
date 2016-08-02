@@ -35,6 +35,9 @@
 					if (Request::is('auth-customers/login')) {
 						$action = url('auth-customers/login');
 					}
+					elseif (Request::is('auth-nonsubs/login')) {
+						$action = url('auth-nonsubs/login');
+					}
 					elseif (Request::is('noncust-ads/login')) {
 						$action = url('noncust-ads/login');
 					}
@@ -42,6 +45,7 @@
 						$action = url('app-admin/auth/login');
 					}
 					?>
+
 					<form method="post" action="{{ $action }}" class="form-horizontal" id="validate-form">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<div class="panel-body">
@@ -83,13 +87,14 @@
 							@if ($action !== url('noncust-ads/login'))
 								<div class="form-group mb-n">
 									<div class="col-xs-12">
-										<a href="{{ url('password/email') }}" class="pull-left">Forgot password?</a>
+										<a href="{{ url('app-admin/password/email') }}" class="pull-left">Forgot password?</a>
 										<div class="checkbox-inline icheck pull-right p-n">
 											<label for="">
 												<input type="checkbox" name="remember"></input>
 												Remember me
 											</label>
 										</div>
+										<br/><a href="{{ url('non-subscriber') }}" class="pull-left">Non-Subscriber</a>
 									</div>
 								</div>
 							@endif

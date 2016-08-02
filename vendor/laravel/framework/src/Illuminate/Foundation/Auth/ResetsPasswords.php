@@ -29,13 +29,22 @@ trait ResetsPasswords
      * @return \Illuminate\Http\Response
      */
     public function postEmail(Request $request)
-    {
+    {   
         $this->validate($request, ['email' => 'required|email']);
 
-        $response = Password::sendResetLink($request->only('email'), function (Message $message) {
+        $response = Password::sendResetLink($request->only('email'), function (Message $message) 
+        {
             $message->subject($this->getEmailSubject());
         });
+        
+        echo "<br/>";
+        if($response !=null) {
+            echo "berhasil";
+        }else{
+            echo "gagal". $response;
+        }
 
+        //return redirect()->back()->with('status', trans($response));
         switch ($response) {
             case Password::RESET_LINK_SENT:
                 return redirect()->back()->with('status', trans($response));
@@ -117,5 +126,19 @@ trait ResetsPasswords
         $user->save();
 
         Auth::login($user);
+    }
+
+    /**
+     * Get the post register / login redirect path.
+     *
+     * @return string
+     */
+    public function redirectPath()
+    {
+        if (property_exists($this, 'redirectPath')) {
+            return $this->redirectPath;
+        }
+
+        return property_exists($this, 'redirectTo') ? $this->redirectTo : '/home';
     }
 }

@@ -39,8 +39,13 @@ Route::controllers([
 	'app-admin/auth' => 'Auth\AuthController',
 	'app-admin/password' => 'Auth\PasswordController',
 ]);
+
 Route::controllers([
 	'auth-customers' => 'Auth\AuthCustomersController'
+]);
+
+Route::controllers([
+	'auth-nonsubs' => 'Auth\AuthNonSubscriberController'
 ]);
 
 Route::group(['prefix' => 'app-admin', 'middleware' => 'auth'], function() {
@@ -167,7 +172,7 @@ Route::group(['prefix' => 'app-admin', 'middleware' => 'auth'], function() {
 	});
 
 	Route::get('geo/getZone', 'Backend\BackendController@getZone');
-
+	
 });
 
 Route::group(['prefix' => 'api', 'middleware' => 'auth'], function(){
@@ -189,7 +194,7 @@ Route::group(['prefix' => 'account', 'middleware' => 'authCustomer'], function()
 
 	// Index (Dashboard) of subscriber page
 	Route::get('/', 'Customers\CustomersController@index');
-	Route::get('listing_stats', 'Customers\ListingsController@statistics');
+	//Route::get('listing_stats', 'Customers\ListingsController@statistics');
 
 	Route::group(['prefix' => 'listings'], function(){
 		Route::get('/', 'Customers\ListingsController@index');
@@ -244,5 +249,33 @@ Route::group(['prefix' => 'account', 'middleware' => 'authCustomer'], function()
 
 	Route::group(['prefix' => 'sub-account'], function(){
 		Route::get('/', 'Customers\CustomersController@sub_account');
+	});
+});
+
+Route::group(['prefix' => 'nonsubs', 'middleware' => 'authNonSubscriber'], function() {
+
+	// Index (Dashboard) of subscriber page
+	Route::get('/', 'Nonsubs\NonSubscriberController@index');
+	//Route::get('listing_stats', 'Customers\ListingsController@statistics');
+
+	Route::get('ads-wizard', 'Nonsubs\AdsController@wizard');
+
+	Route::group(['prefix' => 'ads'], function(){
+		Route::get('/', 'Nonsubs\AdsController@index');
+		Route::get('create', 'Nonsubs\AdsController@create');
+		Route::post('create', 'Nonsubs\AdsController@store');
+		Route::get('edit/{id}', 'Nonsubs\AdsController@edit');
+		Route::post('edit/{id}', 'Nonsubs\AdsController@update');
+		Route::get('delete/{id}', 'Nonsubs\AdsController@destroy');
+
+		Route::post('upload_image', 'Nonsubs\AdsController@upload_image');
+
+		Route::get('buy', 'Nonsubs\AdsController@buy');
+		Route::post('buy', 'Nonsubs\AdsController@buy_ads_slot');
+		Route::get('buy/complete', 'Nonsubs\AdsController@buyComplete');
+
+		Route::get('renew', 'Nonsubs\AdsController@renew');
+		Route::post('renew', 'Nonsubs\AdsController@renew_ads_slot');
+		Route::get('renew/complete', 'Nonsubs\AdsController@renewComplete');
 	});
 });

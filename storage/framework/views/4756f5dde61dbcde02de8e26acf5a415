@@ -89,18 +89,19 @@
 									<div class="images-list">
 										<div class="row">
 											<?php $images = json_decode($listing->assets); ?>
-
-											<?php foreach($images as $image): ?>
+											
+											<!--@//foreach ($images as $image)
 											<div class="col-sm-3">
 												<div class="thumbnail image-entry">
 													<?php
-													$filename = substr($image, strrpos($image, '/') + 1);
-													$img_entry = str_replace($filename, 'thumb-admin-'.$filename, $image);
+													//$filename = substr($image, strrpos($image, '/') + 1);
+													//$img_entry = str_replace($filename, 'thumb-admin-'.$filename, $image);
 													?>
-													<img src="<?php echo e(url($img_entry)); ?>" alt="">
+													<img src="{//{ url($img_entry) }}" alt="">
 												</div>
 											</div>
-											<?php endforeach; ?>
+											@//endforeach-->
+											
 											<div class="col-sm-3">
 												<div class="thumbnail image-entry">
 													<a href="#" id="add-image" class="tooltips" data-trigger="hover" data-original-title="Click to add image(s)"><i class="ti ti-plus"></i></a>
@@ -164,22 +165,21 @@
 			data.append('_token', token);
 			data.append('image', file);
 			data.append('title', 'just title');
-			console.log('<?php echo e(url('account/listings/upload_image/')); ?>' + '<?php echo e(csrf_token()); ?>');
 			$.ajax({
 				method: 'POST',
 				data: data,
-				/*headers:
+				headers:
    				{
         			'X-CSRF-Token': $('input[name="_token"]').val()
-    			},*/
+    			},
 				url: '<?php echo e(url('account/listings/upload_image/')); ?>',
 				cache: false,
-				dataType: 'text',
+				//dataType: 'json',
 				processData: false,
 				contentType: false,
 				success: function(data, textStatus, jqXHR) {
 					console.log(data);
-					if (textStatus == 'success') {
+					if (data.status == 'success') {
 						var thumbDom = null;
 						console.log('success');
 						thumbDom = '<div class="col-md-3"><div class="thumbnail image-entry">';

@@ -140,6 +140,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
+        
 
         /*
          * Application Service Providers...
@@ -149,6 +150,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        //Barryvdh\Debugbar\ServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Cviebrock\EloquentSluggable\SluggableServiceProvider::class,
@@ -205,6 +207,7 @@ return [
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
         'Image'     => Intervention\Image\Facades\Image::class,
         'Setting'   => anlutro\LaravelSettings\Facade::class,
+        //'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
     ],
 

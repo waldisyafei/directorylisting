@@ -79,7 +79,11 @@ class ListingsController extends Controller
         }
 
         $validation = Validator::make($request->all(), [
-            'title' => 'required'
+            'title' => 'required',
+            'content' => 'required',
+            'keywords' => 'required',
+            'tags' => 'required',
+            'images' => 'required'
             ]);
 
         if ($validation->fails()) {
@@ -97,7 +101,7 @@ class ListingsController extends Controller
         $listing->content = $request->input('content');
         $listing->keywords = $request->input('keywords');
         $listing->tags = $request->input('tags');
-        //$listing->assets = $request->input('assets');
+        $listing->assets = json_encode($request->input('images'));
 
         if ($listing->save()) {
             return redirect('app-admin/listings/edit/'. $listing->id)->with('success', 'Listing created successfully.');
@@ -148,7 +152,11 @@ class ListingsController extends Controller
         }
 
         $validation = Validator::make($request->all(), [
-            'title' => 'required'
+            'title' => 'required',
+            'content' => 'required',
+            'keywords' => 'required',
+            'tags' => 'required',
+            'images' => 'required'
             ]);
 
         if ($validation->fails()) {
@@ -170,10 +178,10 @@ class ListingsController extends Controller
         $listing->content = $request->input('content');
         $listing->keywords = $request->input('keywords');
         $listing->tags = $request->input('tags');
-        //$listing->assets = $request->input('assets');
-
+        $listing->assets = json_encode($request->input('images'));
+        
         if ($listing->save()) {
-            return redirect('app-admin/listings/edit/'. $listing->id)->with('success', 'Listing created successfully.');
+            return redirect('app-admin/listings/edit/'. $listing->id)->with('success', 'Listing created successfully');
         }
     }
 

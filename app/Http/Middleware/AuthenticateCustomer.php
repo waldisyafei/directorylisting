@@ -19,7 +19,7 @@ class AuthenticateCustomer
     {
         if (Auth::customer()->guest()) {
             if ($request->ajax()) {
-                return response('Unauthorized.', 401);
+                //return response('Unauthorized.', 401);
             } else {
                 return redirect()->guest('auth-customers/login');
             }

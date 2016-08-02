@@ -11,7 +11,7 @@
 				<div class="panel-heading">
 					<h2>Login Form</h2>
 				</div>
-				<form method="post" action="{{ url('/password/email') }}" class="form-horizontal">
+				<form method="post" action="{{ url('app-admin/password/email') }}" class="form-horizontal">
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
 					<div class="panel-body">
 						@if (session('status'))
@@ -30,6 +30,7 @@
 								</ul>
 							</div>
 						@endif
+
 						<div class="form-group mb-n">
 	                        <div class="col-xs-12">
 	                        	<p>Enter your email to reset your password</p>
@@ -44,7 +45,7 @@
 					</div>
 					<div class="panel-footer">
 						<div class="clearfix">
-							<a href="{{ url('auth/login') }}" class="btn btn-default pull-left">Go Back</a>
+							<a href="{{ url('app-admin/auth/login') }}" class="btn btn-default pull-left">Go Back</a>
 							<button type="submit" class="btn btn-primary pull-right">Reset</button>
 						</div>
 					</div>

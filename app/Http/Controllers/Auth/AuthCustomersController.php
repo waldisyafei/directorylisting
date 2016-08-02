@@ -93,4 +93,28 @@ class AuthCustomersController extends Controller
                 'email' => $this->getFailedLoginMessage(),
             ]);
     }
+
+    public function login(Request $request)
+    {
+        $rules = [
+            'email' => 'required|min:5',
+            'password' => 'required'
+        ];
+
+        $validation = Validator::make($request->only('email', 'password'), $rules);
+
+        if ($validation->fails()) {
+            return redirect($this->loginPath())->withInput($request->only('email', 'remember'))->withErrors($validation);
+        }
+
+        if (Auth::customer()->attempt(['pic_email' => $request->input('email'), 'password' => $request->input('password')], $request->has('remember'))) {
+            return redirect()->intended($this->redirectPath());
+        }
+
+        return redirect($this->loginPath())
+            ->withInput($request->only('email', 'remember'))
+            ->withErrors([
+                'email' => $this->getFailedLoginMessage(),
+            ]);
+    }
 }

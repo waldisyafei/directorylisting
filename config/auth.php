@@ -67,6 +67,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Customer::class
         ],
+        'nonsubs' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\NonSubscriber::class
+        ],
     ],
 
     'password' => [

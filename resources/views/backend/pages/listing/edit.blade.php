@@ -90,16 +90,16 @@
 								<div class="col-sm-8">
 									<div class="images-list">
 										<div class="row">
-											<!--<?php //$images = json_decode($listing->assets); ?>
+											<?php $images = json_decode($listing->assets); ?>
 											
-											@//foreach ($images as $image)
+											<!--@//foreach ($images as $image)
 											<div class="col-sm-3">
 												<div class="thumbnail image-entry">
 													<?php
 													//$filename = substr($image, strrpos($image, '/') + 1);
 													//$img_entry = str_replace($filename, 'thumb-admin-'.$filename, $image);
 													?>
-													<img src="//------- url($img_entry) }}" alt="">
+													<img src="{//{ url($img_entry) }}" alt="">
 												</div>
 											</div>
 											@//endforeach-->
@@ -167,22 +167,21 @@
 			data.append('_token', token);
 			data.append('image', file);
 			data.append('title', 'just title');
-			console.log('{{ url('account/listings/upload_image/') }}' + '{{ csrf_token() }}');
 			$.ajax({
 				method: 'POST',
 				data: data,
-				/*headers:
+				headers:
    				{
         			'X-CSRF-Token': $('input[name="_token"]').val()
-    			},*/
+    			},
 				url: '{{ url('account/listings/upload_image/') }}',
 				cache: false,
-				dataType: 'text',
+				//dataType: 'json',
 				processData: false,
 				contentType: false,
 				success: function(data, textStatus, jqXHR) {
 					console.log(data);
-					if (textStatus == 'success') {
+					if (data.status == 'success') {
 						var thumbDom = null;
 						console.log('success');
 						thumbDom = '<div class="col-md-3"><div class="thumbnail image-entry">';

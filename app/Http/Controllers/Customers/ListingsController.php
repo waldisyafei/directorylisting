@@ -252,17 +252,17 @@ class ListingsController extends Controller
     public function upload_image(Request $request)
     {
         //return "berhasil ke server";
-    /*
+    
         if ($request->hasFile('image')) {
             $dir = storage_path().'/app/listings/assets/';
             $file = $request->file('image');
             $file_name = preg_replace("/[^A-Z0-9._-]/i", "_", $file->getClientOriginalName());
             $thumb_admin = 'thumb-admin-'.$file_name;
             $thumb = 'thumb-'.$file_name;
-            $relative_path = 'storage/app/listings/assets/'.$file_name;
-            $relative_thumb_admin_path = 'storage/app/listings/assets/'.$thumb_admin;
-            $relative_path = 'storage/app/listings/assets/'.$file_name;
-
+            $relative_path = 'storage/app/listings/assets/assets/'.$file_name;
+            $relative_thumb_admin_path = 'storage/app/listings/assets/assets/'.$thumb_admin;
+            $relative_path = 'storage/app/listings/assets/assets/'.$file_name;
+            
             if (!Storage::disk('local')->exists('listings/assets')) {
                 Storage::makeDirectory('listings/assets');
             }
@@ -276,7 +276,7 @@ class ListingsController extends Controller
                 'relative_path' => $relative_path,
                 'relative_thumb_admin_path' => $relative_thumb_admin_path
                 ]);
-        }*/
+        }
     }
 
 
