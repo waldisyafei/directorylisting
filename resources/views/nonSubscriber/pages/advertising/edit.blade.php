@@ -5,8 +5,8 @@
 @section('content')
 	<h3 class="page-title">Edit Ad</h3>
 	<ol class="breadcrumb">
-	    <li><a href="{{ url('app-admin') }}">Dashboard</a></li>
-	    <li><a href="{{ url('app-admin/ads') }}">Ads</a></li>
+	    <li><a href="{{ url('nonsubs') }}">Dashboard</a></li>
+	    <li><a href="{{ url('nonsubs/ads') }}">Ads</a></li>
 	    <li class="active"><span>Edit Ad</span></li>
 	</ol>
 
@@ -44,7 +44,7 @@
 					if (Request::is('noncust-ads*')) {
 						$action = $ad->noncust_ad_link;
 					} else {
-						$action = url('account/ads/edit', $ad->id);
+						$action = url('nonsubs/ads/edit', $ad->id);
 					}
 					?>
 
@@ -104,7 +104,7 @@
 							<div class="row">
 								<div class="col-sm-8 col-sm-offset-2">
 									@if (!Request::is('noncust-ads*'))
-										<a href="{{ url('app-admin/ads') }}" class="btn-default btn">Cancel</a>&nbsp;&nbsp;&nbsp;
+										<a href="{{ url('nonsubs/ads') }}" class="btn-default btn">Cancel</a>&nbsp;&nbsp;&nbsp;
 									@endif
 									<button class="btn-primary btn">Update</button>
 								</div>

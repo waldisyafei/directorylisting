@@ -56,7 +56,7 @@
 											<img class="img-thumbnail" src="<?php echo e(asset($img_entry)); ?>" width="70" height="70">
 										<?php endif ?>
 									</td>
-									<td><a href="<?php echo e(url('account/ads/edit', $ad->id)); ?>"><?php echo e($ad->title); ?></a></td>
+									<td><a href="<?php echo e(url('nonsubs/ads/edit', $ad->id)); ?>"><?php echo e($ad->title); ?></a></td>
 									<td>
 										<?php $status = $ad->adStatus->id; ?>
 										<?php if($status == 1): ?>
@@ -112,7 +112,7 @@
 										<?php endif ?>
 									</td>
 									<td>
-                                        <a href="<?php echo e(url('account/ads/edit', $ad->id)); ?>" class="btn btn-primary-alt btn-sm"><i class="ti ti-pencil"></i>&nbsp;Edit</a>
+                                        <a href="<?php echo e(url('nonsubs/ads/edit', $ad->id)); ?>" class="btn btn-primary-alt btn-sm"><i class="ti ti-pencil"></i>&nbsp;Edit</a>
 									</td>
 								</tr>
 							<?php endforeach ?>

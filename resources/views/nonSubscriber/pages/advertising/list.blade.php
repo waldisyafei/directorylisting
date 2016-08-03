@@ -58,7 +58,7 @@
 											<img class="img-thumbnail" src="{{ asset($img_entry) }}" width="70" height="70">
 										<?php endif ?>
 									</td>
-									<td><a href="{{ url('account/ads/edit', $ad->id) }}">{{ $ad->title }}</a></td>
+									<td><a href="{{ url('nonsubs/ads/edit', $ad->id) }}">{{ $ad->title }}</a></td>
 									<td>
 										<?php $status = $ad->adStatus->id; ?>
 										@if ($status == 1)
@@ -114,7 +114,7 @@
 										<?php endif ?>
 									</td>
 									<td>
-                                        <a href="{{ url('account/ads/edit', $ad->id) }}" class="btn btn-primary-alt btn-sm"><i class="ti ti-pencil"></i>&nbsp;Edit</a>
+                                        <a href="{{ url('nonsubs/ads/edit', $ad->id) }}" class="btn btn-primary-alt btn-sm"><i class="ti ti-pencil"></i>&nbsp;Edit</a>
 									</td>
 								</tr>
 							<?php endforeach ?>
