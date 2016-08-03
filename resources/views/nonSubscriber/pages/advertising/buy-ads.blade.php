@@ -18,10 +18,10 @@
 						<div class="panel-body">
 							<div class="btn-wrapper">
 								<div class="col-md-2 text-center">
-									<a href="{{ url('account/ads/buy') }}" class="btn btn-success btn-block">BUY</a>
+									<a href="{{ url('nonsubs/ads/buy') }}" class="btn btn-success btn-block">BUY</a>
 								</div>
 								<div class="col-md-2 text-center">
-									<a href="{{ url('account/ads/renew') }}" class="btn btn-info btn-block">RENEW</a>
+									<a href="{{ url('nonsubs/ads/renew') }}" class="btn btn-info btn-block">RENEW</a>
 								</div>
 							</div>
 						</div>
