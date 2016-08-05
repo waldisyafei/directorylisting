@@ -274,8 +274,8 @@ Route::group(['prefix' => 'nonsubs', 'middleware' => 'authNonSubscriber'], funct
 		Route::post('buy', 'Nonsubs\AdsController@buy_ads_slot');
 		Route::get('buy/complete', 'Nonsubs\AdsController@buyComplete');
 
-		Route::get('renew', 'Nonsubs\AdsController@renew');
-		Route::post('renew', 'Nonsubs\AdsController@renew_ads_slot');
+		Route::get('renew/{id}', 'Nonsubs\AdsController@renew');
+		Route::post('renew/{id}', 'Nonsubs\AdsController@renew_ads_slot');
 		Route::get('renew/complete', 'Nonsubs\AdsController@renewComplete');
 	});
 });

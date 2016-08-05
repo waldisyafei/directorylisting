@@ -59,7 +59,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-2 control-label">Ad Link</label>
+								<label class="col-sm-2 control-label">URL Link</label>
 								<div class="col-sm-8">
 									<input type="text" name="link" class="form-control" value="{{ $ad->link }}">
 								</div>

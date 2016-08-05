@@ -39,9 +39,9 @@
 									<th width="100">Title</th>
 									<th width="100">Status</th>
 									<th>Sisa Tampil</th>
-									<th width="100">Show Date</th>
+									<th width="100">URL Link</th>
 									<th width="100">Expired Date</th>
-									<th width="50">Action</th>
+									<th width="150">Action</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -107,7 +107,7 @@
 										<?php endif ?>
 											
 									</td>
-									<td>{{ $ad->show_date != '' ? date('d M Y H:i', strtotime($ad->show_date)) : null }}</td>
+									<td><?php if( $ad->link )echo $ad->link; ?></td>
 									<td>
 										<?php if ($ad->status != 1 && $ad->status != 5 && $ad->status != 6): ?>
 											<?php echo date('d M Y H:i', strtotime($ad->expired_date)) ?>
@@ -115,6 +115,7 @@
 									</td>
 									<td>
                                         <a href="{{ url('nonsubs/ads/edit', $ad->id) }}" class="btn btn-primary-alt btn-sm"><i class="ti ti-pencil"></i>&nbsp;Edit</a>
+                                        <a href="{{ url('nonsubs/ads/renew', $ad->id) }}" class="btn btn-primary-alt btn-sm"><i class="ti ti-pencil"></i>&nbsp;Renew</a>
 									</td>
 								</tr>
 							<?php endforeach ?>

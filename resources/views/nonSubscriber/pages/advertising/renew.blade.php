@@ -4,7 +4,7 @@
 
 @section('content')
 	<ol class="breadcrumb">
-	    <li class=""><a href="{{ url('account/listings') }}">Buy Ads Slot</a></li>
+	    <li class=""><a href="{{ url('nonsubs/listings') }}">Buy Ads Slot</a></li>
 	    <li>Buy</li>
 	</ol>
 	<div class="container-fluid">
@@ -45,12 +45,12 @@
 					</div>
 					<div class="panel-body">
 						<p>You are select buy new Ads, please follow the steps to finish</p>
-						<form action="{{ url('nonsubs/ads/renew') }}" method="post" id="buy-ads-wizard" class="form-horizontal">
+						<form action="{{ url('nonsubs/ads/renew/{id}') }}" method="post" id="buy-ads-wizard" class="form-horizontal">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
 							<fieldset title="Step 1">
 								<legend>How Long Ads to show</legend>
-								<?php if ($ads): ?>
-									<?php foreach ($ads as $ad): ?>
+								<?php if ($ad): ?>
+									<?php //foreach ($ads as $ad): ?>
 										<div class="listing-entry first">
 											<div class="form-group">
 												<label class="col-sm-2 control-label">Ads ID</label>
@@ -71,7 +71,7 @@
 											</div>
 											<p class="listing-package-info"></p>
 										</div>
-									<?php endforeach ?>
+									<?php //endforeach ?>
 								<?php endif ?>
 							</fieldset>
 							<fieldset title="Step 2">
@@ -106,7 +106,35 @@
 @section('inline-script')
 	<script type="text/javascript">
 	$(function(){
-		$('body').on('change', '.days', function(){
+		$(document).on('ready', function(){
+					var infoOrders = '';
+					var totalHarga = 0;
+
+					$('.days').each(function(k, v){
+						if ($(this).val() !== '0') {
+							var discount = parseInt($(this).data('discount'));
+							var harga = parseFloat($(this).data('price')) * parseInt($(this).val());
+							var potonganHarga = discount / 100 * harga;
+							var hargaDikurangDiscount = harga - potonganHarga;
+
+							infoOrders += '<div class="panel panel-bluegraylight"><div class="panel-heading"><h2>Ads Slot '+ (k + 1) + '</h2></div>';
+							infoOrders += '<div class="panel-body"><table class="table table-stripped">';
+							infoOrders += '<tr><td width="100">Tayang</td><td>'+$(this).val()+' Hari</td>';
+							infoOrders += '<tr><td width="100">Catatan</td><td>'+$(this).data('notes')+'</td>';
+							infoOrders += '<tr><td width="100">Harga</td><td>Rp '+ hargaDikurangDiscount.format() +'</td>';
+							infoOrders += '<tr><td width="100">Discount</td><td>'+$(this).data('discount')+'%</td>';
+							infoOrders += '</table>';
+							infoOrders += '</div></div>';
+							totalHarga = totalHarga + hargaDikurangDiscount;
+						}
+					});
+
+					$('.info-order-list .col-md-6 .panel').remove();
+
+					$('.info-order-list .col-md-6').append(infoOrders);
+		
+		$('body').on('click', '.days', function(){
+					$('.info-order-list .col-md-6 .panel').remove();
 					var infoOrders = '';
 					var totalHarga = 0;
 
@@ -139,6 +167,7 @@
 						$('.info-order-list').after('<div class="alert alert-inverse clearfix"><div class="col-md-10 text-right"><strong style="color: #000;">Total Harga:</strong></div><div class="col-md-2 text-right"><strong style="color: #000;">Rp '+totalHarga.format()+'</strong></div></div>');
 					}
 				});
+	});
 		/*$('#buy-ads-wizard').stepy(
 			{finishButton: true,
 				titleClick: true,

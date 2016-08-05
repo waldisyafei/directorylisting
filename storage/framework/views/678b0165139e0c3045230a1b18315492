@@ -27,7 +27,7 @@
     					<!-- Ads -->
                         <li><a href="javascript:;"><i class="ti ti-layout-accordion-list"></i><span>ADS</span></a>
                         	<ul class="acc-menu">
-                        		<li><a href="<?php echo url('nonsubs/ads-wizard') ?>">Buy / Renew</a></li>
+                        		<li><a href="<?php echo url('nonsubs/ads-wizard') ?>">Buy Ads</a></li>
                         		<li><a href="<?php echo url('nonsubs/ads') ?>">Ads Management</a></li>
                         	</ul>
                         </li>

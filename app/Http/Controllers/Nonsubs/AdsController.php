@@ -192,7 +192,7 @@ class AdsController extends Controller
 
     public function wizard()
     {
-        return view('nonSubscriber.pages.advertising.buy-ads');
+        return view('nonSubscriber.pages.advertising.buy');
     }
 
     public function buy()
@@ -243,11 +243,23 @@ class AdsController extends Controller
         return view('nonSubscriber.pages.advertising.buy-complete', array('ads' => $ads));
     }
 
-    public function renew()
+    public function renew($id)
     {
-        $ads = Ad::where('customer_id', Auth::nonsubs()->get()->nonsubs_id)->get();
+        $ad = Ad::find($id);
 
-        return view('nonSubscriber.pages.advertising.renew', array('ads' => $ads));
+        if (!$ad) {
+            return abort(404);
+        }
+
+        /*if ($ad->status == 1) {
+            return redirect()->back()->with('error', 'Unable to process this request. [Payment Not Completed]');
+        }*/
+
+        return view('nonSubscriber.pages.advertising.renew', ['ad' => $ad]);
+
+        /*$ads = Ad::where('customer_id', Auth::nonsubs()->get()->nonsubs_id)->get();
+
+        */return view('nonSubscriber.pages.advertising.renew', array('ads' => $ads));
     }
 
     public function renew_ads_slot(Request $request)
