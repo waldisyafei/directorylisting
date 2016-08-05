@@ -68,6 +68,7 @@
 								<label class="col-sm-2 control-label">Show Date</label>
 								<div class="col-sm-8">
 									<input type="text" name="show_date" value="{{ $ad->show_date }}" class="form-control">
+									<input type="text" name="expired_date" value="{{ $ad->expired_date }}" class="form-control">
 								</div>
 							</div>
 
@@ -147,6 +148,20 @@
 		});
 
 		$('input[name="show_date"]').datetimepicker({format: 'yyyy-mm-dd hh:ii'});
+	});
+
+	$(function(){
+		var dataPrice = parseInt($('#package-id').find(':selected').data('price'));
+
+		$('.package-info').html('<i class="ti ti-info-alt"></i>&nbsp;'+$('#package-id :selected').data('notes'));
+
+		$('#package-id').change(function(){
+			dataPrice = parseInt($('#package-id').find(':selected').data('price'));
+
+			$('.package-info').html('<i class="ti ti-info-alt"></i>&nbsp;'+$('#package-id :selected').data('notes'));
+		});
+
+		$('input[name="expired_date"]').datetimepicker({format: 'yyyy-mm-dd hh:ii'});
 	});
 
 	Number.prototype.formatMoney = function(c, d, t){

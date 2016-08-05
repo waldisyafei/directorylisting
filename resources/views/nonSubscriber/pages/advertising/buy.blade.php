@@ -107,6 +107,7 @@
 @section('inline-script')
 	<script type="text/javascript">
 	$(function(){
+
 		$(document).on('ready', function(){
 				$('body').on('click', '.days', function(){
 					$('.info-order-list .col-md-6 .panel').remove();
@@ -114,6 +115,18 @@
 					var totalHarga = 0;
 
 					$('.days').each(function(k, v){
+						var thiss = $('.days').length;
+						console.log(thiss);
+						if (thiss == 1 ){
+							//the are only one ads slot
+
+						}else{
+							var days = $('.days');
+							for (var i = 0; i < days.length; i++) {
+								days.eq(i).attr('name', 'ads[' + i + '][days]');
+								console.log(days);
+							}
+						}
 						if ($(this).val() !== '0') {
 							var discount = parseInt($(this).data('discount'));
 							var harga = parseFloat($(this).data('price')) * parseInt($(this).val());
