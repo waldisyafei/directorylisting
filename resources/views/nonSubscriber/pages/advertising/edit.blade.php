@@ -64,14 +64,13 @@
 									<input type="text" name="link" class="form-control" value="{{ $ad->link }}">
 								</div>
 							</div>
-							<div class="form-group">
+							<div class="row form-inline">
 								<label class="col-sm-2 control-label">Show Date</label>
 								<div class="col-sm-8">
-									<input type="text" name="show_date" value="{{ $ad->show_date }}" class="form-control">
+									<input type="text" name="show_date" value="{{ $ad->show_date }}" class="form-control"> End Date 
 									<input type="text" name="expired_date" value="{{ $ad->expired_date }}" class="form-control">
 								</div>
 							</div>
-
 							<div class="form-group">
 								<label class="col-sm-2 control-label">Images</label>
 								<div class="col-sm-8">
@@ -147,7 +146,12 @@
 			$('.package-info').html('<i class="ti ti-info-alt"></i>&nbsp;'+$('#package-id :selected').data('notes'));
 		});
 
-		$('input[name="show_date"]').datetimepicker({format: 'yyyy-mm-dd hh:ii'});
+		$('input[name="show_date"]')
+			.datetimepicker({
+				format: 'yyyy-mm-dd 00:00:00',
+				autoclose: true,
+				minView:2
+			});
 	});
 
 	$(function(){
@@ -161,7 +165,12 @@
 			$('.package-info').html('<i class="ti ti-info-alt"></i>&nbsp;'+$('#package-id :selected').data('notes'));
 		});
 
-		$('input[name="expired_date"]').datetimepicker({format: 'yyyy-mm-dd hh:ii'});
+		$('input[name="expired_date"]')
+			.datetimepicker({
+				format: 'yyyy-mm-dd 00:00:00',
+				autoclose: true,
+				minView:2
+			});
 	});
 
 	Number.prototype.formatMoney = function(c, d, t){

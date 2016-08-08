@@ -63,6 +63,7 @@ class AdsController extends Controller
         $ad->link = $request->input('link');
         $ad->nonsubs_id = Auth::nonsubs()->get()->nonsubs_id;
         $ad->show_date = $request->input('show_date');
+        $ad->expired_date = $request->input('expired_date');
         $stop_date = Package::find($request->input('package_id'))->days;
         $ad->expire_date = date('Y-m-d H:i:s', strtotime($request->input('show_date') . ' +'. $stop_date .' day'));
 
@@ -150,6 +151,7 @@ class AdsController extends Controller
         $ad->link = $request->input('link');
         $ad->customer_id = Auth::nonsubs()->get()->nonsubs_id;
         $ad->show_date = $request->input('show_date');
+        $ad->expired_date = $request->input('expired_date');
         $ad->status = 2;
         
         if ($request->hasFile('image')) {
@@ -259,7 +261,7 @@ class AdsController extends Controller
 
         /*$ads = Ad::where('customer_id', Auth::nonsubs()->get()->nonsubs_id)->get();
 
-        */return view('nonSubscriber.pages.advertising.renew', array('ads' => $ads));
+        *///return view('nonSubscriber.pages.advertising.renew', array('ads' => $ads));
     }
 
     public function renew_ads_slot(Request $request)
