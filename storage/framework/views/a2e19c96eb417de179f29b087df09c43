@@ -6,6 +6,56 @@
 	</ol>
 	<div class="container-fluid">
 		<div class="row">
+			<div class="col-md-4">
+				<div class="info-tile tile-orange">
+					<div class="tile-icon"><i class="ti ti-layout-list-thumb-alt"></i></div>
+					<div class="tile-heading"><span>Active Listings</span></div>
+					<div class="tile-body"><span><?php echo getSubscriberListings('active')->count(); ?></span></div>
+					<!-- <div class="tile-footer"><span class="text-success">22.5% <i class="fa fa-level-up"></i></span></div> -->
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="info-tile tile-orange">
+					<div class="tile-icon"><i class="ti ti-layout-list-thumb-alt"></i></div>
+					<div class="tile-heading"><span>Almost Expire Listings</span></div>
+					<div class="tile-body">
+						<span>
+							<?php 
+								//echo getSubscriberListings('active')->count();
+								$listings = App\Models\Listing::where('customer_id', Auth::customer()->get()->customer_id)->orderby('created_at', 'DESC')->get();
+								$expired_listings = array();
+								$almost_expired_listings = array();
+								foreach ($listings as $listing) {
+									$listing_date = explode("-", $listing->expired_date);//print_r($listing_date);
+									if ($listing_date[0] >= date('Y')) {
+										if ($listing_date[1] >= date('m')) {
+												$L_date = explode(" ", $listing_date[2]);// print_r($L_date);die();
+											if ($L_date[0] > date('d') && $L_date[0] <= date('d')) {
+												$almost_expired_listings[] = $listing->id;
+												//echo "ada ";print_r($expired_listings); echo "OOEKKEKEKEKEKEK";
+												//die();
+											}
+										} 
+									}
+								}
+								echo count($almost_expired_listings);
+							?>
+						</span>
+					</div>
+					<!-- <div class="tile-footer"><span class="text-success">22.5% <i class="fa fa-level-up"></i></span></div> -->
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="info-tile tile-orange">
+					<div class="tile-icon"><i class="ti ti-layout-list-thumb-alt"></i></div>
+					<div class="tile-heading"><span>Expired Listings</span></div>
+					<div class="tile-body"><span><?php echo getSubscriberListings('expired')->count(); ?></span></div>
+					<!-- <div class="tile-footer"><span class="text-success">22.5% <i class="fa fa-level-up"></i></span></div> -->
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
 	        <div class="col-md-12">
 	            <div class="panel panel-default" data-widget='{"draggable": "false"}'>
 	                <div class="panel-heading">
@@ -14,7 +64,6 @@
 	                    	<div class="dataTables_filter pull-right">
 	                    		<label class="panel-ctrls-center">
 	                    			<select class="form-control" id="choose-listing">
-		                    		<?php $listings = App\Models\Listing::where('customer_id', Auth::customer()->get()->customer_id)->orderby('created_at', 'DESC')->get(); ?>
 
 		                    		<?php foreach ($listings as $listing): ?>
 		                    			<option value="<?php echo $listing->id ?>"><?php echo $listing->title ?></option>

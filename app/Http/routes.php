@@ -194,7 +194,7 @@ Route::group(['prefix' => 'account', 'middleware' => 'authCustomer'], function()
 
 	// Index (Dashboard) of subscriber page
 	Route::get('/', 'Customers\CustomersController@index');
-	//Route::get('listing_stats', 'Customers\ListingsController@statistics');
+	Route::get('listing_stats', 'Customers\ListingsController@statistics');
 
 	Route::group(['prefix' => 'listings'], function(){
 		Route::get('/', 'Customers\ListingsController@index');
@@ -205,6 +205,7 @@ Route::group(['prefix' => 'account', 'middleware' => 'authCustomer'], function()
 		Route::get('delete/{id}', 'Customers\ListingsController@destroy');
 
 		Route::post('upload_image', 'Customers\ListingsController@upload_image');
+		//Route::post('listing_stats', 'Customers\ListingsController@upload_image');
 
 
 		Route::get('buy', 'Customers\ListingsController@buy');

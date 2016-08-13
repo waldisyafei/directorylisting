@@ -24,6 +24,17 @@ function getListings($status)
 	return $listings;
 }
 
+function getSubscriberListings($status)
+{
+	$listingStatus = ListingStatus::where('name', $status)->first();
+
+	$listings = Listing::where('status', $listingStatus->id)
+		->where('customer_id', Auth::customer()->get()->customer_id)
+		->get();
+		
+	return $listings;
+}
+
 function add_listing_meta($key, $value, $listingId)
 {
 	$meta = new ListingMeta;

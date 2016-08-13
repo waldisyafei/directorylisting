@@ -252,6 +252,10 @@ class ListingsController extends Controller
     public function upload_image(Request $request)
     {
         //return "berhasil ke server";
+
+        if (!$request->ajax()) {
+            return abort(403);
+        }
     
         if ($request->hasFile('image')) {
             $dir = storage_path().'/app/listings/assets/';
