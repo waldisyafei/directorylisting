@@ -68,6 +68,11 @@
 									<button type="button" class="add-listing-entry btn tooltips" title="Add New Listing Slot"><i class="fa fa-plus"></i></button>
 									<button type="button" class="remove-listing-entry btn tooltips" title="Remove Slot"><i class="fa fa-close"></i></button>
 								</div>
+
+								<legend>RINCIAN HARGA</legend>
+								<div class="info-price-list clearfix">
+
+								</div>
 							</fieldset>
 							<fieldset title="Step 2">
 								<legend>Info Order</legend>
@@ -101,6 +106,34 @@
 <?php $__env->startSection('inline-script'); ?>
 	<script type="text/javascript">
 	$(function(){
+			$(document).on('ready', function(){
+				$('body').on('change', '.select-package', function(){
+					var infoOrders = '';
+					var totalHarga = 0;
+
+					$('.select-package').each(function(k, v){
+						var selectedPackage = $(this).find(':selected');
+						var discount = parseInt(selectedPackage.data('discount'));
+						var harga = parseFloat(selectedPackage.data('price'));
+						var potonganHarga = discount / 100 * harga;
+						var hargaDikurangDiscount = harga - potonganHarga;
+
+						if ($(this).val() !== '') {
+							infoOrders += '<div class="panels row">';
+							infoOrders += '<div class="col-md-6 text-left">';
+							infoOrders += '<span style="padding-right:5em;">Listing Slot '+ (k + 1) + '</span>' ;
+							infoOrders += '<strong style="color: #000;">Rp '+hargaDikurangDiscount.format()+'</strong></div>' ;
+							
+							infoOrders += '</div></div>';
+							totalHarga = totalHarga + hargaDikurangDiscount;
+						}
+					});
+
+					$('.info-price-list .panels').remove();
+
+					$('.info-price-list').append(infoOrders);
+				});
+			});
 		$('#buy-listing-wizard').stepy(
 			{finishButton: true,
 				titleClick: true,
