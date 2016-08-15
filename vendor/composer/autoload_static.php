@@ -7,19 +7,18 @@ namespace Composer\Autoload;
 class ComposerStaticInit0ad4f2eaed6abdfdd6f2b8275d38712d
 {
     public static $files = array (
-        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '1d1b89d124cc9cb8219922c9d5569199' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest.php',
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
         'bd9634f2d41831496de0d3dfe4c94881' => __DIR__ . '/..' . '/symfony/polyfill-php56/bootstrap.php',
-        '65fec9ebcfbb3cbb4fd0d519687aea01' => __DIR__ . '/..' . '/danielstjules/stringy/src/Create.php',
         'e7223560d890eab89cda23685e711e2c' => __DIR__ . '/..' . '/psy/psysh/src/Psy/functions.php',
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
+        '65fec9ebcfbb3cbb4fd0d519687aea01' => __DIR__ . '/..' . '/danielstjules/stringy/src/Create.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
         '5e8fe2a5ffaded85af682684fe3bbf5a' => __DIR__ . '/..' . '/mews/captcha/src/helpers.php',
-        '4a1f389d6ce373bda9e57857d3b61c84' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/helpers.php',
         '03dcfabcb1d6580b15c538bf5b258558' => __DIR__ . '/../..' . '/app/Libraries/Helper.php',
         '2bc9b150bfe7fb48783113a778904b8b' => __DIR__ . '/../..' . '/app/Libraries/AdsHelper.php',
         '0f7adf9abb8ad3431390f20b3996fdbe' => __DIR__ . '/../..' . '/app/Libraries/BillingHelper.php',
@@ -27,6 +26,10 @@ class ComposerStaticInit0ad4f2eaed6abdfdd6f2b8275d38712d
     );
 
     public static $prefixLengthsPsr4 = array (
+        'p' => 
+        array (
+            'phpDocumentor\\Reflection\\' => 25,
+        ),
         'a' => 
         array (
             'anlutro\\LaravelSettings\\' => 24,
@@ -38,6 +41,10 @@ class ComposerStaticInit0ad4f2eaed6abdfdd6f2b8275d38712d
         'X' => 
         array (
             'XdgBaseDir\\' => 11,
+        ),
+        'W' => 
+        array (
+            'Webmozart\\Assert\\' => 17,
         ),
         'S' => 
         array (
@@ -63,6 +70,7 @@ class ComposerStaticInit0ad4f2eaed6abdfdd6f2b8275d38712d
         'P' => 
         array (
             'Psy\\' => 4,
+            'Psr\\Log\\' => 8,
             'Psr\\Http\\Message\\' => 17,
             'PhpParser\\' => 10,
         ),
@@ -95,7 +103,6 @@ class ComposerStaticInit0ad4f2eaed6abdfdd6f2b8275d38712d
         'D' => 
         array (
             'Doctrine\\Instantiator\\' => 22,
-            'DebugBar\\' => 9,
         ),
         'C' => 
         array (
@@ -103,10 +110,6 @@ class ComposerStaticInit0ad4f2eaed6abdfdd6f2b8275d38712d
             'Cocur\\Slugify\\' => 14,
             'ClassPreloader\\' => 15,
             'Carbon\\' => 7,
-        ),
-        'B' => 
-        array (
-            'Barryvdh\\Debugbar\\' => 18,
         ),
         'A' => 
         array (
@@ -116,6 +119,12 @@ class ComposerStaticInit0ad4f2eaed6abdfdd6f2b8275d38712d
     );
 
     public static $prefixDirsPsr4 = array (
+        'phpDocumentor\\Reflection\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
+            1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+            2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+        ),
         'anlutro\\LaravelSettings\\' => 
         array (
             0 => __DIR__ . '/..' . '/anlutro/l4-settings/src',
@@ -127,6 +136,10 @@ class ComposerStaticInit0ad4f2eaed6abdfdd6f2b8275d38712d
         'XdgBaseDir\\' => 
         array (
             0 => __DIR__ . '/..' . '/dnoegel/php-xdg-base-dir/src',
+        ),
+        'Webmozart\\Assert\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/webmozart/assert/src',
         ),
         'Symfony\\Polyfill\\Util\\' => 
         array (
@@ -204,6 +217,10 @@ class ComposerStaticInit0ad4f2eaed6abdfdd6f2b8275d38712d
         array (
             0 => __DIR__ . '/..' . '/psy/psysh/src/Psy',
         ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
         'Psr\\Http\\Message\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-message/src',
@@ -248,10 +265,6 @@ class ComposerStaticInit0ad4f2eaed6abdfdd6f2b8275d38712d
         array (
             0 => __DIR__ . '/..' . '/doctrine/instantiator/src/Doctrine/Instantiator',
         ),
-        'DebugBar\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar',
-        ),
         'Cviebrock\\EloquentSluggable\\' => 
         array (
             0 => __DIR__ . '/..' . '/cviebrock/eloquent-sluggable/src',
@@ -268,10 +281,6 @@ class ComposerStaticInit0ad4f2eaed6abdfdd6f2b8275d38712d
         array (
             0 => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon',
         ),
-        'Barryvdh\\Debugbar\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src',
-        ),
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
@@ -283,19 +292,8 @@ class ComposerStaticInit0ad4f2eaed6abdfdd6f2b8275d38712d
     );
 
     public static $prefixesPsr0 = array (
-        'p' => 
-        array (
-            'phpDocumentor' => 
-            array (
-                0 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
-            ),
-        ),
         'P' => 
         array (
-            'Psr\\Log\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/psr/log',
-            ),
             'Prophecy\\' => 
             array (
                 0 => __DIR__ . '/..' . '/phpspec/prophecy/src',
@@ -802,6 +800,7 @@ class ComposerStaticInit0ad4f2eaed6abdfdd6f2b8275d38712d
         'PHP_Token_UNSET' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_UNSET_CAST' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_USE' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
+        'PHP_Token_USE_FUNCTION' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_VAR' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_VARIABLE' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_WHERE' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',

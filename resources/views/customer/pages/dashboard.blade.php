@@ -32,10 +32,8 @@
 									if ($listing_date[0] >= date('Y')) {
 										if ($listing_date[1] >= date('m')) {
 												$L_date = explode(" ", $listing_date[2]);// print_r($L_date);die();
-											if ($L_date[0] < (date('d') - 7) && $L_date[0] <= date('d')){
+											if ((date('d') - 7) <= $L_date[0] && date('d')<= $L_date[0]){
 												$almost_expired_listings[] = $listing->id;
-												//echo "ada ";print_r($expired_listings); echo "OOEKKEKEKEKEKEK";
-												//die();
 											}
 										} 
 									}

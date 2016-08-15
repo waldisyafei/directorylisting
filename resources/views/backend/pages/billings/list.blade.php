@@ -66,7 +66,7 @@
 											<td>{{ $billing->customer ? $billing->customer->customer_name : $billing->item->address->company }}</td>
 											<td>
 												@if ($billing->item_type == 'listing')
-													{{ $billing->item->listing_id }}
+													{//{ $billing->item->listing_id }}
 												@else
 													{{ $billing->item->ad_id }}
 												@endif

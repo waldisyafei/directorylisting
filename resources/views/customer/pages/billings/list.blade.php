@@ -62,7 +62,7 @@
 									@foreach ($billings as $billing)
 										<tr>
 											<td>{{ $billing->id }}</td>
-											<td>{{ $billing->item->title }}</td>
+											<td>{//{ $billing->item->title }}</td>
 											<td>{{ $billing->item_id }}</td>
 											<td>{{ $billing->item_type }}</td>
 											<td>IDR {{ number_format($billing->amount, 0, ',', '.') }}</td>

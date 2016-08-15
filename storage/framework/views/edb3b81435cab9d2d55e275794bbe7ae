@@ -60,7 +60,7 @@
 									<?php foreach($billings as $billing): ?>
 										<tr>
 											<td><?php echo e($billing->id); ?></td>
-											<td><?php echo e($billing->item->title); ?></td>
+											<td>{//{ $billing->item->title }}</td>
 											<td><?php echo e($billing->item_id); ?></td>
 											<td><?php echo e($billing->item_type); ?></td>
 											<td>IDR <?php echo e(number_format($billing->amount, 0, ',', '.')); ?></td>

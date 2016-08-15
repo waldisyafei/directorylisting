@@ -13,8 +13,7 @@
         "cviebrock/eloquent-sluggable": "^3.1",
         "anlutro/l4-settings": "^0.4.5",
         "anhskohbo/no-captcha": "2.*",
-        "mews/captcha": "~2.0",
-        "barryvdh/laravel-debugbar": "^2.2"
+        "mews/captcha": "~2.0"
     },
     "minimum-stability": "dev",
     "require-dev": {
