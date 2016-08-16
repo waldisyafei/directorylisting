@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+Use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -14,6 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \App\Console\Commands\Inspire::class,
+        \App\Console\Commands\ListingExpired::class,
     ];
 
     /**
@@ -26,5 +28,22 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('inspire')
                  ->hourly();
+
+        $schedule->command('ListingExpired')
+                 ->everyMinute();
     }
+
+    /*protected function schedule(Schedule $schedule)
+    {
+        $schedule->call(function () {
+            /*$listings = Listing::table('listings')->select('id', 'custtomer_id', 'listing_id', 'expired_date')->get();
+            foreach ($listings as $listing) {
+                   if ($listing->expired_date > Carbon::now() ) {
+                       Listing::table('Listings')
+                            ->where('listing_id', $listing->listing_id)
+                            ->update(['status' => 5]);
+                   }
+               }
+        })->everyMinute();
+    }*/
 }

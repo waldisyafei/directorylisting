@@ -10,6 +10,7 @@ use Auth;
 use Validator;
 use App\Models\Customer;
 use App\Models\Listing;
+use Carbon\Carbon;
 
 /**
 * 
@@ -24,6 +25,7 @@ class CustomersController extends Controller
 
 	public function index()
 	{
+		//return (Carbon::now());
 		return view('customer.pages.dashboard');
 	}
 
