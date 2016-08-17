@@ -63,7 +63,12 @@
 										<tr>
 											<td>{{ $billing->id }}</td>
 											<td>{{ $billing->customer_id ? $billing->customer_id : 'Non Customer' }}</td>
-											<td>{{ $billing->customer ? $billing->customer->customer_name : $billing->item->address->company }}</td>
+											<?php
+												$customers = App\Models\Customer::where('customer_id', $billing->customer_id)->select('customer_name')->orderby('created_at', 'DESC')->get();
+												foreach ($customers as $customer){
+													echo '<td>' . $customer->customer_name . '</td>';
+												}
+											 ?>
 											<td>
 												@if ($billing->item_type == 'listing')
 													{//{ $billing->item->listing_id }}

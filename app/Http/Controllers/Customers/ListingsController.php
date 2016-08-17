@@ -143,7 +143,7 @@ class ListingsController extends Controller
 
         if ($listing) {
             // prevent editing while status is pending payment
-            if ($listing->status == 1) {
+            if ($listing->status == 1 || $listing->status == 5) {
                 return redirect()->back()->with('error', 'Unable to edit this listing!');
             }
             return view('customer.pages.listing.edit', ['listing' => $listing]);

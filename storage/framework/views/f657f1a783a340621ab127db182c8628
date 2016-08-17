@@ -1,40 +1,38 @@
-@extends('customer.base')
+<?php $__env->startSection('title', 'View Billing'); ?>
 
-@section('title', 'View Billing')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 	<h3 class="page-title">Billings</h3>
 	<ol class="breadcrumb">
-	    <li><a href="{{ url('account/billings') }}">Billings</a></li>
+	    <li><a href="<?php echo e(url('account/billings')); ?>">Billings</a></li>
 	    <li class="active">View Billing</li>
 	</ol>
 
 	<div class="container-fluid">
-		@if (Session::has('success'))
+		<?php if(Session::has('success')): ?>
 			<div class="alert alert-dismissable alert-success">
-				<i class="ti ti-check"></i>&nbsp; <strong>Well done!</strong> {{ Session::get('success') }}.
+				<i class="ti ti-check"></i>&nbsp; <strong>Well done!</strong> <?php echo e(Session::get('success')); ?>.
 				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 			</div>
-		@endif
+		<?php endif; ?>
 
-		@if (Session::has('error'))
+		<?php if(Session::has('error')): ?>
 			<div class="alert alert-dismissable alert-danger">
-				<i class="ti ti-check"></i>&nbsp; <strong>Oh snap!</strong> {{ Session::get('error') }}.
+				<i class="ti ti-check"></i>&nbsp; <strong>Oh snap!</strong> <?php echo e(Session::get('error')); ?>.
 				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 			</div>
-		@endif
+		<?php endif; ?>
 
-		@if ($errors->has())
+		<?php if($errors->has()): ?>
 			<div class="alert alert-dismissable alert-danger">
 				<i class="ti ti-close"></i>&nbsp; <strong>Oh snap!</strong>
 				<ul>
-					@foreach ($errors->all() as $error)
-						<li>{{ $error }}</li>
-					@endforeach
+					<?php foreach($errors->all() as $error): ?>
+						<li><?php echo e($error); ?></li>
+					<?php endforeach; ?>
 				</ul>
 				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 			</div>
-		@endif
+		<?php endif; ?>
 
 		<div class="row">
 			<div class="col-md-12">
@@ -67,18 +65,19 @@
 		                        <div class="pull-left">
 		                            <h3 class="text-muted">To</h3>
 		                            <address>
-		                                <strong>{{ $billing->customer->customer_name }}</strong><br>
+		                                <strong><?php echo e($billing->customer->customer_name); ?></strong><br>
 		                                <?php $address = $billing->customer->address; ?>
 		                                <?php echo $address->address_1 . '<br>'; ?>
 		                                <?php echo $address->address_2 != '' ? $address->address_1 . '<br>' : null; ?>
-		                                {{ $address->city }}, {{ App\Models\Zone::find($address->zone_id)->name }}. {{ $address->postcode }}<br>
-		                                {{ App\Models\Country::find($address->country_id)->name }}
+		                                <?php echo e($address->city); ?>, <?php echo e(App\Models\Zone::find($address->zone_id)->name); ?>. <?php echo e($address->postcode); ?><br>
+		                                <?php echo e(App\Models\Country::find($address->country_id)->name); ?>
+
 		                            </address>
 		                        </div>
 		                        <div class="pull-right">
 		                            <h3 class="text-muted">Info</h3>
 		                            <ul class="text-left list-unstyled">
-		                                <li><strong>Date:</strong> {{ date('d/M/Y', strtotime($billing->created_at)) }}</li>
+		                                <li><strong>Date:</strong> <?php echo e(date('d/M/Y', strtotime($billing->created_at))); ?></li>
 		                            </ul>
 		                        </div>
 		                    </div>
@@ -111,7 +110,7 @@
 											 			?>
 		                                                <td><?php echo $billing->item_type ?></td>
 		                                                <td>1</td>
-		                                                <td>Rp {{ number_format($billing->amount, 0, '.',',') }}</td>
+		                                                <td>Rp <?php echo e(number_format($billing->amount, 0, '.',',')); ?></td>
 		                                                <td>{//{ $billing->item->package->discount }}%</td>
 		                                                <td class="text-right">Rp <?php echo number_format($billing->amount, 0, '.', ',') ?></td>
 		                                            </tr>
@@ -125,7 +124,7 @@
 		                    <div class="col-md-12">
 		                        <div class="row" style="border-top-left-radius: 0px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px;">
 		                            <div class="col-md-3 col-md-offset-9">
-		                                <p class="text-right"><strong>SUB TOTAL: Rp {{ number_format($billing->amount, 0, '.',',') }}</strong></p>
+		                                <p class="text-right"><strong>SUB TOTAL: Rp <?php echo e(number_format($billing->amount, 0, '.',',')); ?></strong></p>
 		                                <p class="text-right">DISCOUNT: {//{ $billing->item->package->discount }}%</p>
 		                                <p class="text-right">VAT: 0%</p>
 		                                <hr>
@@ -135,11 +134,11 @@
 		                    </div>
 		                </div>
 		                    
-	                    @if ($billing->bukti_pembayaran == '' || $billing->confirm_message == '')
+	                    <?php if($billing->bukti_pembayaran == '' || $billing->confirm_message == ''): ?>
 	                    	<div class="row">
-			                	<form action="{{ url('account/billings/confirm') }}" method="POST" role="form" enctype="multipart/form-data">
-			                		<input type="hidden" name="_token" value="{{ csrf_token() }}">
-			                		<input type="hidden" name="billing_id" value="{{ $billing->id }}">
+			                	<form action="<?php echo e(url('account/billings/confirm')); ?>" method="POST" role="form" enctype="multipart/form-data">
+			                		<input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+			                		<input type="hidden" name="billing_id" value="<?php echo e($billing->id); ?>">
 			                		<legend>Confirm Payment</legend>
 			                	
 			                		<div class="form-group">
@@ -154,25 +153,26 @@
 			                		<button type="submit" class="btn btn-primary">Confirm</button>
 			                	</form>
 			                </div>
-		                @else
+		                <?php else: ?>
 		                	<div class="row">
 			                	<div class="col-md-12">
 			                		<div class="well">
 			                			<div class="form-group">
 				                			<label for="">Confirm Message</label>
-											<p>{{ $billing->confirm_message }}
+											<p><?php echo e($billing->confirm_message); ?>
+
 				                		</div>
 				                		
 				                		<div class="form-group">
 				                			<label>Bukti Pembayaran</label>
-				                			@if ($billing->bukti_pembayaran != '')
-				                				<img src="{{ asset($billing->bukti_pembayaran) }}" class="img-responsive" alt="">
-				                			@endif
+				                			<?php if($billing->bukti_pembayaran != ''): ?>
+				                				<img src="<?php echo e(asset($billing->bukti_pembayaran)); ?>" class="img-responsive" alt="">
+				                			<?php endif; ?>
 				                		</div>
 			                		</div>
 			                	</div>
 			                </div>
-	                    @endif
+	                    <?php endif; ?>
 
 		            </div>
 
@@ -180,4 +180,5 @@
 			</div>
 		</div>
 	</div>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('customer.base', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
