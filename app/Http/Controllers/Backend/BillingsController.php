@@ -10,6 +10,7 @@ use App\Models\Billing;
 use App\Models\Listing;
 use App\Models\Ad;
 use Auth;
+use Mail;
 
 class BillingsController extends Controller
 {
@@ -121,5 +122,23 @@ class BillingsController extends Controller
         $billing->delete();
 
         return redirect('app-admin/billings/'. $billing->item_type)->with('success', 'Billing deleted successfully');
+    }
+
+    /**
+     * Send an e-mail reminder to the user.
+     *
+     * @param  Request  $request
+     * @param  int  $id
+     * @return Response
+     */
+    public function sendEmailReminder(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        Mail::send('emails.reminder', ['user' => $user], function ($m) use ($user) {
+            $m->from('hello@app.com', 'Your Application');
+
+            $m->to($user->email, $user->name)->subject('Your Reminder!');
+        });
     }
 }

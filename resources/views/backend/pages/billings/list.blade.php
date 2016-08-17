@@ -69,13 +69,7 @@
 													echo '<td>' . $customer->customer_name . '</td>';
 												}
 											 ?>
-											<td>
-												@if ($billing->item_type == 'listing')
-													{//{ $billing->item->listing_id }}
-												@else
-													{{ $billing->item->ad_id }}
-												@endif
-											</td>
+											<td>{{ $billing->item_id }}</td>
 											<td>{{ $billing->item_type }}</td>
 											<td>{{ date('d M Y H:i:s', strtotime($billing->created_at)) }}</td>
 											<td>

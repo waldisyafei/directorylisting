@@ -102,7 +102,18 @@
 		                                        </thead>
 		                                        <tbody>
 		                                            <tr>
-		                                                <td><?php echo $billing->id ?></td>
+		                                            	<?php if ($billing->item_type == 'ads'): ?>
+		                                                	<td><?php echo $billing->item->ad_id ?></td>
+		                                                <?php else: ?>
+		                                                	<td><?php echo $billing->item->listing_id ?></td>
+		                                            	<?php endif ?>
+
+		                                            	<?php if ($billing->item_type == 'ads'): ?>
+	                                                		<td><?php echo $billing->customer ? Setting::get('ads.price_notes') : Setting::get('ads.noncust.price_notes') ?></td>
+	                                                	<?php else: ?>
+		                                                	<td><?php echo $billing->item->package->name ?></td>
+		                                                <?php endif ?>
+		                                                
 		                                                <?php
 															$packages = App\Models\Package::where('id', $billing->id)->select('name')->orderby('created_at', 'DESC')->get();
 															foreach ($packages as $package){
@@ -112,7 +123,14 @@
 		                                                <td><?php echo $billing->item_type ?></td>
 		                                                <td>1</td>
 		                                                <td>Rp {{ number_format($billing->amount, 0, '.',',') }}</td>
-		                                                <td>{//{ $billing->item->package->discount }}%</td>
+		                                                <td>
+		                                                	<?php $price_disc = $billing->customer ? Setting::get('ads.price_discount') : Setting::get('ads.noncust.price_discount')?>
+		                                                	<?php if ($billing->item_type == 'ads'): ?>
+								                                {{ $price_disc }}%
+							                                <?php else: ?>
+								                                {{ $billing->item->package->discount }}%
+							                            	<?php endif ?>
+		                                                </td>
 		                                                <td class="text-right">Rp <?php echo number_format($billing->amount, 0, '.', ',') ?></td>
 		                                            </tr>
 		                                        </tbody>
@@ -125,8 +143,14 @@
 		                    <div class="col-md-12">
 		                        <div class="row" style="border-top-left-radius: 0px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px;">
 		                            <div class="col-md-3 col-md-offset-9">
-		                                <p class="text-right"><strong>SUB TOTAL: Rp {{ number_format($billing->amount, 0, '.',',') }}</strong></p>
-		                                <p class="text-right">DISCOUNT: {//{ $billing->item->package->discount }}%</p>
+		                            	<?php $price_disc = $billing->customer ? Setting::get('ads.price_discount') : Setting::get('ads.noncust.price_discount') ?>
+		                            	<?php if ($billing->item_type == 'ads'): ?>
+			                                <p class="text-right"><strong>SUB TOTAL: Rp {{ number_format($price_disc * $billing->item->days, 0, '.',',') }}</strong></p>
+			                                <p class="text-right">DISCOUNT: {{ $price_disc }}%</p>
+		                                <?php else: ?>
+			                                <p class="text-right"><strong>SUB TOTAL: Rp {{ number_format($billing->item->package->price, 0, '.',',') }}</strong></p>
+			                                <p class="text-right">DISCOUNT: {{ $billing->item->package->discount }}%</p>
+		                            	<?php endif ?>
 		                                <p class="text-right">VAT: 0%</p>
 		                                <hr>
 		                                <h3 class="text-right text-danger" style="font-weight: bold;">IDR <?php echo number_format($billing->amount, 0, ',', '.') ?></h3>
