@@ -59,8 +59,8 @@
                         <!-- Sub User -->
                         <li><a href="javascript:;"><i class="ti ti-user"></i><span>Account</span></a>
                         	<ul class="acc-menu">
-                        		<li><a href="<?php echo url('account/sub-account') ?>">Sub Account</a></li>
-                        		<li><a href="<?php echo url('account/edit-info') ?>">Edit Account Info</a></li>
+                        		<!--<li><a href="<?php// echo url('account/sub-account') ?>">Sub Account</a></li>-->
+                        		<li><a href="<?php echo url('account/edit_info') ?>">Edit Account Info</a></li>
                         	</ul>
                         </li>
 

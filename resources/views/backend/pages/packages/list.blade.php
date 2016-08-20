@@ -49,7 +49,7 @@
 										<td>{{ $package->discount }}%</td>
 										<td width="150">
 											<a href="{{ url('app-admin/packages/edit', $package->id) }}" class="btn btn-primary-alt btn-sm"><i class="ti ti-pencil"></i>&nbsp;Edit</a>&nbsp;&nbsp;
-											<a href="{{ url('app-admin/package/delete', $package->id) }}" class="btn btn-danger-alt btn-sm"><i class="ti ti-trash"></i>&nbsp;Delete</a>
+											<a href="{{ url('app-admin/packages/delete', $package->id) }}" class="btn btn-danger-alt btn-sm"><i class="ti ti-trash"></i>&nbsp;Delete</a>
 										</td>
 									</tr>
 								@endforeach

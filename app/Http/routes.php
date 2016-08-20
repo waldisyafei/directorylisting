@@ -172,6 +172,7 @@ Route::group(['prefix' => 'app-admin', 'middleware' => 'auth'], function() {
 	});
 
 	Route::get('geo/getZone', 'Backend\BackendController@getZone');
+	Route::get('/send', 'EmailController@send');
 	
 });
 
@@ -195,6 +196,8 @@ Route::group(['prefix' => 'account', 'middleware' => 'authCustomer'], function()
 	// Index (Dashboard) of subscriber page
 	Route::get('/', 'Customers\CustomersController@index');
 	Route::get('listing_stats', 'Customers\ListingsController@statistics');
+	Route::get('edit_info', 'Customers\CustomersController@edit_info');
+	Route::post('edit_info/{id}', 'Customers\CustomersController@update_info');
 
 	Route::group(['prefix' => 'listings'], function(){
 		Route::get('/', 'Customers\ListingsController@index');

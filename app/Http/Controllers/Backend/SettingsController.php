@@ -24,7 +24,8 @@ class SettingsController extends Controller
         Setting::set('site_settings.title', $request->input('site_title'));
         
         if ($request->hasFile('default_logo')) {
-            $dir = storage_path().'/app/images/assets/';
+            //$dir = storage_path().'/app/images/assets/';
+            $dir = public_path().'/storage/app/images/assets/';
             $file = $request->file('default_logo');
             $file_name = preg_replace("/[^A-Z0-9._-]/i", "_", $file->getClientOriginalName());
             $thumb_admin = 'thumb-admin-'.$file_name;
@@ -49,7 +50,8 @@ class SettingsController extends Controller
         if ($request->input('enable_sessional_logo') == 'on') {
         
             if ($request->hasFile('sessional_logo')) {
-                $dir = storage_path().'/app/images/assets/';
+                //$dir = storage_path().'/app/images/assets/';
+                $dir = public_path().'/storage/app/images/assets/';
                 $file = $request->file('sessional_logo');
                 $file_name = 'sessional-' . preg_replace("/[^A-Z0-9._-]/i", "_", $file->getClientOriginalName());
                 $thumb_admin = 'thumb-admin-'.$file_name;
