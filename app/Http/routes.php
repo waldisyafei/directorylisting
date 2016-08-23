@@ -108,6 +108,8 @@ Route::group(['prefix' => 'app-admin', 'middleware' => 'auth'], function() {
 		Route::get('ads', 'Backend\ApprovalsController@ads');
 		Route::get('ads/view/{id}', 'Backend\ApprovalsController@show_ad');
 		Route::get('ads/view/{id}/approve', 'Backend\ApprovalsController@approve_ad');
+		Route::get('ads/view/{id}/reject', 'Backend\ApprovalsController@reject_ad');
+
 	});
 
 	Route::group(['prefix' => 'permissions'], function(){
@@ -147,8 +149,12 @@ Route::group(['prefix' => 'app-admin', 'middleware' => 'auth'], function() {
 		Route::get('listings', 'Backend\SettingsController@listings');
 		Route::post('listings', 'Backend\SettingsController@store_listings');
 
+		Route::get('ads', 'Backend\SettingsController@ads');
+		Route::post('ads', 'Backend\SettingsController@store_ads');
+
 		Route::get('ads-price', 'Backend\SettingsController@ads_price');
 		Route::post('ads-price', 'Backend\SettingsController@set_ads_price');
+		Route::post('expiry', 'Backend\SettingsController@expiry');
 		Route::post('noncust-ads-price', 'Backend\SettingsController@noncustset_ads_price');
 	});
 

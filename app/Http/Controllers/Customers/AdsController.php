@@ -68,7 +68,8 @@ class AdsController extends Controller
 
         
         if ($request->hasFile('image')) {
-            $dir = storage_path().'/app/cs/assets/';
+            //$dir = storage_path().'/app/cs/assets/';
+            $dir = public_path().'/storage/app/cs/assets/';
             $file = $request->file('image');
             $file_name = preg_replace("/[^A-Z0-9._-]/i", "_", $file->getClientOriginalName());
             $thumb_admin = 'thumb-admin-'.$file_name;
@@ -153,7 +154,8 @@ class AdsController extends Controller
         $ad->status = 2;
         
         if ($request->hasFile('image')) {
-            $dir = storage_path().'/app/cs/assets/';
+            //$dir = storage_path().'/app/cs/assets/';
+            $dir = public_path().'/storage/app/cs/assets/';
             $file = $request->file('image');
             $file_name = preg_replace("/[^A-Z0-9._-]/i", "_", $file->getClientOriginalName());
             $thumb_admin = 'thumb-admin-'.$file_name;

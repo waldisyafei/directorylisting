@@ -32,6 +32,46 @@ class ApprovalsController extends Controller
     public function approve_listing($id)
     {
         $listing = Listing::find($id);
+        $listing_update = explode('-', $listing->listing_id);var_dump($listing_update);
+        if (count($listing_update) != 1) {
+            $listing_old_id = $listing_update[1];
+        $listing_update = $listing_update[0];
+        if ($listing_update == 'up') {
+            $listing_old = Listing::find(intval($listing_old_id));
+
+            if ($listing_old) {
+                if ($listing_old->been_active == '0') {
+                    $listing_old->been_active = 1;
+
+                    // setup expired date
+                    $days = $listing_old->package->days;
+                    $expired = date('Y-m-d H:i:s', strtotime("+$days days"));
+                    $listing_old->expired_date = $expired;
+                }
+
+                $listing_old->status = 3;
+
+                $listing_old->customer_id = $listing->customer_id;
+                //$listing_old->listing_id =$listing->listing_id;
+                $listing_old->title = $listing->title;
+                $listing_old->content = $listing->content;
+                $listing_old->keywords = $listing->keywords;
+                $listing_old->tags = $listing->tags;
+                $listing_old->url = $listing->url;
+                $listing_old->price_from = $listing->price_from;
+                $listing_old->price_to = $listing->price_to;
+                $listing_old->review = $listing->review;
+                $listing_old->custom_tab_title = $listing->custom_tab_title;
+                $listing_old->custom_tab = $listing->custom_tab;
+                $listing_old->category = $listing->category;
+                $listing_old->package_id = $listing->package_id;
+                $listing_old->assets = $listing->assets;
+
+                $listing_old->save();
+            }
+        }
+        }
+        
 
         if ($listing) {
             if ($listing->been_active == '0') {
@@ -133,7 +173,7 @@ class ApprovalsController extends Controller
      */
     public function reject_ad($id)
     {
-        $ad = Listing::find($id);
+        $ad = Ad::find($id);
 
         if ($ad) {
             $ad->status = 4;

@@ -1,17 +1,15 @@
-@extends('backend.base')
+<?php $__env->startSection('title', 'Item Approvals'); ?>
 
-@section('title', 'Item Approvals')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 	<h3 class="page-title">Listings Approval</h3>
 	<ol class="breadcrumb">
-		<li><a href="{{ url('app-admin') }}">Dashboard</a></li>
+		<li><a href="<?php echo e(url('app-admin')); ?>">Dashboard</a></li>
 		<li class="active">Listings Approvals</li>
 	</ol>
 
 	<div class="container-fluid">
 		
-		@include('backend.partials.errors')
+		<?php echo $__env->make('backend.partials.errors', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
 		<div data-widget-group="group1">
 			<div class="row">
@@ -35,7 +33,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									@foreach ($listings as $listing)
+									<?php foreach($listings as $listing): ?>
 										<?php
 											$listing_up_id = explode('-', $listing->listing_id);
 											$up_id = $listing_up_id[0];
@@ -50,15 +48,15 @@
 											<td><?php echo $listing->customer_id ?></td>
 											<td><?php echo $listing->customer->customer_name ?></td>
 											<td>
-												@if ($listing->status == 2)
+												<?php if($listing->status == 2): ?>
 													<label class="label label-warning tooltips" title="<?php echo $listing->listingStatus->info ?>"><?php echo $listing->listingStatus->display_name ?></label>
-												@endif
+												<?php endif; ?>
 											</td>
 											<td>
 												<a class="btn btn-primary btn-sm tooltips" title="View Details Item" href="<?php echo url('app-admin/approvals/listings/view', $listing->id) ?>" role="button"><i class="ti ti-eye"></i></a>
 											</td>
 										</tr>
-									@endforeach
+									<?php endforeach; ?>
 								</tbody>
 							</table>
 						</div>
@@ -68,4 +66,5 @@
 			</div>
 		</div>
 	</div>
-@stop
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('backend.base', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

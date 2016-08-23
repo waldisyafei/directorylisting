@@ -112,6 +112,41 @@ class SettingsController extends Controller
         return redirect()->back()->with('success', 'Settings updated successfully');
     }
 
+    public function ads()
+    {
+        return view('backend.pages.settings.ads');
+    }
+
+    public function store_ads(Request $request)
+    {
+        $validator = Validator::make($request->all(), ['content_length' => 'required|numeric']);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withInput()->withErrors();
+        }
+
+        Setting::set('ads.content_length', $request->input('content_length'));
+        Setting::save();
+
+        return redirect()->back()->with('success', 'Settings updated successfully');
+    }
+
+    public function expiry(Request $request)
+    {
+        $validator = Validator::make($request->all(), ['almost_expired' => 'required|numeric', 'auto_suspend' => 'required|numeric', 'auto_delete' => 'required|numeric']);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withInput()->withErrors();
+        }
+
+        Setting::set('site_settings.almost_expired', $request->input('almost_expired'));
+        Setting::set('site_settings.auto_suspend', $request->input('auto_suspend'));
+        Setting::set('site_settings.auto_delete', $request->input('auto_delete'));
+        Setting::save();
+
+        return redirect()->back()->with('success', 'Settings updated successfully');
+    }
+
     public function ads_price()
     {
         return view('backend.pages.settings.ads-price');

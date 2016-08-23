@@ -102,6 +102,7 @@
                                     <li class="{{ Request::is('app-admin/settings/site') ? 'active' : null }}"><a href="{{ url('app-admin/settings/site') }}">Site</a></li>
                                     <li class="{{ Request::is('app-admin/settings/packages') ? 'active' : null }}"><a href="{{ url('app-admin/settings/packages') }}">Packages</a></li>
                                     <li class="{{ Request::is('app-admin/settings/listings') ? 'active' : null }}"><a href="{{ url('app-admin/settings/listings') }}">Listings</a></li>
+                                    <li class="{{ Request::is('app-admin/settings/ads') ? 'active' : null }}"><a href="{{ url('app-admin/settings/ads') }}">Ads</a></li>
                                     <li class="{{ Request::is('app-admin/settings/ads-price') ? 'active' : null }}"><a href="{{ url('app-admin/settings/ads-price') }}">Ads Price</a></li>
                                 </ul>
                             </li>

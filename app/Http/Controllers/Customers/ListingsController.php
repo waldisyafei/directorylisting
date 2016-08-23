@@ -17,6 +17,7 @@ use Setting;
 use App\Models\ListingMeta;
 use Session;
 use App\Models\ListingCategory;
+use App\Models\History;
 
 class ListingsController extends Controller
 {
@@ -176,11 +177,15 @@ class ListingsController extends Controller
             return redirect()->back()->withInput()->withErrors($validation);
         }
 
-        $listing = Listing::find($id);
-        if (!$listing) {
+        $listing_old = Listing::find($id);
+        if (!$listing_old) {
             return abort(404);
         }
+        $listing_old->status = 2;
+
+        $listing = new Listing;
         $listing->customer_id = Auth::customer()->get()->customer_id;
+        $listing->listing_id ='up-'.  $listing_old->id .'-'. date('ymd-his');
         $listing->title = $request->input('title');
         $listing->content = $request->input('content');
         $listing->keywords = $request->input('keywords');
@@ -193,6 +198,8 @@ class ListingsController extends Controller
         $listing->custom_tab = $request->input('custom');
         $listing->status = 2;
         $listing->category = $request->input('sub_category');
+        $listing->package_id = $listing_old->package_id;
+
 
         
         if ($request->hasFile('image')) {
@@ -215,6 +222,8 @@ class ListingsController extends Controller
             Image::make($request->file('image'))->resize(200, 200)->save($dir . $thumb);
 
             $listing->assets = json_encode([$relative_path]);
+        }elseif($listing_old->assets){
+            $listing->assets = $listing_old->assets;
         }
 
         /*if ($request->has('images')) {
@@ -228,7 +237,19 @@ class ListingsController extends Controller
             $listing->assets = json_encode($assets);
         }*/
 
-        if ($listing->save()) {
+        $history = new History;
+        $history->customer_id = $listing->customer_id;
+        $history->item_id = $listing->listing_id;
+        $history->item_type = 'listing';
+
+        $history_old = new History;
+        $history_old->customer_id = $listing_old->customer_id;
+        $history_old->item_id = $listing_old->listing_id;
+        $history_old->item_type = 'listing';
+
+        if ($listing->save() && $listing_old->save()) {
+            $history->save();
+            $history_old->save();
             return redirect('account/listings/edit/'.$listing->id)->with('success', 'Listing created successfully.');
         }
     }
