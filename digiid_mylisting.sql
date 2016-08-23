@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Inang: localhost
--- Waktu pembuatan: 08 Agu 2016 pada 21.05
+-- Waktu pembuatan: 23 Agu 2016 pada 12.32
 -- Versi Server: 5.5.50-0ubuntu0.14.04.1
 -- Versi PHP: 5.5.9-1ubuntu4.19
 
@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `ads` (
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=45 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=47 ;
 
 --
 -- Dumping data untuk tabel `ads`
@@ -94,7 +94,9 @@ INSERT INTO `ads` (`id`, `ad_id`, `title`, `customer_id`, `password`, `link`, `d
 (41, '2820160800041', NULL, 'n12016030002682', NULL, NULL, 4, 0, NULL, NULL, 1, NULL, NULL, NULL, '2016-08-08 12:03:08', '2016-08-08 12:03:08'),
 (42, '2820160800042', NULL, 'n12016030002682', NULL, NULL, 3, 0, NULL, NULL, 1, NULL, NULL, NULL, '2016-08-08 12:03:08', '2016-08-08 12:03:08'),
 (43, '2820160800043', NULL, 'n12016030002682', NULL, NULL, 2, 0, NULL, NULL, 1, NULL, NULL, NULL, '2016-08-08 12:11:24', '2016-08-08 12:11:24'),
-(44, '2820160800044', NULL, 'n12016030002682', NULL, NULL, 3, 0, NULL, NULL, 1, NULL, NULL, NULL, '2016-08-08 12:11:24', '2016-08-08 12:11:25');
+(44, '2820160800044', NULL, 'n12016030002682', NULL, NULL, 3, 0, NULL, NULL, 1, NULL, NULL, NULL, '2016-08-08 12:11:24', '2016-08-08 12:11:25'),
+(45, '2820160800045', 'Tes add Ads', '012016030002682', NULL, 'www.batanyo.com', 7, 1, '2016-08-17 08:40:00', '2016-08-24 08:40:00', 3, '["storage\\/app\\/cs\\/assets\\/Screenshot_from_2016-07-23_13_07_31.png"]', NULL, NULL, '2016-08-17 00:17:11', '2016-08-23 01:11:26'),
+(46, '2820160800046', 'Tes add Ads 2', '012016030002682', NULL, 'www.batanyo.com', 1, 1, '2016-08-03 06:30:00', '2016-08-04 06:30:00', 2, '["storage\\/app\\/cs\\/assets\\/invoice7.png"]', NULL, NULL, '2016-08-17 11:17:48', '2016-08-20 13:54:37');
 
 -- --------------------------------------------------------
 
@@ -171,7 +173,7 @@ CREATE TABLE IF NOT EXISTS `billings` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   KEY `status` (`status`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=78 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=92 ;
 
 --
 -- Dumping data untuk tabel `billings`
@@ -190,7 +192,7 @@ INSERT INTO `billings` (`id`, `customer_id`, `item_id`, `bukti_pembayaran`, `con
 (30, '012016030001936', '80', NULL, NULL, 'listing', 560000.00, 2, '2016-03-17 07:18:02', '2016-03-17 08:43:58'),
 (31, '012016030001936', '86', NULL, NULL, 'listing', 560000.00, 2, '2016-03-17 08:46:41', '2016-03-17 09:34:19'),
 (32, '012016030001936', '87', NULL, '', 'listing', 560000.00, 2, '2016-03-17 08:46:41', '2016-03-28 07:28:43'),
-(33, '012016030002682', '88', NULL, 'Paid via cimb tgl 17maret', 'listing', 560000.00, 2, '2016-03-17 08:54:23', '2016-03-17 08:57:33'),
+(33, '012016030002682', '88', NULL, 'Test Confirm Message Payment', 'listing', 560000.00, 2, '2016-03-17 08:54:23', '2016-08-14 14:16:50'),
 (34, '012016030002682', '89', 'storage/app/listings/billings/34/image.jpeg', '', 'listing', 560000.00, 2, '2016-03-17 09:13:14', '2016-03-17 09:16:22'),
 (35, '012016030002682', '90', NULL, 'sudah bayar tgl 10 bulan 3 via bank abc', 'listing', 1360000.00, 2, '2016-03-17 09:36:05', '2016-03-28 04:00:22'),
 (38, '012016030001936', '84', NULL, NULL, 'listing', 1360000.00, 2, '2016-03-17 23:05:52', '2016-03-17 23:06:06'),
@@ -216,7 +218,21 @@ INSERT INTO `billings` (`id`, `customer_id`, `item_id`, `bukti_pembayaran`, `con
 (74, NULL, '38', NULL, NULL, 'ads', 46000.00, 0, '2016-08-08 12:10:13', '2016-08-08 12:10:13'),
 (75, 'n12016030002682', '43', NULL, NULL, 'ads', 46000.00, 0, '2016-08-08 12:11:24', '2016-08-08 12:11:24'),
 (76, 'n12016030002682', '44', NULL, NULL, 'ads', 69000.00, 0, '2016-08-08 12:11:25', '2016-08-08 12:11:25'),
-(77, NULL, '44', NULL, NULL, 'ads', 69000.00, 0, '2016-08-08 12:13:16', '2016-08-08 12:13:16');
+(77, NULL, '44', NULL, NULL, 'ads', 69000.00, 0, '2016-08-08 12:13:16', '2016-08-08 12:13:16'),
+(78, '012016030002682', '108', NULL, NULL, 'listing', 548800.00, 0, '2016-08-12 12:15:12', '2016-08-12 12:15:12'),
+(79, '012016030002682', '108', NULL, NULL, 'listing', 548800.00, 2, '2016-08-14 09:45:29', '2016-08-14 14:07:46'),
+(80, '012016030002682', '88', NULL, NULL, 'listing', 548800.00, 2, '2016-08-14 14:27:50', '2016-08-14 14:29:01'),
+(81, '012016030002682', '89', NULL, NULL, 'listing', 548800.00, 2, '2016-08-14 16:14:57', '2016-08-14 16:16:00'),
+(82, '012016030002682', '108', NULL, NULL, 'listing', 548800.00, 2, '2016-08-14 16:18:49', '2016-08-14 16:19:04'),
+(83, '012016030002682', '108', NULL, NULL, 'listing', 548800.00, 0, '2016-08-14 16:21:42', '2016-08-14 16:21:42'),
+(84, '012016030002682', '108', NULL, NULL, 'listing', 548800.00, 2, '2016-08-16 23:16:37', '2016-08-16 23:20:51'),
+(85, '012016030002682', '89', NULL, NULL, 'listing', 548800.00, 2, '2016-08-16 23:21:16', '2016-08-16 23:22:09'),
+(86, '012016030002682', '110', NULL, NULL, 'listing', 548800.00, 2, '2016-08-16 23:27:37', '2016-08-16 23:38:55'),
+(87, '012016030002682', '111', NULL, NULL, 'listing', 548800.00, 2, '2016-08-16 23:51:06', '2016-08-16 23:51:23'),
+(88, '012016030002682', '45', NULL, NULL, 'ads', 161000.00, 2, '2016-08-17 00:17:11', '2016-08-17 01:31:50'),
+(89, '012016030002682', '46', NULL, NULL, 'ads', 23000.00, 2, '2016-08-17 11:17:49', '2016-08-17 11:17:58'),
+(90, '012016030002682', '132', NULL, NULL, 'listing', 548800.00, 2, '2016-08-23 05:12:12', '2016-08-23 05:12:56'),
+(91, '012016030002682', '134', NULL, NULL, 'listing', 1700000.00, 2, '2016-08-23 05:21:47', '2016-08-23 05:21:59');
 
 -- --------------------------------------------------------
 
@@ -522,9 +538,54 @@ CREATE TABLE IF NOT EXISTS `customers` (
 
 INSERT INTO `customers` (`id`, `customer_id`, `customer_name`, `address_id`, `phone`, `fax`, `pic`, `pic_phone`, `pic_mobile1`, `pic_mobile2`, `pic_email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (9, '012016030001936', 'Grafich Dev Pte Ltd', 1, '082298078502', '', 'Gufron RA', '082298078502', '082298078502', '', 'test@gmail.com', '$2y$10$eK.ei902n59yqGI4EAzM2.QuTX0B1yNvcRqZ1kc77GUKXQ9WwFAQ6', '1zwKp4N00gBJNwLEPsM1oxwmS5a9ADfwaXYfhJUS7HEN2Vr2zri3NiGiZAQl', '2016-03-15 22:25:40', '2016-05-11 23:13:11'),
-(10, '012016030002682', 'PYT. TEST01', 2, '123455678', '', 'TEST01', '1234567', '123456', '', 'test01@gmail.com', '$2y$10$Nw0TyIu19sacR3f4zCyvleFM5PBv/b7TBsPP3MlDhheMh6X.5lOe.', 'RAb4GgWvgIwNesDgDicrdJaLxTuQbFCp8Y6gkgcLRSnlsQWQ2VUU16EVkcb7', '2016-03-17 08:52:37', '2016-08-02 07:43:36'),
+(10, '012016030002682', 'PYT. TEST01 edit', 2, '123455678', '', 'TEST01', '1234567', '123456', '', 'test01@gmail.com', '$2y$10$xfaHKHzPW3zopJ2fJ.ZLmOr/AWlDl4YfmRJotja.0h4QSF0C3OuPO', 'tIBlsheByBfHHnVianflOdZFLjakL1RWzkOECIQ4WV17nGvYWzlMvd5JLzo8', '2016-03-17 08:52:37', '2016-08-21 07:38:45'),
 (11, '012016030003972', 'Pt Test02', 3, '1234556', '', 'Test02', '123445', '1234566789', '', 'Test02@gmail.com', '$2y$10$J6E6I/FRmvXx/.t/1AecEu6g9fwBSZvEuwx.eAJaHcKTg41W4/e7u', 'kD82eOAjvdA7RmpTRdYsUrbFP1KquZrsLKRVAojzDyFKvRqb4PTrI1EyuPjS', '2016-03-28 03:43:34', '2016-03-28 04:12:25'),
 (12, '012016050004935', 'PT. TEST03', 17, '12354656', '', 'test03', '1341', '12324', '', 'test03@gmail.com', '$2y$10$hk386w4hmarO6hzRbUoEjOu76odzlYxx/oGxfSLGXubFPAb6I5kxS', NULL, '2016-05-10 05:12:45', '2016-05-10 05:12:46');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `history`
+--
+
+CREATE TABLE IF NOT EXISTS `history` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `item_id` varchar(15) NOT NULL,
+  `customer_id` varchar(15) NOT NULL,
+  `item_type` varchar(20) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=34 ;
+
+--
+-- Dumping data untuk tabel `history`
+--
+
+INSERT INTO `history` (`id`, `item_id`, `customer_id`, `item_type`, `created_at`, `updated_at`) VALUES
+(11, 'up-110-16082308', '012016030002682', 'listing', '2016-08-23 01:38:30', '2016-08-23 01:38:30'),
+(12, 'up-89-160823090', '012016030002682', 'listing', '2016-08-23 02:03:08', '2016-08-23 02:03:08'),
+(13, 'up-89-160823091', '012016030002682', 'listing', '2016-08-23 02:16:04', '2016-08-23 02:16:04'),
+(14, 'up-89-160823-09', '012016030002682', 'listing', '2016-08-23 02:21:21', '2016-08-23 02:21:21'),
+(15, 'up-89-160823-10', '012016030002682', 'listing', '2016-08-23 03:15:51', '2016-08-23 03:15:51'),
+(16, 'up-89-160823-10', '012016030002682', 'listing', '2016-08-23 03:20:15', '2016-08-23 03:20:15'),
+(17, 'up-123-160823-1', '012016030002682', 'listing', '2016-08-23 03:21:11', '2016-08-23 03:21:11'),
+(18, 'up-124-160823-1', '012016030002682', 'listing', '2016-08-23 03:54:00', '2016-08-23 03:54:00'),
+(19, 'up-110-160823-1', '012016030002682', 'listing', '2016-08-23 04:06:26', '2016-08-23 04:06:26'),
+(20, 'up-110-160823-1', '012016030002682', 'listing', '2016-08-23 04:16:23', '2016-08-23 04:16:23'),
+(21, 'up-110-160823-1', '012016030002682', 'listing', '2016-08-23 04:44:27', '2016-08-23 04:44:27'),
+(22, 'up-110-160823-1', '012016030002682', 'listing', '2016-08-23 04:48:35', '2016-08-23 04:48:35'),
+(23, 'PYTTEST01110', '012016030002682', 'listing', '2016-08-23 04:48:35', '2016-08-23 04:48:35'),
+(24, 'up-110-160823-1', '012016030002682', 'listing', '2016-08-23 05:02:50', '2016-08-23 05:02:50'),
+(25, 'PYTTEST01110', '012016030002682', 'listing', '2016-08-23 05:02:50', '2016-08-23 05:02:50'),
+(26, 'up-110-160823-1', '012016030002682', 'listing', '2016-08-23 05:07:02', '2016-08-23 05:07:02'),
+(27, 'PYTTEST01110', '012016030002682', 'listing', '2016-08-23 05:07:02', '2016-08-23 05:07:02'),
+(28, 'up-132-160823-1', '012016030002682', 'listing', '2016-08-23 05:13:32', '2016-08-23 05:13:32'),
+(29, 'PYTTEST01EDIT13', '012016030002682', 'listing', '2016-08-23 05:13:32', '2016-08-23 05:13:32'),
+(30, 'up-134-160823-1', '012016030002682', 'listing', '2016-08-23 05:22:26', '2016-08-23 05:22:26'),
+(31, 'PYTTEST01EDIT13', '012016030002682', 'listing', '2016-08-23 05:22:26', '2016-08-23 05:22:26'),
+(32, 'up-132-160823-1', '012016030002682', 'listing', '2016-08-23 05:25:12', '2016-08-23 05:25:12'),
+(33, 'PYTTEST01EDIT13', '012016030002682', 'listing', '2016-08-23 05:25:12', '2016-08-23 05:25:12');
 
 -- --------------------------------------------------------
 
@@ -629,26 +690,25 @@ CREATE TABLE IF NOT EXISTS `listings` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   UNIQUE KEY `listing_id` (`listing_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=108 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=137 ;
 
 --
 -- Dumping data untuk tabel `listings`
 --
 
 INSERT INTO `listings` (`id`, `customer_id`, `listing_id`, `title`, `slug`, `content`, `review`, `custom_tab`, `custom_tab_title`, `category`, `keywords`, `tags`, `url`, `price_from`, `price_to`, `assets`, `package_id`, `expired_date`, `been_active`, `status`, `created_at`, `updated_at`) VALUES
-(77, '012016030001936', 'GRAFICHDEVPTELTD77', 'Test Listing edit 2', 'test-listing-edit-2', '<p><strong style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">edit Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;"> adalah contoh teks atau dummy dalam industri percetakan dan penataan huruf atau typesetting. Lorem Ipsum telah menjadi standar contoh teks sejak tahun 1500an, saat seorang tukang cetak yang tidak dikenal mengambil sebuah kumpulan teks dan mengacaknya untuk menjadi sebuah buku contoh huruf. Ia tidak hanya bertahan selama 5 abad, tapi juga telah beralih ke penataan huruf elektronik, tanpa ada perubahan apapun. Ia mulai dipopulerkan pada tahun 1960 dengan diluncurkannya lembaran-lembaran Letraset yang menggunakan kalimat-kalimat dari Lorem Ipsum, dan seiring munculnya perangkat lunak Desktop Publishing seperti Aldus PageMaker juga memiliki versi Lorem Ipsum.</span><br></p><p><strong style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;"> adalah contoh teks atau dummy dalam industri percetakan dan penataan huruf atau typesetting. Lorem Ipsum telah menjadi standar contoh teks sejak tahun 1500an, saat seorang tukang cetak yang tidak dikenal mengambil sebuah kumpulan teks dan mengacaknya untuk menjadi sebuah buku contoh huruf. Ia tidak hanya bertahan selama 5 abad, tapi juga telah beralih ke penataan huruf elektronik, tanpa ada perubahan apapun. Ia mulai dipopulerkan pada tahun 1960 dengan diluncurkannya lembaran-lembaran Letraset yang menggunakan kalimat-kalimat dari Lorem Ipsum, dan seiring munculnya perangkat lunak Desktop Publishing seperti Aldus PageMaker juga memiliki versi Lorem Ipsum.</span><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;"><br></span></p>', NULL, NULL, NULL, 22, 'editkey', 'edittgs', '', '', '', '["storage\\/app\\/listings\\/assets\\/assets\\/Tux_Kernel.png","storage\\/app\\/listings\\/assets\\/assets\\/tux_droid_1.jpg"]', 4, '2016-06-15 06:34:39', 1, 3, '2016-03-15 23:37:37', '2016-05-29 15:20:59'),
+(77, '012016030001936', 'GRAFICHDEVPTELTD77', 'Test Listing edit 2', 'test-listing-edit-2', '<p><strong style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">edit Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;"> adalah contoh teks atau dummy dalam industri percetakan dan penataan huruf atau typesetting. Lorem Ipsum telah menjadi standar contoh teks sejak tahun 1500an, saat seorang tukang cetak yang tidak dikenal mengambil sebuah kumpulan teks dan mengacaknya untuk menjadi sebuah buku contoh huruf. Ia tidak hanya bertahan selama 5 abad, tapi juga telah beralih ke penataan huruf elektronik, tanpa ada perubahan apapun. Ia mulai dipopulerkan pada tahun 1960 dengan diluncurkannya lembaran-lembaran Letraset yang menggunakan kalimat-kalimat dari Lorem Ipsum, dan seiring munculnya perangkat lunak Desktop Publishing seperti Aldus PageMaker juga memiliki versi Lorem Ipsum.</span><br></p><p><strong style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;"> adalah contoh teks atau dummy dalam industri percetakan dan penataan huruf atau typesetting. Lorem Ipsum telah menjadi standar contoh teks sejak tahun 1500an, saat seorang tukang cetak yang tidak dikenal mengambil sebuah kumpulan teks dan mengacaknya untuk menjadi sebuah buku contoh huruf. Ia tidak hanya bertahan selama 5 abad, tapi juga telah beralih ke penataan huruf elektronik, tanpa ada perubahan apapun. Ia mulai dipopulerkan pada tahun 1960 dengan diluncurkannya lembaran-lembaran Letraset yang menggunakan kalimat-kalimat dari Lorem Ipsum, dan seiring munculnya perangkat lunak Desktop Publishing seperti Aldus PageMaker juga memiliki versi Lorem Ipsum.</span><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;"><br></span></p>', NULL, NULL, NULL, 22, 'editkey', 'edittgs', '', '', '', '["storage\\/app\\/listings\\/assets\\/assets\\/Screenshot_from_2016-07-23_13_07_31.png"]', 4, '2016-06-15 06:34:39', 1, 3, '2016-03-15 23:37:37', '2016-08-13 02:32:47'),
 (78, '012016030001936', 'GRAFICHDEVPTELTD78', 'Test Listing 2  edit', 'test-listing-2-edit', '<p style="line-height: 20.3px;"><strong style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">edit Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;"> adalah contoh teks atau dummy dalam industri percetakan dan penataan huruf atau typesetting. Lorem Ipsum telah menjadi standar contoh teks sejak tahun 1500an, saat seorang tukang cetak yang tidak dikenal mengambil sebuah kumpulan teks dan mengacaknya untuk menjadi sebuah buku contoh huruf. Ia tidak hanya bertahan selama 5 abad, tapi juga telah beralih ke penataan huruf elektronik, tanpa ada perubahan apapun. Ia mulai dipopulerkan pada tahun 1960 dengan diluncurkannya lembaran-lembaran Letraset yang menggunakan kalimat-kalimat dari Lorem Ipsum, dan seiring munculnya perangkat lunak Desktop Publishing seperti Aldus PageMaker juga memiliki versi Lorem Ipsum.</span><br></p><p style="line-height: 20.3px;"><strong style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;"> adalah contoh teks atau dummy dalam industri percetakan dan penataan huruf atau typesetting. Lorem Ipsum telah menjadi standar contoh teks sejak tahun 1500an, saat seorang tukang cetak yang tidak dikenal mengambil sebuah kumpulan teks dan mengacaknya untuk menjadi sebuah buku contoh huruf. Ia tidak hanya bertahan selama 5 abad, tapi juga telah beralih ke penataan huruf elektronik, tanpa ada perubahan apapun. Ia mulai dipopulerkan pada tahun 1960 dengan diluncurkannya lembaran-lembaran Letraset yang menggunakan kalimat-kalimat dari Lorem Ipsum, dan seiring munculnya perangkat lunak Desktop Publishing seperti Aldus PageMaker juga memiliki versi Lorem Ipsum.</span></p>', NULL, NULL, NULL, 22, 'edit key', 'edit tags', '', '', '', '["storage\\/app\\/listings\\/assets\\/assets\\/Linux_kernel_ubiquity.svg.png"]', 3, '2016-04-16 06:34:59', 1, 3, '2016-03-15 23:37:37', '2016-05-29 15:32:58'),
 (79, '012016030001936', 'GRAFICHDEVPTELTD79', 'Accusantium doloremque laudantium', 'accusantium-doloremque-laudantium', '<p><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"</span><br></p>', NULL, NULL, NULL, 32, 'saik lah', 'nice', '', '', '', '["storage\\/app\\/listings\\/assets\\/assets\\/Screenshot_from_2016-05-29_19_40_05.png"]', 4, '2016-09-13 08:41:50', 1, 3, '2016-03-16 05:47:10', '2016-05-29 15:33:33'),
 (80, '012016030001936', 'GRAFICHDEVPTELTD80', 'edit Test Listing 3', 'edit-test-listing-3', '<p><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">edit Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"</span><br></p>', NULL, NULL, NULL, 22, 'edit key', 'edit tags', '', '', '', '["storage\\/app\\/listings\\/assets\\/assets\\/Screenshot_from_2016-05-23_17_42_51.png"]', 3, '2016-07-15 06:35:06', 1, 3, '2016-03-16 05:47:10', '2016-05-29 15:33:46'),
 (81, '012016030001936', 'GRAFICHDEVPTELTD81', 'Quasi architecto beatae eedit', 'quasi-architecto-beatae-eedit', '<p><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"</span><br></p>', NULL, NULL, NULL, 44, 'saik lah', 'nice', '', '', '', '["storage\\/app\\/listings\\/assets\\/assets\\/Screenshot_from_2016-05-26_17_08_10.png"]', 4, '2016-06-15 06:35:09', 1, 3, '2016-03-16 05:47:10', '2016-05-29 15:34:05'),
 (82, '012016030001936', 'GRAFICHDEVPTELTD82', 'Architecto beatae vitae ', 'architecto-beatae-vitae', '<p><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">edit Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"</span><br></p>', NULL, NULL, NULL, 22, 'edit key', 'edit tags', '', '', '', '["storage\\/app\\/listings\\/assets\\/post-3.jpg"]', 3, '2016-04-16 06:35:30', 1, 3, '2016-03-16 05:47:10', '2016-05-26 11:49:35'),
-(83, '012016030001936', 'GRAFICHDEVPTELTD83', 'Test Listing hehehe', 'test-listing-hehehe', '<p>Test Lorem Ipsum</p>', '<p><br></p>', '<p><br></p>', '', 32, '', '', '', '', '', '["storage\\/app\\/listings\\/assets\\/car-painting.png"]', 3, '2016-04-16 06:35:26', 1, 2, '2016-03-16 08:50:30', '2016-05-11 23:26:41'),
+(83, '012016030001936', 'GRAFICHDEVPTELTD83', 'Test Listing hehehe', 'test-listing-hehehe', '<p>Test Lorem Ipsum</p>', '<p><br></p>', '<p><br></p>', '', 32, '', '', '', '', '', '["storage\\/app\\/listings\\/assets\\/car-painting.png"]', 3, '2016-04-16 06:35:26', 1, 4, '2016-03-16 08:50:30', '2016-08-22 14:52:18'),
 (84, '012016030001936', 'GRAFICHDEVPTELTD84', 'At vero eos et accusamus', 'at-vero-eos-et-accusamus', '<p><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat</span><br></p>', '<p><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat</span><br></p>', '<p><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat</span><br></p>', 'Custom Tab Title', 32, '', '', '', '', '', '["storage\\/app\\/listings\\/assets\\/20130801_075319_20130801_GaransiCarCare-01.jpg"]', 4, '2016-06-15 23:06:06', 1, 4, '2016-03-17 05:47:35', '2016-05-10 05:08:30'),
 (86, '012016030001936', 'GRAFICHDEVPTELTD86', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, NULL, 0, 6, '2016-03-17 08:46:41', '2016-03-17 09:34:19'),
 (87, '012016030001936', 'GRAFICHDEVPTELTD87', NULL, '-16', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, NULL, 0, 6, '2016-03-17 08:46:41', '2016-03-28 07:28:43'),
-(88, '012016030002682', 'PYTTEST0188', 'Test 01 17 maret', 'test-01-17-maret', '<p>Fghkkjuijnvbm ggyikmn cfhik,nn</p>', NULL, NULL, NULL, 41, '', '', 'www.test01.com', '1000', '2000', '["storage\\/app\\/listings\\/assets\\/Default2.jpg"]', 3, '2016-04-16 09:07:12', 1, 3, '2016-03-17 08:54:23', '2016-03-17 09:31:58'),
-(89, '012016030002682', 'PYTTEST0189', 'Test02', 'test02', '<p>Ksksjiknh nbxgys hxusu hxgsg gn,ocusbxhild bxyui hhmxjsh</p>', NULL, NULL, NULL, 32, '', '', '', '500000', '', '["storage\\/app\\/listings\\/assets\\/image.jpeg"]', 3, '2016-04-16 09:18:50', 1, 3, '2016-03-17 09:13:14', '2016-03-17 09:18:50'),
-(90, '012016030002682', 'PYTTEST0190', NULL, '-12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4, NULL, 0, 6, '2016-03-17 09:36:05', '2016-03-28 04:00:22'),
+(88, '012016030002682', 'PYTTEST0188', 'Test 01 17 maret', 'test-01-17-maret', '<p>Fghkkjuijnvbm ggyikmn cfhik,nn</p>', NULL, NULL, NULL, 41, '', '', 'www.test01.com', '1000', '2000', '["storage\\/app\\/listings\\/assets\\/Default2.jpg"]', 3, '2016-09-13 14:29:01', 1, 3, '2016-03-17 08:54:23', '2016-08-14 14:29:01'),
+(89, '012016030002682', 'PYTTEST0189', 'Test02', 'test02', '<p>Ksksjiknh nbxgys hxusu hxgsg gn,ocusbxhild bxyui hhmxjsh</p>', NULL, NULL, NULL, 32, '', '', '', '500000', '', '["storage\\/app\\/listings\\/assets\\/image.jpeg"]', 3, '2016-10-13 16:16:00', 1, 3, '2016-03-17 09:13:14', '2016-08-23 05:02:21'),
 (91, '012016030003972', 'PTTEST0291', NULL, '-13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, NULL, 0, 6, '2016-03-28 03:50:13', '2016-03-28 04:01:08'),
 (92, '012016030003972', 'PTTEST0292', NULL, '-14', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, NULL, 0, 6, '2016-03-28 03:50:13', '2016-03-28 04:05:07'),
 (93, '012016030003972', 'PTTEST0293', NULL, '-15', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4, NULL, 0, 6, '2016-03-28 03:50:13', '2016-03-28 04:05:17'),
@@ -665,7 +725,16 @@ INSERT INTO `listings` (`id`, `customer_id`, `listing_id`, `title`, `slug`, `con
 (104, '', NULL, 'New Listing', 'new-listing-9', '<p><span style="color: rgb(0, 0, 0); font-family: ''Open Sans'', Arial, sans-serif; line-height: 20px; text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc suscipit, lorem vitae pellentesque rutrum, ipsum neque bibendum ante, nec commodo tellus orci in sapien. Proin posuere gravida purus sit amet gravida. Fusce scelerisque dictum velit vitae consectetur. Phasellus lorem lorem, gravida at ultrices quis, tempus vitae odio. Morbi ullamcorper ac nisl sed imperdiet. Praesent suscipit condimentum eros sed tincidunt. Morbi commodo nulla ante. Vestibulum sed quam enim. In commodo ultricies vehicula. Phasellus ullamcorper dictum lectus, a placerat risus pulvinar quis. Integer efficitur est sit amet tortor rhoncus, eu pellentesque risus aliquam. Suspendisse finibus, justo non venenatis dignissim, mauris ante aliquam ipsum, ut egestas velit ante sed ex. Duis maximus rhoncus justo ac pretium. Aliquam eu velit et augue viverra tristique. Morbi vitae arcu magna.</span><br></p>', NULL, NULL, NULL, 22, 'new key', 'new tags', NULL, NULL, NULL, NULL, 0, NULL, 0, 1, '2016-05-27 02:26:41', '2016-05-27 02:35:09'),
 (105, '', NULL, 'New Listing', 'new-listing-10', '<p><span style="color: rgb(0, 0, 0); font-family: ''Open Sans'', Arial, sans-serif; line-height: 20px; text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc suscipit, lorem vitae pellentesque rutrum, ipsum neque bibendum ante, nec commodo tellus orci in sapien. Proin posuere gravida purus sit amet gravida. Fusce scelerisque dictum velit vitae consectetur. Phasellus lorem lorem, gravida at ultrices quis, tempus vitae odio. Morbi ullamcorper ac nisl sed imperdiet. Praesent suscipit condimentum eros sed tincidunt. Morbi commodo nulla ante. Vestibulum sed quam enim. In commodo ultricies vehicula. Phasellus ullamcorper dictum lectus, a placerat risus pulvinar quis. Integer efficitur est sit amet tortor rhoncus, eu pellentesque risus aliquam. Suspendisse finibus, justo non venenatis dignissim, mauris ante aliquam ipsum, ut egestas velit ante sed ex. Duis maximus rhoncus justo ac pretium. Aliquam eu velit et augue viverra tristique. Morbi vitae arcu magna.</span><br></p>', NULL, NULL, NULL, 22, 'new key', 'new tags', NULL, NULL, NULL, NULL, 0, NULL, 0, 1, '2016-05-27 02:35:26', '2016-05-27 02:35:26'),
 (106, '', NULL, 'new Listing by aldi', 'new-listing-by-aldi', '<p><span style="color: rgb(82, 82, 82); font-family: "Source Sans Pro", sans-serif; font-size: 14.5px; line-height: 24.65px;">The </span><code class=" language-php" style="font-family: Consolas, Monaco, "Andale Mono", monospace; font-size: 11px; color: rgb(244, 100, 95); padding: 1px 5px; border-radius: 3px; text-shadow: white 0px 1px; direction: ltr; white-space: pre; word-break: normal; line-height: 2; tab-size: 4; box-shadow: rgba(0, 0, 0, 0.121569) 0px 1px 1px; vertical-align: middle; background: rgb(240, 242, 241);"><span class="token keyword" style="color: rgb(0, 119, 170);">array</span></code><span style="color: rgb(82, 82, 82); font-family: "Source Sans Pro", sans-serif; font-size: 14.5px; line-height: 24.65px;"> cast type is particularly useful when working with columns that are stored as serialized JSON. For example, if your database has a </span><code class=" language-php" style="font-family: Consolas, Monaco, "Andale Mono", monospace; font-size: 11px; color: rgb(244, 100, 95); padding: 1px 5px; border-radius: 3px; text-shadow: white 0px 1px; direction: ltr; white-space: pre; word-break: normal; line-height: 2; tab-size: 4; box-shadow: rgba(0, 0, 0, 0.121569) 0px 1px 1px; vertical-align: middle; background: rgb(240, 242, 241);"><span class="token constant" style="color: rgb(218, 86, 74);">TEXT</span></code><span style="color: rgb(82, 82, 82); font-family: "Source Sans Pro", sans-serif; font-size: 14.5px; line-height: 24.65px;"> field type that contains serialized JSON, adding the</span><code class=" language-php" style="font-family: Consolas, Monaco, "Andale Mono", monospace; font-size: 11px; color: rgb(244, 100, 95); padding: 1px 5px; border-radius: 3px; text-shadow: white 0px 1px; direction: ltr; white-space: pre; word-break: normal; line-height: 2; tab-size: 4; box-shadow: rgba(0, 0, 0, 0.121569) 0px 1px 1px; vertical-align: middle; background: rgb(240, 242, 241);"><span class="token keyword" style="color: rgb(0, 119, 170);">array</span></code><span style="color: rgb(82, 82, 82); font-family: "Source Sans Pro", sans-serif; font-size: 14.5px; line-height: 24.65px;"> cast to that attribute will automatically deserialize the attribute to a PHP array when you access it on your Eloquent model:</span><br></p>', NULL, NULL, NULL, 22, 'keywords', 'tags', NULL, NULL, NULL, NULL, 0, NULL, 0, 1, '2016-05-29 15:35:40', '2016-05-29 15:35:40'),
-(107, '', NULL, 'new Listing by aldi', 'new-listing-by-aldi-1', '<p><span style="color: rgb(82, 82, 82); font-family: "Source Sans Pro", sans-serif; font-size: 14.5px; line-height: 24.65px;">Once the cast is defined, you may access the </span><code class=" language-php" style="font-family: Consolas, Monaco, "Andale Mono", monospace; font-size: 11px; color: rgb(244, 100, 95); padding: 1px 5px; border-radius: 3px; text-shadow: white 0px 1px; direction: ltr; white-space: pre; word-break: normal; line-height: 2; tab-size: 4; box-shadow: rgba(0, 0, 0, 0.121569) 0px 1px 1px; vertical-align: middle; background: rgb(240, 242, 241);">options</code><span style="color: rgb(82, 82, 82); font-family: "Source Sans Pro", sans-serif; font-size: 14.5px; line-height: 24.65px;"> attribute and it will automatically be deserialized from JSON into a PHP array. When you set the value of the </span><code class=" language-php" style="font-family: Consolas, Monaco, "Andale Mono", monospace; font-size: 11px; color: rgb(244, 100, 95); padding: 1px 5px; border-radius: 3px; text-shadow: white 0px 1px; direction: ltr; white-space: pre; word-break: normal; line-height: 2; tab-size: 4; box-shadow: rgba(0, 0, 0, 0.121569) 0px 1px 1px; vertical-align: middle; background: rgb(240, 242, 241);">options</code><span style="color: rgb(82, 82, 82); font-family: "Source Sans Pro", sans-serif; font-size: 14.5px; line-height: 24.65px;"> attribute, the given array will automatically be serialized back into JSON for storage:</span><br></p>', NULL, NULL, NULL, 22, 'keywords', 'tags', NULL, NULL, NULL, '["storage\\/app\\/listings\\/assets\\/assets\\/tux_droid_1.jpg"]', 0, NULL, 0, 1, '2016-05-29 15:38:15', '2016-05-29 15:38:15');
+(107, '', NULL, 'new Listing by aldi', 'new-listing-by-aldi-1', '<p><span style="color: rgb(82, 82, 82); font-family: "Source Sans Pro", sans-serif; font-size: 14.5px; line-height: 24.65px;">Once the cast is defined, you may access the </span><code class=" language-php" style="font-family: Consolas, Monaco, "Andale Mono", monospace; font-size: 11px; color: rgb(244, 100, 95); padding: 1px 5px; border-radius: 3px; text-shadow: white 0px 1px; direction: ltr; white-space: pre; word-break: normal; line-height: 2; tab-size: 4; box-shadow: rgba(0, 0, 0, 0.121569) 0px 1px 1px; vertical-align: middle; background: rgb(240, 242, 241);">options</code><span style="color: rgb(82, 82, 82); font-family: "Source Sans Pro", sans-serif; font-size: 14.5px; line-height: 24.65px;"> attribute and it will automatically be deserialized from JSON into a PHP array. When you set the value of the </span><code class=" language-php" style="font-family: Consolas, Monaco, "Andale Mono", monospace; font-size: 11px; color: rgb(244, 100, 95); padding: 1px 5px; border-radius: 3px; text-shadow: white 0px 1px; direction: ltr; white-space: pre; word-break: normal; line-height: 2; tab-size: 4; box-shadow: rgba(0, 0, 0, 0.121569) 0px 1px 1px; vertical-align: middle; background: rgb(240, 242, 241);">options</code><span style="color: rgb(82, 82, 82); font-family: "Source Sans Pro", sans-serif; font-size: 14.5px; line-height: 24.65px;"> attribute, the given array will automatically be serialized back into JSON for storage:</span><br></p>', NULL, NULL, NULL, 22, 'keywords', 'tags', NULL, NULL, NULL, '["storage\\/app\\/listings\\/assets\\/assets\\/tux_droid_1.jpg"]', 0, NULL, 0, 1, '2016-05-29 15:38:15', '2016-05-29 15:38:15'),
+(108, '012016030002682', 'PYTTEST01108', 'Test Renew Listing', 'test-renew-listing', '<p><br></p>', '<p><br></p>', '<p><br></p>', '', 25, '', '', '', '', '', NULL, 3, '2016-09-15 23:20:51', 1, 5, '2016-08-16 09:45:29', '2016-08-16 23:20:51'),
+(109, '', NULL, 'title', 'title', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, 0, 3, '2016-08-16 11:06:57', '2016-08-16 11:06:57'),
+(110, '012016030002682', 'PYTTEST01110', 'Tess112 editss history juga as', 'tess112-editss-history-juga-as', '<p>sdssdfsdfsdfsdf</p>', '<p><br></p>', '<p><br></p>', '', 25, 'sdfsd', 'sdfsd', 'sddfsd', 'sdfsdf', '', '["storage\\/app\\/listings\\/assets\\/Screenshot_from_2016-08-13_10_22_47.png"]', 3, '2016-09-22 04:21:35', 1, 2, '2016-08-16 23:27:37', '2016-08-23 05:07:02'),
+(111, '012016030002682', 'PYTTEST01111', 'Tes edit Listing Category', 'tes-edit-listing-category', '<p>ini description</p>', '<p><br></p>', '<p><br></p>', '', 25, 'tes', 'tes cat', 'www.google.com', '2000', '20000', '["storage\\/app\\/listings\\/assets\\/Screenshot_from_2016-08-19_08_36_31.png"]', 3, '2016-09-16 00:10:10', 1, 4, '2016-08-16 23:51:06', '2016-08-22 14:53:33'),
+(131, '012016030002682', 'up-110-160823-120702', 'Tess approve edit oleh admin', 'tess-approve-edit-oleh-admin', '<p>sdssdfsdfsdfsdf</p>', '<p><br></p>', '<p><br></p>', '', 25, 'sdfsd', 'sdfsd', 'sddfsd', 'sdfsdf', '', '["storage\\/app\\/listings\\/assets\\/Screenshot_from_2016-08-13_10_22_47.png"]', 3, NULL, 0, 2, '2016-08-23 05:07:02', '2016-08-23 05:07:02'),
+(132, '012016030002682', 'PYTTEST01EDIT132', 'New Tes Listing', 'new-tes-listing-4', '<p><br></p>', '<p><br></p>', '<p><br></p>', '', 25, '', '', '', '', '', '["storage\\/app\\/listings\\/assets\\/GUNDAR.png"]', 3, '2016-09-22 05:15:17', 1, 3, '2016-08-23 05:12:12', '2016-08-23 05:25:30'),
+(133, '012016030002682', 'up-132-160823-121332', 'New Tes Listing', 'new-tes-listing', '<p><br></p>', '<p><br></p>', '<p><br></p>', '', 35, '', '', '', '', '', '["storage\\/app\\/listings\\/assets\\/linux.jpg"]', 3, '2016-09-22 05:15:18', 1, 3, '2016-08-23 05:13:32', '2016-08-23 05:15:18'),
+(135, '012016030002682', 'up-134-160823-122226', 'Image null', 'image-null', '<p><br></p>', '<p><br></p>', '<p><br></p>', '', 30, '', '', '', '', '', '["storage\\/app\\/listings\\/assets\\/linux2.jpg"]', 4, '2016-11-21 05:23:42', 1, 3, '2016-08-23 05:22:26', '2016-08-23 05:23:42'),
+(136, '012016030002682', 'up-132-160823-122512', 'New Tes Listing', 'new-tes-listing-5', '<p><br></p>', '<p><br></p>', '<p><br></p>', '', 25, '', '', '', '', '', '["storage\\/app\\/listings\\/assets\\/GUNDAR.png"]', 3, '2016-09-22 05:25:30', 1, 3, '2016-08-23 05:25:12', '2016-08-23 05:25:30');
 
 -- --------------------------------------------------------
 
@@ -878,7 +947,7 @@ CREATE TABLE IF NOT EXISTS `packages` (
 --
 
 INSERT INTO `packages` (`id`, `name`, `price`, `notes`, `days`, `discount`, `created_at`, `updated_at`) VALUES
-(3, 'Paket 30 Hari', 560000, 'Listing akan tampil selama 30 hari dihitung sejak listing aktif', 30, 2, '2016-03-15 22:50:09', '2016-05-11 23:34:14'),
+(3, 'Paket 30 Hari ', 560000, 'Listing akan tampil selama 30 hari dihitung sejak listing aktif ', 30, 2, '2016-03-15 22:50:09', '2016-08-20 10:58:39'),
 (4, 'Paket 90 Hari', 1700000, 'Listing akan tampil selama 90 hari dihitung sejak listing aktif', 90, 0, '2016-03-15 22:56:48', '2016-05-10 05:14:26');
 
 -- --------------------------------------------------------
@@ -1111,8 +1180,10 @@ INSERT INTO `role_user` (`user_id`, `role_id`) VALUES
 (2, 2),
 (3, 3),
 (5, 4),
+(7, 4),
 (4, 5),
-(6, 5);
+(6, 5),
+(7, 5);
 
 -- --------------------------------------------------------
 
@@ -1141,7 +1212,7 @@ CREATE TABLE IF NOT EXISTS `system_logs` (
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=52 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=71 ;
 
 --
 -- Dumping data untuk tabel `system_logs`
@@ -1151,7 +1222,26 @@ INSERT INTO `system_logs` (`id`, `user`, `log_text`, `created_at`, `updated_at`)
 (48, 1, '<a href="javascript:;">Digi</a> Approved Listing <a href="javascript:;" class="name">At vero eos et accusamus</a>', '2016-04-01 00:48:04', '2016-04-01 00:48:04'),
 (49, 1, '<a href="javascript:;" class="name">Digi</a> Rejected Listing <a href="javascript:;">At vero eos et accusamus</a>', '2016-05-10 05:08:30', '2016-05-10 05:08:30'),
 (50, 1, '<a href="javascript:;" class="name">Digi</a> created customer <a href="javascript:;" class="name">PT. TEST03</a>', '2016-05-10 05:12:46', '2016-05-10 05:12:46'),
-(51, 1, '<a href="javascript:;" class="name">Digi</a> updated customer <a href="javascript:;" class="name">Grafich Dev Pte Ltd</a>', '2016-05-11 23:13:11', '2016-05-11 23:13:11');
+(51, 1, '<a href="javascript:;" class="name">Digi</a> updated customer <a href="javascript:;" class="name">Grafich Dev Pte Ltd</a>', '2016-05-11 23:13:11', '2016-05-11 23:13:11'),
+(52, 1, '<a href="javascript:;">Digi</a> Approved Listing <a href="javascript:;" class="name">Test Renew Listing</a>', '2016-08-14 14:18:12', '2016-08-14 14:18:12'),
+(53, 1, '<a href="javascript:;">Digi</a> Approved Listing <a href="javascript:;" class="name">Tes edit Listing Category</a>', '2016-08-17 00:10:10', '2016-08-17 00:10:10'),
+(54, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Tes add Ads</a>', '2016-08-17 04:55:40', '2016-08-17 04:55:40'),
+(55, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Tes add Ads 2</a>', '2016-08-17 11:18:59', '2016-08-17 11:18:59'),
+(56, 1, '<a href="javascript:;" class="name">Digi</a> Rejected Listing <a href="javascript:;">Test Listing hehehe</a>', '2016-08-22 14:52:18', '2016-08-22 14:52:18'),
+(57, 1, '<a href="javascript:;" class="name">Digi</a> Rejected Listing <a href="javascript:;">Tes edit Listing Category</a>', '2016-08-22 14:53:33', '2016-08-22 14:53:33'),
+(58, 1, '<a href="javascript:;" class="name">Digi</a> Rejected Ad <a href="javascript:;">Tes add Ads</a>', '2016-08-22 14:57:05', '2016-08-22 14:57:05'),
+(59, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Tes add Ads</a>', '2016-08-23 01:11:26', '2016-08-23 01:11:26'),
+(60, 1, '<a href="javascript:;">Digi</a> Approved Listing <a href="javascript:;" class="name">Tess edit package</a>', '2016-08-23 04:06:54', '2016-08-23 04:06:54'),
+(61, 1, '<a href="javascript:;">Digi</a> Approved Listing <a href="javascript:;" class="name">Tess edit package</a>', '2016-08-23 04:15:38', '2016-08-23 04:15:38'),
+(62, 1, '<a href="javascript:;">Digi</a> Approved Listing <a href="javascript:;" class="name">Tess appr new</a>', '2016-08-23 04:16:34', '2016-08-23 04:16:34'),
+(63, 1, '<a href="javascript:;">Digi</a> Approved Listing <a href="javascript:;" class="name">Tess appr new</a>', '2016-08-23 04:21:35', '2016-08-23 04:21:35'),
+(64, 1, '<a href="javascript:;">Digi</a> Approved Listing <a href="javascript:;" class="name">Tess112 editss</a>', '2016-08-23 04:46:17', '2016-08-23 04:46:17'),
+(65, 1, '<a href="javascript:;">Digi</a> Approved Listing <a href="javascript:;" class="name">Tess112 editss history juga</a>', '2016-08-23 04:49:49', '2016-08-23 04:49:49'),
+(66, 1, '<a href="javascript:;">Digi</a> Approved Listing <a href="javascript:;" class="name">Test02</a>', '2016-08-23 05:02:21', '2016-08-23 05:02:21'),
+(67, 1, '<a href="javascript:;">Digi</a> Approved Listing <a href="javascript:;" class="name">Tess112 editss history juga as</a>', '2016-08-23 05:03:01', '2016-08-23 05:03:01'),
+(68, 1, '<a href="javascript:;">Digi</a> Approved Listing <a href="javascript:;" class="name">New Tes Listing</a>', '2016-08-23 05:15:18', '2016-08-23 05:15:18'),
+(69, 1, '<a href="javascript:;">Digi</a> Approved Listing <a href="javascript:;" class="name">Image null</a>', '2016-08-23 05:23:42', '2016-08-23 05:23:42'),
+(70, 1, '<a href="javascript:;">Digi</a> Approved Listing <a href="javascript:;" class="name">New Tes Listing</a>', '2016-08-23 05:25:30', '2016-08-23 05:25:30');
 
 -- --------------------------------------------------------
 
@@ -1170,19 +1260,20 @@ CREATE TABLE IF NOT EXISTS `users` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data untuk tabel `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Digi', 'grafich.dev@gmail.com', '$2y$10$XQuBCrxFwr4N8et.0VSSK.eavlEYymjNdl7DB5VFaaNgkRqid23.K', 'IOpLi54LNEPGJZUXDFIiJXwlDCrHHQsqxeph3sDje38oXGnxN8Sw2AeqiTjQ', 1, '0000-00-00 00:00:00', '2016-08-02 11:57:43'),
+(1, 'Digi', 'grafich.dev@gmail.com', '$2y$10$XQuBCrxFwr4N8et.0VSSK.eavlEYymjNdl7DB5VFaaNgkRqid23.K', 'hqirQ3ck3j3e2Wdhd4aeapAhqGAdwSD5FvB0CMU27qHiVkJ4CfZwGOmWy4rC', 1, '0000-00-00 00:00:00', '2016-08-21 05:28:30'),
 (2, 'User Admin', 'irhsad.seifaldin@gmail.com', '$2y$10$wtb3McLO/3Ak29lm3/vy/.2m3WlAcjPZZgEmoid8hiwQAG49DG9mW', NULL, 0, '2015-12-16 06:21:18', '2015-12-16 06:21:18'),
 (3, 'User Manager', '31x389@gmail.com', '$2y$10$InGEkucqe6DBfuL76M6xVuRU1qgDUdXgYgKCSP5kYf7LdaHTfzLIO', 'QTNSc7J38AuSZb1HRzq9NcsOmM8wQA3spJ0Xd7ojbuIkuY7nueeyZreYS9Pj', 0, '2015-12-16 06:21:47', '2015-12-28 07:44:52'),
 (4, 'Irwan Sales', 'baponk.smoker@gmail.com', '$2y$10$UTQvH/xnww5zN.LL8qUCrucPa.RJ4BLbS02wr5aIh3MK70G/dT4n6', NULL, 0, '2015-12-16 06:22:17', '2015-12-16 06:22:17'),
 (5, 'Anis Finance', 'aniez.cex@gmail.com', '$2y$10$aguCv.vFUPed1JCB9kaJj.jPe5YjyDofx3CKnx0ZasHUY2wvBGn7W', 'L89mDB5JeicQb7SI0tZOwVN3ju94pvsU4ub8GrSy6x8qzxcKHXJd5bGk6W2F', 0, '2015-12-28 07:48:17', '2015-12-28 08:33:34'),
-(6, 'waldi syafei', 'waldi.syafei@gmail.com', '$2y$10$BAgZmwH/xPhMlkN/ZGpL2.gw4CeCu2OKYTYV9wP6L0YkB9NqGSNV.', NULL, 0, '2016-05-11 23:11:30', '2016-05-11 23:11:30');
+(6, 'waldi syafei', 'waldi.syafei@gmail.com', '$2y$10$BAgZmwH/xPhMlkN/ZGpL2.gw4CeCu2OKYTYV9wP6L0YkB9NqGSNV.', NULL, 0, '2016-05-11 23:11:30', '2016-05-11 23:11:30'),
+(7, 'Aldi Fajrin', 'aldisma2pyk@gmail.com', '$2y$10$.jdpnDzVeDDqzwq5IgK6j.cw6OXNyMjpSqLcgOd9XlZRb6fuVpbHG', NULL, 0, '2016-08-22 02:37:35', '2016-08-22 02:38:55');
 
 -- --------------------------------------------------------
 
