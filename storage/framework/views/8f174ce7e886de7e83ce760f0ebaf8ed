@@ -1,10 +1,8 @@
-@extends('nonSubscriber.base')
+<?php $__env->startSection('title', 'Dashboard'); ?>
 
-@section('title', 'Dashboard')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 	<ol class="breadcrumb">
-	    <li class=""><a href="{{ url('subscriber') }}">Home</a></li>
+	    <li class=""><a href="<?php echo e(url('subscriber')); ?>">Home</a></li>
 	</ol>
 	<div class="container-fluid">
 		<div class="row">
@@ -33,9 +31,9 @@
 	        </div>
 		</div>
 	</div>
-@stop
+<?php $__env->stopSection(); ?>
 
-@section('inline-style')
+<?php $__env->startSection('inline-style'); ?>
 <style type="text/css">
 	.morris-hover.morris-default-style {
     border-radius: 10px;
@@ -53,14 +51,14 @@
 	    z-index: 1000;
 	}
 </style>
-@stop
+<?php $__env->stopSection(); ?>
 
-@section('page-scripts')
-<script type="text/javascript" src="{{ asset('assets/backend/plugins/charts-morrisjs/raphael.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('assets/backend/plugins/charts-morrisjs/morris.min.js') }}"></script>
-@stop()
+<?php $__env->startSection('page-scripts'); ?>
+<script type="text/javascript" src="<?php echo e(asset('assets/backend/plugins/charts-morrisjs/raphael.min.js')); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('assets/backend/plugins/charts-morrisjs/morris.min.js')); ?>"></script>
+<?php $__env->stopSection(); ?>
 
-@section('inline-script')
+<?php $__env->startSection('inline-script'); ?>
 <script type="text/javascript">
 	$(function(){
 
@@ -120,4 +118,5 @@
 
 	});
 </script>
-@stop()
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('nonSubscriber.base', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
