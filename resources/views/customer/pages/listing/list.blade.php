@@ -51,11 +51,11 @@
 								<tbody>
 									@foreach ($listings as $listing)
 										<?php
-										$listing_up_id = explode('-', $listing->listing_id);
-										$up_id = $listing_up_id[0];
-										if ($up_id == 'up') {
-											continue;
-										}
+											$listing_up_id = explode('-', $listing->listing_id);
+											$up_id = $listing_up_id[0];
+											if ($up_id == 'up') {
+												continue;
+											}
 										$assets = json_decode($listing->assets);
 										$filename = substr($assets[0], strrpos($assets[0], '/') + 1);
 										$img_entry = str_replace($filename, 'thumb-admin-'.$filename, $assets[0]);

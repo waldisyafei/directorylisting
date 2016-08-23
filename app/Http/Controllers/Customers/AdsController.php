@@ -14,6 +14,7 @@ use Image;
 use App\Models\Package;
 use Setting;
 use Session;
+use App\Models\History;
 
 class AdsController extends Controller
 {
@@ -146,12 +147,18 @@ class AdsController extends Controller
             return redirect()->back()->withInput()->withErrors($validation);
         }
 
-        $ad = Ad::find($id);
+        $ad_old = Ad::find($id);
+        $ad_old->status = 2;
+
+        $ad = new Ad;
+        $ad->ad_id ='up-'.  $ad_old->id .'-'. date('ymd-his');
         $ad->title = $request->input('title');
         $ad->link = $request->input('link');
         $ad->customer_id = Auth::customer()->get()->customer_id;
         $ad->show_date = $request->input('show_date');
         $ad->status = 2;
+        $stop_date = $ad_old->days;
+        $ad->expired_date = date('Y-m-d H:i:s', strtotime($request->input('show_date') . ' +'. $stop_date .' day'));
         
         if ($request->hasFile('image')) {
             //$dir = storage_path().'/app/cs/assets/';
@@ -173,9 +180,23 @@ class AdsController extends Controller
             Image::make($request->file('image'))->resize(200, 200)->save($dir . $thumb);
 
             $ad->assets = json_encode([$relative_path]);
+        }elseif ($ad_old->assets) {
+            $ad->assets = $ad_old->assets;
         }
 
+        $history = new History;
+        $history->customer_id = $ad->customer_id;
+        $history->item_id = $ad->ad_id;
+        $history->item_type = 'ads';
+
+        $history_old = new History;
+        $history_old->customer_id = $ad_old->customer_id;
+        $history_old->item_id = $ad_old->ad_id;
+        $history_old->item_type = 'ads';
+
         if ($ad->save()) {
+            $history->save();
+            $history_old->save();
             return redirect('account/ads')->withSuccess('success', 'Ads create success.');
         }
     }

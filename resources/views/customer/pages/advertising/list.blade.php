@@ -47,6 +47,11 @@
 							<tbody>
 							<?php foreach ($ads as $ad): ?>
 								<?php
+									$ad_up_id = explode('-', $ad->ad_id);
+									$up_id = $ad_up_id[0];
+									if ($up_id == 'up') {
+									continue;
+								}
 								$assets = json_decode($ad->assets);
 								$filename = substr($assets[0], strrpos($assets[0], '/') + 1);
 								$img_entry = str_replace($filename, 'thumb-admin-'.$filename, $assets[0]);
