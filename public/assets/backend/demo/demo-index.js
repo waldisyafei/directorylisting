@@ -140,7 +140,8 @@ jQuery(document).ready(function() {
             return (Math.floor(Math.random() * (2)));
         }
 
-        var fans = [[1, 17], [2, 34], [3, 73], [4, 47], [5, 90], [6, 70], [7, 40]];
+        var fans = /*<?php $sessions = Tracker::sessions(60 * 24); var_dump($sessions);die(); ?>*/
+                [[1, 17], [2, 34], [3, 73], [4, 47], [5.5, 90], [6, 70], [7, 40]];
         var followers = [[1, 54], [2, 40], [3, 10], [4, 25], [5, 42], [6, 14], [7, 36]];
 
         var plot = $.plot($("#socialstats"),

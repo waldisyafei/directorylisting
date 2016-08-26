@@ -26,6 +26,43 @@
 				</div>
 			</div>
 			<div class="col-md-3">
+				<div class="info-tile tile-orange">
+					<div class="tile-icon"><i class="ti ti-layout-list-thumb-alt"></i></div>
+					<div class="tile-heading"><span>Active Customers</span></div>
+					<div class="tile-body"><span><?php echo $users = App\Models\User::count(); ?></span></div>
+					<!-- <div class="tile-footer"><span class="text-success">22.5% <i class="fa fa-level-up"></i></span></div> -->
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="info-tile tile-orange">
+					<div class="tile-icon"><i class="ti ti-layout-list-thumb-alt"></i></div>
+					<div class="tile-heading"><span>Almost Expire Listings</span></div>
+					<div class="tile-body">
+						<span>
+							<?php 
+								//echo getSubscriberListings('active')->count();
+								$listings = App\Models\Listing::where('customer_id', Auth::user()->get()->user_id)->orderby('created_at', 'DESC')->get();
+								$expired_listings = array();
+								$almost_expired_listings = array();
+								foreach ($listings as $listing) {
+									$listing_date = explode("-", $listing->expired_date);
+									if ($listing_date[0] >= date('Y')) {
+										if ($listing_date[1] >= date('m')) {
+												$L_date = explode(" ", $listing_date[2]);
+											if ((date('d') - Setting::get('site_settings.almost_expired')) <= $L_date[0] && date('d')<= $L_date[0]){
+												$almost_expired_listings[] = $listing->id;
+											}
+										} 
+									}
+								}
+								echo count($almost_expired_listings);
+							?>
+						</span>
+					</div>
+					<!-- <div class="tile-footer"><span class="text-success">22.5% <i class="fa fa-level-up"></i></span></div> -->
+				</div>
+			</div>
+			<div class="col-md-6">
 				<div class="info-tile tile-blue">
 					<div class="tile-icon"><i class="fa fa-money"></i></div>
 					<div class="tile-heading"><span>Payment Confirm</span></div>
@@ -37,7 +74,7 @@
 					<!-- <div class="tile-footer"><span class="text-success">22.5% <i class="fa fa-level-up"></i></span></div> -->
 				</div>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-6">
 				<div class="info-tile tile-green">
 					<div class="tile-icon"><i class="ti ti-check-box"></i></div>
 					<div class="tile-heading"><span>Content Need Approval</span></div>
@@ -108,7 +145,7 @@
 							</div>
 						</div>
 						<div class="panel-body">
-							<div id="earnings" style="height: 272px;" class="mt-sm mb-sm"></div>
+							<div id="socialstats" style="height: 272px;" class="mt-sm mb-sm"></div>
 						</div>
 					</div>
 				</div>

@@ -149,6 +149,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        PragmaRX\Tracker\Vendor\Laravel\ServiceProvider::class,
 
         Zizaco\Entrust\EntrustServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
@@ -206,6 +207,7 @@ return [
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
         'Image'     => Intervention\Image\Facades\Image::class,
         'Setting'   => anlutro\LaravelSettings\Facade::class,
+        'Tracker'   => PragmaRX\Tracker\Vendor\Laravel\Facade::class,
 
     ],
 

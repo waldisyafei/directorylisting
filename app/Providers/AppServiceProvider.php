@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $listings = Listing::where('status', array(3, 5))->get();
+        $listings = Listing::where('status', 3)->get();
 
         if ($listings) {
             foreach ($listings as $listing) {
@@ -25,7 +25,6 @@ class AppServiceProvider extends ServiceProvider
 
                 if ($now_time >= $expired_time) {
                     $listing->status = 5;
-
                     $listing->save();
                 }
             }
