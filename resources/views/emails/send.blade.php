@@ -1,6 +1,2 @@
-<html>
-<head></head>
-<body style="background: black; color: white">
-This is email from me
-</body>
-</html>
+Dear {{ $user }},<br/>
+Your {{ $item_type }} <b>{{ $item_id }}</b> payment has been confirmed.

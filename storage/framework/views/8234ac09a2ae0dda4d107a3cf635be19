@@ -1,0 +1,2 @@
+Dear <?php echo e($user); ?>,<br/>
+Your <?php echo e($item_type); ?> <b><?php echo e($item_id); ?></b> payment has been confirmed.

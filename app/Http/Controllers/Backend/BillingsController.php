@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Billing;
 use App\Models\Listing;
+use App\Models\Customer;
 use App\Models\Ad;
 use Auth;
 use Mail;
@@ -75,9 +76,11 @@ class BillingsController extends Controller
                     } else {
                         $listing->expired_date = date('Y-m-d H:i:s', strtotime("$listing_expired +$days days"));
                     }
+                    $item_id = $listing->listing_id;
                     $listing->save();
                     $billing->save();
                 } else {
+                    $item_id = $listing->listing_id;
                     $listing->status = 6;
                     $listing->save();
                     $billing->save();
@@ -85,11 +88,18 @@ class BillingsController extends Controller
             }
             elseif ($billing->item_type == 'ads') {
                 $ad = Ad::find($billing->item_id);
+                $item_id = $ad->ad_id;
+
                 $ad->status = 6;
                 $ad->save();
                 $billing->save();
             }
-                
+            //var_dump($billing->item_type);die();
+            Mail::send('emails.send', ['user' => $billing->customer->customer_name, 'item_type' => $billing->item_type, 'item_id'=> $item_id], function ($m/*) use ($user*/) {
+            $m->from('digirook@app.com', 'Your Application');
+
+            $m->to('aldisma2pyk@gmail.com', 'Aldi Fajrin')->subject('Payment Confirmed!');
+            });    
 
             return redirect()->back()->with('success', 'Pembayaran telah dikonfirmasi.');
         }
