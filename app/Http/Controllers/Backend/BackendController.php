@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Country;
-use Tracker;
+use Visitor;
 
 class BackendController extends Controller
 {
@@ -18,9 +18,8 @@ class BackendController extends Controller
      */
     public function index()
     {
-        $visitor = Tracker::currentSession();//var_dump( $visitor->geoIp->city );die();
-        
-        return view('backend.pages.dashboard', ['visitor' => $visitor]);
+var_dump(Visitor::count());die();
+        return view('backend.pages.dashboard'/*, ['visitor' => $visitor]*/);
     }
 
     public function getZone(Request $request)

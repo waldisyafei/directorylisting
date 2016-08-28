@@ -15,8 +15,7 @@
         "anhskohbo/no-captcha": "2.*",
         "mews/captcha": "~2.0",
         "guzzlehttp/guzzle": "~5.3|~6.0",
-        "pragmarx/tracker": "^2.0",
-        "geoip2/geoip2": "~2.0"
+        "weboap/visitor": "dev-master"
     },
     "minimum-stability": "dev",
     "require-dev": {

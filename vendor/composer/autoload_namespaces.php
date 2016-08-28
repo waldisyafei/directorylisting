@@ -6,17 +6,20 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Snowplow\\RefererParser' => array($vendorDir . '/snowplow/referer-parser/php/src'),
+    'Whitelist\\' => array($vendorDir . '/jalle19/php-whitelist-check/src'),
     'Prophecy\\' => array($vendorDir . '/phpspec/prophecy/src'),
     'PhpSpec' => array($vendorDir . '/phpspec/phpspec/src'),
     'Mockery' => array($vendorDir . '/mockery/mockery/library'),
     'MaxMind' => array($vendorDir . '/maxmind-db/reader/src'),
+    'JsonSerializable' => array($vendorDir . '/geoip2/geoip2/compat'),
     'JakubOnderka\\PhpConsoleHighlighter' => array($vendorDir . '/jakub-onderka/php-console-highlighter/src'),
     'JakubOnderka\\PhpConsoleColor' => array($vendorDir . '/jakub-onderka/php-console-color/src'),
+    'IpUtils\\' => array($vendorDir . '/xrstf/ip-utils/lib'),
+    'Guzzle\\Tests' => array($vendorDir . '/guzzle/guzzle/tests'),
+    'Guzzle' => array($vendorDir . '/guzzle/guzzle/src'),
+    'GeoIp2' => array($vendorDir . '/geoip2/geoip2/src'),
     'Dotenv' => array($vendorDir . '/vlucas/phpdotenv/src'),
     'Doctrine\\Common\\Inflector\\' => array($vendorDir . '/doctrine/inflector/lib'),
     'Diff' => array($vendorDir . '/phpspec/php-diff/lib'),
-    'Detection' => array($vendorDir . '/mobiledetect/mobiledetectlib/namespaced'),
     'Cron' => array($vendorDir . '/mtdowling/cron-expression/src'),
-    'Bllim\\Datatables' => array($vendorDir . '/pragmarx/datatables/src'),
 );
