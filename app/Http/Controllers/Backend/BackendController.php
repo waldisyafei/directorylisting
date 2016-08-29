@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Country;
-use Visitor;
+//use Tracker;
 
 class BackendController extends Controller
 {
@@ -18,7 +18,7 @@ class BackendController extends Controller
      */
     public function index()
     {
-var_dump(Visitor::count());die();
+      //  $users = Tracker::users(60 * 24);var_dump($users);die();
         return view('backend.pages.dashboard'/*, ['visitor' => $visitor]*/);
     }
 

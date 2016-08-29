@@ -95,11 +95,16 @@ class BillingsController extends Controller
                 $billing->save();
             }
             //var_dump($billing->item_type);die();
-            Mail::send('emails.send', ['user' => $billing->customer->customer_name, 'item_type' => $billing->item_type, 'item_id'=> $item_id], function ($m/*) use ($user*/) {
-            $m->from('digirook@app.com', 'Your Application');
+            Mail::send('emails.send', 
+                [
+                    'billing' => $billing
+                 ], 
+                 function ($m/*) use ($user*/) {
+                
+                $m->from('digirook@app.com', 'Your Application');
 
-            $m->to('aldisma2pyk@gmail.com', 'Aldi Fajrin')->subject('Payment Confirmed!');
-            });    
+                $m->to('aldisma2pyk@gmail.com', 'Aldi Fajrin')->subject('Payment Confirmed!');
+            });
 
             return redirect()->back()->with('success', 'Pembayaran telah dikonfirmasi.');
         }

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1b9dab5a002211889ce2d5ebeb41ff89",
-    "content-hash": "bfa0e89f5b5cbee985ee71c79b3abcf1",
+    "hash": "faf92a51bcbeb01254069ff664feab09",
+    "content-hash": "99ff45a50481cb7ccaf62c2317e976eb",
     "packages": [
         {
             "name": "anhskohbo/no-captcha",
@@ -421,154 +421,6 @@
             "time": "2016-05-12 17:23:41"
         },
         {
-            "name": "geoip2/geoip2",
-            "version": "v2.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/maxmind/GeoIP2-php.git",
-                "reference": "01f58d749b715f30c99d1b19a965ce5b93813656"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/maxmind/GeoIP2-php/zipball/01f58d749b715f30c99d1b19a965ce5b93813656",
-                "reference": "01f58d749b715f30c99d1b19a965ce5b93813656",
-                "shasum": ""
-            },
-            "require": {
-                "guzzle/guzzle": "3.*",
-                "maxmind-db/reader": "~1.0",
-                "php": ">=5.3.1"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "4.2.*",
-                "satooshi/php-coveralls": "dev-master"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "GeoIp2": "src/",
-                    "JsonSerializable": "compat/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "Gregory J. Oschwald",
-                    "email": "goschwald@maxmind.com",
-                    "homepage": "http://www.maxmind.com/"
-                }
-            ],
-            "description": "MaxMind GeoIP2 PHP API",
-            "homepage": "https://github.com/maxmind/GeoIP2-php",
-            "keywords": [
-                "IP",
-                "geoip",
-                "geoip2",
-                "geolocation",
-                "maxmind"
-            ],
-            "time": "2014-12-03 14:59:16"
-        },
-        {
-            "name": "guzzle/guzzle",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/guzzle/guzzle3.git",
-                "reference": "b3f5050cb6270c7a728a0b74ac2de50a262b3e02"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle3/zipball/b3f5050cb6270c7a728a0b74ac2de50a262b3e02",
-                "reference": "b3f5050cb6270c7a728a0b74ac2de50a262b3e02",
-                "shasum": ""
-            },
-            "require": {
-                "ext-curl": "*",
-                "php": ">=5.3.3",
-                "symfony/event-dispatcher": "~2.1"
-            },
-            "replace": {
-                "guzzle/batch": "self.version",
-                "guzzle/cache": "self.version",
-                "guzzle/common": "self.version",
-                "guzzle/http": "self.version",
-                "guzzle/inflection": "self.version",
-                "guzzle/iterator": "self.version",
-                "guzzle/log": "self.version",
-                "guzzle/parser": "self.version",
-                "guzzle/plugin": "self.version",
-                "guzzle/plugin-async": "self.version",
-                "guzzle/plugin-backoff": "self.version",
-                "guzzle/plugin-cache": "self.version",
-                "guzzle/plugin-cookie": "self.version",
-                "guzzle/plugin-curlauth": "self.version",
-                "guzzle/plugin-error-response": "self.version",
-                "guzzle/plugin-history": "self.version",
-                "guzzle/plugin-log": "self.version",
-                "guzzle/plugin-md5": "self.version",
-                "guzzle/plugin-mock": "self.version",
-                "guzzle/plugin-oauth": "self.version",
-                "guzzle/service": "self.version",
-                "guzzle/stream": "self.version"
-            },
-            "require-dev": {
-                "doctrine/cache": "~1.3",
-                "monolog/monolog": "~1.0",
-                "phpunit/phpunit": "3.7.*",
-                "psr/log": "~1.0",
-                "symfony/class-loader": "~2.1",
-                "zendframework/zend-cache": "2.*,<2.3",
-                "zendframework/zend-log": "2.*,<2.3"
-            },
-            "suggest": {
-                "guzzlehttp/guzzle": "Guzzle 5 has moved to a new package name. The package you have installed, Guzzle 3, is deprecated."
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Guzzle": "src/",
-                    "Guzzle\\Tests": "tests/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Michael Dowling",
-                    "email": "mtdowling@gmail.com",
-                    "homepage": "https://github.com/mtdowling"
-                },
-                {
-                    "name": "Guzzle Community",
-                    "homepage": "https://github.com/guzzle/guzzle/contributors"
-                }
-            ],
-            "description": "PHP HTTP client. This library is deprecated in favor of https://packagist.org/packages/guzzlehttp/guzzle",
-            "homepage": "http://guzzlephp.org/",
-            "keywords": [
-                "client",
-                "curl",
-                "framework",
-                "http",
-                "http client",
-                "rest",
-                "web service"
-            ],
-            "abandoned": "guzzlehttp/guzzle",
-            "time": "2015-04-29 17:06:53"
-        },
-        {
             "name": "guzzlehttp/guzzle",
             "version": "dev-master",
             "source": {
@@ -896,48 +748,6 @@
             "time": "2015-04-20 18:58:01"
         },
         {
-            "name": "jalle19/php-whitelist-check",
-            "version": "1.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Jalle19/php-whitelist-check.git",
-                "reference": "23723dc413fc36a7912323d3c1855bb1f5baef3a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Jalle19/php-whitelist-check/zipball/23723dc413fc36a7912323d3c1855bb1f5baef3a",
-                "reference": "23723dc413fc36a7912323d3c1855bb1f5baef3a",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0",
-                "xrstf/ip-utils": "1.*@dev"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "3.7.*",
-                "satooshi/php-coveralls": "dev-master"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Whitelist\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-2-Clause"
-            ],
-            "description": "Provides a simple way to check whether an address or domain is on a whitelist",
-            "homepage": "https://github.com/Jalle19/php-whitelist-check",
-            "keywords": [
-                "cidr",
-                "ipv4",
-                "ipv6",
-                "whitelist"
-            ],
-            "time": "2014-05-11 16:35:28"
-        },
-        {
             "name": "jeremeamia/SuperClosure",
             "version": "dev-master",
             "source": {
@@ -1051,12 +861,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "db580b5b073ea3f1e095b30a75ae5d6394eb8e51"
+                "reference": "ba7a37f87027ae08832bb8eee8eb1becd023072c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/db580b5b073ea3f1e095b30a75ae5d6394eb8e51",
-                "reference": "db580b5b073ea3f1e095b30a75ae5d6394eb8e51",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/ba7a37f87027ae08832bb8eee8eb1becd023072c",
+                "reference": "ba7a37f87027ae08832bb8eee8eb1becd023072c",
                 "shasum": ""
             },
             "require": {
@@ -1172,7 +982,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2016-08-26 11:44:21"
+            "time": "2016-08-29 00:33:00"
         },
         {
             "name": "league/flysystem",
@@ -1256,56 +1066,6 @@
                 "storage"
             ],
             "time": "2016-08-26 20:18:09"
-        },
-        {
-            "name": "maxmind-db/reader",
-            "version": "v1.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/maxmind/MaxMind-DB-Reader-php.git",
-                "reference": "1383655533aa2f13a990b27b075fdde8b7bdd5ff"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/maxmind/MaxMind-DB-Reader-php/zipball/1383655533aa2f13a990b27b075fdde8b7bdd5ff",
-                "reference": "1383655533aa2f13a990b27b075fdde8b7bdd5ff",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.1"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "4.2.*",
-                "satooshi/php-coveralls": "dev-master",
-                "squizlabs/php_codesniffer": "2.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "MaxMind": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "Gregory J. Oschwald",
-                    "email": "goschwald@maxmind.com",
-                    "homepage": "http://www.maxmind.com/"
-                }
-            ],
-            "description": "MaxMind DB Reader API",
-            "homepage": "https://github.com/maxmind/MaxMind-DB-Reader-php",
-            "keywords": [
-                "database",
-                "geoip",
-                "geoip2",
-                "geolocation",
-                "maxmind"
-            ],
-            "time": "2016-01-04 15:38:11"
         },
         {
             "name": "mews/captcha",
@@ -2790,105 +2550,6 @@
             "time": "2015-05-30 15:59:26"
         },
         {
-            "name": "weboap/visitor",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/weboAp/Visitor.git",
-                "reference": "81c9ed4f9b0cf3f3f57e4f74a4ff9c26b66712e7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/weboAp/Visitor/zipball/81c9ed4f9b0cf3f3f57e4f74a4ff9c26b66712e7",
-                "reference": "81c9ed4f9b0cf3f3f57e4f74a4ff9c26b66712e7",
-                "shasum": ""
-            },
-            "require": {
-                "geoip2/geoip2": "2.1.1",
-                "illuminate/support": "~5.0",
-                "jalle19/php-whitelist-check": "1.0.4",
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "phpspec/phpspec": "~2.1"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Weboap\\Visitor\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "weboap",
-                    "email": "weboap@gmail.com"
-                }
-            ],
-            "description": "log your visitors in db, page hits, and generate visit counter for Laravel 5",
-            "keywords": [
-                "clicks",
-                "counter",
-                "framework",
-                "hits",
-                "laravel",
-                "log",
-                "visitors"
-            ],
-            "time": "2015-06-28 23:07:18"
-        },
-        {
-            "name": "xrstf/ip-utils",
-            "version": "dev-default",
-            "source": {
-                "type": "hg",
-                "url": "https://bitbucket.org/xrstf/ip-utils",
-                "reference": "6a4a617d608464c29d6e8ba3cdcfa0fb43266d57"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://bitbucket.org/xrstf/ip-utils/get/6a4a617d608464c29d6e8ba3cdcfa0fb43266d57.zip",
-                "reference": "6a4a617d608464c29d6e8ba3cdcfa0fb43266d57",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-default": "1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "IpUtils\\": "lib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Christoph Mewes",
-                    "homepage": "http://www.xrstf.de/"
-                }
-            ],
-            "description": "small library to deal with IPv4 & IPv6 addresses and subnets",
-            "keywords": [
-                "IP",
-                "ipv4",
-                "ipv6",
-                "matching",
-                "subnet"
-            ],
-            "time": "2013-12-04 01:59:28"
-        },
-        {
             "name": "zizaco/entrust",
             "version": "dev-laravel-5",
             "source": {
@@ -3750,12 +3411,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "5d5239416615e317a9ae693002253b0f5588e389"
+                "reference": "41433b0d64caa3f2a73e415596dfa73490c262fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/5d5239416615e317a9ae693002253b0f5588e389",
-                "reference": "5d5239416615e317a9ae693002253b0f5588e389",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/41433b0d64caa3f2a73e415596dfa73490c262fc",
+                "reference": "41433b0d64caa3f2a73e415596dfa73490c262fc",
                 "shasum": ""
             },
             "require": {
@@ -3814,7 +3475,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-08-17 04:23:12"
+            "time": "2016-08-28 06:58:45"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -4353,8 +4014,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "zizaco/entrust": 20,
-        "weboap/visitor": 20
+        "zizaco/entrust": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
