@@ -107,19 +107,7 @@ class BillingsController extends Controller
                 $ad->save();
                 $billing->save();
             }
-            //var_dump($billing_item_package_name);die();
-            /*Mail::send('emails.send', 
-                [
-                    'billing' => $billing
-                 ], 
-                 function ($m) {
-                
-                $m->from('digirook@app.com', 'Your Application');
 
-                $m->to('aldisma2pyk@gmail.com', 'Aldi Fajrin')->subject('Payment Confirmed!');
-            });*/
-            //var_dump($billing);die();
-            //$billing = (array) $billing;//var_dump($billing->customer->customer_name);die();
             $billing->customer ? $billing->customer->customer_name : $billing->item->address->company;
             $address = $billing->customer ? $billing->customer->address : $billing->item->address;
             $zone_name = Zone::find($address->zone_id)->name;
@@ -128,8 +116,8 @@ class BillingsController extends Controller
             $price = $billing->customer ? floatval(Setting::get('ads.price_per_day')) : floatval(Setting::get('ads.noncust.price_per_day'));
             $billing_customer = null;
             $billing_customer ? Setting::get('ads.price_discount') : Setting::get('ads.noncust.price_discount');
-            $pdf = PDF::loadView('backend.pages.billings.invoice',
-                array('billing_customer_customer_name' => $billing->customer->customer_name,
+
+            $data = array('billing_customer_customer_name' => $billing->customer->customer_name,
                     //'billing_item_address_company' => $billing->item->address->company,
                     'billing_item_address' => $billing->item->address,
                     'billing_customer_address' => $billing->customer->address,
@@ -151,9 +139,19 @@ class BillingsController extends Controller
                     'billing_item_package_price' => $billing_item_package_price,
                     'billing_item_package_discount' => $billing_item_package_discount,
                     'billing_amount' => $billing->amount
-                ));
-            //$pdf = PDF::loadView('backend.pages.billings.invoice', array('data' =>'dataaa'  ));
-            return $pdf->stream();
+                );
+            $pdf = PDF::loadView('backend.pages.billings.invoice',$data);
+
+            //return $pdf->stream();
+
+            Mail::send('emails.invoice', $data, function ($m) use($pdf) {
+                
+                $m->from('digirook@app.com', 'Your Application');
+
+                $m->to('aldi.developer@gmail.com', 'Aldi Fajrin')->subject('Payment Confirmed!');
+
+                $m->attachData($pdf->output(), "invoice.pdf");
+            });
 
             return redirect()->back()->with('success', 'Pembayaran telah dikonfirmasi.');
         }
