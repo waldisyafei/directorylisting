@@ -14,7 +14,9 @@
         "anlutro/l4-settings": "^0.4.5",
         "anhskohbo/no-captcha": "2.*",
         "mews/captcha": "~2.0",
-        "guzzlehttp/guzzle": "~5.3|~6.0"
+        "guzzlehttp/guzzle": "~5.3|~6.0",
+        "barryvdh/laravel-dompdf": "^0.7.0",
+        "dompdf/dompdf": "^0.7.0"
         
     },
     "minimum-stability": "dev",

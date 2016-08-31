@@ -169,22 +169,7 @@
 			                	</div>
 			                </div>
 	                    @endif
-		                    
-		                <div class="row">
-		                    <div class="col-md-12">
-		                        <div class="pull-right">
-		                            <a href="javascript:window.print()" class="btn btn-inverse"><i class="ti ti-printer"></i></a>
-		                            @if ($billing->status == 0)
-		                            <a href="<?php echo url('app-admin/billings/' . $billing->item_type . '/' . $billing->id . '/confirm') ?>" class="btn btn-primary">Confirm Payment</a>
-		                            @else
-		                            <a href="<?php echo url('app-admin/billings/' . $billing->item_type . '/' . $billing->id . '/unconfirm') ?>" class="btn btn-warning">Cancel Confirm Payment</a>
-		                            @endif
-		                        </div>
-		                    </div>
-		                </div>
-
 		            </div>
-
 		        </div>
 			</div>
 		</div>
