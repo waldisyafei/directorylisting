@@ -35,7 +35,7 @@
 				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 			</div>
 		@endif
-		
+
 		<div class="row">
 			<div class="action-menu col-md-12">
 				<a class="btn btn-primary" href="{{ url('app-admin/ads/create') }}" role="button"><i class="ti ti-plus"></i> Add new Non Customer Ads</a>
