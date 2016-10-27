@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.10.14
+-- version 4.5.2
 -- http://www.phpmyadmin.net
 --
--- Host: localhost:3306
--- Generation Time: May 16, 2016 at 10:29 AM
--- Server version: 5.5.49-cll
--- PHP Version: 5.4.31
+-- Host: localhost
+-- Generation Time: 27 Okt 2016 pada 04.45
+-- Versi Server: 10.1.16-MariaDB
+-- PHP Version: 5.6.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `digiid_mylisting`
@@ -23,11 +23,11 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `address`
+-- Struktur dari tabel `address`
 --
 
-CREATE TABLE IF NOT EXISTS `address` (
-  `address_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `address` (
+  `address_id` int(11) NOT NULL,
   `customer_id` int(11) DEFAULT NULL,
   `company` varchar(40) NOT NULL,
   `address_1` varchar(128) NOT NULL,
@@ -37,13 +37,11 @@ CREATE TABLE IF NOT EXISTS `address` (
   `country_id` int(11) NOT NULL DEFAULT '0',
   `zone_id` int(11) NOT NULL DEFAULT '0',
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`address_id`),
-  KEY `customer_id` (`customer_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `address`
+-- Dumping data untuk tabel `address`
 --
 
 INSERT INTO `address` (`address_id`, `customer_id`, `company`, `address_1`, `address_2`, `city`, `postcode`, `country_id`, `zone_id`, `created_at`, `updated_at`) VALUES
@@ -56,11 +54,11 @@ INSERT INTO `address` (`address_id`, `customer_id`, `company`, `address_1`, `add
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ads`
+-- Struktur dari tabel `ads`
 --
 
-CREATE TABLE IF NOT EXISTS `ads` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `ads` (
+  `id` int(10) UNSIGNED NOT NULL,
   `ad_id` varchar(13) COLLATE utf8_unicode_ci DEFAULT NULL,
   `title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `customer_id` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -75,40 +73,45 @@ CREATE TABLE IF NOT EXISTS `ads` (
   `address_id` int(11) DEFAULT NULL,
   `noncust_ad_link` longtext COLLATE utf8_unicode_ci,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=38 ;
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `ads`
+-- Dumping data untuk tabel `ads`
 --
 
 INSERT INTO `ads` (`id`, `ad_id`, `title`, `customer_id`, `password`, `link`, `days`, `been_active`, `show_date`, `expired_date`, `status`, `assets`, `address_id`, `noncust_ad_link`, `created_at`, `updated_at`) VALUES
 (17, '2820160300002', 'Test Ads hehe', '012016030001936', NULL, 'http://www.yahoo.co.id/', 3, 1, '2016-03-21 10:30:00', '2016-05-15 06:55:00', 2, '["storage\\/app\\/cs\\/assets\\/12-car-ads-creative-advertising.jpg"]', NULL, NULL, '2016-03-18 00:54:18', '2016-05-11 23:30:06'),
 (18, '2820160300003', 'Test Ads 5', '012016030001936', NULL, 'http://www.google.co.id', 5, 1, '2016-03-24 15:30:00', '2016-03-29 21:05:00', 5, '["storage\\/app\\/cs\\/assets\\/autosolutions.jpg"]', NULL, NULL, '2016-03-18 00:54:18', '2016-03-30 07:00:27'),
 (36, '2820160400036', 'Test Ads Non Customer', NULL, '$2y$10$NE5FKl85fKI/BTEDnQfBAuzQdhW1dw5gIRHmzVKfWh3MWnktq0LS6', 'http://kaskus.co.id', 34, 1, '2016-04-01 06:45:00', '2016-05-05 06:45:00', 5, '["storage\\/app\\/cs\\/assets\\/img-2.jpg"]', 16, 'http://mylisting.grafich.com/noncust-ads/ca357a4c21a6300c1d9cd06ab71a03e2', '2016-03-31 23:25:44', '2016-05-05 04:48:49'),
-(37, '2820160500037', NULL, '012016030001936', NULL, NULL, 1, 0, NULL, NULL, 1, NULL, NULL, NULL, '2016-05-09 14:21:48', '2016-05-09 14:21:48');
+(37, '2820160500037', NULL, '012016030001936', NULL, NULL, 1, 0, NULL, NULL, 1, NULL, NULL, NULL, '2016-05-09 14:21:48', '2016-05-09 14:21:48'),
+(38, '2820161000038', NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, 1, NULL, NULL, NULL, '2016-10-26 16:59:56', '2016-10-26 16:59:56'),
+(39, '2820161000039', NULL, NULL, NULL, NULL, 3, 0, NULL, NULL, 1, NULL, NULL, NULL, '2016-10-27 01:56:04', '2016-10-27 01:56:04'),
+(40, '2820161000040', NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, 1, NULL, NULL, NULL, '2016-10-27 01:57:47', '2016-10-27 01:57:47'),
+(41, '2820161000041', NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, 1, NULL, NULL, NULL, '2016-10-27 01:58:35', '2016-10-27 01:58:35'),
+(42, '2820161000042', NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, 1, NULL, NULL, NULL, '2016-10-27 01:59:16', '2016-10-27 01:59:16'),
+(43, '2820161000043', NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, 1, NULL, NULL, NULL, '2016-10-27 01:59:29', '2016-10-27 01:59:30'),
+(44, '2820161000044', 'Asasdas', NULL, NULL, 'asdasd', 1, 0, '1899-12-31 00:00:00', '1899-12-12 00:00:00', 2, NULL, NULL, NULL, '2016-10-27 02:03:00', '2016-10-27 02:08:00'),
+(45, '2820161000045', NULL, '012016030002682', NULL, NULL, 1, 0, NULL, NULL, 1, NULL, NULL, NULL, '2016-10-27 02:05:13', '2016-10-27 02:05:14'),
+(46, '2820161000046', 'sdfdsf', '012016030002682', NULL, 'sdfsdf', 1, 1, '2016-10-10 00:00:00', '2016-10-11 00:00:00', 5, NULL, NULL, NULL, '2016-10-27 02:08:50', '2016-10-27 02:09:52');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `adsmeta`
+-- Struktur dari tabel `adsmeta`
 --
 
-CREATE TABLE IF NOT EXISTS `adsmeta` (
-  `meta_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `adsmeta` (
+  `meta_id` bigint(20) UNSIGNED NOT NULL,
   `ad_id` bigint(20) NOT NULL,
   `meta_key` varchar(255) DEFAULT NULL,
   `meta_value` longtext,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`meta_id`),
-  KEY `listing_id` (`ad_id`),
-  KEY `meta_key` (`meta_key`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT AUTO_INCREMENT=6 ;
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
--- Dumping data for table `adsmeta`
+-- Dumping data untuk tabel `adsmeta`
 --
 
 INSERT INTO `adsmeta` (`meta_id`, `ad_id`, `meta_key`, `meta_value`, `created_at`, `updated_at`) VALUES
@@ -121,20 +124,18 @@ INSERT INTO `adsmeta` (`meta_id`, `ad_id`, `meta_key`, `meta_value`, `created_at
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ad_status`
+-- Struktur dari tabel `ad_status`
 --
 
-CREATE TABLE IF NOT EXISTS `ad_status` (
+CREATE TABLE `ad_status` (
   `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `display_name` varchar(50) DEFAULT NULL,
-  `info` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`)
+  `info` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
--- Dumping data for table `ad_status`
+-- Dumping data untuk tabel `ad_status`
 --
 
 INSERT INTO `ad_status` (`id`, `name`, `display_name`, `info`) VALUES
@@ -148,11 +149,11 @@ INSERT INTO `ad_status` (`id`, `name`, `display_name`, `info`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `billings`
+-- Struktur dari tabel `billings`
 --
 
-CREATE TABLE IF NOT EXISTS `billings` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `billings` (
+  `id` int(10) UNSIGNED NOT NULL,
   `customer_id` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
   `item_id` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
   `bukti_pembayaran` longtext COLLATE utf8_unicode_ci,
@@ -161,13 +162,11 @@ CREATE TABLE IF NOT EXISTS `billings` (
   `amount` decimal(10,2) NOT NULL,
   `status` int(1) NOT NULL DEFAULT '0',
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`),
-  KEY `status` (`status`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=65 ;
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `billings`
+-- Dumping data untuk tabel `billings`
 --
 
 INSERT INTO `billings` (`id`, `customer_id`, `item_id`, `bukti_pembayaran`, `confirm_message`, `item_type`, `amount`, `status`, `created_at`, `updated_at`) VALUES
@@ -196,24 +195,32 @@ INSERT INTO `billings` (`id`, `customer_id`, `item_id`, `bukti_pembayaran`, `con
 (61, NULL, '36', NULL, NULL, 'ads', '969000.00', 2, '2016-03-31 23:25:44', '2016-03-31 23:25:44'),
 (62, '012016030001936', '94', NULL, 'Inv via bank abc tgl ', 'listing', '560000.00', 2, '2016-05-09 13:54:45', '2016-05-09 14:03:41'),
 (63, '012016030001936', '95', NULL, NULL, 'listing', '560000.00', 0, '2016-05-09 13:54:45', '2016-05-09 13:54:45'),
-(64, '012016030001936', '37', NULL, NULL, 'ads', '23000.00', 0, '2016-05-09 14:21:48', '2016-05-09 14:21:48');
+(64, '012016030001936', '37', NULL, NULL, 'ads', '23000.00', 0, '2016-05-09 14:21:48', '2016-05-09 14:21:48'),
+(65, NULL, '38', NULL, NULL, 'ads', '23000.00', 0, '2016-10-26 16:59:56', '2016-10-26 16:59:56'),
+(66, NULL, '39', NULL, NULL, 'ads', '69000.00', 0, '2016-10-27 01:56:04', '2016-10-27 01:56:04'),
+(67, NULL, '40', NULL, NULL, 'ads', '23000.00', 0, '2016-10-27 01:57:48', '2016-10-27 01:57:48'),
+(68, NULL, '41', NULL, NULL, 'ads', '23000.00', 0, '2016-10-27 01:58:35', '2016-10-27 01:58:35'),
+(69, NULL, '42', NULL, NULL, 'ads', '23000.00', 0, '2016-10-27 01:59:16', '2016-10-27 01:59:16'),
+(70, NULL, '43', NULL, NULL, 'ads', '23000.00', 0, '2016-10-27 01:59:30', '2016-10-27 01:59:30'),
+(71, '012016030002682', '44', NULL, NULL, 'ads', '23000.00', 2, '2016-10-27 02:03:00', '2016-10-27 02:03:20'),
+(72, '012016030002682', '45', NULL, NULL, 'ads', '23000.00', 0, '2016-10-27 02:05:14', '2016-10-27 02:05:14'),
+(73, '012016030002682', '46', NULL, NULL, 'ads', '23000.00', 2, '2016-10-27 02:08:50', '2016-10-27 02:09:23');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `country`
+-- Struktur dari tabel `country`
 --
 
-CREATE TABLE IF NOT EXISTS `country` (
-  `country_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `country` (
+  `country_id` int(11) NOT NULL,
   `name` varchar(128) NOT NULL,
   `iso_code_2` varchar(2) NOT NULL,
-  `iso_code_3` varchar(3) NOT NULL,
-  PRIMARY KEY (`country_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=258 ;
+  `iso_code_3` varchar(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `country`
+-- Dumping data untuk tabel `country`
 --
 
 INSERT INTO `country` (`country_id`, `name`, `iso_code_2`, `iso_code_3`) VALUES
@@ -474,11 +481,11 @@ INSERT INTO `country` (`country_id`, `name`, `iso_code_2`, `iso_code_3`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customers`
+-- Struktur dari tabel `customers`
 --
 
-CREATE TABLE IF NOT EXISTS `customers` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `customers` (
+  `id` int(10) UNSIGNED NOT NULL,
   `customer_id` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
   `customer_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `address_id` int(11) NOT NULL,
@@ -492,28 +499,27 @@ CREATE TABLE IF NOT EXISTS `customers` (
   `password` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=13 ;
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `customers`
+-- Dumping data untuk tabel `customers`
 --
 
 INSERT INTO `customers` (`id`, `customer_id`, `customer_name`, `address_id`, `phone`, `fax`, `pic`, `pic_phone`, `pic_mobile1`, `pic_mobile2`, `pic_email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (9, '012016030001936', 'Grafich Dev Pte Ltd', 1, '082298078502', '', 'Gufron RA', '082298078502', '082298078502', '', 'test@gmail.com', '$2y$10$eK.ei902n59yqGI4EAzM2.QuTX0B1yNvcRqZ1kc77GUKXQ9WwFAQ6', '1zwKp4N00gBJNwLEPsM1oxwmS5a9ADfwaXYfhJUS7HEN2Vr2zri3NiGiZAQl', '2016-03-15 22:25:40', '2016-05-11 23:13:11'),
-(10, '012016030002682', 'PYT. TEST01', 2, '123455678', '', 'TEST01', '1234567', '123456', '', 'test01@gmail.com', '$2y$10$Nw0TyIu19sacR3f4zCyvleFM5PBv/b7TBsPP3MlDhheMh6X.5lOe.', 'gAensfvj3fC5Z7EzZpnXPoHE4PHaUPo1Y8e7yHk1isrPyol1UfPD213sYy56', '2016-03-17 08:52:37', '2016-03-28 05:48:25'),
+(10, '012016030002682', 'PYT. TEST01', 2, '123455678', '', 'TEST01', '1234567', '123456', '', 'test01@gmail.com', '$2y$10$Nw0TyIu19sacR3f4zCyvleFM5PBv/b7TBsPP3MlDhheMh6X.5lOe.', 'gVzVCtxLD0ScC26tSiJqd2W7IZiBl9oLvI1zRnc0JPvgu2HUdwatzAnS3KrH', '2016-03-17 08:52:37', '2016-05-26 02:25:34'),
 (11, '012016030003972', 'Pt Test02', 3, '1234556', '', 'Test02', '123445', '1234566789', '', 'Test02@gmail.com', '$2y$10$J6E6I/FRmvXx/.t/1AecEu6g9fwBSZvEuwx.eAJaHcKTg41W4/e7u', 'kD82eOAjvdA7RmpTRdYsUrbFP1KquZrsLKRVAojzDyFKvRqb4PTrI1EyuPjS', '2016-03-28 03:43:34', '2016-03-28 04:12:25'),
 (12, '012016050004935', 'PT. TEST03', 17, '12354656', '', 'test03', '1341', '12324', '', 'test03@gmail.com', '$2y$10$hk386w4hmarO6hzRbUoEjOu76odzlYxx/oGxfSLGXubFPAb6I5kxS', NULL, '2016-05-10 05:12:45', '2016-05-10 05:12:46');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `invoices`
+-- Struktur dari tabel `invoices`
 --
 
-CREATE TABLE IF NOT EXISTS `invoices` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `invoices` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `customer_id` varchar(15) NOT NULL,
   `billing_id` bigint(20) NOT NULL,
   `amount` decimal(10,2) NOT NULL,
@@ -524,30 +530,26 @@ CREATE TABLE IF NOT EXISTS `invoices` (
   `status` int(1) NOT NULL,
   `notes` longtext NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `listingmeta`
+-- Struktur dari tabel `listingmeta`
 --
 
-CREATE TABLE IF NOT EXISTS `listingmeta` (
-  `meta_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `listingmeta` (
+  `meta_id` bigint(20) UNSIGNED NOT NULL,
   `listing_id` bigint(20) NOT NULL,
   `meta_key` varchar(255) DEFAULT NULL,
   `meta_value` longtext,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`meta_id`),
-  KEY `listing_id` (`listing_id`),
-  KEY `meta_key` (`meta_key`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=67 ;
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `listingmeta`
+-- Dumping data untuk tabel `listingmeta`
 --
 
 INSERT INTO `listingmeta` (`meta_id`, `listing_id`, `meta_key`, `meta_value`, `created_at`, `updated_at`) VALUES
@@ -581,11 +583,11 @@ INSERT INTO `listingmeta` (`meta_id`, `listing_id`, `meta_key`, `meta_value`, `c
 -- --------------------------------------------------------
 
 --
--- Table structure for table `listings`
+-- Struktur dari tabel `listings`
 --
 
-CREATE TABLE IF NOT EXISTS `listings` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `listings` (
+  `id` int(10) UNSIGNED NOT NULL,
   `customer_id` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
   `listing_id` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -606,28 +608,26 @@ CREATE TABLE IF NOT EXISTS `listings` (
   `been_active` int(1) NOT NULL DEFAULT '0',
   `status` int(1) NOT NULL DEFAULT '1',
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `listing_id` (`listing_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=96 ;
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `listings`
+-- Dumping data untuk tabel `listings`
 --
 
 INSERT INTO `listings` (`id`, `customer_id`, `listing_id`, `title`, `slug`, `content`, `review`, `custom_tab`, `custom_tab_title`, `category`, `keywords`, `tags`, `url`, `price_from`, `price_to`, `assets`, `package_id`, `expired_date`, `been_active`, `status`, `created_at`, `updated_at`) VALUES
-(77, '012016030001936', 'GRAFICHDEVPTELTD77', 'Test Listing', 'test-listing', '<p><strong style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;"> adalah contoh teks atau dummy dalam industri percetakan dan penataan huruf atau typesetting. Lorem Ipsum telah menjadi standar contoh teks sejak tahun 1500an, saat seorang tukang cetak yang tidak dikenal mengambil sebuah kumpulan teks dan mengacaknya untuk menjadi sebuah buku contoh huruf. Ia tidak hanya bertahan selama 5 abad, tapi juga telah beralih ke penataan huruf elektronik, tanpa ada perubahan apapun. Ia mulai dipopulerkan pada tahun 1960 dengan diluncurkannya lembaran-lembaran Letraset yang menggunakan kalimat-kalimat dari Lorem Ipsum, dan seiring munculnya perangkat lunak Desktop Publishing seperti Aldus PageMaker juga memiliki versi Lorem Ipsum.</span><br></p><p><strong style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;"> adalah contoh teks atau dummy dalam industri percetakan dan penataan huruf atau typesetting. Lorem Ipsum telah menjadi standar contoh teks sejak tahun 1500an, saat seorang tukang cetak yang tidak dikenal mengambil sebuah kumpulan teks dan mengacaknya untuk menjadi sebuah buku contoh huruf. Ia tidak hanya bertahan selama 5 abad, tapi juga telah beralih ke penataan huruf elektronik, tanpa ada perubahan apapun. Ia mulai dipopulerkan pada tahun 1960 dengan diluncurkannya lembaran-lembaran Letraset yang menggunakan kalimat-kalimat dari Lorem Ipsum, dan seiring munculnya perangkat lunak Desktop Publishing seperti Aldus PageMaker juga memiliki versi Lorem Ipsum.</span><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;"><br></span></p>', NULL, NULL, NULL, 25, '', '', '', '', '', '["storage\\/app\\/listings\\/assets\\/img-14.jpg"]', 4, '2016-06-15 06:34:39', 1, 3, '2016-03-15 23:37:37', '2016-03-17 08:55:36'),
-(78, '012016030001936', 'GRAFICHDEVPTELTD78', 'Test Listing 2', 'test-listing-2', '<p style="line-height: 20.3px;"><strong style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;"> adalah contoh teks atau dummy dalam industri percetakan dan penataan huruf atau typesetting. Lorem Ipsum telah menjadi standar contoh teks sejak tahun 1500an, saat seorang tukang cetak yang tidak dikenal mengambil sebuah kumpulan teks dan mengacaknya untuk menjadi sebuah buku contoh huruf. Ia tidak hanya bertahan selama 5 abad, tapi juga telah beralih ke penataan huruf elektronik, tanpa ada perubahan apapun. Ia mulai dipopulerkan pada tahun 1960 dengan diluncurkannya lembaran-lembaran Letraset yang menggunakan kalimat-kalimat dari Lorem Ipsum, dan seiring munculnya perangkat lunak Desktop Publishing seperti Aldus PageMaker juga memiliki versi Lorem Ipsum.</span><br></p><p style="line-height: 20.3px;"><strong style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;"> adalah contoh teks atau dummy dalam industri percetakan dan penataan huruf atau typesetting. Lorem Ipsum telah menjadi standar contoh teks sejak tahun 1500an, saat seorang tukang cetak yang tidak dikenal mengambil sebuah kumpulan teks dan mengacaknya untuk menjadi sebuah buku contoh huruf. Ia tidak hanya bertahan selama 5 abad, tapi juga telah beralih ke penataan huruf elektronik, tanpa ada perubahan apapun. Ia mulai dipopulerkan pada tahun 1960 dengan diluncurkannya lembaran-lembaran Letraset yang menggunakan kalimat-kalimat dari Lorem Ipsum, dan seiring munculnya perangkat lunak Desktop Publishing seperti Aldus PageMaker juga memiliki versi Lorem Ipsum.</span></p>', NULL, NULL, NULL, 38, '', '', '', '', '', '["storage\\/app\\/listings\\/assets\\/img-6.jpg"]', 3, '2016-04-16 06:34:59', 1, 3, '2016-03-15 23:37:37', '2016-03-17 09:45:28'),
-(79, '012016030001936', 'GRAFICHDEVPTELTD79', 'Accusantium doloremque laudantium', 'accusantium-doloremque-laudantium', '<p><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"</span><br></p>', NULL, NULL, NULL, 32, '', '', '', '', '', '["storage\\/app\\/listings\\/assets\\/img-9.jpg"]', 4, '2016-09-13 08:41:50', 1, 3, '2016-03-16 05:47:10', '2016-03-17 08:55:36'),
-(80, '012016030001936', 'GRAFICHDEVPTELTD80', 'Test Listing 3', 'test-listing-3', '<p><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"</span><br></p>', NULL, NULL, NULL, 25, '', '', '', '', '', '["storage\\/app\\/listings\\/assets\\/img-11.jpg"]', 3, '2016-07-15 06:35:06', 1, 3, '2016-03-16 05:47:10', '2016-03-17 08:55:36'),
-(81, '012016030001936', 'GRAFICHDEVPTELTD81', 'Quasi architecto beatae', 'quasi-architecto-beatae', '<p><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"</span><br></p>', NULL, NULL, NULL, 44, '', '', '', '', '', '["storage\\/app\\/listings\\/assets\\/post-2.jpg"]', 4, '2016-06-15 06:35:09', 1, 3, '2016-03-16 05:47:10', '2016-03-17 09:44:41'),
-(82, '012016030001936', 'GRAFICHDEVPTELTD82', 'Architecto beatae vitae', 'architecto-beatae-vitae', '<p><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"</span><br></p>', NULL, NULL, NULL, 25, '', '', '', '', '', '["storage\\/app\\/listings\\/assets\\/post-3.jpg"]', 3, '2016-04-16 06:35:30', 1, 3, '2016-03-16 05:47:10', '2016-03-17 08:55:36'),
+(77, '012016030001936', 'GRAFICHDEVPTELTD77', 'Test Listing edit', 'test-listing-edit', '<p><strong style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">edit Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;"> adalah contoh teks atau dummy dalam industri percetakan dan penataan huruf atau typesetting. Lorem Ipsum telah menjadi standar contoh teks sejak tahun 1500an, saat seorang tukang cetak yang tidak dikenal mengambil sebuah kumpulan teks dan mengacaknya untuk menjadi sebuah buku contoh huruf. Ia tidak hanya bertahan selama 5 abad, tapi juga telah beralih ke penataan huruf elektronik, tanpa ada perubahan apapun. Ia mulai dipopulerkan pada tahun 1960 dengan diluncurkannya lembaran-lembaran Letraset yang menggunakan kalimat-kalimat dari Lorem Ipsum, dan seiring munculnya perangkat lunak Desktop Publishing seperti Aldus PageMaker juga memiliki versi Lorem Ipsum.</span><br></p><p><strong style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;"> adalah contoh teks atau dummy dalam industri percetakan dan penataan huruf atau typesetting. Lorem Ipsum telah menjadi standar contoh teks sejak tahun 1500an, saat seorang tukang cetak yang tidak dikenal mengambil sebuah kumpulan teks dan mengacaknya untuk menjadi sebuah buku contoh huruf. Ia tidak hanya bertahan selama 5 abad, tapi juga telah beralih ke penataan huruf elektronik, tanpa ada perubahan apapun. Ia mulai dipopulerkan pada tahun 1960 dengan diluncurkannya lembaran-lembaran Letraset yang menggunakan kalimat-kalimat dari Lorem Ipsum, dan seiring munculnya perangkat lunak Desktop Publishing seperti Aldus PageMaker juga memiliki versi Lorem Ipsum.</span><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;"><br></span></p>', NULL, NULL, NULL, 22, 'editkey', 'edittgs', '', '', '', NULL, 4, '2016-06-15 06:34:39', 1, 5, '2016-03-15 23:37:37', '2016-10-26 16:52:40'),
+(78, '012016030001936', 'GRAFICHDEVPTELTD78', 'Test Listing 2  edit', 'test-listing-2-edit', '<p style="line-height: 20.3px;"><strong style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">edit Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;"> adalah contoh teks atau dummy dalam industri percetakan dan penataan huruf atau typesetting. Lorem Ipsum telah menjadi standar contoh teks sejak tahun 1500an, saat seorang tukang cetak yang tidak dikenal mengambil sebuah kumpulan teks dan mengacaknya untuk menjadi sebuah buku contoh huruf. Ia tidak hanya bertahan selama 5 abad, tapi juga telah beralih ke penataan huruf elektronik, tanpa ada perubahan apapun. Ia mulai dipopulerkan pada tahun 1960 dengan diluncurkannya lembaran-lembaran Letraset yang menggunakan kalimat-kalimat dari Lorem Ipsum, dan seiring munculnya perangkat lunak Desktop Publishing seperti Aldus PageMaker juga memiliki versi Lorem Ipsum.</span><br></p><p style="line-height: 20.3px;"><strong style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;"> adalah contoh teks atau dummy dalam industri percetakan dan penataan huruf atau typesetting. Lorem Ipsum telah menjadi standar contoh teks sejak tahun 1500an, saat seorang tukang cetak yang tidak dikenal mengambil sebuah kumpulan teks dan mengacaknya untuk menjadi sebuah buku contoh huruf. Ia tidak hanya bertahan selama 5 abad, tapi juga telah beralih ke penataan huruf elektronik, tanpa ada perubahan apapun. Ia mulai dipopulerkan pada tahun 1960 dengan diluncurkannya lembaran-lembaran Letraset yang menggunakan kalimat-kalimat dari Lorem Ipsum, dan seiring munculnya perangkat lunak Desktop Publishing seperti Aldus PageMaker juga memiliki versi Lorem Ipsum.</span></p>', NULL, NULL, NULL, 22, 'edit key', 'edit tags', '', '', '', NULL, 3, '2016-04-16 06:34:59', 1, 5, '2016-03-15 23:37:37', '2016-10-26 16:52:40'),
+(79, '012016030001936', 'GRAFICHDEVPTELTD79', 'Accusantium doloremque laudantium', 'accusantium-doloremque-laudantium', '<p><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"</span><br></p>', NULL, NULL, NULL, 32, '', '', '', '', '', NULL, 4, '2016-09-13 08:41:50', 1, 5, '2016-03-16 05:47:10', '2016-10-26 16:52:40'),
+(80, '012016030001936', 'GRAFICHDEVPTELTD80', 'edit Test Listing 3', 'edit-test-listing-3', '<p><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">edit Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"</span><br></p>', NULL, NULL, NULL, 22, 'edit key', 'edit tags', '', '', '', NULL, 3, '2016-07-15 06:35:06', 1, 5, '2016-03-16 05:47:10', '2016-10-26 16:52:41'),
+(81, '012016030001936', 'GRAFICHDEVPTELTD81', 'Quasi architecto beatae eedit', 'quasi-architecto-beatae-eedit', '<p><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"</span><br></p>', NULL, NULL, NULL, 44, '', '', '', '', '', NULL, 4, '2016-06-15 06:35:09', 1, 5, '2016-03-16 05:47:10', '2016-10-26 16:52:41'),
+(82, '012016030001936', 'GRAFICHDEVPTELTD82', 'Architecto beatae vitae ', 'architecto-beatae-vitae', '<p><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">edit Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"</span><br></p>', NULL, NULL, NULL, 22, 'edit key', 'edit tags', '', '', '', '["storage\\/app\\/listings\\/assets\\/post-3.jpg"]', 3, '2016-04-16 06:35:30', 1, 5, '2016-03-16 05:47:10', '2016-10-26 16:52:41'),
 (83, '012016030001936', 'GRAFICHDEVPTELTD83', 'Test Listing hehehe', 'test-listing-hehehe', '<p>Test Lorem Ipsum</p>', '<p><br></p>', '<p><br></p>', '', 32, '', '', '', '', '', '["storage\\/app\\/listings\\/assets\\/car-painting.png"]', 3, '2016-04-16 06:35:26', 1, 2, '2016-03-16 08:50:30', '2016-05-11 23:26:41'),
 (84, '012016030001936', 'GRAFICHDEVPTELTD84', 'At vero eos et accusamus', 'at-vero-eos-et-accusamus', '<p><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat</span><br></p>', '<p><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat</span><br></p>', '<p><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat</span><br></p>', 'Custom Tab Title', 32, '', '', '', '', '', '["storage\\/app\\/listings\\/assets\\/20130801_075319_20130801_GaransiCarCare-01.jpg"]', 4, '2016-06-15 23:06:06', 1, 4, '2016-03-17 05:47:35', '2016-05-10 05:08:30'),
 (86, '012016030001936', 'GRAFICHDEVPTELTD86', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, NULL, 0, 6, '2016-03-17 08:46:41', '2016-03-17 09:34:19'),
 (87, '012016030001936', 'GRAFICHDEVPTELTD87', NULL, '-16', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, NULL, 0, 6, '2016-03-17 08:46:41', '2016-03-28 07:28:43'),
-(88, '012016030002682', 'PYTTEST0188', 'Test 01 17 maret', 'test-01-17-maret', '<p>Fghkkjuijnvbm ggyikmn cfhik,nn</p>', NULL, NULL, NULL, 41, '', '', 'www.test01.com', '1000', '2000', '["storage\\/app\\/listings\\/assets\\/Default2.jpg"]', 3, '2016-04-16 09:07:12', 1, 3, '2016-03-17 08:54:23', '2016-03-17 09:31:58'),
-(89, '012016030002682', 'PYTTEST0189', 'Test02', 'test02', '<p>Ksksjiknh nbxgys hxusu hxgsg gn,ocusbxhild bxyui hhmxjsh</p>', NULL, NULL, NULL, 32, '', '', '', '500000', '', '["storage\\/app\\/listings\\/assets\\/image.jpeg"]', 3, '2016-04-16 09:18:50', 1, 3, '2016-03-17 09:13:14', '2016-03-17 09:18:50'),
+(88, '012016030002682', 'PYTTEST0188', 'Test 01 17 maret', 'test-01-17-maret', '<p>Fghkkjuijnvbm ggyikmn cfhik,nn</p>', NULL, NULL, NULL, 41, '', '', 'www.test01.com', '1000', '2000', '["storage\\/app\\/listings\\/assets\\/Default2.jpg"]', 3, '2016-04-16 09:07:12', 1, 5, '2016-03-17 08:54:23', '2016-10-26 16:52:41'),
+(89, '012016030002682', 'PYTTEST0189', 'Test02', 'test02', '<p>Ksksjiknh nbxgys hxusu hxgsg gn,ocusbxhild bxyui hhmxjsh</p>', NULL, NULL, NULL, 32, '', '', '', '500000', '', '["storage\\/app\\/listings\\/assets\\/image.jpeg"]', 3, '2016-04-16 09:18:50', 1, 5, '2016-03-17 09:13:14', '2016-10-26 16:52:41'),
 (90, '012016030002682', 'PYTTEST0190', NULL, '-12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4, NULL, 0, 6, '2016-03-17 09:36:05', '2016-03-28 04:00:22'),
 (91, '012016030003972', 'PTTEST0291', NULL, '-13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, NULL, 0, 6, '2016-03-28 03:50:13', '2016-03-28 04:01:08'),
 (92, '012016030003972', 'PTTEST0292', NULL, '-14', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, NULL, 0, 6, '2016-03-28 03:50:13', '2016-03-28 04:05:07'),
@@ -638,26 +638,25 @@ INSERT INTO `listings` (`id`, `customer_id`, `listing_id`, `title`, `slug`, `con
 -- --------------------------------------------------------
 
 --
--- Table structure for table `listings_categories`
+-- Struktur dari tabel `listings_categories`
 --
 
-CREATE TABLE IF NOT EXISTS `listings_categories` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `listings_categories` (
+  `id` int(10) UNSIGNED NOT NULL,
   `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `slug` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `parent` int(11) DEFAULT NULL,
   `status` int(1) NOT NULL DEFAULT '0',
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=54 ;
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `listings_categories`
+-- Dumping data untuk tabel `listings_categories`
 --
 
 INSERT INTO `listings_categories` (`id`, `title`, `slug`, `parent`, `status`, `created_at`, `updated_at`) VALUES
-(22, 'Category 1', 'category-1', 0, 0, '2016-03-15 20:21:33', '2016-03-15 20:21:33'),
+(22, 'Category 1', 'category-1', 0, 0, '2016-03-15 20:21:33', '2016-05-20 06:37:48'),
 (23, 'Category 2', 'category-2', 0, 0, '2016-03-15 20:22:07', '2016-03-15 20:22:07'),
 (24, 'Category 3', 'category-3', 0, 0, '2016-03-15 20:22:16', '2016-03-15 20:22:16'),
 (25, 'Sub Category 1.1', 'sub-category-1-1', 22, 0, '2016-03-15 20:44:05', '2016-03-15 20:44:05'),
@@ -693,20 +692,18 @@ INSERT INTO `listings_categories` (`id`, `title`, `slug`, `parent`, `status`, `c
 -- --------------------------------------------------------
 
 --
--- Table structure for table `listing_status`
+-- Struktur dari tabel `listing_status`
 --
 
-CREATE TABLE IF NOT EXISTS `listing_status` (
+CREATE TABLE `listing_status` (
   `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `display_name` varchar(50) DEFAULT NULL,
-  `info` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`)
+  `info` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `listing_status`
+-- Dumping data untuk tabel `listing_status`
 --
 
 INSERT INTO `listing_status` (`id`, `name`, `display_name`, `info`) VALUES
@@ -720,32 +717,31 @@ INSERT INTO `listing_status` (`id`, `name`, `display_name`, `info`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `messages`
+-- Struktur dari tabel `messages`
 --
 
-CREATE TABLE IF NOT EXISTS `messages` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `messages` (
+  `id` int(10) UNSIGNED NOT NULL,
   `to_user_id` int(10) NOT NULL,
   `content` longtext NOT NULL,
   `status` int(1) NOT NULL DEFAULT '0',
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `migrations`
+-- Struktur dari tabel `migrations`
 --
 
-CREATE TABLE IF NOT EXISTS `migrations` (
+CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `migrations`
+-- Dumping data untuk tabel `migrations`
 --
 
 INSERT INTO `migrations` (`migration`, `batch`) VALUES
@@ -756,57 +752,89 @@ INSERT INTO `migrations` (`migration`, `batch`) VALUES
 ('2015_12_17_021503_billings', 2),
 ('2015_12_17_021507_customers', 2),
 ('2015_12_17_021518_listings', 2),
-('2015_12_17_021548_listings_categories', 2);
+('2015_12_17_021548_listings_categories', 2),
+('2015_08_25_172600_create_settings_table', 3);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `non_customers`
+-- Struktur dari tabel `nonsubs`
 --
 
-CREATE TABLE IF NOT EXISTS `non_customers` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+CREATE TABLE `nonsubs` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `nonsub_id` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `nonsub_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `address_id` int(11) NOT NULL,
+  `phone` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `fax` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `pic` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `pic_phone` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `pic_mobile1` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `pic_mobile2` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `pic_email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data untuk tabel `nonsubs`
+--
+
+INSERT INTO `nonsubs` (`id`, `nonsub_id`, `nonsub_name`, `address_id`, `phone`, `fax`, `pic`, `pic_phone`, `pic_mobile1`, `pic_mobile2`, `pic_email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(9, '012016030001936', 'Grafich Dev Pte Ltd', 1, '082298078502', '', 'Gufron RA', '082298078502', '082298078502', '', 'test@gmail.com', '$2y$10$eK.ei902n59yqGI4EAzM2.QuTX0B1yNvcRqZ1kc77GUKXQ9WwFAQ6', '1zwKp4N00gBJNwLEPsM1oxwmS5a9ADfwaXYfhJUS7HEN2Vr2zri3NiGiZAQl', '2016-03-15 22:25:40', '2016-05-11 23:13:11'),
+(10, '012016030002682', 'PYT. TEST01', 2, '123455678', '', 'TEST01', '1234567', '123456', '', 'test01@gmail.com', '$2y$10$Nw0TyIu19sacR3f4zCyvleFM5PBv/b7TBsPP3MlDhheMh6X.5lOe.', 'gVzVCtxLD0ScC26tSiJqd2W7IZiBl9oLvI1zRnc0JPvgu2HUdwatzAnS3KrH', '2016-03-17 08:52:37', '2016-05-26 02:25:34'),
+(11, '012016030003972', 'Pt Test02', 3, '1234556', '', 'Test02', '123445', '1234566789', '', 'Test02@gmail.com', '$2y$10$J6E6I/FRmvXx/.t/1AecEu6g9fwBSZvEuwx.eAJaHcKTg41W4/e7u', 'kD82eOAjvdA7RmpTRdYsUrbFP1KquZrsLKRVAojzDyFKvRqb4PTrI1EyuPjS', '2016-03-28 03:43:34', '2016-03-28 04:12:25'),
+(12, '012016050004935', 'PT. TEST03', 17, '12354656', '', 'test03', '1341', '12324', '', 'test03@gmail.com', '$2y$10$hk386w4hmarO6hzRbUoEjOu76odzlYxx/oGxfSLGXubFPAb6I5kxS', NULL, '2016-05-10 05:12:45', '2016-05-10 05:12:46');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `notifications`
+-- Struktur dari tabel `non_customers`
 --
 
-CREATE TABLE IF NOT EXISTS `notifications` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `non_customers` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `notifications`
+--
+
+CREATE TABLE `notifications` (
+  `id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) NOT NULL,
   `notif` varchar(255) NOT NULL,
   `user_type` varchar(50) NOT NULL,
   `status` int(1) NOT NULL DEFAULT '0',
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `packages`
+-- Struktur dari tabel `packages`
 --
 
-CREATE TABLE IF NOT EXISTS `packages` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `packages` (
+  `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
   `price` decimal(10,0) NOT NULL,
   `notes` varchar(255) DEFAULT NULL,
   `days` int(10) NOT NULL,
   `discount` int(100) NOT NULL DEFAULT '0',
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `packages`
+-- Dumping data untuk tabel `packages`
 --
 
 INSERT INTO `packages` (`id`, `name`, `price`, `notes`, `days`, `discount`, `created_at`, `updated_at`) VALUES
@@ -816,36 +844,32 @@ INSERT INTO `packages` (`id`, `name`, `price`, `notes`, `days`, `discount`, `cre
 -- --------------------------------------------------------
 
 --
--- Table structure for table `password_resets`
+-- Struktur dari tabel `password_resets`
 --
 
-CREATE TABLE IF NOT EXISTS `password_resets` (
+CREATE TABLE `password_resets` (
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `token` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  KEY `password_resets_email_index` (`email`),
-  KEY `password_resets_token_index` (`token`)
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `permissions`
+-- Struktur dari tabel `permissions`
 --
 
-CREATE TABLE IF NOT EXISTS `permissions` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `permissions` (
+  `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `display_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `permissions_name_unique` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=45 ;
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `permissions`
+-- Dumping data untuk tabel `permissions`
 --
 
 INSERT INTO `permissions` (`id`, `name`, `display_name`, `description`, `created_at`, `updated_at`) VALUES
@@ -895,18 +919,16 @@ INSERT INTO `permissions` (`id`, `name`, `display_name`, `description`, `created
 -- --------------------------------------------------------
 
 --
--- Table structure for table `permission_role`
+-- Struktur dari tabel `permission_role`
 --
 
-CREATE TABLE IF NOT EXISTS `permission_role` (
-  `permission_id` int(10) unsigned NOT NULL,
-  `role_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`permission_id`,`role_id`),
-  KEY `permission_role_role_id_foreign` (`role_id`)
+CREATE TABLE `permission_role` (
+  `permission_id` int(10) UNSIGNED NOT NULL,
+  `role_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `permission_role`
+-- Dumping data untuk tabel `permission_role`
 --
 
 INSERT INTO `permission_role` (`permission_id`, `role_id`) VALUES
@@ -914,18 +936,39 @@ INSERT INTO `permission_role` (`permission_id`, `role_id`) VALUES
 (2, 1),
 (3, 1),
 (4, 1),
+(4, 3),
 (5, 1),
+(5, 3),
+(5, 4),
 (6, 1),
+(6, 3),
 (7, 1),
+(7, 3),
 (8, 1),
+(8, 2),
+(8, 3),
+(8, 4),
 (9, 1),
+(9, 3),
+(9, 5),
 (10, 1),
+(10, 3),
 (11, 1),
+(11, 2),
+(11, 3),
+(11, 4),
 (12, 1),
+(12, 3),
+(12, 5),
 (13, 1),
+(13, 3),
 (14, 1),
+(14, 3),
 (15, 1),
+(15, 3),
 (16, 1),
+(16, 3),
+(16, 4),
 (17, 1),
 (18, 1),
 (19, 1),
@@ -933,11 +976,30 @@ INSERT INTO `permission_role` (`permission_id`, `role_id`) VALUES
 (21, 1),
 (22, 1),
 (23, 1),
+(23, 2),
+(23, 3),
+(23, 4),
+(23, 5),
 (24, 1),
+(24, 2),
+(24, 3),
+(24, 4),
 (25, 1),
+(25, 2),
+(25, 3),
+(25, 4),
 (26, 1),
+(26, 2),
+(26, 3),
+(26, 4),
+(26, 5),
 (27, 1),
+(27, 3),
+(27, 4),
 (28, 1),
+(28, 3),
+(28, 4),
+(28, 5),
 (29, 1),
 (30, 1),
 (31, 1),
@@ -950,68 +1012,26 @@ INSERT INTO `permission_role` (`permission_id`, `role_id`) VALUES
 (38, 1),
 (39, 1),
 (40, 1),
-(41, 1),
-(8, 2),
-(11, 2),
-(23, 2),
-(24, 2),
-(25, 2),
-(26, 2),
-(4, 3),
-(5, 3),
-(6, 3),
-(7, 3),
-(8, 3),
-(9, 3),
-(10, 3),
-(11, 3),
-(12, 3),
-(13, 3),
-(14, 3),
-(15, 3),
-(16, 3),
-(23, 3),
-(24, 3),
-(25, 3),
-(26, 3),
-(27, 3),
-(28, 3),
-(5, 4),
-(8, 4),
-(11, 4),
-(16, 4),
-(23, 4),
-(24, 4),
-(25, 4),
-(26, 4),
-(27, 4),
-(28, 4),
 (40, 4),
-(9, 5),
-(12, 5),
-(23, 5),
-(26, 5),
-(28, 5);
+(41, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `roles`
+-- Struktur dari tabel `roles`
 --
 
-CREATE TABLE IF NOT EXISTS `roles` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `roles` (
+  `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `display_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `roles_name_unique` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `roles`
+-- Dumping data untuk tabel `roles`
 --
 
 INSERT INTO `roles` (`id`, `name`, `display_name`, `description`, `created_at`, `updated_at`) VALUES
@@ -1024,78 +1044,86 @@ INSERT INTO `roles` (`id`, `name`, `display_name`, `description`, `created_at`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `role_user`
+-- Struktur dari tabel `role_user`
 --
 
-CREATE TABLE IF NOT EXISTS `role_user` (
-  `user_id` int(10) unsigned NOT NULL,
-  `role_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`user_id`,`role_id`),
-  KEY `role_user_role_id_foreign` (`role_id`)
+CREATE TABLE `role_user` (
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `role_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `role_user`
+-- Dumping data untuk tabel `role_user`
 --
 
 INSERT INTO `role_user` (`user_id`, `role_id`) VALUES
 (1, 1),
 (2, 2),
 (3, 3),
-(5, 4),
 (4, 5),
+(5, 4),
 (6, 5);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `system_logs`
+-- Struktur dari tabel `settings`
 --
 
-CREATE TABLE IF NOT EXISTS `system_logs` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `settings` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `key` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `value` text COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `system_logs`
+--
+
+CREATE TABLE `system_logs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `user` bigint(20) NOT NULL,
   `log_text` longtext NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=52 ;
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `system_logs`
+-- Dumping data untuk tabel `system_logs`
 --
 
 INSERT INTO `system_logs` (`id`, `user`, `log_text`, `created_at`, `updated_at`) VALUES
 (48, 1, '<a href="javascript:;">Digi</a> Approved Listing <a href="javascript:;" class="name">At vero eos et accusamus</a>', '2016-04-01 00:48:04', '2016-04-01 00:48:04'),
 (49, 1, '<a href="javascript:;" class="name">Digi</a> Rejected Listing <a href="javascript:;">At vero eos et accusamus</a>', '2016-05-10 05:08:30', '2016-05-10 05:08:30'),
 (50, 1, '<a href="javascript:;" class="name">Digi</a> created customer <a href="javascript:;" class="name">PT. TEST03</a>', '2016-05-10 05:12:46', '2016-05-10 05:12:46'),
-(51, 1, '<a href="javascript:;" class="name">Digi</a> updated customer <a href="javascript:;" class="name">Grafich Dev Pte Ltd</a>', '2016-05-11 23:13:11', '2016-05-11 23:13:11');
+(51, 1, '<a href="javascript:;" class="name">Digi</a> updated customer <a href="javascript:;" class="name">Grafich Dev Pte Ltd</a>', '2016-05-11 23:13:11', '2016-05-11 23:13:11'),
+(52, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">sdfdsf</a>', '2016-10-27 02:09:52', '2016-10-27 02:09:52');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Struktur dari tabel `users`
 --
 
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `users` (
+  `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `status` int(1) NOT NULL DEFAULT '0',
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `users`
+-- Dumping data untuk tabel `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Digi', 'grafich.dev@gmail.com', '$2y$10$XQuBCrxFwr4N8et.0VSSK.eavlEYymjNdl7DB5VFaaNgkRqid23.K', 'byLdRo9nGr6JN5cpVW9UTKCS85a37LUxNiuMYrVPXU5DZ3BxREUqeOOU1sXY', 1, '0000-00-00 00:00:00', '2016-05-11 23:12:16'),
+(1, 'Digi', 'grafich.dev@gmail.com', '$2y$10$XQuBCrxFwr4N8et.0VSSK.eavlEYymjNdl7DB5VFaaNgkRqid23.K', 'MuMklR7H4qMpNHK14BqFWlzwpPeiqrDqvJOhgHP6KGj9u1jECvwKUBhT5fMT', 1, '0000-00-00 00:00:00', '2016-05-26 11:48:50'),
 (2, 'User Admin', 'irhsad.seifaldin@gmail.com', '$2y$10$wtb3McLO/3Ak29lm3/vy/.2m3WlAcjPZZgEmoid8hiwQAG49DG9mW', NULL, 0, '2015-12-16 06:21:18', '2015-12-16 06:21:18'),
 (3, 'User Manager', '31x389@gmail.com', '$2y$10$InGEkucqe6DBfuL76M6xVuRU1qgDUdXgYgKCSP5kYf7LdaHTfzLIO', 'QTNSc7J38AuSZb1HRzq9NcsOmM8wQA3spJ0Xd7ojbuIkuY7nueeyZreYS9Pj', 0, '2015-12-16 06:21:47', '2015-12-28 07:44:52'),
 (4, 'Irwan Sales', 'baponk.smoker@gmail.com', '$2y$10$UTQvH/xnww5zN.LL8qUCrucPa.RJ4BLbS02wr5aIh3MK70G/dT4n6', NULL, 0, '2015-12-16 06:22:17', '2015-12-16 06:22:17'),
@@ -1105,19 +1133,18 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `statu
 -- --------------------------------------------------------
 
 --
--- Table structure for table `zone`
+-- Struktur dari tabel `zone`
 --
 
-CREATE TABLE IF NOT EXISTS `zone` (
-  `zone_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `zone` (
+  `zone_id` int(11) NOT NULL,
   `country_id` int(11) NOT NULL,
   `name` varchar(128) NOT NULL,
-  `code` varchar(32) NOT NULL,
-  PRIMARY KEY (`zone_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4232 ;
+  `code` varchar(32) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `zone`
+-- Dumping data untuk tabel `zone`
 --
 
 INSERT INTO `zone` (`zone_id`, `country_id`, `name`, `code`) VALUES
@@ -2806,9 +2833,9 @@ INSERT INTO `zone` (`zone_id`, `country_id`, `name`, `code`) VALUES
 (1765, 112, 'Hwanghae-bukto', 'HWB'),
 (1766, 112, 'Hwanghae-namdo', 'HWN'),
 (1767, 112, 'Kangwon-do', 'KAN'),
-(1768, 112, 'P''yongan-bukto', 'PYB');
+(1768, 112, 'P''yongan-bukto', 'PYB'),
+(1769, 112, 'P''yongan-namdo', 'PYN');
 INSERT INTO `zone` (`zone_id`, `country_id`, `name`, `code`) VALUES
-(1769, 112, 'P''yongan-namdo', 'PYN'),
 (1770, 112, 'Ryanggang-do (Yanggang-do)', 'YAN'),
 (1771, 112, 'Rason Directly Governed City', 'NAJ'),
 (1772, 112, 'P''yongyang Special City', 'PYO'),
@@ -4439,12 +4466,12 @@ INSERT INTO `zone` (`zone_id`, `country_id`, `name`, `code`) VALUES
 (3432, 219, 'Mukono', 'MUK'),
 (3433, 219, 'Nakasongola', 'NKS'),
 (3434, 219, 'Rakai', 'RAK'),
-(3435, 219, 'Sembabule', 'SEM');
-INSERT INTO `zone` (`zone_id`, `country_id`, `name`, `code`) VALUES
+(3435, 219, 'Sembabule', 'SEM'),
 (3436, 219, 'Wakiso', 'WAK'),
 (3437, 219, 'Bugiri', 'BUG'),
 (3438, 219, 'Busia', 'BUS'),
-(3439, 219, 'Iganga', 'IGA'),
+(3439, 219, 'Iganga', 'IGA');
+INSERT INTO `zone` (`zone_id`, `country_id`, `name`, `code`) VALUES
 (3440, 219, 'Jinja', 'JIN'),
 (3441, 219, 'Kaberamaido', 'KAB'),
 (3442, 219, 'Kamuli', 'KML'),
@@ -5231,18 +5258,303 @@ INSERT INTO `zone` (`zone_id`, `country_id`, `name`, `code`) VALUES
 (4231, 99, 'Telangana', 'TS');
 
 --
--- Constraints for dumped tables
+-- Indexes for dumped tables
 --
 
 --
--- Constraints for table `permission_role`
+-- Indexes for table `address`
+--
+ALTER TABLE `address`
+  ADD PRIMARY KEY (`address_id`),
+  ADD KEY `customer_id` (`customer_id`);
+
+--
+-- Indexes for table `ads`
+--
+ALTER TABLE `ads`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `adsmeta`
+--
+ALTER TABLE `adsmeta`
+  ADD PRIMARY KEY (`meta_id`),
+  ADD KEY `listing_id` (`ad_id`),
+  ADD KEY `meta_key` (`meta_key`);
+
+--
+-- Indexes for table `ad_status`
+--
+ALTER TABLE `ad_status`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`);
+
+--
+-- Indexes for table `billings`
+--
+ALTER TABLE `billings`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `status` (`status`);
+
+--
+-- Indexes for table `country`
+--
+ALTER TABLE `country`
+  ADD PRIMARY KEY (`country_id`);
+
+--
+-- Indexes for table `customers`
+--
+ALTER TABLE `customers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `invoices`
+--
+ALTER TABLE `invoices`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `listingmeta`
+--
+ALTER TABLE `listingmeta`
+  ADD PRIMARY KEY (`meta_id`),
+  ADD KEY `listing_id` (`listing_id`),
+  ADD KEY `meta_key` (`meta_key`);
+
+--
+-- Indexes for table `listings`
+--
+ALTER TABLE `listings`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `listing_id` (`listing_id`);
+
+--
+-- Indexes for table `listings_categories`
+--
+ALTER TABLE `listings_categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `listing_status`
+--
+ALTER TABLE `listing_status`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`);
+
+--
+-- Indexes for table `messages`
+--
+ALTER TABLE `messages`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `nonsubs`
+--
+ALTER TABLE `nonsubs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `non_customers`
+--
+ALTER TABLE `non_customers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `notifications`
+--
+ALTER TABLE `notifications`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `packages`
+--
+ALTER TABLE `packages`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `password_resets`
+--
+ALTER TABLE `password_resets`
+  ADD KEY `password_resets_email_index` (`email`),
+  ADD KEY `password_resets_token_index` (`token`);
+
+--
+-- Indexes for table `permissions`
+--
+ALTER TABLE `permissions`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `permissions_name_unique` (`name`);
+
+--
+-- Indexes for table `permission_role`
+--
+ALTER TABLE `permission_role`
+  ADD PRIMARY KEY (`permission_id`,`role_id`),
+  ADD KEY `permission_role_role_id_foreign` (`role_id`);
+
+--
+-- Indexes for table `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `roles_name_unique` (`name`);
+
+--
+-- Indexes for table `role_user`
+--
+ALTER TABLE `role_user`
+  ADD PRIMARY KEY (`user_id`,`role_id`),
+  ADD KEY `role_user_role_id_foreign` (`role_id`);
+
+--
+-- Indexes for table `settings`
+--
+ALTER TABLE `settings`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `settings_key_index` (`key`);
+
+--
+-- Indexes for table `system_logs`
+--
+ALTER TABLE `system_logs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_email_unique` (`email`);
+
+--
+-- Indexes for table `zone`
+--
+ALTER TABLE `zone`
+  ADD PRIMARY KEY (`zone_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `address`
+--
+ALTER TABLE `address`
+  MODIFY `address_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+--
+-- AUTO_INCREMENT for table `ads`
+--
+ALTER TABLE `ads`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+--
+-- AUTO_INCREMENT for table `adsmeta`
+--
+ALTER TABLE `adsmeta`
+  MODIFY `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `billings`
+--
+ALTER TABLE `billings`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+--
+-- AUTO_INCREMENT for table `country`
+--
+ALTER TABLE `country`
+  MODIFY `country_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=258;
+--
+-- AUTO_INCREMENT for table `customers`
+--
+ALTER TABLE `customers`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT for table `invoices`
+--
+ALTER TABLE `invoices`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `listingmeta`
+--
+ALTER TABLE `listingmeta`
+  MODIFY `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+--
+-- AUTO_INCREMENT for table `listings`
+--
+ALTER TABLE `listings`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
+--
+-- AUTO_INCREMENT for table `listings_categories`
+--
+ALTER TABLE `listings_categories`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+--
+-- AUTO_INCREMENT for table `messages`
+--
+ALTER TABLE `messages`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `nonsubs`
+--
+ALTER TABLE `nonsubs`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT for table `non_customers`
+--
+ALTER TABLE `non_customers`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `notifications`
+--
+ALTER TABLE `notifications`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `packages`
+--
+ALTER TABLE `packages`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `permissions`
+--
+ALTER TABLE `permissions`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+--
+-- AUTO_INCREMENT for table `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `settings`
+--
+ALTER TABLE `settings`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `system_logs`
+--
+ALTER TABLE `system_logs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `zone`
+--
+ALTER TABLE `zone`
+  MODIFY `zone_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4232;
+--
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+--
+
+--
+-- Ketidakleluasaan untuk tabel `permission_role`
 --
 ALTER TABLE `permission_role`
   ADD CONSTRAINT `permission_role_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `permission_role_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `role_user`
+-- Ketidakleluasaan untuk tabel `role_user`
 --
 ALTER TABLE `role_user`
   ADD CONSTRAINT `role_user_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
