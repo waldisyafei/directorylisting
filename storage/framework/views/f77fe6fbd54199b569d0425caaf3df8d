@@ -1,0 +1,100 @@
+<?php $__env->startSection('title', 'Edit Role'); ?>
+
+<?php $__env->startSection('content'); ?>
+	<h3 class="page-title">Edit Role</h3>
+	<ol class="breadcrumb">
+	    <li><a href="<?php echo e(url('app-admin')); ?>">Dashboard</a></li>
+	    <li><a href="<?php echo e(url('app-admin/roles')); ?>">Roles</a></li>
+	    <li class="active"><span>Edit Role</span></li>
+	</ol>
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<?php if($errors->has()): ?>
+					<div class="alert alert-dismissable alert-danger">
+						<i class="ti ti-close"></i>&nbsp; <strong>Oh snap!</strong>
+						<ul>
+							<?php foreach($errors->all() as $error): ?>
+								<li><?php echo e($error); ?></li>
+							<?php endforeach; ?>
+						</ul>
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+					</div>
+				<?php endif; ?>
+				
+				<?php if(Session::has('success')): ?>
+					<div class="alert alert-dismissable alert-success">
+						<i class="ti ti-check"></i>&nbsp; <strong>Well done!</strong> <?php echo e(Session::get('success')); ?>.
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+					</div>
+				<?php endif; ?>
+
+				<div class="panel panel-midnightblue" data-widget='{"draggable": "false"}'>
+					<!-- Panel heading -->
+					<div class="panel-heading">
+						<h2>Edit Role Form</h2>
+					</div>
+					<!-- ./End panel heading -->
+
+					<form class="form-horizontal row-border" method="post" action="<?php echo e(url('app-admin/roles/edit', $role->id)); ?>">
+						<input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+						<!-- Panel body -->
+						<div class="panel-body" style="padding: 40px 16px;">
+							<div class="form-group">
+								<label for="rolename" class="col-sm-2 control-label">Role Name <small style="color: red;">*</small></label>
+								<div class="col-sm-8">
+									<input type="text" name="name" class="form-control" id="rolename" placeholder="Role Name" value="<?php echo e($role->display_name); ?>">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="desc" class="col-sm-2 control-label">Description</label>
+								<div class="col-sm-8">
+									<textarea name="desc" class="form-control" id="desc"><?php echo e($role->desc); ?></textarea>
+								</div>
+							</div>
+
+							<!-- Permissions -->
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Permissions</label>
+								<div class="col-sm-8">
+									<?php $perms = App\Models\Permission::all(); ?>
+									<div class="row">
+										<?php foreach($perms as $perm): ?>
+											<div class="col-sm-4">
+												<label class="checkbox icheck">
+													<input type="checkbox" name="perms[]" id="<?php echo $perm->name; ?>" value="<?php echo $perm->id; ?>"<?php echo e($role->hasPermission($perm->name) ? ' checked' : null); ?>>
+													<?php echo $perm->display_name; ?>
+												</label>
+											</div>
+										<?php endforeach; ?>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- ./End panel body -->
+
+						<!-- Panel Footer -->
+						<div class="panel-footer">
+							<div class="row">
+								<div class="col-sm-8 col-sm-offset-2">
+									<a href="<?php echo e(url('app-admin/roles')); ?>" class="btn-default btn">CANCEL</a>&nbsp;&nbsp;&nbsp;
+									<button class="btn-primary btn">SAVE</button>
+								</div>
+							</div>
+						</div>
+						<!-- ./End Panel Footer -->
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('page-styles'); ?>
+	<!-- Code Prettifier -->
+    <link type="text/css" href="<?php echo e(asset('assets/backend/plugins/codeprettifier/prettify.css')); ?>" rel="stylesheet">
+    <!-- iCheck -->
+    <link type="text/css" href="<?php echo e(asset('assets/backend/plugins/iCheck/skins/minimal/blue.css')); ?>" rel="stylesheet">
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('backend.base', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

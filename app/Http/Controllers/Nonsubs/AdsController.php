@@ -24,7 +24,7 @@ class AdsController extends Controller
      */
     public function index()
     {
-        $ads = Ad::where('customer_id', Auth::nonsubs()->get()->nonsubs_id)->get();
+        $ads = Ad::where('customer_id', Auth::nonsubs()->get()->nonsub_id)->get();//->count();dd($ads);
 
         return view('nonSubscriber.pages.advertising.list', ['ads' => $ads]);
     }
@@ -149,7 +149,7 @@ class AdsController extends Controller
         $ad = Ad::find($id);
         $ad->title = $request->input('title');
         $ad->link = $request->input('link');
-        $ad->customer_id = Auth::nonsubs()->get()->nonsubs_id;
+        $ad->customer_id = Auth::nonsubs()->get()->nonsub_id;
         $ad->show_date = $request->input('show_date');
         $ad->expired_date = $request->input('expired_date');
         $ad->status = 2;
@@ -208,7 +208,7 @@ class AdsController extends Controller
 
         foreach ($request->input('ads') as $adsRequest) {
             $ad = new Ad;
-            $ad->customer_id = Auth::nonsubs()->get()->nonsubs_id;
+            $ad->customer_id = Auth::nonsubs()->get()->nonsub_id;
             $ad->days = $adsRequest['days'];
 
             if ($ad->save()) {

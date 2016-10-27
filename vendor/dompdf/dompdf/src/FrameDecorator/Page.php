@@ -635,14 +635,17 @@ class Page extends AbstractFrameDecorator
 
         $y = 0;
 
-        foreach ($this->_floating_frames as $key => $frame) {
-            if ($side === "both" || $frame->get_style()->float === $side) {
-                $y = max($y, $frame->get_position("y") + $frame->get_margin_height());
-
-                if ($float !== "none") {
-                    $this->remove_floating_frame($key);
+        if ($float === "none") {
+            foreach ($this->_floating_frames as $key => $frame) {
+                if ($side === "both" || $frame->get_style()->float === $side) {
+                    $y = max($y, $frame->get_position("y") + $frame->get_margin_height());
                 }
+                $this->remove_floating_frame($key);
             }
+        }
+
+        if ($y > 0) {
+            $y++; // add 1px buffer from float
         }
 
         return $y;

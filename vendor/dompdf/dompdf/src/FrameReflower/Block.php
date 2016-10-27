@@ -11,8 +11,10 @@ namespace Dompdf\FrameReflower;
 use Dompdf\FontMetrics;
 use Dompdf\Frame;
 use Dompdf\FrameDecorator\Block as BlockFrameDecorator;
+use Dompdf\FrameDecorator\TableCell as TableCellFrameDecorator;
 use Dompdf\FrameDecorator\Text as TextFrameDecorator;
 use Dompdf\Exception;
+use Dompdf\Css\Style;
 
 /**
  * Reflows block frames
@@ -212,19 +214,13 @@ class Block extends AbstractFrameReflower
      */
     protected function _calculate_content_height()
     {
-        $lines = $this->_frame->get_line_boxes();
         $height = 0;
-
-        foreach ($lines as $line) {
-            $height += $line->h;
+        $lines = $this->_frame->get_line_boxes();
+        if (count($lines) > 0) {
+            $last_line = end($lines);
+            $position = $this->_frame->get_position();
+            $height = $last_line->y + $last_line->h - $position['y'];
         }
-
-        /*
-        $first_line = reset($lines);
-        $last_line  = end($lines);
-        $height2 = $last_line->y + $last_line->h - $first_line->y;
-        */
-
         return $height;
     }
 
@@ -515,7 +511,6 @@ class Block extends AbstractFrameReflower
      */
     function vertical_align()
     {
-
         $canvas = null;
 
         foreach ($this->_frame->get_line_boxes() as $line) {
@@ -524,12 +519,14 @@ class Block extends AbstractFrameReflower
 
             foreach ($line->get_frames() as $frame) {
                 $style = $frame->get_style();
-
-                if ($style->display !== "inline") {
+                $isInlineBlock = (
+                    '-dompdf-image' === $style->display
+                    || 'inline-block' === $style->display
+                    || 'inline-table' === $style->display
+                );
+                if (!$isInlineBlock && $style->display !== "inline") {
                     continue;
                 }
-
-                $align = $frame->get_parent()->get_style()->vertical_align;
 
                 if (!isset($canvas)) {
                     $canvas = $frame->get_root()->get_dompdf()->get_canvas();
@@ -538,34 +535,91 @@ class Block extends AbstractFrameReflower
                 $baseline = $canvas->get_font_baseline($style->font_family, $style->font_size);
                 $y_offset = 0;
 
-                switch ($align) {
-                    case "baseline":
-                        $y_offset = $height * 0.8 - $baseline; // The 0.8 ratio is arbitrary until we find it's meaning
-                        break;
+                //FIXME: The 0.8 ratio applied to the height is arbitrary (used to accommodate descenders?)
+                if($isInlineBlock) {
+                    $lineFrames = $line->get_frames();
+                    if (count($lineFrames) == 1) {
+                        continue;
+                    }
+                    $frameBox = $frame->get_frame()->get_border_box();
+                    $imageHeightDiff = $height * 0.8 - $frameBox['h'];
+                    
+                    $align = $frame->get_style()->vertical_align;
+                    if (in_array($align, Style::$vertical_align_keywords) === true) {
+                        switch ($align) {
+                            case "middle":
+                                $y_offset = $imageHeightDiff / 2;
+                                break;
 
-                    case "middle":
-                        $y_offset = ($height * 0.8 - $baseline) / 2;
-                        break;
+                            case "sub":
+                                $y_offset = 0.3 * $height + $imageHeightDiff;
+                                break;
 
-                    case "sub":
-                        $y_offset = 0.3 * $height;
-                        break;
+                            case "super":
+                                $y_offset = -0.2 * $height + $imageHeightDiff;
+                                break;
 
-                    case "super":
-                        $y_offset = -0.2 * $height;
-                        break;
+                            case "text-top": // FIXME: this should be the height of the frame minus the height of the text
+                                $y_offset = $height - $style->length_in_pt($style->get_line_height(), $style->font_size);
+                                break;
 
-                    case "text-top":
-                    case "top": // Not strictly accurate, but good enough for now
-                        break;
+                            case "top":
+                                break;
 
-                    case "text-bottom":
-                    case "bottom":
-                        $y_offset = $height * 0.8 - $baseline;
-                        break;
+                            case "text-bottom": // FIXME: align bottom of image with the descender?
+                            case "bottom":
+                                $y_offset = 0.3 * $height + $imageHeightDiff;
+                                break;
+
+                            case "baseline":
+                            default:
+                                $y_offset = $imageHeightDiff;
+                                break;
+                        }
+                    } else {
+                        $y_offset = $baseline - $style->length_in_pt($align, $style->font_size) - $frameBox['h'];
+                    }
+                } else {
+                    $parent = $frame->get_parent();
+                    if ($parent instanceof TableCellFrameDecorator) {
+                        $align = "baseline";
+                    } else {
+                        $align = $parent->get_style()->vertical_align;
+                    }
+                    if (in_array($align, Style::$vertical_align_keywords) === true) {
+                        switch ($align) {
+                            case "middle":
+                                $y_offset = ($height * 0.8 - $baseline) / 2;
+                                break;
+
+                            case "sub":
+                                $y_offset = $height * 0.8 - $baseline * 0.5;
+                                break;
+
+                            case "super":
+                                $y_offset = $height * 0.8 - $baseline * 1.4;
+                                break;
+
+                            case "text-top":
+                            case "top": // Not strictly accurate, but good enough for now
+                                break;
+
+                            case "text-bottom":
+                            case "bottom":
+                                $y_offset = $height * 0.8 - $baseline;
+                                break;
+
+                            case "baseline":
+                            default:
+                                $y_offset = $height * 0.8 - $baseline;
+                                break;
+                        }
+                    } else {
+                        $y_offset = $height * 0.8 - $baseline - $style->length_in_pt($align, $style->font_size);
+                    }
                 }
 
-                if ($y_offset) {
+                if ($y_offset !== 0) {
                     $frame->move(0, $y_offset);
                 }
             }

@@ -16,11 +16,11 @@
 	                    	<div class="dataTables_filter pull-right">
 	                    		<label class="panel-ctrls-center">
 	                    			<select class="form-control" id="choose-listing">
-		                    		<?php// $listings = App\Models\Listing::where('nonsubs_id', Auth::nonsubs()->get()->nonsubs_id)->orderby('created_at', 'DESC')->get(); */?>
+		                    		<?//php// $listings = App\Models\Listing::where('nonsubs_id', Auth::nonsubs()->get()->nonsubs_id)->orderby('created_at', 'DESC')->get(); */?>
 
-		                    		<?php// foreach ($listings as $listing): ?>
-		                    			<option value="<?php// echo $listing->id ?>"><?php// echo $listing->title ?></option>
-		                    		<?php// endforeach ?>
+		                    		<?//php// foreach ($listings as $listing): ?>
+		                    			<option value="<?//php// echo $listing->id ?>"><?//php// echo $listing->title ?></option>
+		                    		<?//php// endforeach ?>
 		                    	</select>
 	                    		</label>
 	                    	</div>

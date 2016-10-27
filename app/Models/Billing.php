@@ -11,6 +11,11 @@ class Billing extends Model
     	return $this->hasOne('App\Models\Customer', 'customer_id', 'customer_id');
     }
 
+    public function nonsubs()
+    {
+        return $this->hasOne('App\Models\NonSubscriber', 'nonsub_id', 'customer_id');
+    }
+
     public function item()
     {
     	if ($this->item_type == 'listing') {

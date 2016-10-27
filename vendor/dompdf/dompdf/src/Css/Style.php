@@ -62,6 +62,14 @@ class Style
     );
 
     /**
+     * List of valid vertical-align keywords.  Should also really be a constant.
+     *
+     * @var array
+     */
+    static $vertical_align_keywords = array("baseline", "bottom", "middle", "sub",
+        "super", "text-bottom", "text-top", "top");
+
+    /**
      * List of all inline types.  Should really be a constant.
      *
      * @var array
@@ -1013,6 +1021,10 @@ class Style
      */
     function get_line_height()
     {
+        if (array_key_exists("line_height", $this->_props) === false)
+        {
+            $this->_props["line_height"] = self::$_defaults["line_height"];
+        }
         $line_height = $this->_props["line_height"];
 
         if ($line_height === "normal") {
