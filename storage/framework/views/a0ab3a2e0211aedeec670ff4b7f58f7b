@@ -2,22 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title><?php echo $__env->yieldContent('title'); ?> - <?php echo Setting::get('site_settings.title') != '' ? Setting::get('site_settings.title') : 'MyListing' ?></title>
+    <title><?php echo $__env->yieldContent('title'); ?> - MyListing</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-touch-fullscreen" content="yes">
-    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
     <link type='text/css' href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600' rel='stylesheet'>
-    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript">
-                $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-    </script>
 
      <!-- Font Awesome -->
     <link type="text/css" href="<?php echo e(asset('assets/backend/fonts/font-awesome/css/font-awesome.min.css')); ?>" rel="stylesheet">
@@ -42,12 +33,12 @@
     <?php echo $__env->yieldContent('inline-style'); ?>
 </head>
 <body>
-    <?php echo $__env->make('backend.partials.header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+    <?php echo $__env->make('customer.partials.header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
     <div id="wrapper">
         <div id="layout-static">
             <?php if(!Request::is('noncust-ads*')): ?>
                 <?php /* include sidebar menu blade */ ?>
-                <?php echo $__env->make('backend.partials.sidebar-menu', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                <?php echo $__env->make('customer.partials.sidebar-menu', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
             <?php endif; ?>
 
             <div class="static-content-wrapper">

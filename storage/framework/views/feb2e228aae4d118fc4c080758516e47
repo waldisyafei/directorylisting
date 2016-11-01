@@ -6,11 +6,11 @@
 			    <div class="widget-body">
 			        <div class="userinfo">
 			            <div class="avatar">
-			                <img src="{{ Auth::customer()->get()->gravatar }}" class="img-responsive img-circle"> 
+			                <img src="<?php echo e(Auth::customer()->get()->gravatar); ?>" class="img-responsive img-circle"> 
 			            </div>
 			            <div class="info">
-			                <span class="username" style="display: block; margin-bottom: 5px;">{{ Auth::customer()->get()->customer_name }}</span>
-			                <span class="useremail" style="display: block; text-transform: uppercase;">{{ Auth::customer()->get()->pic_email }}</span>
+			                <span class="username" style="display: block; margin-bottom: 5px;"><?php echo e(Auth::customer()->get()->customer_name); ?></span>
+			                <span class="useremail" style="display: block; text-transform: uppercase;"><?php echo e(Auth::customer()->get()->pic_email); ?></span>
 			            </div>
 			        </div>
 			    </div>
@@ -22,7 +22,7 @@
     			<nav role="navigation" class="widget-body">
     				<ul class="acc-menu">
     					<li class="nav-separator"><span>NAVIGATION MENU</span></li>
-    					<li class="{{ Request::is('account') ? 'active ' : null }}"><a href="{{ url('account') }}"><i class="ti ti-home"></i><span>Dashboard</span></a></li>
+    					<li class="<?php echo e(Request::is('account') ? 'active ' : null); ?>"><a href="<?php echo e(url('account')); ?>"><i class="ti ti-home"></i><span>Dashboard</span></a></li>
 
     					<!-- Listing -->
                         <li><a href="javascript:;"><i class="ti ti-layout-list-thumb"></i><span>Listing</span></a>
@@ -45,15 +45,15 @@
                             $unconfirmed = getListings('pending')->count();
                             $unconfirmed = $unconfirmed + getAds('pending')->count();
                             ?>
-                            <li class="{{ Request::is('account/billings*') ? 'open active' : null }}">
-                                <a href="javascript:;"><i class="ti ti-receipt"></i><span>Billings</span>{!! $unconfirmed > 0 ? ' <span class="badge badge-teal">'. $unconfirmed .'</span>' : null !!}</a>
-                                <ul class="acc-menu" {!! Request::is('account/billings*') ? ' style="display: block;"' : null !!}>
-                                    <li class="{{ Request::is('account/billings/listing/*') ? 'active' : null }}"><a href="{{ url('account/billings/listing') }}">Listing</a></li>
-                                    <li><a href="{{ url('account/billings/ads') }}">Ads</a></li>
+                            <li class="<?php echo e(Request::is('account/billings*') ? 'open active' : null); ?>">
+                                <a href="javascript:;"><i class="ti ti-receipt"></i><span>Billings</span><?php echo $unconfirmed > 0 ? ' <span class="badge badge-teal">'. $unconfirmed .'</span>' : null; ?></a>
+                                <ul class="acc-menu" <?php echo Request::is('account/billings*') ? ' style="display: block;"' : null; ?>>
+                                    <li class="<?php echo e(Request::is('account/billings/listing/*') ? 'active' : null); ?>"><a href="<?php echo e(url('account/billings/listing')); ?>">Listing</a></li>
+                                    <li><a href="<?php echo e(url('account/billings/ads')); ?>">Ads</a></li>
                                 </ul>
                             </li>-->
-                        <li class="{{ Request::is('account/billings*') ? 'active ' : null }}">
-                            <a href="{{ url('account/billings') }}"><i class="ti ti-receipt"></i><span>My Billing</span></a>
+                        <li class="<?php echo e(Request::is('account/billings*') ? 'active ' : null); ?>">
+                            <a href="<?php echo e(url('account/billings')); ?>"><i class="ti ti-receipt"></i><span>My Billing</span></a>
                         </li>
 
                         <!-- Sub User -->

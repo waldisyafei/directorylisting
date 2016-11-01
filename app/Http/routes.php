@@ -128,6 +128,8 @@ Route::group(['prefix' => 'app-admin', 'middleware' => 'auth'], function() {
 		/*Route::get('edit/{id}', 'Backend\AdsController@edit');
 		Route::post('edit/{id}', 'Backend\AdsController@update');*/
 		Route::get('delete/{id}', 'Backend\AdsController@destroy');
+
+		Route::get('buy/complete', 'Backend\AdsController@buyComplete');
 	});
 
 	Route::group(['prefix' => 'packages'], function() {
@@ -228,7 +230,7 @@ Route::group(['prefix' => 'account', 'middleware' => 'authCustomer'], function()
 	});
 
 	Route::get('listing-wizard', 'Customers\ListingsController@wizard');
-	Route::get('ads-wizard', 'Customers\AdsController@wizard');
+	Route::get('ads-wizard', 'Customers\AdsController@buy');
 
 	Route::group(['prefix' => 'ads'], function(){
 		Route::get('/', 'Customers\AdsController@index');
@@ -240,7 +242,7 @@ Route::group(['prefix' => 'account', 'middleware' => 'authCustomer'], function()
 
 		Route::post('upload_image', 'Customers\AdsController@upload_image');
 
-		Route::get('buy', 'Customers\AdsController@buy');
+		//Route::get('buy', 'Customers\AdsController@buy');
 		Route::post('buy', 'Customers\AdsController@buy_ads_slot');
 		Route::get('buy/complete', 'Customers\AdsController@buyComplete');
 

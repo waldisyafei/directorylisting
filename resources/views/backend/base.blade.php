@@ -9,6 +9,7 @@
     <meta name="apple-touch-fullscreen" content="yes">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <link type='text/css' href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600' rel='stylesheet'>
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript">
                 $.ajaxSetup({
@@ -17,7 +18,6 @@
                 }
             });
     </script>
-    <link type='text/css' href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600' rel='stylesheet'>
 
      <!-- Font Awesome -->
     <link type="text/css" href="{{ asset('assets/backend/fonts/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
@@ -39,15 +39,16 @@
     <!-- The following CSS are included as plugins and can be removed if unused-->
 
     @yield('page-styles')
-
     @yield('inline-style')
 </head>
-<body class="animated-content">
+<body>
     @include('backend.partials.header')
     <div id="wrapper">
         <div id="layout-static">
-            {{-- include sidebar menu blade --}}
-            @include('backend.partials.sidebar-menu')
+            @if (!Request::is('noncust-ads*'))
+                {{-- include sidebar menu blade --}}
+                @include('backend.partials.sidebar-menu')
+            @endif
 
             <div class="static-content-wrapper">
                 <div class="static-content">

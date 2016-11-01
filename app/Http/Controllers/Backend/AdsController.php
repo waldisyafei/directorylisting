@@ -13,6 +13,7 @@ use App\Models\Ad;
 use App\Models\Address;
 use Setting;
 use App\Models\Billing;
+use Session;
 
 class AdsController extends Controller
 {
@@ -50,7 +51,34 @@ class AdsController extends Controller
      */
     public function store(Request $request)
     {
-        if (!Auth::user()->get()->can('can_create_ads')) return abort(403);
+        $ad_id = array();
+
+        foreach ($request->input('ads') as $adsRequest) {
+            $ad = new Ad;
+            $ad->customer_id = Auth::user()->get()->user_id;
+            $ad->days = $adsRequest['days'];
+
+            if ($ad->save()) {
+                $ad->ad_id = '28' . date('Y') . date('m') . str_pad((string)$ad->id, 5, 0, STR_PAD_LEFT);
+                $ad->save();
+                $price = Setting::get('ads.price_per_day') * $adsRequest['days'];
+                $discount = Setting::get('ads.price_discount');
+                $potongan = $discount / 100 * $price;
+                $total = $price - $potongan;
+                create_billing($ad->customer_id, $ad->id, 'ads', $total);
+            }
+            $ad_id[] = $ad->id;
+        }
+
+        $ads = array();
+        foreach ($ad_id as $id) {
+            $ads[] = Ad::find($id);
+        }
+
+        Session::put('ads', $ads);
+
+        return redirect('app-admin/ads/buy/complete');
+        /*if (!Auth::user()->get()->can('can_create_ads')) return abort(403);
 
         $validation = Validator::make($request->all(), [
             'days' => 'required|numeric',
@@ -101,8 +129,9 @@ class AdsController extends Controller
         }
 
         $ads->save();
-
+        
         return redirect('app-admin/ads')->with('success', 'Non customer ads created!');
+        */
 
         /*if ($request->has('customer_id') && $request->input('customer_id') != 'choose-customer') {
             $ad = new Ad;
@@ -114,6 +143,18 @@ class AdsController extends Controller
                 return redirect('app-admin/ads/edit/'. $ad->id)->withSuccess('success', 'Ad create success.');
             }
         }*/
+    }
+
+    public function buyComplete()
+    {
+        if (Session::has('ads')) {
+            $ads = Session::get('ads');
+            //Session::forget('listings');
+        } else {
+            return redirect('app-admin/ads');
+        }
+
+        return view('backend.pages.ads.buy-complete', array('ads' => $ads));
     }
 
     /**

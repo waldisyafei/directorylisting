@@ -30,171 +30,266 @@
 						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 					</div>
 				@endif
-				
-				<div class="panel panel-blue" data-widget='{"draggable": "false"}'>
-					<!-- Panel heading -->
+				<div class="col-md-12">
+				<div class="panel panel-blue">
 					<div class="panel-heading">
-						<h2>New Non Customer Ads Form</h2>
+						<h2>Buy Ads Slot</h2>
 					</div>
-					<!-- ./End panel heading -->
-
-					<form class="form-horizontal row-border" method="post" action="{{ url('app-admin/ads/create') }}">
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
-						<!-- Panel body -->
-						<div class="panel-body" style="padding: 40px 16px;">
-							<div role="tabpanel">
-								<!-- Nav tabs -->
-								<ul class="nav nav-tabs" role="tablist">
-									<li role="presentation" class="active">
-										<a href="#ads" aria-controls="ads" role="tab" data-toggle="tab">Ads Fields</a>
-									</li>
-									<li role="presentation">
-										<a href="#acc-info" aria-controls="acc-info" role="tab" data-toggle="tab">Account Info</a>
-									</li>
-								</ul>
-							
-								<!-- Tab panes -->
-								<div class="tab-content" style="padding-top: 20px;">
-									<div role="tabpanel" class="tab-pane active" id="ads">
-										<div class="form-group">
-											<label class="col-xs-2 control-label">Days</label>
-											<div class="col-xs-8">
-												<div class="row">
-													<div class="col-xs-2">
-														<input type="number" name="days" class="form-control" value="{{ old('days') ? old('days') : '1' }}">
+					<div class="panel-body">
+						<p>You are select buy new Ads, please follow the steps to finish</p>
+						<form action="{{ url('app-admin/ads/create') }}" method="post" id="buy-ads-wizard" class="form-horizontal">
+							<input type="hidden" name="_token" value="{{ csrf_token() }}">
+							<fieldset title="Step 1">
+								<legend>How Long Ads to show</legend>
+								<div class="listing-entry first">
+									<div class="form-group">
+										<label class="col-sm-2 control-label">Show Days</label>
+										<div class="col-sm-8">
+											<div class="row">
+												<div class="col-sm-2">
+													<input type="number" min="1" max="365" name="ads[0][days]" data-price="{{ Setting::get('ads.price_per_day') }}" data-notes="{{ Setting::get('ads.price_notes') }}" data-discount="{{ Setting::get('ads.price_discount') }}" class="form-control days" value="{{ old('days') ? old('days') : '1' }}">
+												</div>
+												<div class="col-sm-8">
+													<label class="control-label">Days</label>
+													<div class="p-harga col-sm-6">
+														<div class ="days-a" name="ads-a[k][days]">
+														</div>
 													</div>
-													<label class="col-xs-7 control-label" style="text-align: left;">Days</label>
 												</div>
 											</div>
 										</div>
-										<div class="form-group" id="set-addpass">
-											<label for="address-input" class="col-sm-2 control-label">Set Ad Password <small style="color: red;">*</small></label>
-											<div class="col-sm-8">
-												<input type="text" name="password" placeholder="Ad Password" class="form-control">
-											</div>
-										</div>
 									</div>
-									<div role="tabpanel" class="tab-pane" id="acc-info">
-										<div class="form-group">
-											<label for="customer_name" class="col-sm-2 control-label">Customer Name <small style="color: red;">*</small></label>
-											<div class="col-sm-8">
-												<input type="text" name="customer_name" class="form-control" id="customer_name" placeholder="Customer Name" value="{{ old('customer_name') }}">
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-2 control-label">Address 1<small style="color: red;">*</small></label>
-											<div class="col-sm-8">
-												<input type="text" name="address_1" class="form-control" value="{{ old('address_1') }}">
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-2 control-label">Address 2</label>
-											<div class="col-sm-8">
-												<input type="text" name="address_2" class="form-control" value="{{ old('address_2') }}">
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-2 control-label">Country<small style="color: red;">*</small></label>
-											<div class="col-sm-4">
-												<select name="country">
-													<option{{ old('country') == '' ? ' selected' : null }} disabled>-- SELECT COUNTRY--</option>
-													@foreach (App\Models\Country::all() as $country)
-														<option value="{{ $country->country_id }}"{!! old('country') == $country->country_id ? ' selected' : null !!}>{{ $country->name }}</option>
-													@endforeach
-												</select>
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-2 control-label">Province<small style="color: red;">*</small></label>
-											<div class="col-sm-4">
-												<select class="form-control" name="province">
-													<option{{ old('province') == '' ? ' selected' : null }} disabled>-- SELECT PROVINCE--</option>
-												</select>
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-2 control-label">City <small style="color: red;">*</small></label>
-											<div class="col-sm-8">
-												<input type="text" name="city" class="form-control" placeholder="City">
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-2 control-label">Post Code</label>
-											<div class="col-sm-8">
-												<input type="text" name="postcode" class="form-control" placeholder="Post Code">
-											</div>
-										</div>
-									</div>
+									<p class="listing-package-info"></p>
+									<button type="button" class="add-listing-entry btn tooltips" title="Add New Ads Slot"><i class="fa fa-plus"></i></button>
+									<button type="button" class="remove-listing-entry btn tooltips" title="Remove Slot"><i class="fa fa-close"></i></button>
 								</div>
-							</div>
-						</div>
-						<!-- ./End panel body -->
+							</fieldset>
+							<!--<fieldset title="Step 2">
+								<legend>Info Order</legend>-->
 
-						<!-- Panel Footer -->
-						<div class="panel-footer">
-							<div class="row">
-								<div class="col-sm-8 col-sm-offset-2">
-									<a href="{{ url('app-admin/ads') }}" class="btn-default btn">Cancel</a>&nbsp;&nbsp;&nbsp;
-									<button class="btn-primary btn">Create</button>
+								<div class="info-order-list clearfix">
+									<div class="col-md-6">
+										
+									</div>
 								</div>
-							</div>
-						</div>
-						<!-- ./End Panel Footer -->
-					</form>
+						<!--	</fieldset>-->
+							<input type="submit" style="float:right;" class="finish btn-success btn right" value="Submit" />
+						</form>
+					</div>
+					<!-- ./End panel body -->
 				</div>
 			</div>
 		</div>
 	</div>
-@stop
+@endsection
 
 @section('page-styles')
-	<!-- Code Prettifier -->
-    <link type="text/css" href="{{ asset('assets/backend/plugins/codeprettifier/prettify.css') }}" rel="stylesheet">
-    <!-- iCheck -->
-    <link type="text/css" href="{{ asset('assets/backend/plugins/iCheck/skins/minimal/blue.css') }}" rel="stylesheet">
-    <!-- DateRangePicker -->
-    <link type="text/css" href="{{ asset('assets/backend/plugins/form-daterangepicker/daterangepicker-bs3.css') }}" rel="stylesheet">
-    <link type="text/css" href="{{ asset('assets/backend/plugins/form-select2/select2.css') }}" rel="stylesheet">
-@stop
+@endsection
 
 @section('page-scripts')
-	<!-- Datepicker -->
-	<script type="text/javascript" src="{{ asset('assets/backend/plugins/bootstrap-datepicker/bootstrap-datepicker.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('assets/backend/plugins/form-select2/select2.min.js') }}"></script>
-@stop
+    <!-- Validate Plugin -->
+	<script type="text/javascript" src="{{ asset('assets/backend/plugins/form-validation/jquery.validate.min.js') }}"></script>
+	<!-- Stepy Plugin -->
+	<script type="text/javascript" src="{{ asset('assets/backend/plugins/form-stepy/jquery.stepy.js') }}"></script>
+@endsection
 
 @section('inline-script')
 	<script type="text/javascript">
 	$(function(){
+		$(document).on('ready', function(){
+					var infoOrders = '';
+					var totalHarga = 0;
 
-		$('select[name="country"]').change(function(){
-			var thisEl = $(this);
-			var thisVal = thisEl.find(':selected').val();
+					$('.days').each(function(k, v){
+						if ($(this).val() !== '0') {
+							var discount = parseInt($(this).data('discount'));
+							var harga = parseFloat($(this).data('price')) * parseInt($(this).val());
+							var potonganHarga = discount / 100 * harga;
+							var hargaDikurangDiscount = harga - potonganHarga;
 
-			$.ajax({
-				method: 'get',
-				url: '{{ url('app-admin/geo/getZone') }}',
-				data: {
-					_token: '{{ csrf_token() }}',
-					country_id: thisVal
-				},
-				success: function(res) {
-					if (res.status === 'success') {
-						var output = '';
-						var results = res.results;
-						var inputProvince = $('select[name="province"]');
-
-						for (var i = 0; i < results.length; i++) {
-							output += '<option value="' + results[i].zone_id + '">' + results[i].name + '</option>';
+							infoOrders += '<div class="panel panel-bluegraylight"><div class="panel-heading"><h2>Ads Slot '+ (k + 1) + '</h2></div>';
+							infoOrders += '<div class="panel-body"><table class="table table-stripped">';
+							infoOrders += '<tr><td width="100">Tayang</td><td>'+$(this).val()+' Hari</td>';
+							infoOrders += '<tr><td width="100">Catatan</td><td>'+$(this).data('notes')+'</td>';
+							infoOrders += '<tr><td width="100">Harga</td><td>Rp '+ hargaDikurangDiscount.format() +'</td>';
+							infoOrders += '<tr><td width="100">Discount</td><td>'+$(this).data('discount')+'%</td>';
+							infoOrders += '</table>';
+							infoOrders += '</div></div>';
+							totalHarga = totalHarga + hargaDikurangDiscount;
 						}
-						inputProvince.find('option').remove();
-						inputProvince.append(output);
+					});
+
+					$('.info-order-list .col-md-6 .panel').remove();
+
+					$('.info-order-list .col-md-6').append(infoOrders);
+		
+		$('body').on('click', '.days', function(){
+					$('.info-order-list .col-md-6 .panel').remove();
+					var infoOrders = '';
+					var totalHarga = 0;
+
+					$('.days').each(function(k, v){
+						if ($(this).val() !== '0') {
+							var discount = parseInt($(this).data('discount'));
+							var harga = parseFloat($(this).data('price')) * parseInt($(this).val());
+							var potonganHarga = discount / 100 * harga;
+							var hargaDikurangDiscount = harga - potonganHarga;
+
+							infoOrders += '<div class="panel panel-bluegraylight"><div class="panel-heading"><h2>Ads Slot '+ (k + 1) + '</h2></div>';
+							infoOrders += '<div class="panel-body"><table class="table table-stripped">';
+							infoOrders += '<tr><td width="100">Tayang</td><td>'+$(this).val()+' Hari</td>';
+							infoOrders += '<tr><td width="100">Catatan</td><td>'+$(this).data('notes')+'</td>';
+							infoOrders += '<tr><td width="100">Harga</td><td>Rp '+ hargaDikurangDiscount.format() +'</td>';
+							infoOrders += '<tr><td width="100">Discount</td><td>'+$(this).data('discount')+'%</td>';
+							infoOrders += '</table>';
+							infoOrders += '</div></div>';
+							totalHarga = totalHarga + hargaDikurangDiscount;
+						}
+					});
+
+					$('.info-order-list .col-md-6 .panel').remove();
+
+					$('.info-order-list .col-md-6').append(infoOrders);
+
+					if ($('.alert').length > 0) {
+						$('.alert .col-md-2 strong').html('Rp ' + totalHarga.format());
+					} else {
+						$('.info-order-list').after('<div class="alert alert-inverse clearfix"><div class="col-md-10 text-right"><strong style="color: #000;">Total Harga:</strong></div><div class="col-md-2 text-right"><strong style="color: #000;">Rp '+totalHarga.format()+'</strong></div></div>');
 					}
-				}
-			});
+				});
+	});
+		
+	    //Add Wizard Compability - see docs
+	    $('.stepy-navigator').wrapInner('<div class="pull-right"></div>');
+
+	    //Make Validation Compability - see docs
+	    $('#buy-ads-wizard').validate({
+	        errorClass: "help-block",
+	        validClass: "help-block",
+	        highlight: function(element, errorClass,validClass) {
+	           $(element).closest('.form-group').addClass("has-error");
+	        },
+	        unhighlight: function(element, errorClass,validClass) {
+	            $(element).closest('.form-group').removeClass("has-error");
+	        }
+	    });
+
+	    $('body').on('change', '.days', function(){
+			$(this).closest('.listing-entry').find('.listing-package-info').html($(this).data('notes'));
+			$(this).parents('.form-group').next('.listing-package-info').addClass('active');
 		});
 
-		$('select[name="country"]').select2({width: '100%'});
+		$('body').on('click', '.add-listing-entry', function(){
+			var parent = $(this).parent();
+
+			parent.find('.tooltip').remove();
+
+			var cloned = parent.clone();
+
+			$(this).css('display', 'none');
+
+			cloned.find('.days').val('1');
+			cloned.find('.listing-package-info').text('').removeClass('active');
+			cloned.find('.remove-listing-entry').css('display', 'block');
+			parent.after(cloned);
+
+			renameFieldEntry();
+
+					var infoOrders = '';
+					var totalHarga = 0;
+
+					$('.days').each(function(k, v){
+						//if ($(this).val() !== '0') {
+							var discount = parseInt($(this).data('discount'));
+							var harga = parseFloat($(this).data('price')) * parseInt($(this).val());
+							var potonganHarga = discount / 100 * harga;
+							var hargaDikurangDiscount = harga - potonganHarga;
+
+							infoOrders += '<div class="panel panel-bluegraylight"><div class="panel-heading"><h2>Ads Slot '+ (k + 1) + '</h2></div>';
+							infoOrders += '<div class="panel-body"><table class="table table-stripped">';
+							infoOrders += '<tr><td width="100">Tayang</td><td>'+$(this).val()+' Hari</td>';
+							infoOrders += '<tr><td width="100">Catatan</td><td>'+$(this).data('notes')+'</td>';
+							infoOrders += '<tr><td width="100">Harga</td><td>Rp '+ hargaDikurangDiscount.format() +'</td>';
+							infoOrders += '<tr><td width="100">Discount</td><td>'+$(this).data('discount')+'%</td>';
+							infoOrders += '</table>';
+							infoOrders += '</div></div>';
+							totalHarga = totalHarga + hargaDikurangDiscount;
+						//}
+					});
+
+					$('.info-order-list .col-md-6 .panel').remove();
+
+					$('.info-order-list .col-md-6').append(infoOrders);
+		});
+
+		$('body').on('click', '.remove-listing-entry', function(){
+			var prevEntry = $(this).parent().prev();
+			var nextEntry = $(this).parent().next();
+			$(this).parent().remove();
+			$(".panel-bluegraylight").remove();
+			$(".alert-inverse").remove();
+					var infoOrders = '';
+					var totalHarga = 0;
+
+					$('.days').each(function(k, v){
+						if ($(this).val() !== '0') {
+							var discount = parseInt($(this).data('discount'));
+							var harga = parseFloat($(this).data('price')) * parseInt($(this).val());
+							var potonganHarga = discount / 100 * harga;
+							var hargaDikurangDiscount = harga - potonganHarga;
+
+							infoOrders += '<div class="panel panel-bluegraylight"><div class="panel-heading"><h2>Ads Slot '+ (k + 1) + '</h2></div>';
+							infoOrders += '<div class="panel-body"><table class="table table-stripped">';
+							infoOrders += '<tr><td width="100">Tayang</td><td>'+$(this).val()+' Hari</td>';
+							infoOrders += '<tr><td width="100">Catatan</td><td>'+$(this).data('notes')+'</td>';
+							infoOrders += '<tr><td width="100">Harga</td><td>Rp '+ hargaDikurangDiscount.format() +'</td>';
+							infoOrders += '<tr><td width="100">Discount</td><td>'+$(this).data('discount')+'%</td>';
+							infoOrders += '</table>';
+							infoOrders += '</div></div>';
+							totalHarga = totalHarga + hargaDikurangDiscount;
+						}
+					});
+
+					$('.info-order-list .col-md-6 .panel').remove();
+
+					$('.info-order-list .col-md-6').append(infoOrders);
+
+					if ($('.alert').length > 0) {
+						$('.alert .col-md-2 strong').html('Rp ' + totalHarga.format());
+					} else {
+						$('.info-order-list').after('<div class="alert alert-inverse clearfix"><div class="col-md-10 text-right"><strong style="color: #000;">Total Harga:</strong></div><div class="col-md-2 text-right"><strong style="color: #000;">Rp '+totalHarga.format()+'</strong></div></div>');
+					}
+
+			// show the remove button and add button to the prev of parent
+			// if any entry after
+			if (nextEntry.hasClass('listing-entry') === false) {
+				prevEntry.find('.add-listing-entry').css('display', 'block');
+			}
+
+			renameFieldEntry();
+		});
+
+		function renameFieldEntry() {
+			var days = $('.days');
+
+			for (var i = 0; i < days.length; i++) {
+				days.eq(i).attr('name', 'ads[' + i + '][days]');
+			}
+		}
 	});
+	/**
+	 * Number.prototype.format(n, x)
+	 * 
+	 * @param integer n: length of decimal
+	 * @param integer x: length of sections
+	 */
+	Number.prototype.format = function(n, x) {
+	    var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+	    return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
+	};
 	</script>
+@endsection
+
+@section('inline-style')
+</style>
 @stop

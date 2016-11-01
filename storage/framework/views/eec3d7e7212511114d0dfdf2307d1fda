@@ -36,6 +36,7 @@
 					</div>
 				</div>
 			<?php endif; ?>
+
 			<div class="col-md-12">
 				<div class="panel panel-blue">
 					<div class="panel-heading">
@@ -79,7 +80,7 @@
 									</div>
 								</div>
 						<!--	</fieldset>-->
-							<input type="submit" class="finish btn-success btn right" value="Submit" />
+							<input type="submit" style="float:right;" class="finish btn-success btn right" value="Submit" />
 						</form>
 					</div>
 					<!-- ./End panel body -->
@@ -90,9 +91,7 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('page-styles'); ?>
-.right{
-	float: right !important;
-}
+
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('page-scripts'); ?>
@@ -167,46 +166,7 @@
 					}
 				});
 	});
-		/*$('#buy-ads-wizard').stepy(
-			{finishButton: true,
-				titleClick: true,
-				block: true,
-				validate: true,
-				next: function(){
-					var infoOrders = '';
-					var totalHarga = 0;
-
-					$('.days').each(function(k, v){
-						if ($(this).val() !== '0') {
-							var discount = parseInt($(this).data('discount'));
-							var harga = parseFloat($(this).data('price')) * parseInt($(this).val());
-							var potonganHarga = discount / 100 * harga;
-							var hargaDikurangDiscount = harga - potonganHarga;
-
-							infoOrders += '<div class="panel panel-bluegraylight"><div class="panel-heading"><h2>Ads Slot '+ (k + 1) + '</h2></div>';
-							infoOrders += '<div class="panel-body"><table class="table table-stripped">';
-							infoOrders += '<tr><td width="100">Tayang</td><td>'+$(this).val()+' Hari</td>';
-							infoOrders += '<tr><td width="100">Catatan</td><td>'+$(this).data('notes')+'</td>';
-							infoOrders += '<tr><td width="100">Harga</td><td>Rp '+ hargaDikurangDiscount.format() +'</td>';
-							infoOrders += '<tr><td width="100">Discount</td><td>'+$(this).data('discount')+'%</td>';
-							infoOrders += '</table>';
-							infoOrders += '</div></div>';
-							totalHarga = totalHarga + hargaDikurangDiscount;
-						}
-					});
-
-					$('.info-order-list .col-md-6 .panel').remove();
-
-					$('.info-order-list .col-md-6').append(infoOrders);
-
-					if ($('.alert').length > 0) {
-						$('.alert .col-md-2 strong').html('Rp ' + totalHarga.format());
-					} else {
-						$('.info-order-list').after('<div class="alert alert-inverse clearfix"><div class="col-md-10 text-right"><strong style="color: #000;">Total Harga:</strong></div><div class="col-md-2 text-right"><strong style="color: #000;">Rp '+totalHarga.format()+'</strong></div></div>');
-					}
-				}
-			});*/
-
+		
 	    //Add Wizard Compability - see docs
 	    $('.stepy-navigator').wrapInner('<div class="pull-right"></div>');
 

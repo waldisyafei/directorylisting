@@ -55,10 +55,14 @@
 										<div class="col-sm-8">
 											<div class="row">
 												<div class="col-sm-2">
-													<input type="number" min="1" name="ads[0][days]" data-price="{{ Setting::get('ads.price_per_day') }}" data-notes="{{ Setting::get('ads.price_notes') }}" data-discount="{{ Setting::get('ads.price_discount') }}" class="form-control days" value="{{ old('days') ? old('days') : '1' }}">
+													<input type="number" min="1" max="365" name="ads[0][days]" data-price="{{ Setting::get('ads.price_per_day') }}" data-notes="{{ Setting::get('ads.price_notes') }}" data-discount="{{ Setting::get('ads.price_discount') }}" class="form-control days" value="{{ old('days') ? old('days') : '1' }}">
 												</div>
-												<div class="col-sm-3">
+												<div class="col-sm-8">
 													<label class="control-label">Days</label>
+													<div class="p-harga col-sm-6">
+														<div class ="days-a" name="ads-a[k][days]">
+														</div>
+													</div>
 												</div>
 											</div>
 										</div>
@@ -68,16 +72,16 @@
 									<button type="button" class="remove-listing-entry btn tooltips" title="Remove Slot"><i class="fa fa-close"></i></button>
 								</div>
 							</fieldset>
-							<fieldset title="Step 2">
-								<legend>Info Order</legend>
+							<!--<fieldset title="Step 2">
+								<legend>Info Order</legend>-->
 
 								<div class="info-order-list clearfix">
 									<div class="col-md-6">
 										
 									</div>
 								</div>
-							</fieldset>
-							<input type="submit" class="finish btn-success btn" value="Submit" />
+						<!--	</fieldset>-->
+							<input type="submit" style="float:right;" class="finish btn-success btn right" value="Submit" />
 						</form>
 					</div>
 					<!-- ./End panel body -->
@@ -100,30 +104,55 @@
 @section('inline-script')
 	<script type="text/javascript">
 	$(function(){
-		$('#buy-ads-wizard').stepy(
-			{finishButton: true,
-				titleClick: true,
-				block: true,
-				validate: true,
-				next: function(){
+		$(document).on('ready', function(){
 					var infoOrders = '';
 					var totalHarga = 0;
 
 					$('.days').each(function(k, v){
-						var discount = parseInt($(this).data('discount'));
-						var harga = parseFloat($(this).data('price')) * parseInt($(this).val());
-						var potonganHarga = discount / 100 * harga;
-						var hargaDikurangDiscount = harga - potonganHarga;
+						if ($(this).val() !== '0') {
+							var discount = parseInt($(this).data('discount'));
+							var harga = parseFloat($(this).data('price')) * parseInt($(this).val());
+							var potonganHarga = discount / 100 * harga;
+							var hargaDikurangDiscount = harga - potonganHarga;
 
-						infoOrders += '<div class="panel panel-bluegraylight"><div class="panel-heading"><h2>Ads Slot '+ (k + 1) + '</h2></div>';
-						infoOrders += '<div class="panel-body"><table class="table table-stripped">';
-						infoOrders += '<tr><td width="100">Tayang</td><td>'+$(this).val()+' Hari</td>';
-						infoOrders += '<tr><td width="100">Catatan</td><td>'+$(this).data('notes')+'</td>';
-						infoOrders += '<tr><td width="100">Harga</td><td>Rp '+ hargaDikurangDiscount.format() +'</td>';
-						infoOrders += '<tr><td width="100">Discount</td><td>'+$(this).data('discount')+'%</td>';
-						infoOrders += '</table>';
-						infoOrders += '</div></div>';
-						totalHarga = totalHarga + hargaDikurangDiscount;
+							infoOrders += '<div class="panel panel-bluegraylight"><div class="panel-heading"><h2>Ads Slot '+ (k + 1) + '</h2></div>';
+							infoOrders += '<div class="panel-body"><table class="table table-stripped">';
+							infoOrders += '<tr><td width="100">Tayang</td><td>'+$(this).val()+' Hari</td>';
+							infoOrders += '<tr><td width="100">Catatan</td><td>'+$(this).data('notes')+'</td>';
+							infoOrders += '<tr><td width="100">Harga</td><td>Rp '+ hargaDikurangDiscount.format() +'</td>';
+							infoOrders += '<tr><td width="100">Discount</td><td>'+$(this).data('discount')+'%</td>';
+							infoOrders += '</table>';
+							infoOrders += '</div></div>';
+							totalHarga = totalHarga + hargaDikurangDiscount;
+						}
+					});
+
+					$('.info-order-list .col-md-6 .panel').remove();
+
+					$('.info-order-list .col-md-6').append(infoOrders);
+		
+		$('body').on('click', '.days', function(){
+					$('.info-order-list .col-md-6 .panel').remove();
+					var infoOrders = '';
+					var totalHarga = 0;
+
+					$('.days').each(function(k, v){
+						if ($(this).val() !== '0') {
+							var discount = parseInt($(this).data('discount'));
+							var harga = parseFloat($(this).data('price')) * parseInt($(this).val());
+							var potonganHarga = discount / 100 * harga;
+							var hargaDikurangDiscount = harga - potonganHarga;
+
+							infoOrders += '<div class="panel panel-bluegraylight"><div class="panel-heading"><h2>Ads Slot '+ (k + 1) + '</h2></div>';
+							infoOrders += '<div class="panel-body"><table class="table table-stripped">';
+							infoOrders += '<tr><td width="100">Tayang</td><td>'+$(this).val()+' Hari</td>';
+							infoOrders += '<tr><td width="100">Catatan</td><td>'+$(this).data('notes')+'</td>';
+							infoOrders += '<tr><td width="100">Harga</td><td>Rp '+ hargaDikurangDiscount.format() +'</td>';
+							infoOrders += '<tr><td width="100">Discount</td><td>'+$(this).data('discount')+'%</td>';
+							infoOrders += '</table>';
+							infoOrders += '</div></div>';
+							totalHarga = totalHarga + hargaDikurangDiscount;
+						}
 					});
 
 					$('.info-order-list .col-md-6 .panel').remove();
@@ -135,9 +164,9 @@
 					} else {
 						$('.info-order-list').after('<div class="alert alert-inverse clearfix"><div class="col-md-10 text-right"><strong style="color: #000;">Total Harga:</strong></div><div class="col-md-2 text-right"><strong style="color: #000;">Rp '+totalHarga.format()+'</strong></div></div>');
 					}
-				}
-			});
-
+				});
+	});
+		
 	    //Add Wizard Compability - see docs
 	    $('.stepy-navigator').wrapInner('<div class="pull-right"></div>');
 
@@ -173,12 +202,71 @@
 			parent.after(cloned);
 
 			renameFieldEntry();
+
+					var infoOrders = '';
+					var totalHarga = 0;
+
+					$('.days').each(function(k, v){
+						//if ($(this).val() !== '0') {
+							var discount = parseInt($(this).data('discount'));
+							var harga = parseFloat($(this).data('price')) * parseInt($(this).val());
+							var potonganHarga = discount / 100 * harga;
+							var hargaDikurangDiscount = harga - potonganHarga;
+
+							infoOrders += '<div class="panel panel-bluegraylight"><div class="panel-heading"><h2>Ads Slot '+ (k + 1) + '</h2></div>';
+							infoOrders += '<div class="panel-body"><table class="table table-stripped">';
+							infoOrders += '<tr><td width="100">Tayang</td><td>'+$(this).val()+' Hari</td>';
+							infoOrders += '<tr><td width="100">Catatan</td><td>'+$(this).data('notes')+'</td>';
+							infoOrders += '<tr><td width="100">Harga</td><td>Rp '+ hargaDikurangDiscount.format() +'</td>';
+							infoOrders += '<tr><td width="100">Discount</td><td>'+$(this).data('discount')+'%</td>';
+							infoOrders += '</table>';
+							infoOrders += '</div></div>';
+							totalHarga = totalHarga + hargaDikurangDiscount;
+						//}
+					});
+
+					$('.info-order-list .col-md-6 .panel').remove();
+
+					$('.info-order-list .col-md-6').append(infoOrders);
 		});
 
 		$('body').on('click', '.remove-listing-entry', function(){
 			var prevEntry = $(this).parent().prev();
 			var nextEntry = $(this).parent().next();
 			$(this).parent().remove();
+			$(".panel-bluegraylight").remove();
+			$(".alert-inverse").remove();
+					var infoOrders = '';
+					var totalHarga = 0;
+
+					$('.days').each(function(k, v){
+						if ($(this).val() !== '0') {
+							var discount = parseInt($(this).data('discount'));
+							var harga = parseFloat($(this).data('price')) * parseInt($(this).val());
+							var potonganHarga = discount / 100 * harga;
+							var hargaDikurangDiscount = harga - potonganHarga;
+
+							infoOrders += '<div class="panel panel-bluegraylight"><div class="panel-heading"><h2>Ads Slot '+ (k + 1) + '</h2></div>';
+							infoOrders += '<div class="panel-body"><table class="table table-stripped">';
+							infoOrders += '<tr><td width="100">Tayang</td><td>'+$(this).val()+' Hari</td>';
+							infoOrders += '<tr><td width="100">Catatan</td><td>'+$(this).data('notes')+'</td>';
+							infoOrders += '<tr><td width="100">Harga</td><td>Rp '+ hargaDikurangDiscount.format() +'</td>';
+							infoOrders += '<tr><td width="100">Discount</td><td>'+$(this).data('discount')+'%</td>';
+							infoOrders += '</table>';
+							infoOrders += '</div></div>';
+							totalHarga = totalHarga + hargaDikurangDiscount;
+						}
+					});
+
+					$('.info-order-list .col-md-6 .panel').remove();
+
+					$('.info-order-list .col-md-6').append(infoOrders);
+
+					if ($('.alert').length > 0) {
+						$('.alert .col-md-2 strong').html('Rp ' + totalHarga.format());
+					} else {
+						$('.info-order-list').after('<div class="alert alert-inverse clearfix"><div class="col-md-10 text-right"><strong style="color: #000;">Total Harga:</strong></div><div class="col-md-2 text-right"><strong style="color: #000;">Rp '+totalHarga.format()+'</strong></div></div>');
+					}
 
 			// show the remove button and add button to the prev of parent
 			// if any entry after

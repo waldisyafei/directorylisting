@@ -1,44 +1,41 @@
-@extends('nonSubscriber.base')
+<?php $__env->startSection('title', 'Buy Ads'); ?>
 
-@section('title', 'Buy Ads')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 	<ol class="breadcrumb">
-	    <li class=""><a href="{{ url('nonsubs/listings') }}">Buy Ads Slot</a></li>
+	    <li class=""><a href="<?php echo e(url('account/listings')); ?>">Buy Ads Slot</a></li>
 	    <li>Buy</li>
 	</ol>
 	<div class="container-fluid">
 		<div class="row">
-			@if (Session::has('error'))
+			<?php if(Session::has('error')): ?>
 				<div class="col-md-12">
 					<div class="alert alert-dismissable alert-danger">
-						<i class="ti ti-check"></i>&nbsp; <strong>Oh snap!</strong> {{ Session::get('error') }}.
+						<i class="ti ti-check"></i>&nbsp; <strong>Oh snap!</strong> <?php echo e(Session::get('error')); ?>.
 						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 					</div>
 				</div>
-			@endif
-			@if (Session::has('success'))
+			<?php endif; ?>
+			<?php if(Session::has('success')): ?>
 				<div class="col-md-12">
 					<div class="alert alert-dismissable alert-success">
-						<i class="ti ti-check"></i>&nbsp; <strong>Well Done!</strong> {{ Session::get('success') }}.
+						<i class="ti ti-check"></i>&nbsp; <strong>Well Done!</strong> <?php echo e(Session::get('success')); ?>.
 						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 					</div>
 				</div>
-			@endif
-			@if ($errors->has())
+			<?php endif; ?>
+			<?php if($errors->has()): ?>
 				<div class="col-md-12">
 					<div class="alert alert-dismissable alert-danger">
 						<i class="ti ti-close"></i>&nbsp; <strong>Oh snap!</strong>
 						<ul>
-							@foreach ($errors->all() as $error)
-								<li>{{ $error }}</li>
-							@endforeach
+							<?php foreach($errors->all() as $error): ?>
+								<li><?php echo e($error); ?></li>
+							<?php endforeach; ?>
 						</ul>
 						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 					</div>
 				</div>
-			@endif
-
+			<?php endif; ?>
 			<div class="col-md-12">
 				<div class="panel panel-blue">
 					<div class="panel-heading">
@@ -46,8 +43,8 @@
 					</div>
 					<div class="panel-body">
 						<p>You are select buy new Ads, please follow the steps to finish</p>
-						<form action="{{ url('nonsubs/ads/buy') }}" method="post" id="buy-ads-wizard" class="form-horizontal">
-							<input type="hidden" name="_token" value="{{ csrf_token() }}">
+						<form action="<?php echo e(url('account/ads/buy')); ?>" method="post" id="buy-ads-wizard" class="form-horizontal">
+							<input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
 							<fieldset title="Step 1">
 								<legend>How Long Ads to show</legend>
 								<div class="listing-entry first">
@@ -56,7 +53,7 @@
 										<div class="col-sm-8">
 											<div class="row">
 												<div class="col-sm-2">
-													<input type="number" min="1" max="365" name="ads[0][days]" data-price="{{ Setting::get('ads.price_per_day') }}" data-notes="{{ Setting::get('ads.price_notes') }}" data-discount="{{ Setting::get('ads.price_discount') }}" class="form-control days" value="{{ old('days') ? old('days') : '1' }}">
+													<input type="number" min="1" max="365" name="ads[0][days]" data-price="<?php echo e(Setting::get('ads.price_per_day')); ?>" data-notes="<?php echo e(Setting::get('ads.price_notes')); ?>" data-discount="<?php echo e(Setting::get('ads.price_discount')); ?>" class="form-control days" value="<?php echo e(old('days') ? old('days') : '1'); ?>">
 												</div>
 												<div class="col-sm-8">
 													<label class="control-label">Days</label>
@@ -90,20 +87,19 @@
 			</div>
 		</div>
 	</div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('page-styles')
+<?php $__env->startSection('page-styles'); ?>
+<?php $__env->stopSection(); ?>
 
-@endsection
-
-@section('page-scripts')
+<?php $__env->startSection('page-scripts'); ?>
     <!-- Validate Plugin -->
-	<script type="text/javascript" src="{{ asset('assets/backend/plugins/form-validation/jquery.validate.min.js') }}"></script>
+	<script type="text/javascript" src="<?php echo e(asset('assets/backend/plugins/form-validation/jquery.validate.min.js')); ?>"></script>
 	<!-- Stepy Plugin -->
-	<script type="text/javascript" src="{{ asset('assets/backend/plugins/form-stepy/jquery.stepy.js') }}"></script>
-@endsection
+	<script type="text/javascript" src="<?php echo e(asset('assets/backend/plugins/form-stepy/jquery.stepy.js')); ?>"></script>
+<?php $__env->stopSection(); ?>
 
-@section('inline-script')
+<?php $__env->startSection('inline-script'); ?>
 	<script type="text/javascript">
 	$(function(){
 		$(document).on('ready', function(){
@@ -290,16 +286,17 @@
 	/**
 	 * Number.prototype.format(n, x)
 	 * 
-	 * @param integer n: length of decimal
-	 * @param integer x: length of sections
+	 * @param  integer n: length of decimal
+	 * @param  integer x: length of sections
 	 */
 	Number.prototype.format = function(n, x) {
 	    var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
 	    return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
 	};
 	</script>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('inline-style')
+<?php $__env->startSection('inline-style'); ?>
 </style>
-@stop
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('customer.base', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
