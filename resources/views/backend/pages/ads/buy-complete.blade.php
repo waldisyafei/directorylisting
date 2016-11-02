@@ -61,7 +61,7 @@
 					                        <div class="pull-left">
 					                            <h3 class="text-muted">To</h3>
 					                            <address>
-					                                <strong>{{ Auth::user()->get()->user_name }}</strong><br>
+					                                <strong>{{ Auth::user()->get()->name }}</strong><br>
 					                                <?php $address = Auth::user()->get()->address; ?>
 					                                <?php echo $address->address_1 . '<br>'; ?>
 					                                <?php echo $address->address_2 != '' ? $address->address_1 . '<br>' : null; ?>

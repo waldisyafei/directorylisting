@@ -59,10 +59,10 @@
 					                        <div class="pull-left">
 					                            <h3 class="text-muted">To</h3>
 					                            <address>
-					                                <strong><?php echo e(Auth::user()->get()->user_name); ?></strong><br>
-					                                <?php $address = Auth::user()->get()->address; ?>
-					                                <?php echo $address->address_1 . '<br>'; ?>
-					                                <?php echo $address->address_2 != '' ? $address->address_1 . '<br>' : null; ?>
+					                                <strong><?php echo e(Auth::user()->get()->name); ?></strong><br>
+					                                <?//php $address = Auth::user()->get()->address; ?>
+					                                <?//php echo $address->address_1 . '<br>'; ?>
+					                                <?//php echo $address->address_2 != '' ? $address->address_1 . '<br>' : null; ?>
 					                                <?php echo e($address->city); ?>, <?php echo e(App\Models\Zone::find($address->zone_id)->name); ?>. <?php echo e($address->postcode); ?><br>
 					                                <?php echo e(App\Models\Country::find($address->country_id)->name); ?>
 

@@ -77,7 +77,8 @@ class AdsController extends Controller
 
         Session::put('ads', $ads);
 
-        return redirect('app-admin/ads/buy/complete');
+        //return redirect('app-admin/ads/buy/complete');
+        return redirect('app-admin/ads')->with('success', 'Ad inserted successfully');
         /*if (!Auth::user()->get()->can('can_create_ads')) return abort(403);
 
         $validation = Validator::make($request->all(), [
@@ -221,6 +222,6 @@ class AdsController extends Controller
 
         $ad->delete();
 
-        return redirect('app-admin/ads')->with('success', 'Ad deleted successfully');
+        
     }
 }
