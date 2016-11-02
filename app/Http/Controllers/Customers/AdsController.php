@@ -230,6 +230,7 @@ class AdsController extends Controller
         foreach ($request->input('ads') as $adsRequest) {
             $ad = new Ad;
             $ad->customer_id = Auth::customer()->get()->customer_id;
+            $ad->address_id = Auth::customer()->get()->address_id;
             $ad->days = $adsRequest['days'];
 
             if ($ad->save()) {
@@ -266,11 +267,19 @@ class AdsController extends Controller
         return view('customer.pages.advertising.buy-complete', array('ads' => $ads));
     }
 
-    public function renew()
+    public function renew($id)
     {
-        $ads = Ad::where('customer_id', Auth::customer()->get()->customer_id)->get();
+        $ad = Ad::find($id);
 
-        return view('customer.pages.advertising.renew', array('ads' => $ads));
+        if (!$ad) {
+            return abort(404);
+        }
+
+        /*if ($ad->status == 1) {
+            return redirect()->back()->with('error', 'Unable to process this request. [Payment Not Completed]');
+        }*/
+
+        return view('customer.pages.advertising.renew', ['ad' => $ad]);
     }
 
     public function renew_ads_slot(Request $request)
@@ -291,7 +300,7 @@ class AdsController extends Controller
                 $discount = Setting::get('ads.price_discount');
                 $potongan = $discount / 100 * $price;
                 $total = $price - $potongan;
-                create_billing($ad->customer_id, $ad->id, 'ads', $total);
+                create_billing($ad->nonsubs_id, $ad->id, 'ads', $total);
 
                 $ads_id[] = $ad->id;
             }
@@ -304,6 +313,6 @@ class AdsController extends Controller
 
         Session::put('ads', $ads);
 
-        return redirect('account/ads/buy/complete');
+        return redirect('nonsubs/ads/buy/complete');
     }
 }

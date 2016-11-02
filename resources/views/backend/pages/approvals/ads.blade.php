@@ -41,12 +41,21 @@
 											<td><?php echo $ad->title ?></td>
 											<td><?php echo $ad->ad_id ?></td>
 											<td><?php echo $ad->customer ? $ad->customer_id : 'Non Customer' ?></td>
+											<td>
 											<?php
-												$customers = App\Models\Customer::where('customer_id', $ad->customer_id)->select('customer_name')->orderby('created_at', 'DESC')->get();
-												foreach ($customers as $customer){
-													echo '<td>' . $customer->customer_name . '</td>';
+												if($ad->customer_id){
+													$pos = strpos($ad->customer_id, "N");
+													if ($pos !== 0) {
+														echo $ad->customer->customer_name;		
+													} else {
+														echo $ad->customer->nonsub_name;
+													}
+												}else{
+													echo $ad->item->address->company;
 												}
-											 ?>
+												
+											?>
+											</td>
 											<td>
 												@if ($ad->status == 2)
 													<label class="label label-warning tooltips" title="<?php echo $ad->adStatus->info ?>"><?php echo $ad->adStatus->display_name ?></label>

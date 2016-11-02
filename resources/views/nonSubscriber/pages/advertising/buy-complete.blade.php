@@ -119,7 +119,7 @@
 					                                        			<td>{{ $counter }}</td>
 						                                        		<td>{{ $ad->ad_id }}</td>
 						                                        		<td>{{ Setting::get('ads.price_notes') }}</td>
-						                                        		<td class="text-right">1</td>
+						                                        		<td class="text-right">{{ $ad->days }}</td>
 						                                        		<td class="text-right">Rp {{ number_format($harga, 0, '.', ',') }}</td>
 						                                        		<td class="text-right">{{ $disc }}%</td>
 						                                        		<td class="text-right">Rp {{ number_format($potonganHarga, 0, '.', ',') }}</td>

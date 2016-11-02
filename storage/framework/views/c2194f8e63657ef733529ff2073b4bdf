@@ -118,7 +118,7 @@
 					                                        			<td><?php echo e($counter); ?></td>
 						                                        		<td><?php echo e($ad->ad_id); ?></td>
 						                                        		<td><?php echo e(Setting::get('ads.price_notes')); ?></td>
-						                                        		<td class="text-right">1</td>
+						                                        		<td class="text-right"><?php echo e($ad->days); ?></td>
 						                                        		<td class="text-right">Rp <?php echo e(number_format($harga, 0, '.', ',')); ?></td>
 						                                        		<td class="text-right"><?php echo e($disc); ?>%</td>
 						                                        		<td class="text-right">Rp <?php echo e(number_format($potonganHarga, 0, '.', ',')); ?></td>

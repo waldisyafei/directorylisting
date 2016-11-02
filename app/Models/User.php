@@ -54,4 +54,9 @@ class User extends Model implements AuthenticatableContract,
     {
         return true;
     }
+
+    public function address()
+    {
+        return $this->hasOne('App\Models\Address', 'address_id', 'address_id');
+    }
 }

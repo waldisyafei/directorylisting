@@ -63,12 +63,21 @@
 										<tr>
 											<td>{{ $billing->id }}</td>
 											<td>{{ $billing->customer_id ? $billing->customer_id : 'Non Customer' }}</td>
+											<td>
 											<?php
-												$customers = App\Models\Customer::where('customer_id', $billing->customer_id)->select('customer_name')->orderby('created_at', 'DESC')->get();
-												foreach ($customers as $customer){
-													echo '<td>' . $customer->customer_name . '</td>';
+												if($billing->customer_id){
+													$pos = strpos($billing->customer_id, "N");
+													if ($pos !== 0) {
+														echo $billing->customer->customer_name;		
+													} else {
+														echo $billing->customer->nonsub_name;
+													}
+												}else{
+													echo $billing->item->address->company;
 												}
-											 ?>
+												
+											?>
+											</td>
 											<td>{{ $billing->item_id }}</td>
 											<td>{{ $billing->item_type }}</td>
 											<td>{{ date('d M Y H:i:s', strtotime($billing->created_at)) }}</td>

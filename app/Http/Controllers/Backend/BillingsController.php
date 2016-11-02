@@ -53,9 +53,12 @@ class BillingsController extends Controller
      */
     public function show($id)
     {
-        $billing = Billing::find($id);
 
-        if ($billing) {
+
+        //$pos = strpos('N-0120160300026', "N");
+        $billing = Billing::find($id);
+//dd($pos);
+        if ($billing) {//dd($billing->item->address->company );
             return view('backend.pages.billings.view', ['billing' => $billing]);
         }
     }
@@ -108,7 +111,8 @@ class BillingsController extends Controller
                 $billing->save();
             }
 
-            $billing->customer ? $billing->customer->customer_name : $billing->item->address->company;
+            //send email
+            /*$billing->customer ? $billing->customer->customer_name : $billing->item->address->company;
             $address = $billing->customer ? $billing->customer->address : $billing->item->address;
             $zone_name = Zone::find($address->zone_id)->name;
             $country_name = Country::find($address->country_id)->name;
@@ -152,6 +156,7 @@ class BillingsController extends Controller
 
                 $m->attachData($pdf->output(), "invoice.pdf");
             });
+            */
 
             return redirect()->back()->with('success', 'Pembayaran telah dikonfirmasi.');
         }

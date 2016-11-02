@@ -69,7 +69,7 @@ class AdsController extends Controller
 
         
         if ($request->hasFile('image')) {
-            $dir = storage_path().'/app/cs/assets/';
+            $dir = public_path().'/storage/app/cs/assets/';
             $file = $request->file('image');
             $file_name = preg_replace("/[^A-Z0-9._-]/i", "_", $file->getClientOriginalName());
             $thumb_admin = 'thumb-admin-'.$file_name;
@@ -155,7 +155,7 @@ class AdsController extends Controller
         $ad->status = 2;
         
         if ($request->hasFile('image')) {
-            $dir = storage_path().'/app/cs/assets/';
+            $dir = public_path().'/storage/app/cs/assets/';
             $file = $request->file('image');
             $file_name = preg_replace("/[^A-Z0-9._-]/i", "_", $file->getClientOriginalName());
             $thumb_admin = 'thumb-admin-'.$file_name;
@@ -209,6 +209,7 @@ class AdsController extends Controller
         foreach ($request->input('ads') as $adsRequest) {
             $ad = new Ad;
             $ad->customer_id = Auth::nonsubs()->get()->nonsub_id;
+            $ad->address_id = Auth::nonsubs()->get()->address_id;
             $ad->days = $adsRequest['days'];
 
             if ($ad->save()) {

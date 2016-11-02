@@ -246,8 +246,8 @@ Route::group(['prefix' => 'account', 'middleware' => 'authCustomer'], function()
 		Route::post('buy', 'Customers\AdsController@buy_ads_slot');
 		Route::get('buy/complete', 'Customers\AdsController@buyComplete');
 
-		Route::get('renew', 'Customers\AdsController@renew');
-		Route::post('renew', 'Customers\AdsController@renew_ads_slot');
+		Route::get('renew/{id}', 'Customers\AdsController@renew');
+		Route::post('renew/{id}', 'Customers\AdsController@renew_ads_slot');
 		Route::get('renew/complete', 'Customers\AdsController@renewComplete');
 	});
 

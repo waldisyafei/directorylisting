@@ -39,19 +39,14 @@
 									<th width="100">Title</th>
 									<th width="100">Status</th>
 									<th>Sisa Tampil</th>
-									<th width="100">Show Date</th>
+									<th width="100">URL Link</th>
 									<th width="100">Expired Date</th>
-									<th width="50">Action</th>
+									<th width="150">Action</th>
 								</tr>
 							</thead>
 							<tbody>
 							<?php foreach ($ads as $ad): ?>
 								<?php
-									$ad_up_id = explode('-', $ad->ad_id);
-									$up_id = $ad_up_id[0];
-									if ($up_id == 'up') {
-									continue;
-								}
 								$assets = json_decode($ad->assets);
 								$filename = substr($assets[0], strrpos($assets[0], '/') + 1);
 								$img_entry = str_replace($filename, 'thumb-admin-'.$filename, $assets[0]);
@@ -63,7 +58,7 @@
 											<img class="img-thumbnail" src="{{ asset($img_entry) }}" width="70" height="70">
 										<?php endif ?>
 									</td>
-									<td><a href="{{ url('account/ads/edit', $ad->id) }}">{{ $ad->title }}</a></td>
+									<td><a href="{{ url('nonsubs/ads/edit', $ad->id) }}">{{ $ad->title }}</a></td>
 									<td>
 										<?php $status = $ad->adStatus->id; ?>
 										@if ($status == 1)
@@ -112,7 +107,7 @@
 										<?php endif ?>
 											
 									</td>
-									<td>{{ $ad->show_date != '' ? date('d M Y H:i', strtotime($ad->show_date)) : null }}</td>
+									<td><?php if( $ad->link )echo $ad->link; ?></td>
 									<td>
 										<?php if ($ad->status != 1 && $ad->status != 5 && $ad->status != 6): ?>
 											<?php echo date('d M Y H:i', strtotime($ad->expired_date)) ?>
@@ -120,6 +115,7 @@
 									</td>
 									<td>
                                         <a href="{{ url('account/ads/edit', $ad->id) }}" class="btn btn-primary-alt btn-sm"><i class="ti ti-pencil"></i>&nbsp;Edit</a>
+                                        <a href="{{ url('account/ads/renew', $ad->id) }}" class="btn btn-primary-alt btn-sm"><i class="ti ti-pencil"></i>&nbsp;Renew</a>
 									</td>
 								</tr>
 							<?php endforeach ?>

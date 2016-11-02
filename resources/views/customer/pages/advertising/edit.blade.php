@@ -59,18 +59,18 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-2 control-label">Ad Link</label>
+								<label class="col-sm-2 control-label">URL Link</label>
 								<div class="col-sm-8">
 									<input type="text" name="link" class="form-control" value="{{ $ad->link }}">
 								</div>
 							</div>
-							<div class="form-group">
+							<div class="row form-inline">
 								<label class="col-sm-2 control-label">Show Date</label>
 								<div class="col-sm-8">
-									<input type="text" name="show_date" value="{{ $ad->show_date }}" class="form-control">
+									<input type="text" name="show_date" value="{{ $ad->show_date }}" class="form-control"> End Date 
+									<input type="text" name="expired_date" value="{{ $ad->expired_date }}" class="form-control">
 								</div>
 							</div>
-
 							<div class="form-group">
 								<label class="col-sm-2 control-label">Images</label>
 								<div class="col-sm-8">
@@ -104,7 +104,7 @@
 							<div class="row">
 								<div class="col-sm-8 col-sm-offset-2">
 									@if (!Request::is('noncust-ads*'))
-										<a href="{{ url('account/ads') }}" class="btn-default btn">Cancel</a>&nbsp;&nbsp;&nbsp;
+										<a href="{{ url('nonsubs/ads') }}" class="btn-default btn">Cancel</a>&nbsp;&nbsp;&nbsp;
 									@endif
 									<button class="btn-primary btn">Update</button>
 								</div>
@@ -146,7 +146,31 @@
 			$('.package-info').html('<i class="ti ti-info-alt"></i>&nbsp;'+$('#package-id :selected').data('notes'));
 		});
 
-		$('input[name="show_date"]').datetimepicker({format: 'yyyy-mm-dd hh:ii'});
+		$('input[name="show_date"]')
+			.datetimepicker({
+				format: 'yyyy-mm-dd 00:00:00',
+				autoclose: true,
+				minView:2
+			});
+	});
+
+	$(function(){
+		var dataPrice = parseInt($('#package-id').find(':selected').data('price'));
+
+		$('.package-info').html('<i class="ti ti-info-alt"></i>&nbsp;'+$('#package-id :selected').data('notes'));
+
+		$('#package-id').change(function(){
+			dataPrice = parseInt($('#package-id').find(':selected').data('price'));
+
+			$('.package-info').html('<i class="ti ti-info-alt"></i>&nbsp;'+$('#package-id :selected').data('notes'));
+		});
+
+		$('input[name="expired_date"]')
+			.datetimepicker({
+				format: 'yyyy-mm-dd 00:00:00',
+				autoclose: true,
+				minView:2
+			});
 	});
 
 	Number.prototype.formatMoney = function(c, d, t){
