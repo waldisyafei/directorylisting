@@ -43,7 +43,7 @@
 					</div>
 					<div class="panel-body">
 						<p>You are select buy new Ads, please follow the steps to finish</p>
-						<form action="<?php echo e(url('account/ads/renew/{id}')); ?>" method="post" id="buy-ads-wizard" class="form-horizontal">
+						<form action="<?php echo e(url('app-admin/ads/renew/{id}')); ?>" method="post" id="buy-ads-wizard" class="form-horizontal">
 							<input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
 							<fieldset title="Step 1">
 								<legend>How Long Ads to show</legend>
@@ -340,4 +340,4 @@
 <?php $__env->startSection('inline-style'); ?>
 </style>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('customer.base', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('backend.base', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

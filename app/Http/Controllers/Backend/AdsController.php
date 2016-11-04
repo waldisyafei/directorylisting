@@ -13,7 +13,10 @@ use App\Models\Ad;
 use App\Models\Address;
 use Setting;
 use App\Models\Billing;
+use App\Models\History;
 use Session;
+use Storage;
+use Image;
 
 class AdsController extends Controller
 {
@@ -29,6 +32,13 @@ class AdsController extends Controller
         $ads = Ad::orderBy('created_at', 'DESC')->paginate(15);
 
         return view('backend.pages.ads.list', ['ads' => $ads]);
+    }
+
+    public function index_noncust()
+    {
+        $ads = Ad::where('customer_id', Auth::user()->get()->user_id)->get();
+
+        return view('backend.pages.ads.list-noncust', ['ads' => $ads]);
     }
 
     /**
@@ -204,9 +214,76 @@ class AdsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //public function update(Request $request, $id)
+    //{
+    //    if (!Auth::user()->get()->can('can_edit_ads')) return abort(403);
+    //}
+
     public function update(Request $request, $id)
     {
-        if (!Auth::user()->get()->can('can_edit_ads')) return abort(403);
+        $validation = Validator::make($request->all(), [
+            'title' => 'required|max:255',
+            'link' => 'required|max:255'
+            ]);
+
+        if ($validation->fails()) {
+            return redirect()->back()->withInput()->withErrors($validation);
+        }
+
+        $ad_old = Ad::find($id);
+        $ad_old->status = 2;
+
+        $ad = new Ad;
+        $ad->ad_id ='up-'.  $ad_old->id .'-'. date('ymd-his');
+        $ad->title = $request->input('title');
+        $ad->link = $request->input('link');
+        $ad->customer_id = Auth::user()->get()->user_id;
+        $ad->show_date = $request->input('show_date');
+        $ad->status = 2;
+        $stop_date = $ad_old->days;
+        $ad->expired_date = date('Y-m-d H:i:s', strtotime($request->input('show_date') . ' +'. $stop_date .' day'));
+        
+        if ($request->hasFile('image')) {
+            //$dir = storage_path().'/app/cs/assets/';
+            $dir = public_path().'/storage/app/cs/assets/';
+            $file = $request->file('image');
+            $file_name = preg_replace("/[^A-Z0-9._-]/i", "_", $file->getClientOriginalName());
+            $thumb_admin = 'thumb-admin-'.$file_name;
+            $thumb = 'thumb-'.$file_name;
+            $relative_path = 'storage/app/cs/assets/' . $ad->ad_id . '/' . $file_name;
+            $relative_thumb_admin_path = 'storage/app/cs/assets/'.$thumb_admin;
+            $relative_path = 'storage/app/cs/assets/'.$file_name;
+
+            if (!Storage::disk('local')->exists('cs/assets/' . $ad->ad_id)) {
+                Storage::makeDirectory('cs/assets/' . $ad->ad_id);
+            }
+
+            Image::make($request->file('image'))->save($dir . $file_name);
+            Image::make($request->file('image'))->resize(150, 120)->save($dir . $thumb_admin);
+            Image::make($request->file('image'))->resize(200, 200)->save($dir . $thumb);
+
+            $ad->assets = json_encode([$relative_path]);
+        }elseif ($ad_old->assets) {
+            $ad->assets = $ad_old->assets;
+        }
+
+        $history = new History;
+        $history->customer_id = $ad->customer_id;
+        $history->customer_id = 'NULL';
+        $history->item_id = $ad->ad_id;
+        $history->item_type = 'ads';
+
+        $history_old = new History;
+        $history_old->customer_id = $ad_old->customer_id;
+        $history_old->customer_id = 'NULL';
+        $history_old->item_id = $ad_old->ad_id;
+        $history_old->item_type = 'ads';
+
+        if ($ad->save()) {
+            $history->save();
+            $history_old->save();
+            return redirect('app-admin/ads/noncust')->withSuccess('success', 'Ads create success.');
+        }
     }
 
     /**
@@ -222,7 +299,54 @@ class AdsController extends Controller
         $ad = Ad::find($id);
 
         $ad->delete();
+    }
 
-        
+    public function renew($id)
+    {
+        $ad = Ad::find($id);
+
+        if (!$ad) {
+            return abort(404);
+        }
+
+        /*if ($ad->status == 1) {
+            return redirect()->back()->with('error', 'Unable to process this request. [Payment Not Completed]');
+        }*/
+
+        return view('backend.pages.ads.renew', ['ad' => $ad]);
+    }
+
+    public function renew_ads_slot(Request $request)
+    {
+        $ads_id = array();
+
+        foreach ($request->input('ads') as $key => $adsRequest) {
+            if ($adsRequest['days'] != '0') {
+                $ad = Ad::where('id', $key)->first();
+                $ad->days = $adsRequest['days'];
+
+                if ($ad->status == 5) {
+                    $ad->status = 1;
+                }
+
+                $ad->save();
+                $price = Setting::get('ads.price_per_day') * $adsRequest['days'];
+                $discount = Setting::get('ads.price_discount');
+                $potongan = $discount / 100 * $price;
+                $total = $price - $potongan;
+                create_billing($ad->customer_id, $ad->id, 'ads', $total);
+
+                $ads_id[] = $ad->id;
+            }
+        }
+
+        $ads = array();
+        foreach ($ads_id as $id) {
+            $ads[] = Ad::find($id);
+        }
+
+        Session::put('ads', $ads);
+
+        return redirect('account/ads/buy/complete');
     }
 }

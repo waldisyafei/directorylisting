@@ -48,10 +48,10 @@
 													if ($pos !== 0) {
 														echo $ad->customer->customer_name;		
 													} else {
-														echo $ad->customer->nonsub_name;
+														echo '$ad->customer->nonsub_name';
 													}
 												}else{
-													echo $ad->item->address->company;
+													echo '$ad->item->address->company';
 												}
 												
 											?>

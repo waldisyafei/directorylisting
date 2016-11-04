@@ -275,11 +275,7 @@ class AdsController extends Controller
             return abort(404);
         }
 
-        /*if ($ad->status == 1) {
-            return redirect()->back()->with('error', 'Unable to process this request. [Payment Not Completed]');
-        }*/
-
-        return view('customer.pages.advertising.renew', ['ad' => $ad]);
+        return view('backend.pages.ads.renew', ['ad' => $ad]);
     }
 
     public function renew_ads_slot(Request $request)
@@ -300,7 +296,7 @@ class AdsController extends Controller
                 $discount = Setting::get('ads.price_discount');
                 $potongan = $discount / 100 * $price;
                 $total = $price - $potongan;
-                create_billing($ad->nonsubs_id, $ad->id, 'ads', $total);
+                create_billing($ad->customer_id, $ad->id, 'ads', $total);
 
                 $ads_id[] = $ad->id;
             }
@@ -313,6 +309,6 @@ class AdsController extends Controller
 
         Session::put('ads', $ads);
 
-        return redirect('nonsubs/ads/buy/complete');
+        return redirect('app-admin/ads/buy/complete');
     }
 }

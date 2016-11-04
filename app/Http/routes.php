@@ -123,10 +123,13 @@ Route::group(['prefix' => 'app-admin', 'middleware' => 'auth'], function() {
 
 	Route::group(['prefix' => 'ads'], function() {
 		Route::get('/', 'Backend\AdsController@index');
+		Route::get('noncust', 'Backend\AdsController@index_noncust');
 		Route::get('create', 'Backend\AdsController@create');
 		Route::post('create', 'Backend\AdsController@store');
-		/*Route::get('edit/{id}', 'Backend\AdsController@edit');
-		Route::post('edit/{id}', 'Backend\AdsController@update');*/
+		Route::get('edit/{id}', 'Backend\AdsController@edit');
+		Route::post('edit/{id}', 'Backend\AdsController@update');
+		Route::get('renew/{id}', 'Backend\AdsController@renew');
+		Route::post('renew/{id}', 'Backend\AdsController@renew_ads_slot');
 		Route::get('delete/{id}', 'Backend\AdsController@destroy');
 
 		Route::get('buy/complete', 'Backend\AdsController@buyComplete');
