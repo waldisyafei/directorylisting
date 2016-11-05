@@ -231,7 +231,7 @@ class AdsController extends Controller
         }
 
         $ad_old = Ad::find($id);
-        $ad_old->status = 2;
+        //$ad_old->status = 2;
 
         $ad = new Ad;
         $ad->ad_id ='up-'.  $ad_old->id .'-'. date('ymd-his');

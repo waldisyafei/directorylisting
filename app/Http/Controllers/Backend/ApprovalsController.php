@@ -128,7 +128,7 @@ class ApprovalsController extends Controller
      */
     public function ads()
     {
-        $ads = Ad::where('status', 2)->orderBy('created_at', 'DSC')->paginate(15);
+        $ads = Ad::where('status', 2)->orderBy('created_at', 'DSC')->where('edit', 1)->paginate(15);
 
         return view('backend.pages.approvals.ads', ['ads' => $ads]);
     }

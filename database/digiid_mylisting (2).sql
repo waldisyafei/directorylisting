@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 02 Nov 2016 pada 16.25
+-- Generation Time: 05 Nov 2016 pada 02.19
 -- Versi Server: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -70,6 +70,7 @@ CREATE TABLE `ads` (
   `show_date` datetime DEFAULT NULL,
   `expired_date` datetime DEFAULT NULL,
   `status` int(1) NOT NULL DEFAULT '1',
+  `edit` int(1) NOT NULL,
   `assets` longtext COLLATE utf8_unicode_ci,
   `address_id` int(11) DEFAULT NULL,
   `noncust_ad_link` longtext COLLATE utf8_unicode_ci,
@@ -81,12 +82,9 @@ CREATE TABLE `ads` (
 -- Dumping data untuk tabel `ads`
 --
 
-INSERT INTO `ads` (`id`, `ad_id`, `title`, `customer_id`, `password`, `link`, `days`, `been_active`, `show_date`, `expired_date`, `status`, `assets`, `address_id`, `noncust_ad_link`, `created_at`, `updated_at`) VALUES
-(8, '2820161100008', 'Ads from Nonsubs', 'N-0120160300026', NULL, 'www.batanyo.com', 2, 0, '2016-11-02 00:00:00', '2016-11-30 00:00:00', 2, '["storage\\/app\\/cs\\/assets\\/images__1_.jpg"]', 2, NULL, '2016-11-02 15:20:22', '2016-11-02 15:24:21'),
-(9, '2820161100009', NULL, '012016030002682', NULL, NULL, 1, 0, NULL, NULL, 6, NULL, 2, NULL, '2016-11-02 15:20:31', '2016-11-02 15:20:44'),
-(10, '2820161100010', NULL, '012016030002682', NULL, NULL, 1, 0, NULL, NULL, 1, NULL, 2, NULL, '2016-11-02 15:20:57', '2016-11-02 15:20:57'),
-(11, '2820161100011', NULL, 'N-0120160300026', NULL, NULL, 1, 0, NULL, NULL, 1, NULL, 2, NULL, '2016-11-02 15:21:04', '2016-11-02 15:21:04'),
-(12, 'up-9-161102-1', 'Ads from Subscriber', '012016030002682', NULL, 'www.batanyo.com', 0, 0, '2016-11-02 00:00:00', '2016-11-03 00:00:00', 2, '["storage\\/app\\/cs\\/assets\\/leisa_christmas_false_color.png"]', NULL, NULL, '2016-11-02 15:23:54', '2016-11-02 15:23:54');
+INSERT INTO `ads` (`id`, `ad_id`, `title`, `customer_id`, `password`, `link`, `days`, `been_active`, `show_date`, `expired_date`, `status`, `edit`, `assets`, `address_id`, `noncust_ad_link`, `created_at`, `updated_at`) VALUES
+(24, '2820161100024', NULL, '012016030002682', NULL, NULL, 1, 0, NULL, NULL, 6, 2, NULL, 2, NULL, '2016-11-04 16:30:36', '2016-11-04 16:31:32'),
+(25, '2820161100024', 'Ads from Customer', '012016030002682', NULL, 'www.batanyo.com', 0, 0, '2016-11-04 00:00:00', '2016-11-30 00:00:00', 2, 1, '["storage\\/app\\/cs\\/assets\\/leisa_christmas_false_color.png"]', NULL, NULL, '2016-11-04 16:31:32', '2016-11-04 16:31:32');
 
 -- --------------------------------------------------------
 
@@ -163,10 +161,7 @@ CREATE TABLE `billings` (
 --
 
 INSERT INTO `billings` (`id`, `customer_id`, `item_id`, `bukti_pembayaran`, `confirm_message`, `item_type`, `amount`, `status`, `created_at`, `updated_at`) VALUES
-(7, 'N-0120160300026', '8', NULL, NULL, 'ads', '46000.00', 2, '2016-11-02 15:20:22', '2016-11-02 15:20:50'),
-(8, '012016030002682', '9', NULL, NULL, 'ads', '23000.00', 2, '2016-11-02 15:20:31', '2016-11-02 15:20:44'),
-(9, '012016030002682', '10', NULL, NULL, 'ads', '23000.00', 0, '2016-11-02 15:20:57', '2016-11-02 15:20:57'),
-(10, 'N-0120160300026', '11', NULL, NULL, 'ads', '23000.00', 0, '2016-11-02 15:21:04', '2016-11-02 15:21:04');
+(12, '012016030002682', '24', NULL, NULL, 'ads', '23000.00', 2, '2016-11-04 16:30:36', '2016-11-04 16:31:05');
 
 -- --------------------------------------------------------
 
@@ -498,7 +493,45 @@ INSERT INTO `history` (`customer_id`, `item_id`, `item_type`, `updated_at`, `cre
 ('012016030002682', 'up-6-161102-095', 'ads', '2016-11-02 14:55:42', '2016-11-02 14:55:42'),
 ('012016030002682', '2820161100006', 'ads', '2016-11-02 14:55:43', '2016-11-02 14:55:43'),
 ('012016030002682', 'up-9-161102-102', 'ads', '2016-11-02 15:23:54', '2016-11-02 15:23:54'),
-('012016030002682', '2820161100009', 'ads', '2016-11-02 15:23:55', '2016-11-02 15:23:55');
+('012016030002682', '2820161100009', 'ads', '2016-11-02 15:23:55', '2016-11-02 15:23:55'),
+('012016030002682', 'up-12-161103-09', 'ads', '2016-11-03 14:08:05', '2016-11-03 14:08:05'),
+('012016030002682', 'up-9-161102-1', 'ads', '2016-11-03 14:08:05', '2016-11-03 14:08:05'),
+('NULL', 'up-13-161104-07', 'ads', '2016-11-04 12:20:23', '2016-11-04 12:20:23'),
+('NULL123', 'up-13-161104-07', 'ads', '2016-11-04 12:20:37', '2016-11-04 12:20:37'),
+('NULL', 'up-13-161104-07', 'ads', '2016-11-04 12:21:42', '2016-11-04 12:21:42'),
+('NULL', 'up-13-161104-07', 'ads', '2016-11-04 12:22:18', '2016-11-04 12:22:18'),
+('NULL', '2820161100013', 'ads', '2016-11-04 12:22:18', '2016-11-04 12:22:18'),
+('NULL', 'up-1-161104-090', 'ads', '2016-11-04 14:09:04', '2016-11-04 14:09:04'),
+('NULL', '2820161100001', 'ads', '2016-11-04 14:09:04', '2016-11-04 14:09:04'),
+('012016030002682', 'up-1-161104-091', 'ads', '2016-11-04 14:12:04', '2016-11-04 14:12:04'),
+('012016030002682', '2820161100001', 'ads', '2016-11-04 14:12:04', '2016-11-04 14:12:04'),
+('012016030002682', 'up-2-161104-091', 'ads', '2016-11-04 14:14:20', '2016-11-04 14:14:20'),
+('012016030002682', 'up-1-161104-0', 'ads', '2016-11-04 14:14:21', '2016-11-04 14:14:21'),
+('012016030002682', 'up-4-161104-093', 'ads', '2016-11-04 14:34:43', '2016-11-04 14:34:43'),
+('012016030002682', '2820161100004', 'ads', '2016-11-04 14:34:43', '2016-11-04 14:34:43'),
+('012016030002682', '2820161100006', 'ads', '2016-11-04 14:39:49', '2016-11-04 14:39:49'),
+('012016030002682', '2820161100008', 'ads', '2016-11-04 14:41:32', '2016-11-04 14:41:32'),
+('012016030002682', '2820161100008', 'ads', '2016-11-04 14:51:16', '2016-11-04 14:51:16'),
+('012016030002682', '2820161100008', 'ads', '2016-11-04 14:52:18', '2016-11-04 14:52:18'),
+('012016030002682', '2820161100008', 'ads', '2016-11-04 15:08:10', '2016-11-04 15:08:10'),
+('012016030002682', '2820161100010', 'ads', '2016-11-04 15:09:11', '2016-11-04 15:09:11'),
+('012016030002682', '2820161100010', 'ads', '2016-11-04 15:09:33', '2016-11-04 15:09:33'),
+('012016030002682', '11', 'ads', '2016-11-04 15:28:51', '2016-11-04 15:28:51'),
+('012016030002682', '2820161100011', 'ads', '2016-11-04 15:28:51', '2016-11-04 15:28:51'),
+('012016030002682', '2820161100011', 'ads', '2016-11-04 15:34:11', '2016-11-04 15:34:11'),
+('012016030002682', '2820161100011', 'ads', '2016-11-04 15:34:12', '2016-11-04 15:34:12'),
+('012016030002682', '2820161100014', 'ads', '2016-11-04 15:41:13', '2016-11-04 15:41:13'),
+('012016030002682', '2820161100014', 'ads', '2016-11-04 15:41:14', '2016-11-04 15:41:14'),
+('012016030002682', '2820161100016', 'ads', '2016-11-04 15:52:15', '2016-11-04 15:52:15'),
+('012016030002682', '2820161100016', 'ads', '2016-11-04 15:52:15', '2016-11-04 15:52:15'),
+('012016030002682', '2820161100018', 'ads', '2016-11-04 16:07:14', '2016-11-04 16:07:14'),
+('012016030002682', '2820161100018', 'ads', '2016-11-04 16:07:15', '2016-11-04 16:07:15'),
+('012016030002682', '2820161100020', 'ads', '2016-11-04 16:20:26', '2016-11-04 16:20:26'),
+('012016030002682', '2820161100020', 'ads', '2016-11-04 16:20:26', '2016-11-04 16:20:26'),
+('012016030002682', '2820161100022', 'ads', '2016-11-04 16:24:24', '2016-11-04 16:24:24'),
+('012016030002682', '2820161100022', 'ads', '2016-11-04 16:24:24', '2016-11-04 16:24:24'),
+('012016030002682', '2820161100024', 'ads', '2016-11-04 16:31:32', '2016-11-04 16:31:32'),
+('012016030002682', '2820161100024', 'ads', '2016-11-04 16:31:32', '2016-11-04 16:31:32');
 
 -- --------------------------------------------------------
 
@@ -1071,7 +1104,10 @@ INSERT INTO `system_logs` (`id`, `user`, `log_text`, `created_at`, `updated_at`)
 (57, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Tes Add Ads - Tes Edit and Approval</a>', '2016-11-01 19:12:19', '2016-11-01 19:12:19'),
 (58, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Tes Add Ads subscriber</a>', '2016-11-01 19:30:36', '2016-11-01 19:30:36'),
 (59, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Ads from Nonsubs</a>', '2016-11-02 15:10:20', '2016-11-02 15:10:20'),
-(60, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Ads from Subscriber</a>', '2016-11-02 15:10:58', '2016-11-02 15:10:58');
+(60, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Ads from Subscriber</a>', '2016-11-02 15:10:58', '2016-11-02 15:10:58'),
+(61, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Ads from Admin</a>', '2016-11-04 14:09:18', '2016-11-04 14:09:18'),
+(62, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Ads from Customer</a>', '2016-11-04 15:07:15', '2016-11-04 15:07:15'),
+(63, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Ads from Customer</a>', '2016-11-04 15:09:21', '2016-11-04 15:09:21');
 
 -- --------------------------------------------------------
 
@@ -1096,7 +1132,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `status`, `address_id`, `created_at`, `updated_at`) VALUES
-(1, 'Digi', 'grafich.dev@gmail.com', '$2y$10$XQuBCrxFwr4N8et.0VSSK.eavlEYymjNdl7DB5VFaaNgkRqid23.K', 'I2lyHKOhAdce3Yg4zHueYxPAEcQPqb0sOn2NPWyMrV0Ev52C9DBvwylYEpme', 1, 1, '0000-00-00 00:00:00', '2016-11-01 19:18:51'),
+(1, 'Digi', 'grafich.dev@gmail.com', '$2y$10$XQuBCrxFwr4N8et.0VSSK.eavlEYymjNdl7DB5VFaaNgkRqid23.K', 'FL6wCeS4G2owTc53pMo5ljDC9NeFudTOjPyHZ0ZPH4QrJUygaeiKEo38pZse', 1, 1, '0000-00-00 00:00:00', '2016-11-04 14:10:01'),
 (2, 'User Admin', 'irhsad.seifaldin@gmail.com', '$2y$10$wtb3McLO/3Ak29lm3/vy/.2m3WlAcjPZZgEmoid8hiwQAG49DG9mW', NULL, 0, 0, '2015-12-16 06:21:18', '2015-12-16 06:21:18'),
 (3, 'User Manager', '31x389@gmail.com', '$2y$10$InGEkucqe6DBfuL76M6xVuRU1qgDUdXgYgKCSP5kYf7LdaHTfzLIO', 'QTNSc7J38AuSZb1HRzq9NcsOmM8wQA3spJ0Xd7ojbuIkuY7nueeyZreYS9Pj', 0, 0, '2015-12-16 06:21:47', '2015-12-28 07:44:52'),
 (4, 'Irwan Sales', 'baponk.smoker@gmail.com', '$2y$10$UTQvH/xnww5zN.LL8qUCrucPa.RJ4BLbS02wr5aIh3MK70G/dT4n6', NULL, 0, 0, '2015-12-16 06:22:17', '2015-12-16 06:22:17'),
@@ -5419,7 +5455,7 @@ ALTER TABLE `address`
 -- AUTO_INCREMENT for table `ads`
 --
 ALTER TABLE `ads`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT for table `adsmeta`
 --
@@ -5429,7 +5465,7 @@ ALTER TABLE `adsmeta`
 -- AUTO_INCREMENT for table `billings`
 --
 ALTER TABLE `billings`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `country`
 --
@@ -5504,7 +5540,7 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `system_logs`
 --
 ALTER TABLE `system_logs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 --
 -- AUTO_INCREMENT for table `users`
 --

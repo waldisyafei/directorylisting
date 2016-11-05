@@ -148,17 +148,19 @@ class AdsController extends Controller
         }
 
         $ad_old = Ad::find($id);
-        $ad_old->status = 2;
+        $ad_old->edit = 2;
 
         $ad = new Ad;
-        $ad->ad_id ='up-'.  $ad_old->id .'-'. date('ymd-his');
+        $ad->ad_id =$ad_old->ad_id;
         $ad->title = $request->input('title');
+        $ad->edit = 1;
         $ad->link = $request->input('link');
         $ad->customer_id = Auth::customer()->get()->customer_id;
         $ad->show_date = $request->input('show_date');
+        $ad->expired_date = $request->input('expired_date');
         $ad->status = 2;
-        $stop_date = $ad_old->days;
-        $ad->expired_date = date('Y-m-d H:i:s', strtotime($request->input('show_date') . ' +'. $stop_date .' day'));
+        //$stop_date = $ad_old->days;
+        //$ad->expired_date = date('Y-m-d H:i:s', strtotime($request->input('show_date') . ' +'. $stop_date .' day'));
         
         if ($request->hasFile('image')) {
             //$dir = storage_path().'/app/cs/assets/';
@@ -195,6 +197,7 @@ class AdsController extends Controller
         $history_old->item_type = 'ads';
 
         if ($ad->save()) {
+            $ad_old->save();
             $history->save();
             $history_old->save();
             return redirect('account/ads')->withSuccess('success', 'Ads create success.');
