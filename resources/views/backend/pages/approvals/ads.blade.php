@@ -39,7 +39,7 @@
 										<tr>
 											<td><?php echo $ad->id ?></td>
 											<td><?php echo $ad->title ?></td>
-											<td><?php echo $ad->ad_id ?></td>
+											<td><?php echo $ad->ad_edit_id ?></td>
 											<td><?php echo $ad->customer ? $ad->customer_id : 'Non Customer' ?></td>
 											<td>
 											<?php

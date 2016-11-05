@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Ad;
+use App\Models\AdEdit;
 use Validator;
 use Auth;
 use Storage;
@@ -148,17 +149,18 @@ class AdsController extends Controller
         }
 
         $ad_old = Ad::find($id);
-        $ad_old->edit = 2;
+        $ad_old->status = 2;
 
-        $ad = new Ad;
-        $ad->ad_id =$ad_old->ad_id;
+        $ad = new AdEdit;
+        $ad->ad_edit_id =$ad_old->ad_id;
         $ad->title = $request->input('title');
-        $ad->edit = 1;
+        $ad->edit = $ad_old->id;
         $ad->link = $request->input('link');
         $ad->customer_id = Auth::customer()->get()->customer_id;
         $ad->show_date = $request->input('show_date');
         $ad->expired_date = $request->input('expired_date');
         $ad->status = 2;
+        $ad->ad_edit_id = $ad_old->ad_id;
         //$stop_date = $ad_old->days;
         //$ad->expired_date = date('Y-m-d H:i:s', strtotime($request->input('show_date') . ' +'. $stop_date .' day'));
         
@@ -188,7 +190,7 @@ class AdsController extends Controller
 
         $history = new History;
         $history->customer_id = $ad->customer_id;
-        $history->item_id = $ad->ad_id;
+        $history->item_id = $ad->ad_edit_id;
         $history->item_type = 'ads';
 
         $history_old = new History;
