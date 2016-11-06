@@ -1,11 +1,11 @@
-<?php $__env->startSection('title', 'Edit Ad'); ?>
+<?php $__env->startSection('title', 'Confirm Payment'); ?>
 
 <?php $__env->startSection('content'); ?>
 	<h3 class="page-title">Edit Ad</h3>
 	<ol class="breadcrumb">
 	    <li><a href="<?php echo e(url('nonsubs')); ?>">Dashboard</a></li>
-	    <li><a href="<?php echo e(url('nonsubs/ads')); ?>">Ads</a></li>
-	    <li class="active"><span>Edit Ad</span></li>
+	    <li><a href="<?php echo e(url('nonsubs/billings')); ?>">Billings</a></li>
+	    <li class="active"><span>Confirm Payment</span></li>
 	</ol>
 
 	<div class="container-fluid">
@@ -34,45 +34,15 @@
 					<div class="panel-heading">
 						<h2>Edit Ad Form</h2>
 					</div>
-					<!-- ./End panel heading -->
-
-					<?php
-					$action = '';
-
-					if (Request::is('noncust-ads*')) {
-						$action = $ad->noncust_ad_link;
-					} else {
-						$action = url('nonsubs/ads/edit', $ad->id);
-					}
-					?>
-
-					<form class="form-horizontal row-border" method="post" action="<?php echo e($action); ?>" enctype="multipart/form-data">
+					<form class="form-horizontal row-border" method="post" action="<?php echo e(url('nonsubs/billings/confirm', $billing->id)); ?>" enctype="multipart/form-data">
 						<input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
 						<!-- Panel body -->
 						<div class="panel-body" style="padding: 40px 16px;">
 							<div class="form-group">
-								<label class="col-sm-2 control-label">Ad Title</label>
+								<label class="col-sm-2 control-label">Message</label>
 								<div class="col-sm-8">
-									<input type="text" name="title" class="form-control" value="<?php echo e($ad->title); ?>">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-2 control-label">URL Link</label>
-								<div class="col-sm-8">
-									<input type="text" name="link" class="form-control" value="<?php echo e($ad->link); ?>">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-2 control-label">Days</label>
-								<div class="col-sm-8">
-									<input type="text" name="link" class="form-control" value="<?php echo e($ad->days); ?> days left" disabled>
-								</div>
-							</div>
-							<div class="row form-inline">
-								<label class="col-sm-2 control-label">Show Date</label>
-								<div class="col-sm-8">
-									<input type="text" name="show_date" value="<?php echo e($ad->show_date); ?>" class="form-control"> <!--End Date 
-									<input type="text" name="expired_date" value="<?php echo e($ad->expired_date); ?>" class="form-control">-->
+									<input type="text" name="message" class="form-control">
+									<input type="hidden" name="billing_id" value="<?php echo e($billing->id); ?>" class="form-control">
 								</div>
 							</div>
 							<div class="form-group">
@@ -81,7 +51,7 @@
 									<input type="file" name="image">
 									<div class="images-list">
 										<div class="row">
-											<?php $images = json_decode($ad->assets); ?>
+											<?php $images = json_decode($billing->bukti_pembayaran); ?>
 
 											<?php if (count($images) > 0): ?>
 												<?php foreach ($images as $image): ?>
@@ -108,7 +78,7 @@
 							<div class="row">
 								<div class="col-sm-8 col-sm-offset-2">
 									<?php if(!Request::is('noncust-ads*')): ?>
-										<a href="<?php echo e(url('nonsubs/ads')); ?>" class="btn-default btn">Cancel</a>&nbsp;&nbsp;&nbsp;
+										<a href="<?php echo e(url('nonsubs/billings')); ?>" class="btn-default btn">Cancel</a>&nbsp;&nbsp;&nbsp;
 									<?php endif; ?>
 									<button class="btn-primary btn">Update</button>
 								</div>
@@ -149,14 +119,6 @@
 
 			$('.package-info').html('<i class="ti ti-info-alt"></i>&nbsp;'+$('#package-id :selected').data('notes'));
 		});
-
-		$('input[name="show_date"]')
-			.datetimepicker({
-				format: 'yyyy-mm-dd 00:00:00',
-				autoclose: true,
-				minView:2,
-				endDate : <?php echo "'+".$ad->days."d'" ?>
-			});
 	});
 
 	$(function(){

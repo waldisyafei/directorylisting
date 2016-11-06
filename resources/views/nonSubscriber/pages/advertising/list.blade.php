@@ -37,9 +37,8 @@
 									<th width="80">Ad ID</th>
 									<th width="100">Image</th>
 									<th width="100">Title</th>
-									<th width="100">Status</th>
-									<th>Sisa Tampil</th>
 									<th width="100">URL Link</th>
+									<th width="100">Status</th>
 									<th width="100">Expired Date</th>
 									<th width="150">Action</th>
 								</tr>
@@ -59,6 +58,7 @@
 										<?php endif ?>
 									</td>
 									<td><a href="{{ url('nonsubs/ads/edit', $ad->id) }}">{{ $ad->title }}</a></td>
+									<td><?php if( $ad->link )echo $ad->link; ?></td>
 									<td>
 										<?php $status = $ad->adStatus->id; ?>
 										@if ($status == 1)
@@ -85,10 +85,11 @@
 											<label class="label label-info tooltips" title="<?php echo $ad->adStatus->info ?>">{{ $ad->adStatus->display_name }}</label>
 										@endif
 									</td>
-									<td>
-										<?php if ($ad->status != 5 && $ad->status != 1  && $ad->status != 6): ?>
-											<?php if ($ad->expired_date != ''): ?>
-												<?php
+									
+									<!--<td>
+										<?//php if ($ad->status != 5 && $ad->status != 1  && $ad->status != 6): ?>
+											<?//php if ($ad->expired_date != ''): ?>
+												<?//php
 												$now_date = date('Y-m-d H:i:s');
 												$now_time = strtotime($now_date);
 												$show_datetime = strtotime($ad->show_date);
@@ -103,11 +104,10 @@
 												}
 												echo $remainings->format("%a days, %h hours, %i minutes, %s seconds");
 												?>
-											<?php endif ?>
-										<?php endif ?>
+											<?//php endif ?>
+										<?//php endif ?>
 											
-									</td>
-									<td><?php if( $ad->link )echo $ad->link; ?></td>
+									</td>-->
 									<td>
 										<?php if ($ad->status != 1 && $ad->status != 5 && $ad->status != 6): ?>
 											<?php echo date('d M Y H:i', strtotime($ad->expired_date)) ?>

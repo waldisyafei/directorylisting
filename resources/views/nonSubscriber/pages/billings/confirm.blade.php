@@ -1,78 +1,50 @@
-<?php $__env->startSection('title', 'Edit Ad'); ?>
+@extends('nonSubscriber.base')
 
-<?php $__env->startSection('content'); ?>
+@section('title', 'Confirm Payment')
+
+@section('content')
 	<h3 class="page-title">Edit Ad</h3>
 	<ol class="breadcrumb">
-	    <li><a href="<?php echo e(url('nonsubs')); ?>">Dashboard</a></li>
-	    <li><a href="<?php echo e(url('nonsubs/ads')); ?>">Ads</a></li>
-	    <li class="active"><span>Edit Ad</span></li>
+	    <li><a href="{{ url('nonsubs') }}">Dashboard</a></li>
+	    <li><a href="{{ url('nonsubs/billings') }}">Billings</a></li>
+	    <li class="active"><span>Confirm Payment</span></li>
 	</ol>
 
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
-				<?php if(Session::has('error')): ?>
+				@if (Session::has('error'))
 					<div class="alert alert-dismissable alert-danger">
 						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-						<i class="ti ti-check"></i>&nbsp; <strong>Oh snap!</strong> <?php echo e(Session::get('error')); ?>.
+						<i class="ti ti-check"></i>&nbsp; <strong>Oh snap!</strong> {{ Session::get('error') }}.
 					</div>
-				<?php endif; ?>
-				<?php if($errors->has()): ?>
+				@endif
+				@if ($errors->has())
 					<div class="alert alert-dismissable alert-danger">
 						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 						<i class="ti ti-close"></i>&nbsp; <strong>Oh snap!</strong>
 						<ul>
-							<?php foreach($errors->all() as $error): ?>
-								<li><?php echo e($error); ?></li>
-							<?php endforeach; ?>
+							@foreach ($errors->all() as $error)
+								<li>{{ $error }}</li>
+							@endforeach
 						</ul>
 					</div>
-				<?php endif; ?>
+				@endif
 				
 				<div class="panel panel-blue" data-widget='{"draggable": "false"}'>
 					<!-- Panel heading -->
 					<div class="panel-heading">
 						<h2>Edit Ad Form</h2>
 					</div>
-					<!-- ./End panel heading -->
-
-					<?php
-					$action = '';
-
-					if (Request::is('noncust-ads*')) {
-						$action = $ad->noncust_ad_link;
-					} else {
-						$action = url('nonsubs/ads/edit', $ad->id);
-					}
-					?>
-
-					<form class="form-horizontal row-border" method="post" action="<?php echo e($action); ?>" enctype="multipart/form-data">
-						<input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+					<form class="form-horizontal row-border" method="post" action="{{ url('nonsubs/billings/confirm', $billing->id) }}" enctype="multipart/form-data">
+						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<!-- Panel body -->
 						<div class="panel-body" style="padding: 40px 16px;">
 							<div class="form-group">
-								<label class="col-sm-2 control-label">Ad Title</label>
+								<label class="col-sm-2 control-label">Message</label>
 								<div class="col-sm-8">
-									<input type="text" name="title" class="form-control" value="<?php echo e($ad->title); ?>">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-2 control-label">URL Link</label>
-								<div class="col-sm-8">
-									<input type="text" name="link" class="form-control" value="<?php echo e($ad->link); ?>">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-2 control-label">Days</label>
-								<div class="col-sm-8">
-									<input type="text" name="link" class="form-control" value="<?php echo e($ad->days); ?> days left" disabled>
-								</div>
-							</div>
-							<div class="row form-inline">
-								<label class="col-sm-2 control-label">Show Date</label>
-								<div class="col-sm-8">
-									<input type="text" name="show_date" value="<?php echo e($ad->show_date); ?>" class="form-control"> <!--End Date 
-									<input type="text" name="expired_date" value="<?php echo e($ad->expired_date); ?>" class="form-control">-->
+									<input type="text" name="message" class="form-control">
+									<input type="hidden" name="billing_id" value="{{ $billing->id}}" class="form-control">
 								</div>
 							</div>
 							<div class="form-group">
@@ -81,7 +53,7 @@
 									<input type="file" name="image">
 									<div class="images-list">
 										<div class="row">
-											<?php $images = json_decode($ad->assets); ?>
+											<?php $images = json_decode($billing->bukti_pembayaran); ?>
 
 											<?php if (count($images) > 0): ?>
 												<?php foreach ($images as $image): ?>
@@ -91,7 +63,7 @@
 															$filename = substr($image, strrpos($image, '/') + 1);
 															$img_entry = str_replace($filename, 'thumb-admin-'.$filename, $image);
 															?>
-															<img src="<?php echo e(url($img_entry)); ?>" alt="">
+															<img src="{{ url($img_entry) }}" alt="">
 														</div>
 													</div>
 												<?php endforeach ?>
@@ -107,9 +79,9 @@
 						<div class="panel-footer">
 							<div class="row">
 								<div class="col-sm-8 col-sm-offset-2">
-									<?php if(!Request::is('noncust-ads*')): ?>
-										<a href="<?php echo e(url('nonsubs/ads')); ?>" class="btn-default btn">Cancel</a>&nbsp;&nbsp;&nbsp;
-									<?php endif; ?>
+									@if (!Request::is('noncust-ads*'))
+										<a href="{{ url('nonsubs/billings') }}" class="btn-default btn">Cancel</a>&nbsp;&nbsp;&nbsp;
+									@endif
 									<button class="btn-primary btn">Update</button>
 								</div>
 							</div>
@@ -120,24 +92,24 @@
 			</div>
 		</div>
 	</div>
-<?php $__env->stopSection(); ?>
+@stop
 
-<?php $__env->startSection('page-styles'); ?>
+@section('page-styles')
 	<!-- Code Prettifier -->
-    <link type="text/css" href="<?php echo e(asset('assets/backend/plugins/codeprettifier/prettify.css')); ?>" rel="stylesheet">
+    <link type="text/css" href="{{ asset('assets/backend/plugins/codeprettifier/prettify.css') }}" rel="stylesheet">
     <!-- iCheck -->
-    <link type="text/css" href="<?php echo e(asset('assets/backend/plugins/iCheck/skins/minimal/blue.css')); ?>" rel="stylesheet">
+    <link type="text/css" href="{{ asset('assets/backend/plugins/iCheck/skins/minimal/blue.css') }}" rel="stylesheet">
     <!-- DateRangePicker -->
-    <link type="text/css" href="<?php echo e(asset('assets/backend/plugins/form-daterangepicker/daterangepicker-bs3.css')); ?>" rel="stylesheet">
-<?php $__env->stopSection(); ?>
+    <link type="text/css" href="{{ asset('assets/backend/plugins/form-daterangepicker/daterangepicker-bs3.css') }}" rel="stylesheet">
+@stop
 
-<?php $__env->startSection('page-scripts'); ?>
+@section('page-scripts')
 	<!-- Datepicker -->
-	<script type="text/javascript" src="<?php echo e(asset('assets/backend/plugins/bootstrap-datepicker/bootstrap-datepicker.js')); ?>"></script>
-	<script type="text/javascript" src="<?php echo e(asset('assets/backend/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js')); ?>"></script>
-<?php $__env->stopSection(); ?>
+	<script type="text/javascript" src="{{ asset('assets/backend/plugins/bootstrap-datepicker/bootstrap-datepicker.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('assets/backend/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js') }}"></script>
+@stop
 
-<?php $__env->startSection('inline-script'); ?>
+@section('inline-script')
 	<script type="text/javascript">
 	$(function(){
 		var dataPrice = parseInt($('#package-id').find(':selected').data('price'));
@@ -149,14 +121,6 @@
 
 			$('.package-info').html('<i class="ti ti-info-alt"></i>&nbsp;'+$('#package-id :selected').data('notes'));
 		});
-
-		$('input[name="show_date"]')
-			.datetimepicker({
-				format: 'yyyy-mm-dd 00:00:00',
-				autoclose: true,
-				minView:2,
-				endDate : <?php echo "'+".$ad->days."d'" ?>
-			});
 	});
 
 	$(function(){
@@ -189,9 +153,9 @@
 	   return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
 	 };
 	</script>
-<?php $__env->stopSection(); ?>
+@endsection
 
-<?php $__env->startSection('inline-style'); ?>
+@section('inline-style')
 <style type="text/css">
 .package-info-wrapper {
     display: block;
@@ -206,5 +170,4 @@
 	color: #000;
 }
 </style>
-<?php $__env->stopSection(); ?>
-<?php echo $__env->make('nonSubscriber.base', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+@stop

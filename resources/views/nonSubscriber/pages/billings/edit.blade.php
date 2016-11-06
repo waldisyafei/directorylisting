@@ -1,4 +1,4 @@
-@extends('backend.base')
+@extends('nonSubscriber.base')
 
 @section('title', 'Edit Ad')
 

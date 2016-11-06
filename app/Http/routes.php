@@ -292,4 +292,12 @@ Route::group(['prefix' => 'nonsubs', 'middleware' => 'authNonSubscriber'], funct
 		Route::post('renew/{id}', 'Nonsubs\AdsController@renew_ads_slot');
 		Route::get('renew/complete', 'Nonsubs\AdsController@renewComplete');
 	});
+
+	Route::group(['prefix' => 'billings'], function(){
+		Route::get('/', 'Nonsubs\BillingsController@index');
+		Route::get('view/{id}', 'Nonsubs\BillingsController@show');
+
+		Route::get('confirm/{id}', 'Nonsubs\BillingsController@confirm_get');
+		Route::post('confirm/{id}', 'Nonsubs\BillingsController@confirm_post');
+	});
 });

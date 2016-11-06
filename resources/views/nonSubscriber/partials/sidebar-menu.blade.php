@@ -32,6 +32,22 @@
                         	</ul>
                         </li>
 
+                        <!-- Billings -->
+                         <!--   <?php
+                            $unconfirmed = getListings('pending')->count();
+                            $unconfirmed = $unconfirmed + getAds('pending')->count();
+                            ?>
+                            <li class="{{ Request::is('account/billings*') ? 'open active' : null }}">
+                                <a href="javascript:;"><i class="ti ti-receipt"></i><span>Billings</span>{!! $unconfirmed > 0 ? ' <span class="badge badge-teal">'. $unconfirmed .'</span>' : null !!}</a>
+                                <ul class="acc-menu" {!! Request::is('account/billings*') ? ' style="display: block;"' : null !!}>
+                                    <li class="{{ Request::is('account/billings/listing/*') ? 'active' : null }}"><a href="{{ url('account/billings/listing') }}">Listing</a></li>
+                                    <li><a href="{{ url('account/billings/ads') }}">Ads</a></li>
+                                </ul>
+                            </li>-->
+                        <li class="{{ Request::is('nonsubs/billings*') ? 'active ' : null }}">
+                            <a href="{{ url('nonsubs/billings') }}"><i class="ti ti-receipt"></i><span>My Billing</span></a>
+                        </li>
+
     				</ul>
     			</nav>
     		</div>

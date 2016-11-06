@@ -65,9 +65,9 @@ class AdsController extends Controller
         $ad->link = $request->input('link');
         $ad->nonsubs_id = Auth::nonsubs()->get()->nonsubs_id;
         $ad->show_date = $request->input('show_date');
-        $ad->expired_date = $request->input('expired_date');
+        //$ad->expired_date = $request->input('expired_date');
         $stop_date = Package::find($request->input('package_id'))->days;
-        $ad->expire_date = date('Y-m-d H:i:s', strtotime($request->input('show_date') . ' +'. $stop_date .' day'));
+        $ad->expired_date = date('Y-m-d H:i:s', strtotime($request->input('show_date') . ' +'. $stop_date .' day'));
 
         
         if ($request->hasFile('image')) {
@@ -158,11 +158,11 @@ class AdsController extends Controller
         $ad->link = $request->input('link');
         $ad->customer_id = Auth::nonsubs()->get()->nonsub_id;
         $ad->show_date = $request->input('show_date');
-        $ad->expired_date = $request->input('expired_date');
+        //$ad->expired_date = $request->input('expired_date');
         $ad->status = 2;
         $ad->ad_edit_id = $ad_old->ad_id;
-        //$stop_date = $ad_old->days;
-        //$ad->expired_date = date('Y-m-d H:i:s', strtotime($request->input('show_date') . ' +'. $stop_date .' day'));
+        $stop_date = $ad_old->days;
+        $ad->expired_date = date('Y-m-d H:i:s', strtotime($request->input('show_date') . ' +'. $stop_date .' day'));
         
         if ($request->hasFile('image')) {
             //$dir = storage_path().'/app/cs/assets/';

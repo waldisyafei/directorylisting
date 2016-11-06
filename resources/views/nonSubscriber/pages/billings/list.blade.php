@@ -1,4 +1,4 @@
-@extends('customer.base')
+@extends('nonSubscriber.base')
 
 @section('title', 'Billings')
 
@@ -55,7 +55,7 @@
 										<th>Amount</th>
 										<th>Created</th>
 										<th>Status</th>
-										<th width="150">Action</th>
+										<th width="215">Action</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -75,7 +75,8 @@
 												@endif
 											</td>
 											<td>
-												<a href="{{ url('account/billings/view', $billing->id) }}" class="btn btn-success-alt btn-sm"><i class="ti ti-eye"></i>&nbsp;&nbsp;View</a>
+												<a href="{{ url('nonsubs/billings/view', $billing->id) }}" class="btn btn-success-alt btn-sm"><i class="ti ti-eye"></i>&nbsp;&nbsp;View</a>
+												<a href="{{ url('nonsubs/billings/confirm', $billing->id) }}" class="btn btn-success-alt btn-sm"><i class="ti ti-eye"></i>&nbsp;&nbsp;Confirm Payment</a>
 											</td>
 										</tr>
 									@endforeach
