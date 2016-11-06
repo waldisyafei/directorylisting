@@ -326,7 +326,10 @@ class AdsController extends Controller
         foreach ($request->input('ads') as $key => $adsRequest) {
             if ($adsRequest['days'] != '0') {
                 $ad = Ad::where('id', $key)->first();
-                $ad->days = $adsRequest['days'];
+                if ($ad->status == 3) {
+                    $ad->days = $adsRequest['days'] + $ad->days;
+                }else
+                   $ad->days = $adsRequest['days'];
 
                 if ($ad->status == 5) {
                     $ad->status = 1;
@@ -350,6 +353,6 @@ class AdsController extends Controller
 
         Session::put('ads', $ads);
 
-        return redirect('account/ads/buy/complete');
+        return redirect('app-admin/ads');
     }
 }

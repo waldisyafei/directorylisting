@@ -298,7 +298,10 @@ class AdsController extends Controller
         foreach ($request->input('ads') as $key => $adsRequest) {
             if ($adsRequest['days'] != '0') {
                 $ad = Ad::where('id', $key)->first();
-                $ad->days = $adsRequest['days'];
+                if ($ad->status == 3) {
+                    $ad->days = $adsRequest['days'] + $ad->days;
+                }else
+                   $ad->days = $adsRequest['days'];
 
                 if ($ad->status == 5) {
                     $ad->status = 1;
@@ -309,7 +312,7 @@ class AdsController extends Controller
                 $discount = Setting::get('ads.price_discount');
                 $potongan = $discount / 100 * $price;
                 $total = $price - $potongan;
-                create_billing($ad->nonsubs_id, $ad->id, 'ads', $total);
+                create_billing($ad->customer_id, $ad->id, 'ads', $total);
 
                 $ads_id[] = $ad->id;
             }

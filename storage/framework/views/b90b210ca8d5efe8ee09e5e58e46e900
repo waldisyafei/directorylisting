@@ -116,14 +116,18 @@
 		                                                <?php endif ?>
 
 		                                                <td><?php echo $billing->item_type ?></td>
-		                                                <td>1</td>
-		                                                <?php if ($billing->item_type == 'ads'): ?>	
+		                                            	<?php if ($billing->item_type == 'ads'): ?>
+		                                                	<td><?php echo $billing->item->days ?></td>
+		                                                <?php else: ?>
+		                                                	<td><?php echo $billing->item->package->days ?></td>
+		                                            	<?php endif ?>
+		                                            	<?php if ($billing->item_type == 'ads'): ?>	
 		                                                	<?php
 		                                                	$price = $billing->customer ? floatval(Setting::get('ads.price_per_day')) : floatval(Setting::get('ads.noncust.price_per_day'));
 		                                                	$price_total = $price * intval($billing->item->days);
 		                                                	?>
 
-		                                                	<td>Rp <?php echo e(number_format($price_total, 0, '.',',')); ?></td>
+		                                                	<td>Rp <?php echo e(number_format($price, 0, '.',',')); ?></td>
 		                                                	<td><?php echo e($billing->customer ? Setting::get('ads.price_discount') : Setting::get('ads.noncust.price_discount')); ?>%</td>
 	                                                	<?php else: ?>
 			                                                <td>Rp <?php echo e(number_format($billing->item->package->price, 0, '.',',')); ?></td>

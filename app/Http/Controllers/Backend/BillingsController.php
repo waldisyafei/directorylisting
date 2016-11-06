@@ -102,13 +102,17 @@ class BillingsController extends Controller
             elseif ($billing->item_type == 'ads') {
                 $ad = Ad::find($billing->item_id);
                 $item_id = $ad->ad_id;
+                
+                if ($ad->status = 5) {
+                    $ad->status = 6;
+                }
+                $ad->save();
+                $billing->save();
+
+                //untuk pdf
                 $billing_item_package_price= "";
                 $billing_item_package_discount= "";
                 $billing_item_package_name = "";
-
-                $ad->status = 6;
-                $ad->save();
-                $billing->save();
             }
 
             //send email
