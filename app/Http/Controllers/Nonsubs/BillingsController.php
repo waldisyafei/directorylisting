@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Billing;
 use Auth;
 use Storage;
+use File;
 use Image;
 
 class BillingsController extends Controller
@@ -56,19 +57,40 @@ class BillingsController extends Controller
         $billing->confirm_message = $request->input('message');
 
         if ($request->hasFile('image')) {
-            $dir = storage_path().'/app/listings/billings/'.$billing->id . '/';
+            $dir = public_path().'/storage/app/listings/billings/'.$billing->id . '/';
             $file = $request->file('image');
             $file_name = preg_replace("/[^A-Z0-9._-]/i", "_", $file->getClientOriginalName());
             $relative_path = 'storage/app/listings/billings/' . $billing->id . '/' .$file_name;
 
-            if (!Storage::disk('local')->exists('listings/billings/'.$billing->id)) {
-                Storage::makeDirectory('listings/billings/'.$billing->id);
+            if(!File::exists(public_path().'/storage/app/listings/billings/'.$billing->id)) {
+                $createDir = File::makeDirectory( public_path().'/storage/app/listings/billings/'.$billing->id,  0755, true);
             }
 
             Image::make($request->file('image'))->save($dir . $file_name);
 
             $billing->bukti_pembayaran = $relative_path;
         }
+
+        /*if ($request->hasFile('image')) {
+            $dir = public_path().'/storage/app/cs/assets/';
+            $file = $request->file('image');
+            $file_name = preg_replace("/[^A-Z0-9._-]/i", "_", $file->getClientOriginalName());
+            $thumb_admin = 'thumb-admin-'.$file_name;
+            $thumb = 'thumb-'.$file_name;
+            $relative_path = 'storage/app/cs/assets/'.$file_name;
+            $relative_thumb_admin_path = 'storage/app/cs/assets/'.$thumb_admin;
+            $relative_path = 'storage/app/cs/assets/'.$file_name;
+
+            if (!Storage::disk('local')->exists('cs/assets')) {
+                Storage::makeDirectory('cs/assets');
+            }
+
+            Image::make($request->file('image'))->save($dir . $file_name);
+            Image::make($request->file('image'))->resize(150, 120)->save($dir . $thumb_admin);
+            Image::make($request->file('image'))->resize(200, 200)->save($dir . $thumb);
+
+            $billing->bukti_pembayaran = json_encode([$relative_path]);
+        }*/
 
         $billing->save();
 

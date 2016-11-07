@@ -43,7 +43,7 @@
 							<div class="form-group">
 								<label class="col-sm-2 control-label">Message</label>
 								<div class="col-sm-8">
-									<input type="text" name="message" class="form-control">
+									<input type="text" name="message" value="{{ $billing->confirm_message}}" class="form-control">
 									<input type="hidden" name="billing_id" value="{{ $billing->id}}" class="form-control">
 								</div>
 							</div>
@@ -51,27 +51,16 @@
 								<label class="col-sm-2 control-label">Images</label>
 								<div class="col-sm-8">
 									<input type="file" name="image">
-									<div class="images-list">
-										<div class="row">
-											<?php $images = json_decode($billing->bukti_pembayaran); ?>
-
-											<?php if (count($images) > 0): ?>
-												<?php foreach ($images as $image): ?>
-													<div class="col-sm-3">
-														<div class="thumbnail image-entry">
-															<?php
-															$filename = substr($image, strrpos($image, '/') + 1);
-															$img_entry = str_replace($filename, 'thumb-admin-'.$filename, $image);
-															?>
-															<img src="{{ url($img_entry) }}" alt="">
-														</div>
-													</div>
-												<?php endforeach ?>
-											<?php endif ?>
-										</div>
-									</div>
 								</div>
 							</div>
+							<div class="form-group">
+							<label class="col-sm-2 control-label"></label>
+								<div class="col-sm-8">
+	                			@if ($billing->bukti_pembayaran != '')
+	                				<img src="{{ asset($billing->bukti_pembayaran) }}" style="max-width:25%;" alt="">
+	                			@endif
+	                			</div>
+	                		</div>
 						</div>
 						<!-- ./End panel body -->
 
