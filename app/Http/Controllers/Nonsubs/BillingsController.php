@@ -71,29 +71,8 @@ class BillingsController extends Controller
             $billing->bukti_pembayaran = $relative_path;
         }
 
-        /*if ($request->hasFile('image')) {
-            $dir = public_path().'/storage/app/cs/assets/';
-            $file = $request->file('image');
-            $file_name = preg_replace("/[^A-Z0-9._-]/i", "_", $file->getClientOriginalName());
-            $thumb_admin = 'thumb-admin-'.$file_name;
-            $thumb = 'thumb-'.$file_name;
-            $relative_path = 'storage/app/cs/assets/'.$file_name;
-            $relative_thumb_admin_path = 'storage/app/cs/assets/'.$thumb_admin;
-            $relative_path = 'storage/app/cs/assets/'.$file_name;
-
-            if (!Storage::disk('local')->exists('cs/assets')) {
-                Storage::makeDirectory('cs/assets');
-            }
-
-            Image::make($request->file('image'))->save($dir . $file_name);
-            Image::make($request->file('image'))->resize(150, 120)->save($dir . $thumb_admin);
-            Image::make($request->file('image'))->resize(200, 200)->save($dir . $thumb);
-
-            $billing->bukti_pembayaran = json_encode([$relative_path]);
-        }*/
-
         $billing->save();
 
-        return redirect()->back()->with('success', 'Payment confirmed success!');
+        return redirect('/nonsubs/billings/confirm/'. $request->input('billing_id'))->withSuccess('success', 'Payment confirmed success!');
     }
 }

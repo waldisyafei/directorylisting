@@ -1,7 +1,7 @@
 <?php $__env->startSection('title', 'Confirm Payment'); ?>
 
 <?php $__env->startSection('content'); ?>
-	<h3 class="page-title">Edit Ad</h3>
+	<h3 class="page-title">Confirm Payment</h3>
 	<ol class="breadcrumb">
 	    <li><a href="<?php echo e(url('nonsubs')); ?>">Dashboard</a></li>
 	    <li><a href="<?php echo e(url('nonsubs/billings')); ?>">Billings</a></li>
@@ -11,6 +11,12 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
+				<?php if(Session::has('success')): ?>
+					<div class="alert alert-dismissable alert-success">
+						<i class="ti ti-check"></i>&nbsp; <strong>Well done!</strong> <?php echo e(Session::get('success')); ?>.
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+					</div>
+				<?php endif; ?>
 				<?php if(Session::has('error')): ?>
 					<div class="alert alert-dismissable alert-danger">
 						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -32,7 +38,7 @@
 				<div class="panel panel-blue" data-widget='{"draggable": "false"}'>
 					<!-- Panel heading -->
 					<div class="panel-heading">
-						<h2>Edit Ad Form</h2>
+						<h2>Confirm Payment</h2>
 					</div>
 					<form class="form-horizontal row-border" method="post" action="<?php echo e(url('nonsubs/billings/confirm', $billing->id)); ?>" enctype="multipart/form-data">
 						<input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">

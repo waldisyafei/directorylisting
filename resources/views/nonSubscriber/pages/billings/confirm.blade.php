@@ -13,6 +13,12 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
+				@if (Session::has('success'))
+					<div class="alert alert-dismissable alert-success">
+						<i class="ti ti-check"></i>&nbsp; <strong>Well done!</strong> {{ Session::get('success') }}.
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+					</div>
+				@endif
 				@if (Session::has('error'))
 					<div class="alert alert-dismissable alert-danger">
 						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -34,7 +40,7 @@
 				<div class="panel panel-blue" data-widget='{"draggable": "false"}'>
 					<!-- Panel heading -->
 					<div class="panel-heading">
-						<h2>Edit Ad Form</h2>
+						<h2>Confirm Payment</h2>
 					</div>
 					<form class="form-horizontal row-border" method="post" action="{{ url('nonsubs/billings/confirm', $billing->id) }}" enctype="multipart/form-data">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
