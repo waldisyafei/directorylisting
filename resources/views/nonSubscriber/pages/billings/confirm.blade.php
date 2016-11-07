@@ -3,7 +3,7 @@
 @section('title', 'Confirm Payment')
 
 @section('content')
-	<h3 class="page-title">Edit Ad</h3>
+	<h3 class="page-title">Confirm Payment</h3>
 	<ol class="breadcrumb">
 	    <li><a href="{{ url('nonsubs') }}">Dashboard</a></li>
 	    <li><a href="{{ url('nonsubs/billings') }}">Billings</a></li>
