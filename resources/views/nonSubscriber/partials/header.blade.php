@@ -104,7 +104,7 @@
             </a>
             <ul class="dropdown-menu userinfo arrow">
                 @if (!Request::is('noncust-ads*'))
-                    <li><a href="#/"><i class="ti ti-user"></i><span>Profile</span></a></li>
+                    <li><a href="{{ url('nonsubs/edit_info') }}"><i class="ti ti-user"></i><span>Profile</span></a></li>
                     <li><a href="#/"><i class="ti ti-panel"></i><span>Account</span></a></li>
                     <li><a href="#/"><i class="ti ti-settings"></i><span>Settings</span></a></li>
                     <li class="divider"></li>

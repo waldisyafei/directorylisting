@@ -272,6 +272,9 @@ Route::group(['prefix' => 'nonsubs', 'middleware' => 'authNonSubscriber'], funct
 	Route::get('/', 'Nonsubs\NonSubscriberController@index');
 	//Route::get('listing_stats', 'Customers\ListingsController@statistics');
 
+	Route::get('edit_info', 'Nonsubs\NonSubscriberController@edit_info');
+	Route::post('edit_info/{id}', 'Nonsubs\NonSubscriberController@update_info');
+
 	Route::get('ads-wizard', 'Nonsubs\AdsController@wizard');
 
 	Route::group(['prefix' => 'ads'], function(){
