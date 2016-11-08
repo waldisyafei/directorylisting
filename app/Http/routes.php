@@ -258,7 +258,8 @@ Route::group(['prefix' => 'account', 'middleware' => 'authCustomer'], function()
 		Route::get('/', 'Customers\BillingsController@index');
 		Route::get('view/{id}', 'Customers\BillingsController@show');
 
-		Route::post('confirm', 'Customers\BillingsController@confirm');
+		Route::get('confirm/{id}', 'Customers\BillingsController@confirm_get');
+		Route::post('confirm/{id}', 'Customers\BillingsController@confirm_post');
 	});
 
 	Route::group(['prefix' => 'sub-account'], function(){
