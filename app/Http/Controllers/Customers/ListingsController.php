@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Auth;
 use Validator;
 use App\Models\Customer;
+use App\Models\Package;
 use App\Models\Listing;
 use App\Models\ListingEdit;
 use Storage;
@@ -336,13 +337,16 @@ class ListingsController extends Controller
     
     public function buy_listing_slot(Request $request)
     {
-        $listing_id = array();
+        $listing_id = array();//dd($request->all());
 
         foreach ($request->input('listings') as $listingRequest) {
             $listing = new Listing;
             $listing->customer_id = Auth::customer()->get()->customer_id;
             $listing->package_id = $listingRequest['package_id'];
-
+            
+            //$stop_date = Package::find($listing->package_id)->days;//dd($stop_date);
+            //$listing->expired_date = date('Y-m-d H:i:s', strtotime($stop_date));//dd($listing->expired_date);
+            
             $listing->save();
 
             $listing->listing_id = strtoupper($this->generateListingID() . $listing->id);

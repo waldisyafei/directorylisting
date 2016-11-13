@@ -78,10 +78,10 @@ class BillingsController extends Controller
                     $days = $listing->package->days;
 
                     if ($expired <= time()) {
-                        $listing->expired_date = date('Y-m-d H:i:s', strtotime("+$days days"));
+                        $listing->expired_date = date('Y-m-d H:i:s', strtotime("+$days"));//dd($listing->expired_date);
                         $listing->status = 3;
                     } else {
-                        $listing->expired_date = date('Y-m-d H:i:s', strtotime("$listing_expired +$days days"));
+                        $listing->expired_date = date('Y-m-d H:i:s', strtotime("$listing_expired +$days"));
                     }
                     $item_id = $listing->listing_id;
                     $listing->save();
@@ -90,6 +90,16 @@ class BillingsController extends Controller
                     $billing_item_package_discount = $billing->item->package->discount;
                     $billing_item_package_name = $billing->item->package->name;
                 } else {
+                    $expired = strtotime($listing->expired_date);
+                    $listing_expired = $listing->expired_date;
+                    $days = $listing->package->days;
+
+                    if ($expired <= time()) {
+                        $listing->expired_date = date('Y-m-d H:i:s', strtotime("+$days"));//dd($listing->expired_date);
+                        $listing->status = 3;
+                    } else {
+                        $listing->expired_date = date('Y-m-d H:i:s', strtotime("$listing_expired +$days"));
+                    }
                     $item_id = $listing->listing_id;
                     $listing->status = 6;
                     $listing->save();
