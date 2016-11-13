@@ -67,8 +67,7 @@
 							<div class="row form-inline">
 								<label class="col-sm-2 control-label">Show Date</label>
 								<div class="col-sm-8">
-									<input type="text" name="show_date" value="{{ $ad->show_date }}" class="form-control"> End Date 
-									<input type="text" name="expired_date" value="{{ $ad->expired_date }}" class="form-control">
+									<input type="text" name="show_date" value="{{ $ad->show_date }}" class="form-control"> 
 								</div>
 							</div>
 							<div class="form-group">
