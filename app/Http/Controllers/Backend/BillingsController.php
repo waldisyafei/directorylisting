@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Billing;
 use App\Models\Listing;
 use App\Models\Customer;
+use App\Models\Package;
 use App\Models\Ad;
 use Auth;
 use Mail;
@@ -74,15 +75,17 @@ class BillingsController extends Controller
                 $listing = Listing::find($billing->item_id);
                 if ($listing->been_active != '0') {
                     $expired = strtotime($listing->expired_date);
-                    $listing_expired = $listing->expired_date;
-                    $days = $listing->package->days;
-
-                    if ($expired <= time()) {
-                        $listing->expired_date = date('Y-m-d H:i:s', strtotime("+$days"));//dd($listing->expired_date);
-                        $listing->status = 3;
-                    } else {
-                        $listing->expired_date = date('Y-m-d H:i:s', strtotime("$listing_expired +$days"));
-                    }
+                    //$listing_expired = $listing->expired_date;
+                    //$days = $listing->package->days;
+                    $stop_date = Package::find($listing->package_id)->days;//dd($stop_date);
+                    
+                    $listing->expired_date = date('Y-m-d H:i:s', strtotime(" $stop_date days "));//dd($listing->expired_date);
+                    //if ($expired <= time()) {
+                    //    $listing->expired_date = date('Y-m-d H:i:s', strtotime("+$days"));//dd($listing->expired_date);
+                    //    $listing->status = 3;
+                    //} else {
+                    //    $listing->expired_date = date('Y-m-d H:i:s', strtotime("$listing_expired +$days"));
+                    //}
                     $item_id = $listing->listing_id;
                     $listing->save();
                     $billing->save();
@@ -91,15 +94,17 @@ class BillingsController extends Controller
                     $billing_item_package_name = $billing->item->package->name;
                 } else {
                     $expired = strtotime($listing->expired_date);
-                    $listing_expired = $listing->expired_date;
-                    $days = $listing->package->days;
+                    //$listing_expired = $listing->expired_date;
+                    //$days = $listing->package->days;
+                    $stop_date = Package::find($listing->package_id)->days;//dd($stop_date);
+                    $listing->expired_date = date('Y-m-d H:i:s', strtotime(" $stop_date days "));//dd($listing->expired_date);
 
-                    if ($expired <= time()) {
-                        $listing->expired_date = date('Y-m-d H:i:s', strtotime("+$days"));//dd($listing->expired_date);
-                        $listing->status = 3;
-                    } else {
-                        $listing->expired_date = date('Y-m-d H:i:s', strtotime("$listing_expired +$days"));
-                    }
+                    //if ($expired <= time()) {
+                    //    $listing->expired_date = date('Y-m-d H:i:s', strtotime("+$days"));//dd($listing->expired_date);
+                    //    $listing->status = 3;
+                    //} else {
+                    //    $listing->expired_date = date('Y-m-d H:i:s', strtotime("$listing_expired +$days"));
+                    //}
                     $item_id = $listing->listing_id;
                     $listing->status = 6;
                     $listing->save();
