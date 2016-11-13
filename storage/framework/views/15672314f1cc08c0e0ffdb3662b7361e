@@ -1,10 +1,11 @@
-<?php $__env->startSection('title', 'Edit Profile'); ?>
+<?php $__env->startSection('title', 'Edit User'); ?>
 
 <?php $__env->startSection('content'); ?>
-	<h3 class="page-title">Edit Profile</h3>
+	<h3 class="page-title">Edit User</h3>
 	<ol class="breadcrumb">
-	    <li><a href="<?php echo e(url('account')); ?>">Dashboard</a></li>
-	    <li class="active"><span>Edit Profile</span></li>
+	    <li><a href="<?php echo e(url('app-admin')); ?>">Dashboard</a></li>
+	    <li><a href="<?php echo e(url('app-admin/users')); ?>">Users</a></li>
+	    <li class="active"><span>Edit User</span></li>
 	</ol>
 
 	<div class="container-fluid">
@@ -32,30 +33,30 @@
 				<div class="panel panel-midnightblue" data-widget='{"draggable": "false"}'>
 					<!-- Panel heading -->
 					<div class="panel-heading">
-						<h2>Edit Profile Form</h2>
+						<h2>Edit User Form</h2>
 					</div>
 					<!-- ./End panel heading -->
 
-					<form class="form-horizontal row-border" method="post" action="<?php echo e(url('nonsubs/edit_info', Auth::nonsubs()->get()->id)); ?>">
+					<form class="form-horizontal row-border" method="post" action="<?php echo e(url('app-admin/users/edit', $user->id)); ?>">
 						<input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
 						<!-- Panel body -->
 						<div class="panel-body" style="padding: 40px 16px;">
 							<div class="form-group">
 								<label for="fullname" class="col-sm-2 control-label">Full Name <small style="color: red;">*</small></label>
 								<div class="col-sm-8">
-									<input type="text" name="name" class="form-control" id="fullname" placeholder="Full Name" value="<?php echo e($customer->nonsub_name); ?>">
+									<input type="text" name="name" class="form-control" id="fullname" placeholder="Full Name" value="<?php echo e($user->name); ?>">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="email-input" class="col-sm-2 control-label">Email <small style="color: red;">*</small></label>
 								<div class="col-sm-8">
-									<input type="email" name="email" class="form-control" id="email-input" placeholder="Email" value="<?php echo e($customer->pic_email); ?>">
+									<input type="email" name="email" class="form-control" id="email-input" placeholder="Email" value="<?php echo e($user->email); ?>">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="password-input" class="col-sm-2 control-label">Password <small style="color: red;">*</small></label>
 								<div class="col-sm-8">
-									<input type="password" name="password" class="form-control" id="password-input" placeholder="Password" value="">
+									<input type="password" name="password" class="form-control" id="password-input" placeholder="Password">
 								</div>
 							</div>
 							<div class="form-group">
@@ -74,20 +75,18 @@
 								</div>
 							</div>
 							
-							<!--
 							<div class="form-group">
 								<label class="col-sm-2 control-label">Role <small style="color: red;">*</small></label>
 								<div class="col-sm-8">
 									<select name="role" class="form-control">
 										<option value="choose-role">-- Select Role --</option>
-										<?//php// $roles = App\Models\Role::all(); ?>
-										@//foreach ($roles as $role)
-											<option value="{//{ $role->id }}"{//{ $customer->roles[0]->id == $role->id ? ' selected' : null }}>{//{ $role->display_name }}</option>
-										@//endforeach
+										<?php $roles = App\Models\Role::all(); ?>
+										<?php foreach($roles as $role): ?>
+											<option value="<?php echo e($role->id); ?>"<?php echo e($user->roles[0]->id == $role->id ? ' selected' : null); ?>><?php echo e($role->display_name); ?></option>
+										<?php endforeach; ?>
 									</select>
 								</div>
 							</div>
-							-->
 						</div>
 						<!-- ./End panel body -->
 
@@ -95,7 +94,7 @@
 						<div class="panel-footer">
 							<div class="row">
 								<div class="col-sm-8 col-sm-offset-2">
-									<a href="<?php echo e(url('account/edit_info')); ?>" class="btn-default btn">Cancel</a>&nbsp;&nbsp;&nbsp;
+									<a href="<?php echo e(url('app-admin/users')); ?>" class="btn-default btn">Cancel</a>&nbsp;&nbsp;&nbsp;
 									<button class="btn-primary btn">Save</button>
 								</div>
 							</div>
@@ -114,4 +113,4 @@
     <!-- iCheck -->
     <link type="text/css" href="<?php echo e(asset('assets/backend/plugins/iCheck/skins/minimal/blue.css')); ?>" rel="stylesheet">
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('nonSubscriber.base', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('backend.base', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

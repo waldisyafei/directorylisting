@@ -219,4 +219,15 @@ class CustomersController extends Controller
 
         return abort(404);
     }
+
+    public function profile($id)
+    {
+        $customer = Customer::find($id);
+
+        if ($customer) {
+            return view('backend.pages.customers.profile', ['customer' => $customer]);
+        }
+
+        return abort(404, 'Request not found');
+    }
 }

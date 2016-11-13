@@ -10,6 +10,22 @@
 		@if (Auth::user()->get()->can('can_create_category'))
 			<!-- Action menu -->
 			<div class="row">
+				@if (Session::has('success'))
+					<div class="col-md-12">
+						<div class="alert alert-dismissable alert-success">
+							<i class="ti ti-check"></i>&nbsp; <strong>Well Done!</strong> {{ Session::get('success') }}.
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+						</div>
+					</div>
+				@endif
+				@if (Session::has('error'))
+					<div class="col-md-12">
+						<div class="alert alert-dismissable alert-danger">
+							<i class="ti ti-close"></i>&nbsp; <strong>Access denied!</strong> {{ Session::get('error') }}.
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+						</div>
+					</div>
+				@endif
 				<div class="action-menu col-md-12">
 					<a class="btn btn-primary" href="{{ url('app-admin/listings/categories/create') }}" role="button"><i class="ti ti-plus"></i> Add new Category</a>
 				</div>

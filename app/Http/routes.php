@@ -59,6 +59,7 @@ Route::group(['prefix' => 'app-admin', 'middleware' => 'auth'], function() {
 		Route::get('edit/{id}', 'Backend\UsersController@edit');
 		Route::post('edit/{id}', 'Backend\UsersController@update');
 		Route::get('delete/{id}', 'Backend\UsersController@destroy');
+		Route::get('profile/{id}', 'Backend\UsersController@profile');
 	});
 	
 	Route::group(['prefix' => 'customers'], function() {
@@ -68,6 +69,7 @@ Route::group(['prefix' => 'app-admin', 'middleware' => 'auth'], function() {
 		Route::get('edit/{id}', 'Backend\CustomersController@edit');
 		Route::post('edit/{id}', 'Backend\CustomersController@update');
 		Route::get('delete/{id}', 'Backend\CustomersController@destroy');
+		Route::get('profile/{id}', 'Backend\CustomersController@profile');
 	});
 
 	Route::group(['prefix' => 'roles'], function() {
@@ -95,7 +97,7 @@ Route::group(['prefix' => 'app-admin', 'middleware' => 'auth'], function() {
 			Route::post('create', 'Backend\ListingCategoriesController@store');
 			Route::get('edit/{id}', 'Backend\ListingCategoriesController@edit');
 			Route::post('edit/{id}', 'Backend\ListingCategoriesController@update');
-			Route::get('delete/{id}', 'Backend\ListingCategoriesController@destory');
+			Route::get('delete/{id}', 'Backend\ListingCategoriesController@destroy');
 		});
 	});
 

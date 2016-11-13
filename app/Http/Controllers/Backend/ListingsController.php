@@ -193,6 +193,15 @@ class ListingsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if (!Auth::user()->get()->can('can_delete_listing')) {
+            return redirect()->back();
+        }
+        $listing = Listing::find($id);
+
+        if ($listing) {
+            $listing->delete();
+
+            return redirect()->back()->with('success', 'Listing deleted successfully.');
+        }
     }
 }

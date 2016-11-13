@@ -63,7 +63,7 @@ class BillingsController extends Controller
             $relative_path = 'storage/app/listings/billings/' . $billing->id . '/' .$file_name;
 
             if(!File::exists(public_path().'/storage/app/listings/billings/'.$billing->id)) {
-                $createDir = File::makeDirectory( public_path().'/storage/app/listings/billings/'.$billing->id,  0755, true);
+                $createDir = File::makeDirectory( public_path().'/storage/app/listings/billings/'.$billing->id,  0777, true);
             }
 
             Image::make($request->file('image'))->save($dir . $file_name);

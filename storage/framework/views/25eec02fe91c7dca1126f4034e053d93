@@ -2,7 +2,7 @@
 
 <?php $__env->startSection('content'); ?>
 	<ol class="breadcrumb">
-	    <li class=""><a href="<?php echo e(url('account/listings')); ?>">My Listings</a></li>
+	    <li class=""><a href="<?php echo e(url('app-admin/listings')); ?>">My Listings</a></li>
 	    <li>Create New Listings</li>
 	</ol>
 	<div class="container-fluid">

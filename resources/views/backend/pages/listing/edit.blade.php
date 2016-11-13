@@ -4,7 +4,7 @@
 
 @section('content')
 	<ol class="breadcrumb">
-	    <li class=""><a href="{{ url('account/listings') }}">My Listings</a></li>
+	    <li class=""><a href="{{ url('app-admin/listings') }}">My Listings</a></li>
 	    <li>Edit Listings</li>
 	</ol>
 	<div class="container-fluid">

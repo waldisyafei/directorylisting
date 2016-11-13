@@ -5,8 +5,8 @@
 @section('content')
 	<h3 class="page-title">Edit Ad</h3>
 	<ol class="breadcrumb">
-	    <li><a href="{{ url('app-admin') }}">Dashboard</a></li>
-	    <li><a href="{{ url('app-admin/ads') }}">Ads</a></li>
+	    <li><a href="{{ url('nonsubs') }}">Dashboard</a></li>
+	    <li><a href="{{ url('nonsubs') }}">Ads</a></li>
 	    <li class="active"><span>Edit Ad</span></li>
 	</ol>
 

@@ -8,6 +8,23 @@
 		<?php if(Auth::user()->get()->can('can_create_listing')): ?>
 		<!-- Action menu -->
 		<div class="row">
+				<?php if(Session::has('success')): ?>
+					<div class="col-md-12">
+						<div class="alert alert-dismissable alert-success">
+							<i class="ti ti-check"></i>&nbsp; <strong>Well Done!</strong> <?php echo e(Session::get('success')); ?>.
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+						</div>
+					</div>
+				<?php endif; ?>
+				<?php if(Session::has('error')): ?>
+					<div class="col-md-12">
+						<div class="alert alert-dismissable alert-danger">
+							<i class="ti ti-close"></i>&nbsp; <strong>Access denied!</strong> <?php echo e(Session::get('error')); ?>.
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+						</div>
+					</div>
+				<?php endif; ?>
+
 			<div class="action-menu col-md-12">
 				<a class="btn btn-primary" href="<?php echo e(url('app-admin/listings/create')); ?>" role="button"><i class="ti ti-plus"></i> Add new Listing</a>
 			</div>

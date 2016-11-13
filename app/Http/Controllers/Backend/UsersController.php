@@ -146,4 +146,15 @@ class UsersController extends Controller
     {
         //
     }
+
+    public function profile($id)
+    {
+        $user = User::find($id);
+
+        if ($user) {
+            return view('backend.pages.users.profile', ['user' => $user]);
+        }
+
+        return abort(404, 'Request not found');
+    }
 }
