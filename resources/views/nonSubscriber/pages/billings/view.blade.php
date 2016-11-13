@@ -163,7 +163,26 @@
 
 
 		                    
-	                    @if ($billing->bukti_pembayaran != '' || $billing->confirm_message != '')
+	                   @if ($billing->bukti_pembayaran == '' || $billing->confirm_message == '')
+	                    	<div class="row">
+			                	<form action="{{ url('nonsubs/billings/confirm', $billing->id) }}" method="POST" role="form" enctype="multipart/form-data">
+			                		<input type="hidden" name="_token" value="{{ csrf_token() }}">
+			                		<input type="hidden" name="billing_id" value="{{ $billing->id }}">
+			                		<legend>Confirm Payment</legend>
+			                	
+			                		<div class="form-group">
+			                			<label for="">Confirm Message</label>
+										<textarea class="form-control" rows="5" name="message"></textarea>
+			                		</div>
+			                		
+			                		<div class="form-group">
+			                			<label>Bukti Pembayaran</label>
+			                			<input type="file" name="image" accept="image/*">
+			                		</div>
+			                		<button type="submit" class="btn btn-primary">Confirm</button>
+			                	</form>
+			                </div>
+		                @else
 		                	<div class="row">
 			                	<div class="col-md-12">
 			                		<div class="well">

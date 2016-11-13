@@ -234,7 +234,7 @@ Route::group(['prefix' => 'account', 'middleware' => 'authCustomer'], function()
 		Route::get('get_sub_categories', 'Customers\ListingsController@getSubcategory');
 	});
 
-	Route::get('listing-wizard', 'Customers\ListingsController@wizard');
+	Route::get('listing-wizard', 'Customers\ListingsController@buy');
 	Route::get('ads-wizard', 'Customers\AdsController@buy');
 
 	Route::group(['prefix' => 'ads'], function(){

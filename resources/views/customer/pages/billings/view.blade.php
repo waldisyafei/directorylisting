@@ -161,7 +161,7 @@
 		                    
 	                    @if ($billing->bukti_pembayaran == '' || $billing->confirm_message == '')
 	                    	<div class="row">
-			                	<form action="{{ url('account/billings/confirm') }}" method="POST" role="form" enctype="multipart/form-data">
+			                	<form action="{{ url('account/billings/confirm', $billing->id) }}" method="POST" role="form" enctype="multipart/form-data">
 			                		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			                		<input type="hidden" name="billing_id" value="{{ $billing->id }}">
 			                		<legend>Confirm Payment</legend>

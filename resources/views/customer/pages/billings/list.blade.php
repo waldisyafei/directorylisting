@@ -55,7 +55,7 @@
 										<th>Amount</th>
 										<th>Created</th>
 										<th>Status</th>
-										<th width="225">Action</th>
+										<th width="">Action</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -88,7 +88,6 @@
 											</td>
 											<td>
 												<a href="{{ url('account/billings/view', $billing->id) }}" class="btn btn-success-alt btn-sm"><i class="ti ti-eye"></i>&nbsp;&nbsp;View</a>
-												<a href="{{ url('account/billings/confirm', $billing->id) }}" class="btn btn-success-alt btn-sm"><i class="ti ti-eye"></i>&nbsp;&nbsp;Confirm Payment</a>
 											</td>
 										</tr>
 									@endforeach

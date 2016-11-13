@@ -6,7 +6,8 @@
 	<h3 class="page-title">Billings</h3>
 	<ol class="breadcrumb">
 	    <li><a href="{{ url('app-admin') }}">Dashboard</a></li>
-	    <li><a href="{{ url('app-admin/billings') }}">Billings</a></li>
+	    <?php if($billing->item_type == 'listing') $bill_url = 'listing'; else $bill_url = 'ads'; ?>
+	    <li><a href="{{ url('app-admin/billings/'. $bill_url) }}">Billings</a></li>
 	    <li class="active">View Billing</li>
 	</ol>
 

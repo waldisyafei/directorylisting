@@ -10,6 +10,7 @@ use Auth;
 use Validator;
 use App\Models\Customer;
 use App\Models\Listing;
+use App\Models\ListingEdit;
 use Storage;
 use Image;
 use App\Libraries\BillingLibrary;
@@ -178,14 +179,13 @@ class ListingsController extends Controller
         }
 
         $listing_old = Listing::find($id);
-        if (!$listing_old) {
-            return abort(404);
-        }
         $listing_old->status = 2;
 
-        $listing = new Listing;
+        $listing = new ListingEdit;
         $listing->customer_id = Auth::customer()->get()->customer_id;
-        $listing->listing_id ='up-'.  $listing_old->id .'-'. date('ymd-his');
+        $listing->listing_edit_id = $listing_old->listing_id;
+        $listing->status = 2;
+        $listing->edit = $listing_old->id;
         $listing->title = $request->input('title');
         $listing->content = $request->input('content');
         $listing->keywords = $request->input('keywords');
@@ -193,13 +193,10 @@ class ListingsController extends Controller
         $listing->url = $request->input('url');
         $listing->price_from = $request->input('price_from');
         $listing->price_to = $request->input('price_to');
-        $listing->review = $request->input('review');
-        $listing->custom_tab_title = $request->input('custom_title');
-        $listing->custom_tab = $request->input('custom');
-        $listing->status = 2;
-        $listing->category = $request->input('sub_category');
-        $listing->package_id = $listing_old->package_id;
-
+      //  $listing->package_id = $request->input('package');
+        if ($request->input('category') != 'choose-category') {
+            $listing->category = $request->input('category');
+        }
 
         
         if ($request->hasFile('image')) {
@@ -212,7 +209,7 @@ class ListingsController extends Controller
             $relative_path = 'storage/app/listings/assets/'.$file_name;
             $relative_thumb_admin_path = 'storage/app/listings/assets/'.$thumb_admin;
             $relative_path = 'storage/app/listings/assets/'.$file_name;
-            
+
             if (!Storage::disk('local')->exists('listings/assets')) {
                 Storage::makeDirectory('listings/assets');
             }
@@ -222,24 +219,13 @@ class ListingsController extends Controller
             Image::make($request->file('image'))->resize(200, 200)->save($dir . $thumb);
 
             $listing->assets = json_encode([$relative_path]);
-        }elseif($listing_old->assets){
+        }elseif ($listing_old->assets) {
             $listing->assets = $listing_old->assets;
         }
 
-        /*if ($request->has('images')) {
-            $images = $request->input('images');
-            $assets = array();
-
-            foreach ($images as $image) {
-                $assets[] = $image;
-            }
-
-            $listing->assets = json_encode($assets);
-        }*/
-
         $history = new History;
         $history->customer_id = $listing->customer_id;
-        $history->item_id = $listing->listing_id;
+        $history->item_id = $listing_old->listing_id;
         $history->item_type = 'listing';
 
         $history_old = new History;
@@ -247,11 +233,13 @@ class ListingsController extends Controller
         $history_old->item_id = $listing_old->listing_id;
         $history_old->item_type = 'listing';
 
-        if ($listing->save() && $listing_old->save()) {
+        if ($listing->save()) {
+            $listing_old->save();
             $history->save();
             $history_old->save();
-            return redirect('account/listings/edit/'.$listing->id)->with('success', 'Listing created successfully.');
+            return redirect('account/listings')->with('success', 'Listing created successfully.');
         }
+
     }
 
     /**

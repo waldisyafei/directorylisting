@@ -1,8 +1,6 @@
-@extends('backend.base')
+<?php $__env->startSection('title', "Review Listing"); ?>
 
-@section('title', "Review Listing")
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 	<ol class="breadcrumb">
 		<li><a href="<?php echo url('app-admin/approvals') ?>">Approvals</a></li>
 		<li class="active">Review Listing</li>
@@ -11,7 +9,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
-				@include('backend.partials.errors')
+				<?php echo $__env->make('backend.partials.errors', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
 				<div class="panel panel-blue">
 					<div class="panel-heading">
@@ -54,15 +52,19 @@
 								<!-- Tab panes -->
 								<div class="tab-content" style="border: 1px solid #E2E2E2; border-top-width: 0;">
 									<div role="tabpanel" class="tab-pane active" id="description" style="padding: 20px;">
-										{!! $listing->content !!}
+										<?php echo $listing->content; ?>
+
 									</div>
 									<div role="tabpanel" class="tab-pane" id="review" style="padding: 20px;">
-										{!! $listing->review !!}
+										<?php echo $listing->review; ?>
+
 									</div>
 									<div role="tabpanel" class="tab-pane" id="custom" style="padding: 20px;">
-										Custom Title: {{ $listing->custom_tab_title }}
+										Custom Title: <?php echo e($listing->custom_tab_title); ?>
+
 										<br><br>
-										{!! $listing->custom_tab !!}
+										<?php echo $listing->custom_tab; ?>
+
 									</div>
 								</div>
 							</div>
@@ -70,7 +72,7 @@
 							<div class="form-group">
 								<label class="col-sm-2 control-label">Image</label>
 								<div class="col-sm-8">
-									<img src="{{ asset($images[0]) }}" alt="" class="img-rounded img-responsive">
+									<img src="<?php echo e(asset($images[0])); ?>" alt="" class="img-rounded img-responsive">
 								</div>
 							</div>
 						</form>
@@ -87,4 +89,5 @@
 			</div>
 		</div>
 	</div>
-@stop
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('backend.base', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -36,13 +36,6 @@
 								</thead>
 								<tbody>
 									@foreach ($listings as $listing)
-										<?php
-											$listing_up_id = explode('-', $listing->listing_id);
-											$up_id = $listing_up_id[0];
-											if ($up_id !== 'up') {
-												continue;
-											}
-										?>
 										<tr>
 											<td><?php echo $listing->id ?></td>
 											<td><?php echo $listing->title ?></td>

@@ -73,6 +73,6 @@ class BillingsController extends Controller
 
         $billing->save();
 
-        return redirect('/account/billings/confirm/'. $request->input('billing_id'))->withSuccess('success', 'Payment confirmed success!');
+        return redirect()->back()->withSuccess('success', 'Payment confirmed success!');
     }
 }

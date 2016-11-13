@@ -160,7 +160,7 @@
 		                    
 	                    <?php if($billing->bukti_pembayaran == '' || $billing->confirm_message == ''): ?>
 	                    	<div class="row">
-			                	<form action="<?php echo e(url('account/billings/confirm')); ?>" method="POST" role="form" enctype="multipart/form-data">
+			                	<form action="<?php echo e(url('account/billings/confirm', $billing->id)); ?>" method="POST" role="form" enctype="multipart/form-data">
 			                		<input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
 			                		<input type="hidden" name="billing_id" value="<?php echo e($billing->id); ?>">
 			                		<legend>Confirm Payment</legend>

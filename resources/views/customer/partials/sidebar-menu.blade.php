@@ -27,7 +27,7 @@
     					<!-- Listing -->
                         <li><a href="javascript:;"><i class="ti ti-layout-list-thumb"></i><span>Listing</span></a>
                         	<ul class="acc-menu">
-                        		<li><a href="<?php echo url('account/listing-wizard') ?>">Buy Ads</a></li>
+                        		<li><a href="<?php echo url('account/listing-wizard') ?>">Buy Listings</a></li>
                         		<li><a href="<?php echo url('account/listings') ?>">Listings Management</a></li>
                         	</ul>
                         </li>
@@ -35,7 +35,7 @@
     					<!-- Ads -->
                         <li><a href="javascript:;"><i class="ti ti-layout-accordion-list"></i><span>ADS</span></a>
                         	<ul class="acc-menu">
-                        		<li><a href="<?php echo url('account/ads-wizard') ?>">Buy / Renew</a></li>
+                        		<li><a href="<?php echo url('account/ads-wizard') ?>">Buy Ads</a></li>
                         		<li><a href="<?php echo url('account/ads') ?>">Ads Management</a></li>
                         	</ul>
                         </li>
