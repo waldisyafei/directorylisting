@@ -11,6 +11,7 @@ use Auth;
 use Storage;
 use File;
 use Image;
+use Validator;
 
 class BillingsController extends Controller
 {
@@ -52,6 +53,17 @@ class BillingsController extends Controller
     }
     public function confirm_post(Request $request)
     {
+        $validation = Validator::make($request->all(), [
+            'message' => 'max:255'
+        ]);
+
+        if ($validation->fails()) {
+            return redirect()->back()->withInput()->withErrors($validation);
+        }
+
+        if($request->input('message') == null && $request->file('image') == null)
+            return redirect()->back()->withInput()->withErrors('You have to fill confirm message or attach an image to confirm payment');
+        
         $billing = Billing::find($request->input('billing_id'));//dd($request->all());
 
         $billing->confirm_message = $request->input('message');
@@ -72,7 +84,26 @@ class BillingsController extends Controller
         }
 
         $billing->save();
+        if($request->input('edit') == 'true')
+            return view('customer.pages.billings.view', ['billing' => $billing]);
+        else
+            return redirect()->back()->withSuccess('success', 'Payment confirmed success!');
+    }
 
-        return redirect()->back()->withSuccess('success', 'Payment confirmed success!');
+    public function delimage($id){
+        $billing = Billing::find($id);
+        $billing->bukti_pembayaran = NULL;
+        
+        $billing->save();
+
+        return redirect()->back()->withSuccess('success', 'Image deleted success!');
+    }
+
+    public function edit_confirm($id){
+        $billing = Billing::find($id);
+
+        if ($billing) {
+            return view('customer.pages.billings.view', ['billing' => $billing, 'edit' =>true]);
+        }
     }
 }

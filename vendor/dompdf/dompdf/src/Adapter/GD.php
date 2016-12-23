@@ -277,21 +277,18 @@ class GD implements Canvas
      */
     private function _allocate_color($color)
     {
+        $a = isset($color["alpha"]) ? $color["alpha"] : 1;
 
         if (isset($color["c"])) {
             $color = Helpers::cmyk_to_rgb($color);
         }
 
-        // Full opacity if no alpha set
-        if (!isset($color[3]))
-            $color[3] = 0;
-
-        list($r, $g, $b, $a) = $color;
+        list($r, $g, $b) = $color;
 
         $r *= 255;
         $g *= 255;
         $b *= 255;
-        $a *= 127;
+        $a = 127 - ($a * 127);
 
         // Clip values
         $r = $r > 255 ? 255 : $r;
@@ -831,14 +828,25 @@ class GD implements Canvas
 
     function get_ttf_file($font)
     {
-        if (stripos($font, '.ttf') === false)
+        if ( stripos($font, ".ttf") === false ) {
             $font .= ".ttf";
+        }
 
-        /*$filename = substr(strtolower(basename($font)), 0, -4);
-
-        if ( in_array($filename, Dompdf::$native_fonts) ) {
-          return "arial.ttf";
-        }*/
+        if ( !file_exists($font) ) {
+            $font_metrics = $this->_dompdf->getFontMetrics();
+            $font = $font_metrics->getFont($this->_dompdf->getOptions()->getDefaultFont()) . ".ttf";
+            if ( !file_exists($font) ) {
+                if (strpos($font, "mono")) {
+                    $font = $font_metrics->getFont("DejaVu Mono") . ".ttf";
+                } elseif (strpos($font, "sans") !== false) {
+                    $font = $font_metrics->getFont("DejaVu Sans") . ".ttf";
+                } elseif (strpos($font, "serif")) {
+                    $font = $font_metrics->getFont("DejaVu Serif") . ".ttf";
+                } else {
+                    $font = $font_metrics->getFont("DejaVu Sans") . ".ttf";
+                }
+            }
+        }
 
         return $font;
     }

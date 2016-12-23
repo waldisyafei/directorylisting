@@ -428,7 +428,7 @@ class Block extends AbstractFrameReflower
             case "justify":
                 // We justify all lines except the last one
                 $lines = $this->_frame->get_line_boxes(); // needs to be a variable (strict standards)
-                array_pop($lines);
+                $last_line = array_pop($lines);
 
                 foreach ($lines as $i => $line) {
                     if ($line->br) {
@@ -449,10 +449,6 @@ class Block extends AbstractFrameReflower
                             $frame->set_position($frame->get_position("x") + $line->left);
                         }
                     }
-
-                    // Only set the spacing if the line is long enough.  This is really
-                    // just an aesthetic choice ;)
-                    //if ( $line["left"] + $line["w"] + $line["right"] > self::MIN_JUSTIFY_WIDTH * $width ) {
 
                     // Set the spacing for each child
                     if ($line->wc > 1) {
@@ -482,7 +478,16 @@ class Block extends AbstractFrameReflower
                     // The line (should) now occupy the entire width
                     $line->w = $width;
 
-                    //}
+                }
+
+                // Adjust the last line if necessary
+                if ($last_line->left) {
+                    foreach ($last_line->get_frames() as $frame) {
+                        if ($frame instanceof BlockFrameDecorator) {
+                            continue;
+                        }
+                        $frame->set_position($frame->get_position("x") + $last_line->left);
+                    }
                 }
                 break;
 
@@ -636,6 +641,14 @@ class Block extends AbstractFrameReflower
 
         // Handle "clear"
         if ($child_style->clear !== "none") {
+            //TODO: this is a WIP for handling clear/float frames that are in between inline frames
+            if ($child->get_prev_sibling() !== null) {
+                $this->_frame->add_line();
+            }
+            if ($child_style->float !== "none" && $child->get_next_sibling()) {
+                $this->_frame->set_current_line_number($this->_frame->get_current_line_number() - 1);
+            }
+
             $lowest_y = $root->get_lowest_float_offset($child);
 
             // If a float is still applying, we handle it
