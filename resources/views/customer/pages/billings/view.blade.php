@@ -159,45 +159,66 @@
 		                    </div>
 		                </div>
 		                    
-	                    @if ($billing->bukti_pembayaran == '' || $billing->confirm_message == '')
 	                    	<div class="row">
 			                	<form action="{{ url('account/billings/confirm', $billing->id) }}" method="POST" role="form" enctype="multipart/form-data">
 			                		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			                		<input type="hidden" name="billing_id" value="{{ $billing->id }}">
+			                		<input type="hidden" name="edit" value="true">
 			                		<legend>Confirm Payment</legend>
-			                	
+			                		
+			                		@if ($billing->confirm_message == '' )
 			                		<div class="form-group">
 			                			<label for="">Confirm Message</label>
-										<textarea class="form-control" rows="5" name="message"></textarea>
+										<textarea class="form-control" value="{{ $billing->confirm_message }}" rows="5" name="message"></textarea>
 			                		</div>
+			                		@elseif($billing->confirm_message == '' && $billing->bukti_pembayaran !== '')
+			                		<div class="form-group">
+			                			<label for="">Confirm Message</label>
+										<textarea class="form-control" value="{{ $billing->confirm_message }}" rows="5" name="message" disabled></textarea>
+			                		</div>
+			                		@elseif( isset($edit) &&  $edit == true)
+			                		<div class="form-group">
+			                			<label for="">Confirm Message</label>
+										<textarea class="form-control" placeholder="Update your confirm message here..." value="{{ $billing->confirm_message }}" rows="5" name="message" ></textarea>
+			                		</div>
+			                		@elseif ($billing->confirm_message !== '')
+			                		<div class="form-group">
+			                		<label for="">Confirm Message</label>
+										<p>{{ $billing->confirm_message }}</p>
+			                		@endif
 			                		
+			                		@if ($billing->bukti_pembayaran == '' && $billing->confirm_message !== "")
 			                		<div class="form-group">
 			                			<label>Bukti Pembayaran</label>
-			                			<input type="file" name="image" accept="image/*">
+			                			<input type="file" name="image" value="{{ $billing->bukti_pembayaran }}" accept="image/*" disabled>
 			                		</div>
+			                		@elseif ($billing->bukti_pembayaran == '')
+			                		<div class="form-group">
+			                			<label>Bukti Pembayaran</label>
+			                			<input type="file" name="image" value="{{ $billing->bukti_pembayaran }}" accept="image/*" >
+			                		</div>
+			                		@elseif ( isset($edit) && $edit == true)
+			                		<div class="form-group">
+			                			<label>Bukti Pembayaran</label>
+			                			<input type="file" name="image" value="{{ $billing->bukti_pembayaran }}" accept="image/*">
+			                		</div>
+			                		@elseif ($billing->bukti_pembayaran !== '')
+			                		<div class="form-group">
+			                			<label>Bukti Pembayaran</label>
+			                				<img src="{{ asset($billing->bukti_pembayaran) }}" class="img-responsive" alt=""><br/>
+			                				<a class="btn btn-danger" href="{{ url('account/billings/confirm/delimage', $billing->id) }}" role="button"><i class="ti ti-trash"></i> Delete Image</a> <em>(Be Careful this will immediately delete your proof of payment)</em>
+				                	</div>
+			                		@endif
+
+			                		@if ($billing->bukti_pembayaran == '' && $billing->confirm_message == '')
 			                		<button type="submit" class="btn btn-primary">Confirm</button>
+			                		@elseif ( isset($edit) && isset($edit) && $edit == true && ($billing->bukti_pembayaran !== '' || $billing->confirm_message !== ''))
+			                		<button type="submit" class="btn btn-primary">Update</button>
+			                		@elseif ($billing->bukti_pembayaran !== '' || $billing->confirm_message !== '')
+			                		<a class="btn btn-primary" href="{{ url('account/billings/confirm/edit', $billing->id) }}" role="button"><i class=""></i> Edit Confirm Payment</a>
+			                		@endif
 			                	</form>
 			                </div>
-		                @else
-		                	<div class="row">
-			                	<div class="col-md-12">
-			                		<div class="well">
-			                			<div class="form-group">
-				                			<label for="">Confirm Message</label>
-											<p>{{ $billing->confirm_message }}
-				                		</div>
-				                		
-				                		<div class="form-group">
-				                			<label>Bukti Pembayaran</label>
-				                			@if ($billing->bukti_pembayaran != '')
-				                				<img src="{{ asset($billing->bukti_pembayaran) }}" class="img-responsive" alt="">
-				                			@endif
-				                		</div>
-			                		</div>
-			                	</div>
-			                </div>
-	                    @endif
-
 		            </div>
 
 		        </div>

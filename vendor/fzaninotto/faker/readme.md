@@ -187,10 +187,10 @@ Each of the generator properties (like `name`, `address`, and `lorem`) are calle
     time($format = 'H:i:s', $max = 'now') // '20:49:42'
     dateTimeBetween($startDate = '-30 years', $endDate = 'now', $timezone = date_default_timezone_get()) // DateTime('2003-03-15 02:00:49', 'Africa/Lagos')
     dateTimeInInterval($startDate = '-30 years', $interval = '+ 5 days', $timezone = date_default_timezone_get()) // DateTime('2003-03-15 02:00:49', 'Antartica/Vostok')
-    dateTimeThisCentury($max = 'now')     // DateTime('1915-05-30 19:28:21')
-    dateTimeThisDecade($max = 'now')      // DateTime('2007-05-29 22:30:48')
-    dateTimeThisYear($max = 'now')        // DateTime('2011-02-27 20:52:14')
-    dateTimeThisMonth($max = 'now')       // DateTime('2011-10-23 13:46:23')
+    dateTimeThisCentury($max = 'now', $timezone = date_default_timezone_get())     // DateTime('1915-05-30 19:28:21', 'UTC')
+    dateTimeThisDecade($max = 'now', $timezone = date_default_timezone_get())      // DateTime('2007-05-29 22:30:48', 'Europe/Paris')
+    dateTimeThisYear($max = 'now', $timezone = date_default_timezone_get())        // DateTime('2011-02-27 20:52:14', 'Africa/Lagos')
+    dateTimeThisMonth($max = 'now', $timezone = date_default_timezone_get())       // DateTime('2011-10-23 13:46:23', 'Antarctica/Vostok')
     amPm($max = 'now')                    // 'pm'
     dayOfMonth($max = 'now')              // '04'
     dayOfWeek($max = 'now')               // 'Friday'
@@ -370,7 +370,7 @@ try {
 
 ## Localization
 
-`Faker\Factory` can take a locale as an argument, to return localized data. If no localized provider is found, the factory fallbacks to the default locale (en_EN).
+`Faker\Factory` can take a locale as an argument, to return localized data. If no localized provider is found, the factory fallbacks to the default locale (en_US).
 
 ```php
 <?php
@@ -394,7 +394,7 @@ You can check available Faker locales in the source code, [under the `Provider` 
 
 ## Populating Entities Using an ORM or an ODM
 
-Faker provides adapters for Object-Relational and Object-Document Mappers (currently, [Propel](http://www.propelorm.org), [Doctrine2](http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/), [CakePHP](http://cakephp.org), [Spot2](https://github.com/vlucas/spot2) and [Mandango](https://github.com/mandango/mandango) are supported). These adapters ease the population of databases through the Entity classes provided by an ORM library (or the population of document stores using Document classes provided by an ODM library).
+Faker provides adapters for Object-Relational and Object-Document Mappers (currently, [Propel](http://www.propelorm.org), [Doctrine2](http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/), [CakePHP](http://cakephp.org), [Spot2](https://github.com/vlucas/spot2), [Mandango](https://github.com/mandango/mandango) and [Eloquent](https://laravel.com/docs/master/eloquent) are supported). These adapters ease the population of databases through the Entity classes provided by an ORM library (or the population of document stores using Document classes provided by an ODM library).
 
 To populate entities, create a new populator class (using a generator instance as parameter), then list the class and number of all the entities that must be generated. To launch the actual data population, call the `execute()` method.
 
@@ -923,6 +923,35 @@ echo $faker->mobileNumber; // 082 123 5555
 echo $faker->dni; // '77446565E'
 ```
 
+### `Faker\Provider\es_ES\Payment`
+
+```php
+<?php
+// Generates a Código de identificación Fiscal (CIF) number
+echo $faker->vat;           // "A35864370"
+```
+
+### `Faker\Provider\fi_FI\Payment`
+
+```php
+<?php
+
+// Generates a random bank account number
+echo $faker->bankAccountNumber; // "FI8350799879879616"
+```
+
+### `Faker\Provider\fi_FI\Person`
+
+```php
+<?php
+
+//Generates a valid Finnish personal identity number (in Finnish - Henkilötunnus)
+echo $faker->personalIdentityNumber() // '170974-007J'
+
+//Since the numbers are different for male and female persons, optionally you can specify gender.
+echo $faker->personalIdentityNumber(\DateTime::createFromFormat('Y-m-d', '2015-12-14'), 'female') // '141215A520B'
+```
+
 ### `Faker\Provider\fr_BE\Payment`
 
 ```php
@@ -1023,10 +1052,16 @@ echo $faker->taxId(); // "DIXDPZ44E08F367A"
 <?php
 
 // Generates a 'kana' name
-echo $faker->kanaName; // "アオタ ミノル"
+echo $faker->kanaName($gender = null|'male'|'female') // "アオタ ミノル"
 
 // Generates a 'kana' first name
-echo $faker->firstKanaName; // "ハルカ"
+echo $faker->firstKanaName($gender = null|'male'|'female') // "ヒデキ"
+
+// Generates a 'kana' first name on the male
+echo $faker->firstKanaNameMale // "ヒデキ"
+
+// Generates a 'kana' first name on the female
+echo $faker->firstKanaNameFemale // "マアヤ"
 
 // Generates a 'kana' last name
 echo $faker->lastKanaName; // "ナカジマ"
@@ -1269,10 +1304,22 @@ echo $faker->bankAccountNumber; // "RO55WRJE3OE8X3YQI7J26U1E"
 echo $faker->prefixMale; // "ing."
 // Generates a random female name prefix/title
 echo $faker->prefixFemale; // "d-na."
-// Generates a random male fist name
+// Generates a random male first name
 echo $faker->firstNameMale; // "Adrian"
-// Generates a random female fist name
+// Generates a random female first name
 echo $faker->firstNameFemale; // "Miruna"
+
+
+// Generates a random Personal Numerical Code (CNP)
+echo $faker->cnp; // "2800523081231"
+// Valid option values:
+//    $gender: null (random), male, female
+//    $dateOfBirth (1800+): null (random), Y-m-d, Y-m (random day), Y (random month and day)
+//          i.e. '1981-06-16', '2015-03', '1900'
+//    $county: 2 letter ISO 3166-2:RO county codes and B1, B2, B3, B4, B5, B6 for Bucharest's 6 sectors
+//    $isResident true/false flag if the person resides in Romania
+echo $faker->cnp($gender = null, $dateOfBirth = null, $county = null, $isResident = true);
+
 ```
 
 ### `Faker\Provider\ro_RO\PhoneNumber`
@@ -1346,6 +1393,7 @@ echo $faker->bank; // '中国建设银行'
 * [CakePHP 2.x Fake Seeder Plugin](https://github.com/ravage84/cakephp-fake-seeder) A CakePHP 2.x shell to seed your database with fake and/or fixed data.
 * [images-generator](https://github.com/bruceheller/images-generator): An image generator provider using GD for placeholder type pictures
 * [pattern-lab/plugin-php-faker](https://github.com/pattern-lab/plugin-php-faker): Pattern Lab is a Styleguide, Component Library, and Prototyping tool. This creates unique content each time Pattern Lab is generated.
+* [guidocella/eloquent-populator](https://github.com/guidocella/eloquent-populator): Adapter for Laravel's Eloquent ORM.
 
 ## License
 
