@@ -1,146 +1,198 @@
-@extends('backend.base')
+@extends('customer.base')
 
-@section('title', 'Edit Ad')
+@section('title', 'View Billing')
 
 @section('content')
-	<h3 class="page-title">Edit Ad</h3>
+	<h3 class="page-title">Billings</h3>
 	<ol class="breadcrumb">
-	    <li><a href="{{ url('app-admin') }}">Dashboard</a></li>
-	    <li><a href="{{ url('app-admin/ads') }}">Ads</a></li>
-	    <li class="active"><span>Edit Ad</span></li>
+	    <li><a href="{{ url('account/billings') }}">Billings</a></li>
+	    <li class="active">View Billing</li>
 	</ol>
 
 	<div class="container-fluid">
+		@if (Session::has('success'))
+			<div class="alert alert-dismissable alert-success">
+				<i class="ti ti-check"></i>&nbsp; <strong>Well done!</strong> {{ Session::get('success') }}.
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+			</div>
+		@endif
+
+		@if (Session::has('error'))
+			<div class="alert alert-dismissable alert-danger">
+				<i class="ti ti-check"></i>&nbsp; <strong>Oh snap!</strong> {{ Session::get('error') }}.
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+			</div>
+		@endif
+
+		@if ($errors->has())
+			<div class="alert alert-dismissable alert-danger">
+				<i class="ti ti-close"></i>&nbsp; <strong>Oh snap!</strong>
+				<ul>
+					@foreach ($errors->all() as $error)
+						<li>{{ $error }}</li>
+					@endforeach
+				</ul>
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+			</div>
+		@endif
+
 		<div class="row">
 			<div class="col-md-12">
-				@if (Session::has('error'))
-					<div class="alert alert-dismissable alert-danger">
-						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-						<i class="ti ti-check"></i>&nbsp; <strong>Oh snap!</strong> {{ Session::get('error') }}.
-					</div>
-				@endif
-				@if ($errors->has())
-					<div class="alert alert-dismissable alert-danger">
-						<i class="ti ti-close"></i>&nbsp; <strong>Oh snap!</strong>
-						<ul>
-							@foreach ($errors->all() as $error)
-								<li>{{ $error }}</li>
-							@endforeach
-						</ul>
-						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-					</div>
-				@endif
-				
-				<div class="panel panel-blue" data-widget='{"draggable": "false"}'>
-					<!-- Panel heading -->
-					<div class="panel-heading">
-						<h2>Edit Ad Form</h2>
-					</div>
-					<!-- ./End panel heading -->
+				<div class="panel panel-transparent">
+		            <div class="panel-body">
+		            	<!--
+		                <div class="clearfix">
+		                    <div class="pull-left">
+		                        <img src="assets/img/logo-big.png" class="mt-md mb-md" alt="Avenxo">
+		                        <address class="mt-md mb-md">
+		                            <strong>Avenxo, Inc.</strong><br>
+		                            705 Folsom Ave, Suite 400<br>
+		                            San Francisco, CA 94107<br>
+		                        </address>
+		                    </div>
+		                    <div class="pull-right">
+		                        <h1 class="text-primary text-right" style="font-weight: normal;">
+		                            INVOICE
+		                            <small style="display: block;">#10007819</small>
+		                        </h1>
+		                    </div>
+		                </div>
+		                <hr>
+		                -->
+		                <div class="row mb-xl">
+		                    <!-- <div class="col-md-12">
+		                        <h1 class="text-primary text-center" style="font-weight: normal;">INVOICE</h1>
+		                    </div> -->
+		                    <div class="col-md-12">
+		                        <div class="pull-left">
+		                            <h3 class="text-muted">To</h3>
+		                            <address>
+		                                <strong>{{ $billing->customer->customer_name }}</strong><br>
+		                                <?php $address = $billing->customer->address; ?>
+		                                <?php echo $address->address_1 . '<br>'; ?>
+		                                <?php echo $address->address_2 != '' ? $address->address_1 . '<br>' : null; ?>
+		                                {{ $address->city }}, {{ App\Models\Zone::find($address->zone_id)->name }}. {{ $address->postcode }}<br>
+		                                {{ App\Models\Country::find($address->country_id)->name }}
+		                            </address>
+		                        </div>
+		                        <div class="pull-right">
+		                            <h3 class="text-muted">Info</h3>
+		                            <ul class="text-left list-unstyled">
+		                                <li><strong>Date:</strong> {{ date('d/M/Y', strtotime($billing->created_at)) }}</li>
+		                            </ul>
+		                        </div>
+		                    </div>
+		                </div>
+		                <div class="row mb-xl">
+		                    <div class="col-md-12">
+		                        <div class="panel">
+		                            <div class="panel-body no-padding">
+		                                <div class="table-responsive">
+		                                    <table class="table table-hover m-n">
+		                                        <thead>
+		                                            <tr>
+		                                                <th width="200">Listing ID</th>
+		                                                <th>Description</th>
+		                                                <th>Item Type</th>
+		                                                <th>Qty</th>
+		                                                <th>Unit Cost</th>
+		                                                <th>Discount</th>
+		                                                <th class="text-right">Total</th>
+		                                            </tr>
+		                                        </thead>
+		                                        <tbody>
+		                                            <tr>
+		                                            	<?php if ($billing->item_type == 'ads'): ?>
+		                                                	<td><?php echo $billing->item->ad_id ?></td>
+		                                                <?php else: ?>
+		                                                	<td><?php echo $billing->item->listing_id ?></td>
+		                                            	<?php endif ?>
 
-					<form class="form-horizontal row-border" method="post" action="{{ url('app-admin/ads/create') }}">
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
-						<!-- Panel body -->
-						<div class="panel-body" style="padding: 40px 16px;">
-							<div class="form-group">
-								<label for="ad_name" class="col-sm-2 control-label">Customer <small style="color: red;">*</small></label>
-								<div class="col-sm-8">
-									<?php $customers = App\Models\Customer::all(); ?>
-									<select class="form-control" name="customer_id" id="customer-id">
-										<option value="choose-customer">-- Select Customer --</option>
-										<option value="non-customer"{{ ($ad->customer_id == null ? ' selected' : null) }}>Non Customer</option>
-										@foreach ($customers as $customer)
-											<option value="{{ $customer->id }}"{{ ($ad->customer_id == $customer->id ? ' selected' : null) }}>{{ $customer->customer_name }}</option>
-										@endforeach
-									</select>
-								</div>
-							</div>
+		                                            	<?php if ($billing->item_type == 'ads'): ?>
+	                                                		<td><?php echo $billing->customer ? Setting::get('ads.price_notes') : Setting::get('ads.noncust.price_notes') ?></td>
+	                                                	<?php else: ?>
+		                                                	<td><?php echo $billing->item->package->name ?></td>
+		                                                <?php endif ?>
+		                                                
+		                                                <?php
+															$packages = App\Models\Package::where('id', $billing->id)->select('name')->orderby('created_at', 'DESC')->get();
+															foreach ($packages as $package){
+																echo '<td>' . $package->name . '</td>';
+															}
+											 			?>
+		                                                <td><?php echo $billing->item_type ?></td>
+		                                                <td>1</td>
+		                                                <td>Rp {{ number_format($billing->amount, 0, '.',',') }}</td>
+		                                                <td>
+		                                                	<?php $price_disc = $billing->customer ? Setting::get('ads.price_discount') : Setting::get('ads.noncust.price_discount')?>
+		                                                	<?php if ($billing->item_type == 'ads'): ?>
+								                                {{ $price_disc }}%
+							                                <?php else: ?>
+								                                {{ $billing->item->package->discount }}%
+							                            	<?php endif ?>
+		                                                </td>
+		                                                <td class="text-right">Rp <?php echo number_format($billing->amount, 0, '.', ',') ?></td>
+		                                            </tr>
+		                                        </tbody>
+		                                    </table>
+		                                </div>
+		                            </div>
+		                        </div>
+		                    </div>
 
-							<div class="form-group" id="set-addpass" style="display: none;">
-								<label for="address-input" class="col-sm-2 control-label">Set Ad Password <small style="color: red;">*</small></label>
-								<div class="col-sm-8">
-									<input type="text" name="add_password" placeholder="Ad Password" class="form-control" value="{{ $ad->password }}">
-								</div>
-							</div>
+		                    <div class="col-md-12">
+		                        <div class="row" style="border-top-left-radius: 0px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px;">
+		                            <div class="col-md-3 col-md-offset-9">
+		                            	<?php $price_disc = $billing->customer ? Setting::get('ads.price_discount') : Setting::get('ads.noncust.price_discount') ?>
+		                            	<?php if ($billing->item_type == 'ads'): ?>
+			                                <p class="text-right"><strong>SUB TOTAL: Rp {{ number_format($price_disc * $billing->item->days, 0, '.',',') }}</strong></p>
+			                                <p class="text-right">DISCOUNT: {{ $price_disc }}%</p>
+		                                <?php else: ?>
+			                                <p class="text-right"><strong>SUB TOTAL: Rp {{ number_format($billing->item->package->price, 0, '.',',') }}</strong></p>
+			                                <p class="text-right">DISCOUNT: {{ $billing->item->package->discount }}%</p>
+		                            	<?php endif ?>
+		                                <p class="text-right">VAT: 0%</p>
+		                                <hr>
+		                                <h3 class="text-right text-danger" style="font-weight: bold;">IDR <?php echo number_format($billing->amount, 0, ',', '.') ?></h3>
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+		                    
+	                    <div class="row">
+			                	<form action="{{ url('account/billings/confirm', $billing->id) }}" method="POST" role="form" enctype="multipart/form-data">
+			                		<input type="hidden" name="_token" value="{{ csrf_token() }}">
+			                		<input type="hidden" name="billing_id" value="{{ $billing->id }}">
+			                		<input type="hidden" name="edit" value="true">
+			                		<legend>Confirm Payment</legend>
+			                		
+			                		<div class="form-group">
+			                			<label for="">Confirm Message</label>
+										<textarea class="form-control"  id="message" value="{{ $billing->confirm_message }}" rows="5" name="message"></textarea>
+			                		</div>
+			                		
+			                		<script type="text/javascript">
+			                			document.getElementById("message").defaultValue = "{{ $billing->confirm_message }}";
+			                		</script>
+			                		<div class="form-group">
+			                			<label>Bukti Pembayaran</label>
+			                			<input type="file" name="image" value="{{ $billing->bukti_pembayaran }}" accept=".pdf,image/*">
+			                			<em>(Leave this empty if your proff of payment is correct)</em>
+			                		</div>
 
-							<div class="form-group">
-								<label for="address-input" class="col-sm-2 control-label">Days to show <small style="color: red;">*</small></label>
-								<div class="col-sm-8">
-									<input type="text" name="days_to_show" class="form-control" value="{{ $ad->days }}">
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="phone-input" class="col-sm-2 control-label">Expired Date <small style="color: red;">*</small></label>
-								<div class="col-sm-8">
-									<div class="input-group date" id="expire-date">
-										<span class="input-group-addon"><i class="ti ti-calendar"></i></span>
-										<input type="text" class="form-control" name="expire_date" value="{{ date('Y-m-d', strtotime($ad->expire_date)) }}" readonly>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- ./End panel body -->
+			                		@if ($billing->bukti_pembayaran == '' && $billing->confirm_message == '')
+			                		<button type="submit" class="btn btn-primary">Confirm</button>
+			                		@elseif (isset($edit) && $edit == true && ($billing->bukti_pembayaran !== '' || $billing->confirm_message !== ''))
+			                		<button type="submit" class="btn btn-primary">Update</button>
+			                		@elseif ($billing->bukti_pembayaran !== '' || $billing->confirm_message !== '')
+			                		<a class="btn btn-primary" href="{{ url('account/billings/confirm/edit', $billing->id) }}" role="button"><i class=""></i> Edit Confirm Payment</a>
+			                		@endif
+			                	</form>
+			                </div>
+		            </div>
 
-						<!-- Panel Footer -->
-						<div class="panel-footer">
-							<div class="row">
-								<div class="col-sm-8 col-sm-offset-2">
-									<a href="{{ url('app-admin/ads') }}" class="btn-default btn">Cancel</a>&nbsp;&nbsp;&nbsp;
-									<button class="btn-primary btn">Create</button>
-								</div>
-							</div>
-						</div>
-						<!-- ./End Panel Footer -->
-					</form>
-				</div>
+		        </div>
 			</div>
 		</div>
 	</div>
-@stop
-
-@section('page-styles')
-	<!-- Code Prettifier -->
-    <link type="text/css" href="{{ asset('assets/backend/plugins/codeprettifier/prettify.css') }}" rel="stylesheet">
-    <!-- iCheck -->
-    <link type="text/css" href="{{ asset('assets/backend/plugins/iCheck/skins/minimal/blue.css') }}" rel="stylesheet">
-    <!-- DateRangePicker -->
-    <link type="text/css" href="{{ asset('assets/backend/plugins/form-daterangepicker/daterangepicker-bs3.css') }}" rel="stylesheet">
-@stop
-
-@section('page-scripts')
-	<!-- Datepicker -->
-	<script type="text/javascript" src="{{ asset('assets/backend/plugins/bootstrap-datepicker/bootstrap-datepicker.js') }}"></script>
-@stop
-
-@section('inline-script')
-	<script type="text/javascript">
-	$(function(){
-		$('#expire-date').datepicker({
-			todayHighLight: true,
-			startDate: "+0d",
-			format: 'yyyy-mm-dd',
-			endDate: "+" + $('input[name="days_to_show"]').val() + "d"
-		});
-
-		$('input[name="days_to_show"]').change(function(){
-			var val = $(this).val();
-
-			$('#expire-date').datepicker('setEndDate', '+' + val + 'd');
-		});
-
-		$('#customer-id').change(function(){
-			if ($(this).val() == 'non-customer') {
-				$('#set-addpass').css('display', 'block');
-			} else {
-				$('#set-addpass').css('display', 'none');
-			}
-		});
-
-		if ($('#customer-id').val() == 'non-customer') {
-			$('#set-addpass').css('display', 'block');
-		} else {
-			$('#set-addpass').css('display', 'none');
-		}
-	});
-	</script>
-@stop
+@endsection

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.2
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: 13 Nov 2016 pada 15.26
--- Versi Server: 10.1.16-MariaDB
--- PHP Version: 5.6.24
+-- Host: 127.0.0.1
+-- Generation Time: 24 Des 2016 pada 18.30
+-- Versi Server: 10.1.19-MariaDB
+-- PHP Version: 5.6.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -78,6 +78,16 @@ CREATE TABLE `ads` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data untuk tabel `ads`
+--
+
+INSERT INTO `ads` (`id`, `ad_id`, `title`, `customer_id`, `password`, `link`, `days`, `been_active`, `show_date`, `expired_date`, `status`, `edit`, `assets`, `address_id`, `noncust_ad_link`, `created_at`, `updated_at`) VALUES
+(1, '2820161200001', NULL, '012016030002682', NULL, NULL, 67, 0, NULL, NULL, 2, 0, NULL, 2, NULL, '2016-12-24 08:58:42', '2016-12-24 09:23:47'),
+(2, '2820161200002', NULL, 'N-0120160300026', NULL, NULL, 50, 0, NULL, NULL, 2, 0, NULL, 2, NULL, '2016-12-24 09:00:40', '2016-12-24 09:19:37'),
+(3, '2820161200003', NULL, NULL, NULL, NULL, 67, 0, NULL, NULL, 2, 0, NULL, 1, NULL, '2016-12-24 15:22:12', '2016-12-24 16:55:04'),
+(4, '2820161200004', NULL, 'ADMINISTRATOR', NULL, NULL, 3, 0, NULL, NULL, 6, 0, NULL, 1, NULL, '2016-12-24 16:48:17', '2016-12-24 16:54:02');
+
 -- --------------------------------------------------------
 
 --
@@ -130,6 +140,15 @@ CREATE TABLE `ad_edits` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data untuk tabel `ad_edits`
+--
+
+INSERT INTO `ad_edits` (`id`, `ad_edit_id`, `title`, `customer_id`, `password`, `link`, `days`, `been_active`, `show_date`, `expired_date`, `status`, `edit`, `assets`, `address_id`, `noncust_ad_link`, `created_at`, `updated_at`) VALUES
+(1, '2820161200002', 'Rumah baru Tangerang', 'N-0120160300026', NULL, 'www.batanyo.com', 0, 0, '2016-12-24 00:00:00', '2017-02-12 00:00:00', 2, 2, '["storage\\/app\\/cs\\/assets\\/Lighthouse.jpg"]', NULL, NULL, '2016-12-24 09:19:37', '2016-12-24 09:19:37'),
+(2, '2820161200001', 'Tanah Luas 2 Ha lokasi Depok', '012016030002682', NULL, 'www.tanahluas.com', 0, 0, '2016-12-24 00:00:00', '2017-03-01 00:00:00', 2, 1, '["storage\\/app\\/cs\\/assets\\/Desert.jpg"]', NULL, NULL, '2016-12-24 09:23:47', '2016-12-24 09:23:47'),
+(3, '2820161200003', 'Rumah kosong Bogor ', NULL, NULL, 'www.rumahksosong.com', 0, 0, '2016-12-24 00:00:00', '2016-12-31 00:00:00', 2, 3, '["storage\\/app\\/cs\\/assets\\/Lighthouse.jpg"]', NULL, NULL, '2016-12-24 16:55:04', '2016-12-24 16:55:04');
+
 -- --------------------------------------------------------
 
 --
@@ -165,7 +184,8 @@ CREATE TABLE `billings` (
   `id` int(10) UNSIGNED NOT NULL,
   `customer_id` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
   `item_id` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
-  `bukti_pembayaran` longtext COLLATE utf8_unicode_ci,
+  `image_pembayaran` longtext COLLATE utf8_unicode_ci,
+  `file_pembayaran` longtext COLLATE utf8_unicode_ci,
   `confirm_message` longtext COLLATE utf8_unicode_ci,
   `item_type` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `amount` decimal(10,2) NOT NULL,
@@ -173,6 +193,17 @@ CREATE TABLE `billings` (
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data untuk tabel `billings`
+--
+
+INSERT INTO `billings` (`id`, `customer_id`, `item_id`, `image_pembayaran`, `file_pembayaran`, `confirm_message`, `item_type`, `amount`, `status`, `created_at`, `updated_at`) VALUES
+(1, '012016030002682', '1', 'storage/app/listings/billings/1/WhatsApp_Image_2016-12-20_at_10.14.51.jpeg', NULL, 'ini dari customer', 'ads', '1541000.00', 2, '2016-12-24 08:58:42', '2016-12-24 09:22:26'),
+(2, 'N-0120160300026', '2', 'storage/app/listings/billings/2/Koala.jpg', NULL, 'ini dari nonsubs edit', 'ads', '1150000.00', 2, '2016-12-24 09:00:40', '2016-12-24 09:18:15'),
+(3, '012016030002682', '1', 'storage/app/listings/billings/3/79886.jpg', NULL, 'Pembayaran 24 Desember 2016. Transfer lunas', 'listing', '548800.00', 2, '2016-12-24 09:25:11', '2016-12-24 09:28:10'),
+(4, NULL, '3', NULL, NULL, NULL, 'ads', '1541000.00', 0, '2016-12-24 15:22:12', '2016-12-24 15:22:12'),
+(5, 'ADMINISTRATOR', '4', NULL, NULL, NULL, 'ads', '69000.00', 2, '2016-12-24 16:48:17', '2016-12-24 16:54:02');
 
 -- --------------------------------------------------------
 
@@ -476,7 +507,7 @@ CREATE TABLE `customers` (
 
 INSERT INTO `customers` (`id`, `customer_id`, `customer_name`, `address_id`, `phone`, `fax`, `pic`, `pic_phone`, `pic_mobile1`, `pic_mobile2`, `pic_email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (9, '012016030001936', 'Grafich Dev Pte Ltd', 1, '082298078502', '', 'Gufron RA', '082298078502', '082298078502', '', 'test@gmail.com', '$2y$10$eK.ei902n59yqGI4EAzM2.QuTX0B1yNvcRqZ1kc77GUKXQ9WwFAQ6', '1zwKp4N00gBJNwLEPsM1oxwmS5a9ADfwaXYfhJUS7HEN2Vr2zri3NiGiZAQl', '2016-03-15 22:25:40', '2016-05-11 23:13:11'),
-(10, '012016030002682', 'Customer 2', 2, '123455678', '', 'TEST01', '1234567', '123456', '', 'test01@gmail.com', '$2y$10$ErY9JZ8ES4J1c.MFUWDNmuXIPQSIBECGR9ZQl1EkOB4xkezZnf706', 'SKtFYsgUHAmwror03Iy8P4y4cOX8Nbu9ek7mOIm7bkeqkJ5P3hSqtGBRNFPV', '2016-03-17 08:52:37', '2016-11-12 12:35:55'),
+(10, '012016030002682', 'Customer 2', 2, '123455678', '', 'TEST01', '1234567', '123456', '', 'test01@gmail.com', '$2y$10$ErY9JZ8ES4J1c.MFUWDNmuXIPQSIBECGR9ZQl1EkOB4xkezZnf706', 'bsS74hoIVnVk9oMFFnIdPFFtViRiXFkY5UtPMUF1G96jEXUScx1K8h31TpXb', '2016-03-17 08:52:37', '2016-12-24 08:59:07'),
 (11, '012016030003972', 'Pt Test02', 3, '1234556', '', 'Test02', '123445', '1234566789', '', 'Test02@gmail.com', '$2y$10$J6E6I/FRmvXx/.t/1AecEu6g9fwBSZvEuwx.eAJaHcKTg41W4/e7u', 'kD82eOAjvdA7RmpTRdYsUrbFP1KquZrsLKRVAojzDyFKvRqb4PTrI1EyuPjS', '2016-03-28 03:43:34', '2016-03-28 04:12:25'),
 (12, '012016050004935', 'PT. TEST03', 17, '12354656', '', 'test03', '1341', '12324', '', 'test03@gmail.com', '$2y$10$hk386w4hmarO6hzRbUoEjOu76odzlYxx/oGxfSLGXubFPAb6I5kxS', NULL, '2016-05-10 05:12:45', '2016-05-10 05:12:46');
 
@@ -599,7 +630,15 @@ INSERT INTO `history` (`customer_id`, `item_id`, `item_type`, `updated_at`, `cre
 ('012016030002682', 'CUSTOMER29', 'listing', '2016-11-13 13:53:46', '2016-11-13 13:53:46'),
 ('012016030002682', 'CUSTOMER29', 'listing', '2016-11-13 13:53:46', '2016-11-13 13:53:46'),
 ('012016030002682', 'CUSTOMER212', 'listing', '2016-11-13 14:00:12', '2016-11-13 14:00:12'),
-('012016030002682', 'CUSTOMER212', 'listing', '2016-11-13 14:00:12', '2016-11-13 14:00:12');
+('012016030002682', 'CUSTOMER212', 'listing', '2016-11-13 14:00:12', '2016-11-13 14:00:12'),
+('N-0120160300026', '2820161200002', 'ads', '2016-12-24 09:19:37', '2016-12-24 09:19:37'),
+('N-0120160300026', '2820161200002', 'ads', '2016-12-24 09:19:37', '2016-12-24 09:19:37'),
+('012016030002682', '2820161200001', 'ads', '2016-12-24 09:23:47', '2016-12-24 09:23:47'),
+('012016030002682', '2820161200001', 'ads', '2016-12-24 09:23:47', '2016-12-24 09:23:47'),
+('012016030002682', 'CUSTOMER21', 'listing', '2016-12-24 09:31:43', '2016-12-24 09:31:43'),
+('012016030002682', 'CUSTOMER21', 'listing', '2016-12-24 09:31:43', '2016-12-24 09:31:43'),
+('Non Customer', '2820161200003', 'ads', '2016-12-24 16:55:04', '2016-12-24 16:55:04'),
+('Non Customer', '2820161200003', 'ads', '2016-12-24 16:55:04', '2016-12-24 16:55:04');
 
 -- --------------------------------------------------------
 
@@ -701,6 +740,14 @@ CREATE TABLE `listings` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data untuk tabel `listings`
+--
+
+INSERT INTO `listings` (`id`, `customer_id`, `listing_id`, `title`, `slug`, `content`, `review`, `custom_tab`, `custom_tab_title`, `category`, `keywords`, `tags`, `url`, `price_from`, `price_to`, `assets`, `package_id`, `expired_date`, `been_active`, `status`, `edit`, `created_at`, `updated_at`) VALUES
+(1, '012016030002682', 'CUSTOMER21', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, '2017-01-23 09:28:10', 0, 2, 0, '2016-12-24 09:25:11', '2016-12-24 09:31:43'),
+(2, '', NULL, 'Rumah kosong Bogor Listing', 'rumah-kosong-bogor-listing', '<p>Kontennya disini<br></p>', NULL, NULL, NULL, 23, 'rumah ksosong', 'rumah kosong', NULL, NULL, NULL, '["storage\\/app\\/listings\\/assets\\/assets\\/Chrysanthemum.jpg"]', 0, NULL, 0, 1, 0, '2016-12-24 16:56:55', '2016-12-24 16:56:55');
+
 -- --------------------------------------------------------
 
 --
@@ -786,6 +833,13 @@ CREATE TABLE `listing_edits` (
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data untuk tabel `listing_edits`
+--
+
+INSERT INTO `listing_edits` (`id`, `customer_id`, `listing_edit_id`, `title`, `slug`, `content`, `review`, `custom_tab`, `custom_tab_title`, `category`, `keywords`, `tags`, `url`, `price_from`, `price_to`, `assets`, `package_id`, `expired_date`, `been_active`, `status`, `edit`, `created_at`, `updated_at`) VALUES
+(1, '012016030002682', 'CUSTOMER21', 'Rumah baru di Jln. Margonda Raya', 'rumah-baru-di-jln-margonda-raya', '<p>Rumah Lighthouse</p>', NULL, NULL, NULL, 23, 'rumah', 'rumah', 'www.rumah.com', '2000000', '4000000', '["storage\\/app\\/listings\\/assets\\/Chrysanthemum.jpg"]', 0, NULL, 0, 2, 1, '2016-12-24 09:31:43', '2016-12-24 09:31:43');
 
 -- --------------------------------------------------------
 
@@ -883,7 +937,7 @@ CREATE TABLE `nonsubs` (
 
 INSERT INTO `nonsubs` (`id`, `nonsub_id`, `nonsub_name`, `address_id`, `phone`, `fax`, `pic`, `pic_phone`, `pic_mobile1`, `pic_mobile2`, `pic_email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (9, '012016030001936', 'Grafich Dev Pte Ltd', 1, '082298078502', '', 'Gufron RA', '082298078502', '082298078502', '', 'test@gmail.com', '$2y$10$eK.ei902n59yqGI4EAzM2.QuTX0B1yNvcRqZ1kc77GUKXQ9WwFAQ6', '1zwKp4N00gBJNwLEPsM1oxwmS5a9ADfwaXYfhJUS7HEN2Vr2zri3NiGiZAQl', '2016-03-15 22:25:40', '2016-05-11 23:13:11'),
-(10, 'N-0120160300026', 'Nonsubscriber 22', 2, '123455678', '', 'TEST01', '1234567', '123456', '', 'test01@gmail.com', '$2y$10$cJCT6y7kNtuir7kQIMF/KeGim6PfjckO2yplz/4w/qq0esj93Hd62', 'ScUtbTIUegSx3U31xsnvVWtNJuiYx1b0i53O5m95stDLnmcVbWOAJHQBCDru', '2016-03-17 08:52:37', '2016-11-12 12:30:54'),
+(10, 'N-0120160300026', 'Nonsubscriber 22', 2, '123455678', '', 'TEST01', '1234567', '123456', '', 'test01@gmail.com', '$2y$10$cJCT6y7kNtuir7kQIMF/KeGim6PfjckO2yplz/4w/qq0esj93Hd62', '85ijZSbRLdoR5ScqaXT0ID3ht05hqJPw2bWdBajMAR84DDJkB6eJi0Zw3RSu', '2016-03-17 08:52:37', '2016-12-24 03:57:32'),
 (11, '012016030003972', 'Pt Test02', 3, '1234556', '', 'Test02', '123445', '1234566789', '', 'Test02@gmail.com', '$2y$10$J6E6I/FRmvXx/.t/1AecEu6g9fwBSZvEuwx.eAJaHcKTg41W4/e7u', 'kD82eOAjvdA7RmpTRdYsUrbFP1KquZrsLKRVAojzDyFKvRqb4PTrI1EyuPjS', '2016-03-28 03:43:34', '2016-03-28 04:12:25'),
 (12, '012016050004935', 'PT. TEST03', 17, '12354656', '', 'test03', '1341', '12324', '', 'test03@gmail.com', '$2y$10$hk386w4hmarO6hzRbUoEjOu76odzlYxx/oGxfSLGXubFPAb6I5kxS', NULL, '2016-05-10 05:12:45', '2016-05-10 05:12:46');
 
@@ -5585,7 +5639,7 @@ ALTER TABLE `address`
 -- AUTO_INCREMENT for table `ads`
 --
 ALTER TABLE `ads`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `adsmeta`
 --
@@ -5595,12 +5649,12 @@ ALTER TABLE `adsmeta`
 -- AUTO_INCREMENT for table `ad_edits`
 --
 ALTER TABLE `ad_edits`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `billings`
 --
 ALTER TABLE `billings`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `country`
 --
@@ -5625,7 +5679,7 @@ ALTER TABLE `listingmeta`
 -- AUTO_INCREMENT for table `listings`
 --
 ALTER TABLE `listings`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `listings_categories`
 --
@@ -5635,7 +5689,7 @@ ALTER TABLE `listings_categories`
 -- AUTO_INCREMENT for table `listing_edits`
 --
 ALTER TABLE `listing_edits`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `messages`
 --

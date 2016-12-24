@@ -43,14 +43,6 @@ class BillingsController extends Controller
         }
     }
 
-    public function confirm_get($id)
-    {
-        $billing = Billing::find($id);
-
-        if ($billing) {
-            return view('nonSubscriber.pages.billings.confirm', ['billing' => $billing]);
-        }
-    }
      public function confirm_post(Request $request)
     {
         $validation = Validator::make($request->all(), [
@@ -69,30 +61,51 @@ class BillingsController extends Controller
         $billing->confirm_message = $request->input('message');
 
         if ($request->hasFile('image')) {
-            $dir = public_path().'/storage/app/listings/billings/'.$billing->id . '/';
             $file = $request->file('image');
+            $filename = $_FILES['image']['name'];
+            $ext = end((explode(".", $filename)));//dd($ext);
             $file_name = preg_replace("/[^A-Z0-9._-]/i", "_", $file->getClientOriginalName());
             $relative_path = 'storage/app/listings/billings/' . $billing->id . '/' .$file_name;
+            if($ext == "pdf"){
+                if(!File::exists(public_path().'/storage/app/listings/billings/'.$billing->id)) {
+                    $createDir = File::makeDirectory( public_path().'/storage/app/listings/billings/'.$billing->id,  0755, true);
+                }
+                $request->file('image')->move(
+                    public_path().'/storage/app/listings/billings/'.$billing->id . '/', $file_name
+                );
 
-            if(!File::exists(public_path().'/storage/app/listings/billings/'.$billing->id)) {
-                $createDir = File::makeDirectory( public_path().'/storage/app/listings/billings/'.$billing->id,  0755, true);
+                $billing->image_pembayaran = null;
+                $billing->file_pembayaran = $relative_path;
+            }else{
+                $dir = public_path().'/storage/app/listings/billings/'.$billing->id . '/';
+                $file = $request->file('image');
+                $file_name = preg_replace("/[^A-Z0-9._-]/i", "_", $file->getClientOriginalName());
+                $relative_path = 'storage/app/listings/billings/' . $billing->id . '/' .$file_name;
+
+                if(!File::exists(public_path().'/storage/app/listings/billings/'.$billing->id)) {
+                    $createDir = File::makeDirectory( public_path().'/storage/app/listings/billings/'.$billing->id,  0755, true);
+                }
+
+                Image::make($request->file('image'))->save($dir . $file_name);
+
+                $billing->file_pembayaran = null;
+                $billing->image_pembayaran = $relative_path;
             }
-
-            Image::make($request->file('image'))->save($dir . $file_name);
-
-            $billing->bukti_pembayaran = $relative_path;
         }
 
         $billing->save();
         if($request->input('edit') == 'true')
-            return view('customer.pages.billings.view', ['billing' => $billing]);
+            return view('nonSubscriber.pages.billings.view', ['billing' => $billing]);
         else
             return redirect()->back()->withSuccess('success', 'Payment confirmed success!');
     }
 
     public function delimage($id){
         $billing = Billing::find($id);
-        $billing->bukti_pembayaran = NULL;
+        if($billing->image_pembayaran == NULL)
+            $billing->file_pembayaran = NULL;
+        else
+            $billing->image_pembayaran = NULL;
         
         $billing->save();
 
@@ -103,7 +116,7 @@ class BillingsController extends Controller
         $billing = Billing::find($id);
 
         if ($billing) {
-            return view('customer.pages.billings.view', ['billing' => $billing, 'edit' =>true]);
+            return view('nonSubscriber.pages.billings.edit', ['billing' => $billing, 'edit' =>true]);
         }
     }
 }

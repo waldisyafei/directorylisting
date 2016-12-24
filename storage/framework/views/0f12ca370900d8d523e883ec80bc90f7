@@ -131,7 +131,7 @@
 
 					$('.info-order-list .col-md-6').append(infoOrders);
 		
-		$('body').on('click', '.days', function(){
+		$('body').on('change', '.days', function(){
 					$('.info-order-list .col-md-6 .panel').remove();
 					var infoOrders = '';
 					var totalHarga = 0;

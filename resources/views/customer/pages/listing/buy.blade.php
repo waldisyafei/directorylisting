@@ -47,11 +47,9 @@
 						<p>You are select buy new Listing, please follow the steps to finish</p>
 						<form action="{{ url('account/listings/buy') }}" method="post" id="buy-listing-wizard" class="form-horizontal">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
-							<fieldset title="Step 1">
 								<?php
 								$packages = App\Models\Package::all();
 								?>
-								<legend>Please Select a Package</legend>
 								<div class="listing-entry first">
 									<div class="form-group">
 										<label for="fieldname" class="col-md-3 control-label">Select Package</label>

@@ -1,0 +1,140 @@
+<?php $__env->startSection('title', 'My Listing'); ?>
+
+<?php $__env->startSection('content'); ?>
+	<ol class="breadcrumb">
+	    <li class="">My Listings</li>
+	</ol>
+	<div class="container-fluid">
+
+		<!-- Listings Table -->
+		<div data-widget-group="group1">
+			<div class="row">
+				<?php if(Session::has('success')): ?>
+					<div class="col-md-12">
+						<div class="alert alert-dismissable alert-success">
+							<i class="ti ti-check"></i>&nbsp; <strong>Well Done!</strong> <?php echo e(Session::get('success')); ?>.
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+						</div>
+					</div>
+				<?php endif; ?>
+				<?php if(Session::has('error')): ?>
+					<div class="col-md-12">
+						<div class="alert alert-dismissable alert-danger">
+							<i class="ti ti-close"></i>&nbsp; <strong>Access denied!</strong> <?php echo e(Session::get('error')); ?>.
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+						</div>
+					</div>
+				<?php endif; ?>
+				<div class="col-md-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h2>My Listings list</h2>
+							<div class="panel-ctrls">
+								<?php echo $listings->render(); ?>
+
+							</div>
+						</div>
+						<div class="panel-body">
+							<table id="listings-list" class="table table-striped table-hover">
+								<thead>
+									<tr>
+										<th width="120">Listing ID</th>
+										<th>Title</th>
+										<th width="80">Image</th>
+										<th>Category</th>
+										<th>Expired Date</th>
+										<th>Status</th>
+										<th width="150">Actions</th>
+									</tr>
+								</thead>
+								<tbody>
+									<?php foreach($listings as $listing): ?>
+										<?php
+											$listing_up_id = explode('-', $listing->listing_id);
+											$up_id = $listing_up_id[0];
+											if ($up_id == 'up') {
+												continue;
+											}
+										$assets = json_decode($listing->assets);
+										$filename = substr($assets[0], strrpos($assets[0], '/') + 1);
+										$img_entry = str_replace($filename, 'thumb-admin-'.$filename, $assets[0]);
+										?>
+										<tr>
+											<td class="text-center"><?php echo e($listing->listing_id); ?></td>
+											<td><a href="<?php echo e(url('account/listings/edit', $listing->id)); ?>"><?php echo e($listing->title); ?></a></td>
+											<td class="text-center">
+												<?php if($img_entry != ''): ?>
+													<img class="img-thumbnail" src="<?php echo e(asset($img_entry)); ?>" width="70" height="70">
+												<?php endif; ?>
+											</td>
+											<td><?php echo e($listing->listingCategory ? $listing->listingCategory->title : null); ?></td>
+											<td><?php echo e($listing->expired_date ? date('d M Y H:i', strtotime($listing->expired_date)) : null); ?></td>
+											<td>
+												<?php $status = $listing->listingStatus->id; ?>
+												<?php if($status == 1): ?>
+													<label class="label label-default tooltips" title="<?php echo $listing->listingStatus->info ?>"><?php echo e($listing->listingStatus->display_name); ?></label>
+												<?php endif; ?>
+
+												<?php if($status == 2): ?>
+													<label class="label label-warning tooltips" title="<?php echo $listing->listingStatus->info ?>"><?php echo e($listing->listingStatus->display_name); ?></label>
+												<?php endif; ?>
+
+												<?php if($status == 3): ?>
+													<label class="label label-success"><?php echo e($listing->listingStatus->display_name); ?></label>
+												<?php endif; ?>
+
+												<?php if($status == 4): ?>
+													<label class="label label-danger tooltips" title="<?php echo $listing->listingStatus->info ?>"><?php echo e($listing->listingStatus->display_name); ?></label>
+												<?php endif; ?>
+
+												<?php if($status == 5): ?>
+													<label class="label label-default tooltips" title="<?php echo $listing->listingStatus->info ?>"><?php echo e($listing->listingStatus->display_name); ?></label>
+												<?php endif; ?>
+
+												<?php if($status == 6): ?>
+													<label class="label label-info tooltips" title="<?php echo $listing->listingStatus->info ?>"><?php echo e($listing->listingStatus->display_name); ?></label>
+												<?php endif; ?>
+											</td>
+											<td>
+	                                            <a href="<?php echo e(url('account/listings/edit', $listing->id)); ?>" class="btn btn-primary-alt btn-sm"><i class="ti ti-pencil"></i>&nbsp;Edit</a>&nbsp;&nbsp;
+											</td>
+										</tr>
+									<?php endforeach; ?>
+								</tbody>
+							</table>
+						</div>
+
+						<div class="panel-footer text-right">
+							<?php echo $listings->render(); ?>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- ./End Listings Table -->
+	</div>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('page-styles'); ?>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('page-scripts'); ?>
+	<!-- Load page level scripts-->
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('inline-script'); ?>
+	<script type="text/javascript">
+	$(function(){
+	});
+	</script>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('inline-style'); ?>
+<style type="text/css">
+	#listings-list tr td {
+		vertical-align: middle;
+	}
+</style>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('customer.base', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

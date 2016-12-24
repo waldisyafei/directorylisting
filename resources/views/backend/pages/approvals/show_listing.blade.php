@@ -28,7 +28,7 @@
 							<div class="form-group">
 								<label class="col-sm-2 control-label">Main Category</label>
 								<div class="col-sm-8">
-									<label class="control-label"><strong><?//php echo $listing->listingCategory->parentCat->title ?></strong></label>
+									<label class="control-label"><strong><?php echo $listing->listingCategory->parentCategory->title ?></strong></label>
 								</div>
 							</div>
 							<div class="form-group">
@@ -67,6 +67,36 @@
 								</div>
 							</div>
 							<?php $images = json_decode($listing->assets) ?>
+							<div class="form-group">
+								<span class="col-sm-2 control-label">Keywords</span>
+								<div class="col-sm-8">
+									<label class="control-label"><strong><?php echo $listing->keywords ?></strong></label>
+								</div>
+							</div>
+							<div class="form-group">
+								<span class="col-sm-2 control-label">Tags</span>
+								<div class="col-sm-8">
+									<label class="control-label"><strong><?php echo $listing->tags ?></strong></label>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">URL</label>
+								<div class="col-sm-8">
+									<label class="control-label"><strong><a href="http://<?php echo $listing->url ?>" target="_blank"><?php echo $listing->url ?></a></strong></label>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Price From</label>
+								<div class="col-sm-8">
+									<label class="control-label"><strong><?php echo $listing->price_from ?></strong></label>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Price To</label>
+								<div class="col-sm-8">
+									<label class="control-label"><strong><?php echo $listing->price_to ?></strong></label>
+								</div>
+							</div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label">Image</label>
 								<div class="col-sm-8">
