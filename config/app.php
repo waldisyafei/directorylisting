@@ -206,7 +206,7 @@ return [
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
         'Image'     => Intervention\Image\Facades\Image::class,
         'Setting'   => anlutro\LaravelSettings\Facade::class,
-        'PDF' => Barryvdh\DomPDF\Facade::class,
+        //'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 
