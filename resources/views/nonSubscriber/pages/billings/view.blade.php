@@ -162,15 +162,15 @@
 		                </div>
 
 
-		                    
-	                   <div class="row">
-			                	<form action="{{ url('account/billings/confirm', $billing->id) }}" method="POST" role="form" enctype="multipart/form-data">
+		               @if ($billing->confirm_message == '' && $billing->bukti_pembayaran == '')
+	                    <div class="row">
+			                	<form action="{{ url('nonsubs/billings/confirm', $billing->id) }}" method="POST" role="form" enctype="multipart/form-data">
 			                		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			                		<input type="hidden" name="billing_id" value="{{ $billing->id }}">
 			                		<input type="hidden" name="edit" value="true">
 			                		<legend>Confirm Payment</legend>
 			                		
-			                		@if ($billing->confirm_message !== '' && isset($edit) && $edit == true)
+			                		@if ($billing->confirm_message == '')
 			                		<div class="form-group">
 			                			<label for="">Confirm Message</label>
 										<textarea class="form-control" value="{{ $billing->confirm_message }}" rows="5" name="message"></textarea>
@@ -182,26 +182,16 @@
 			                		</div>
 			                		@endif
 			                		
-			                		@if ($billing->bukti_pembayaran == '' && $billing->confirm_message !== "")
+			                		@if ($billing->bukti_pembayaran == '')
 			                		<div class="form-group">
 			                			<label>Bukti Pembayaran</label>
-			                			<input type="file" name="image" value="{{ $billing->bukti_pembayaran }}" accept="image/*" disabled>
+			                			<input type="file" name="image" value="{{ $billing->bukti_pembayaran }}" accept=".pdf,image/*">
 			                		</div>
-			                		@elseif ($billing->bukti_pembayaran == '')
-			                		<div class="form-group">
-			                			<label>Bukti Pembayaran</label>
-			                			<input type="file" name="image" value="{{ $billing->bukti_pembayaran }}" accept="image/*" >
-			                		</div>
-			                		@elseif ($billing->bukti_pembayaran == '' && $edit == true)
-			                		<div class="form-group">
-			                			<label>Bukti Pembayaran</label>
-			                			<input type="file" name="image" value="{{ $billing->bukti_pembayaran }}" accept="image/*">
-			                		</div>
-			                		@elseif ($billing->bukti_pembayaran !== '')
+			                		@else
 			                		<div class="form-group">
 			                			<label>Bukti Pembayaran</label>
 			                				<img src="{{ asset($billing->bukti_pembayaran) }}" class="img-responsive" alt=""><br/>
-			                				<a class="btn btn-danger" href="{{ url('account/billings/confirm/delimage', $billing->id) }}" role="button"><i class="ti ti-trash"></i> Delete Image</a> <em>(Be Careful this will immediately delete your proof of payment)</em>
+			                				<a class="btn btn-danger" href="{{ url('nonsubs/billings/confirm/delimage', $billing->id) }}" role="button"><i class="ti ti-trash"></i> Delete Image</a> <em>(Be Careful this will immediately delete your proof of payment)</em>
 				                	</div>
 			                		@endif
 
@@ -210,10 +200,57 @@
 			                		@elseif (isset($edit) && $edit == true && ($billing->bukti_pembayaran !== '' || $billing->confirm_message !== ''))
 			                		<button type="submit" class="btn btn-primary">Update</button>
 			                		@elseif ($billing->bukti_pembayaran !== '' || $billing->confirm_message !== '')
-			                		<a class="btn btn-primary" href="{{ url('account/billings/confirm/edit', $billing->id) }}" role="button"><i class=""></i> Edit Confirm Payment</a>
+			                		<a class="btn btn-primary" href="{{ url('nonsubs/billings/confirm/edit', $billing->id) }}" role="button"><i class=""></i> Edit Confirm Payment</a>
 			                		@endif
 			                	</form>
 			                </div>
+			                @else
+			                 <div class="row">
+			                	<form action="{{ url('nonsubs/billings/confirm', $billing->id) }}" method="POST" role="form" enctype="multipart/form-data">
+			                		<input type="hidden" name="_token" value="{{ csrf_token() }}">
+			                		<input type="hidden" name="billing_id" value="{{ $billing->id }}">
+			                		<input type="hidden" name="edit" value="true">
+			                		<legend>Confirm Payment</legend>
+			                		
+			                		@if ($billing->confirm_message == '')
+			                		<div class="form-group">
+			                			<label for="">Confirm Message</label>
+										<textarea class="form-control" value="{{ $billing->confirm_message }}" rows="5" name="message" disabled></textarea>
+			                		</div>
+			                		@else
+			                		<div class="form-group">
+			                			<label for="">Confirm Message</label>
+										<p>{{ $billing->confirm_message }}</p>
+			                		</div>
+			                		@endif
+			                		
+			                		@if ($billing->image_pembayaran == null && $billing->file_pembayaran == null )
+			                		<div class="form-group">
+			                			<label>Bukti Pembayaran</label>
+			                			<p><em>Belum ada bukti pembayaran yang diupload</em></p>
+			                		</div>
+			                		@elseif($billing->image_pembayaran !== null)
+			                		<div class="form-group">
+			                			<label>Bukti Pembayaran</label>
+			                				<img src="{{ asset($billing->image_pembayaran) }}" class="img-responsive" alt=""><br/>
+			                				<a class="btn btn-danger" href="{{ url('nonsubs/billings/confirm/delimage', $billing->id) }}" role="button"><i class="ti ti-trash"></i> Delete Image</a> <em>(Be Careful this will immediately delete your proof of payment)</em>
+				                	</div>
+				                	@else
+				                	<div class="form-group">
+			                			<label>Bukti Pembayaran</label>
+			                			<?php
+			                			$filename = explode( '/', $billing->file_pembayaran );
+			                			$filename = $filename[5];
+			                			?>
+			                			<p><a class="img-responsive" href="{{ asset($billing->file_pembayaran) }}" > {{ $filename }}</a><br>
+			                			<a class="btn btn-danger" href="{{ url('nonsubs/billings/confirm/delimage', $billing->id) }}" role="button"><i class="ti ti-trash"></i> Delete File</a> <em>(Be Careful this will immediately delete your proof of payment)</em>
+			                		</div>
+			                		@endif
+
+			                		<a class="btn btn-primary" href="{{ url('nonsubs/billings/confirm/edit', $billing->id) }}" role="button"><i class=""></i> Edit Confirm Payment</a>
+			                	</form>
+			                </div>
+			                @endif
 		            </div>
 		        </div>
 			</div>

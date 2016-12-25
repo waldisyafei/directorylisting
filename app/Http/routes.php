@@ -260,7 +260,7 @@ Route::group(['prefix' => 'account', 'middleware' => 'authCustomer'], function()
 		Route::get('/', 'Customers\BillingsController@index');
 		Route::get('view/{id}', 'Customers\BillingsController@show');
 
-		Route::get('confirm/{id}', 'Customers\BillingsController@confirm_get');
+		Route::get('confirm/{id}', 'Customers\BillingsController@show');
 		Route::post('confirm/{id}', 'Customers\BillingsController@confirm_post');
 		Route::get('confirm/delimage/{id}', 'Customers\BillingsController@delimage');
 		Route::get('confirm/edit/{id}', 'Customers\BillingsController@edit_confirm');
@@ -305,7 +305,9 @@ Route::group(['prefix' => 'nonsubs', 'middleware' => 'authNonSubscriber'], funct
 		Route::get('/', 'Nonsubs\BillingsController@index');
 		Route::get('view/{id}', 'Nonsubs\BillingsController@show');
 
-		Route::get('confirm/{id}', 'Nonsubs\BillingsController@confirm_get');
+		Route::get('confirm/{id}', 'Nonsubs\BillingsController@show');
 		Route::post('confirm/{id}', 'Nonsubs\BillingsController@confirm_post');
+		Route::get('confirm/delimage/{id}', 'Nonsubs\BillingsController@delimage');
+		Route::get('confirm/edit/{id}', 'Nonsubs\BillingsController@edit_confirm');
 	});
 });

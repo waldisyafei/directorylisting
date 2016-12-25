@@ -1,0 +1,200 @@
+<?php $__env->startSection('title', 'View Billing'); ?>
+
+<?php $__env->startSection('content'); ?>
+	<h3 class="page-title">Billings</h3>
+	<ol class="breadcrumb">
+	    <li><a href="<?php echo e(url('account/billings')); ?>">Billings</a></li>
+	    <li class="active">View Billing</li>
+	</ol>
+
+	<div class="container-fluid">
+		<?php if(Session::has('success')): ?>
+			<div class="alert alert-dismissable alert-success">
+				<i class="ti ti-check"></i>&nbsp; <strong>Well done!</strong> <?php echo e(Session::get('success')); ?>.
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+			</div>
+		<?php endif; ?>
+
+		<?php if(Session::has('error')): ?>
+			<div class="alert alert-dismissable alert-danger">
+				<i class="ti ti-check"></i>&nbsp; <strong>Oh snap!</strong> <?php echo e(Session::get('error')); ?>.
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+			</div>
+		<?php endif; ?>
+
+		<?php if($errors->has()): ?>
+			<div class="alert alert-dismissable alert-danger">
+				<i class="ti ti-close"></i>&nbsp; <strong>Oh snap!</strong>
+				<ul>
+					<?php foreach($errors->all() as $error): ?>
+						<li><?php echo e($error); ?></li>
+					<?php endforeach; ?>
+				</ul>
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+			</div>
+		<?php endif; ?>
+
+		<div class="row">
+			<div class="col-md-12">
+
+				<div class="panel panel-transparent">
+		            <div class="panel-body">
+		            	<!--
+		                <div class="clearfix">
+		                    <div class="pull-left">
+		                        <img src="assets/img/logo-big.png" class="mt-md mb-md" alt="Avenxo">
+		                        <address class="mt-md mb-md">
+		                            <strong>Avenxo, Inc.</strong><br>
+		                            705 Folsom Ave, Suite 400<br>
+		                            San Francisco, CA 94107<br>
+		                        </address>
+		                    </div>
+		                    <div class="pull-right">
+		                        <h1 class="text-primary text-right" style="font-weight: normal;">
+		                            INVOICE
+		                            <small style="display: block;">#10007819</small>
+		                        </h1>
+		                    </div>
+		                </div>
+		                <hr>
+		                -->
+		                <div class="row mb-xl">
+		                    <!-- <div class="col-md-12">
+		                        <h1 class="text-primary text-center" style="font-weight: normal;">INVOICE</h1>
+		                    </div> -->
+		                    <div class="col-md-12">
+		                        <div class="pull-left">
+		                            <h3 class="text-muted">To</h3>
+		                            <address>
+		                                <strong><?php echo e($billing->customer ? $billing->customer->customer_name : $billing->item->address->company); ?></strong><br>
+		                                <?php $address = $billing->customer ? $billing->customer->address : $billing->item->address; ?>
+		                                <?php echo $address->address_1 . '<br>'; ?>
+		                                <?php echo $address->address_2 != '' ? $address->address_1 . '<br>' : null; ?>
+		                                <?php echo e($address->city); ?>, <?php echo e(App\Models\Zone::find($address->zone_id)->name); ?>. <?php echo e($address->postcode); ?><br>
+		                                <?php echo e(App\Models\Country::find($address->country_id)->name); ?>
+
+		                            </address>
+		                        </div>
+		                        <div class="pull-right">
+		                            <h3 class="text-muted">Info</h3>
+		                            <ul class="text-left list-unstyled">
+		                                <li><strong>Date:</strong> <?php echo e(date('d/M/Y', strtotime($billing->created_at))); ?></li>
+		                            </ul>
+		                        </div>
+		                    </div>
+		                </div>
+		                <div class="row mb-xl">
+		                    <div class="col-md-12">
+		                        <div class="panel">
+		                            <div class="panel-body no-padding">
+		                                <div class="table-responsive">
+		                                    <table class="table table-hover m-n">
+		                                        <thead>
+		                                            <tr>
+		                                                <th width="200"><?php echo e(ucfirst($billing->item_type)); ?> ID</th>
+		                                                <th>Description</th>
+		                                                <th>Item Type</th>
+		                                                <th>Qty</th>
+		                                                <th>Unit Cost</th>
+		                                                <th>Discount</th>
+		                                                <th class="text-right">Total</th>
+		                                            </tr>
+		                                        </thead>
+		                                        <tbody>
+		                                            <tr>
+		                                            	<?php if ($billing->item_type == 'ads'): ?>
+		                                                	<td><?php echo $billing->item->ad_id ?></td>
+		                                                <?php else: ?>
+		                                                	<td><?php echo $billing->item->listing_id ?></td>
+		                                            	<?php endif ?>
+
+		                                                <?php if ($billing->item_type == 'ads'): ?>
+	                                                		<td><?php echo $billing->customer ? Setting::get('ads.price_notes') : Setting::get('ads.noncust.price_notes') ?></td>
+	                                                	<?php else: ?>
+		                                                	<td><?php echo $billing->item->package->name ?></td>
+		                                                <?php endif ?>
+
+		                                                <td><?php echo $billing->item_type ?></td>
+		                                            	<?php if ($billing->item_type == 'ads'): ?>
+		                                                	<td><?php echo $billing->item->days ?></td>
+		                                                <?php else: ?>
+		                                                	<td><?php echo $billing->item->package->days ?></td>
+		                                            	<?php endif ?>
+		                                            	<?php if ($billing->item_type == 'ads'): ?>	
+		                                                	<?php
+		                                                	$price = $billing->customer ? floatval(Setting::get('ads.price_per_day')) : floatval(Setting::get('ads.noncust.price_per_day'));
+		                                                	$price_total = $price * intval($billing->item->days);
+		                                                	?>
+
+		                                                	<td>Rp <?php echo e(number_format($price, 0, '.',',')); ?></td>
+		                                                	<td><?php echo e($billing->customer ? Setting::get('ads.price_discount') : Setting::get('ads.noncust.price_discount')); ?>%</td>
+	                                                	<?php else: ?>
+			                                                <td>Rp <?php echo e(number_format($billing->item->package->price, 0, '.',',')); ?></td>
+			                                                <td><?php echo e($billing->item->package->discount); ?>%</td>
+		                                                <?php endif ?>
+	                                                	<td class="text-right">Rp <?php echo number_format($billing->amount, 0, '.', ',') ?></td>
+		                                            </tr>
+		                                        </tbody>
+		                                    </table>
+		                                </div>
+		                            </div>
+		                        </div>
+		                    </div>
+
+		                    <div class="col-md-12">
+		                        <div class="row" style="border-top-left-radius: 0px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px;">
+		                            <div class="col-md-3 col-md-offset-9">
+		                            	<?php $price_disc = $billing->customer ? Setting::get('ads.price_discount') : Setting::get('ads.noncust.price_discount') ?>
+		                            	<?php if ($billing->item_type == 'ads'): ?>
+			                                <p class="text-right"><strong>SUB TOTAL: Rp <?php echo e(number_format($price_disc * $billing->item->days, 0, '.',',')); ?></strong></p>
+			                                <p class="text-right">DISCOUNT: <?php echo e($price_disc); ?>%</p>
+		                                <?php else: ?>
+			                                <p class="text-right"><strong>SUB TOTAL: Rp <?php echo e(number_format($billing->item->package->price, 0, '.',',')); ?></strong></p>
+			                                <p class="text-right">DISCOUNT: <?php echo e($billing->item->package->discount); ?>%</p>
+		                            	<?php endif ?>
+		                                <p class="text-right">VAT: 0%</p>
+		                                <hr>
+		                                <h3 class="text-right text-danger" style="font-weight: bold;">IDR <?php echo number_format($billing->amount, 0, ',', '.') ?></h3>
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+
+
+		               <div class="row">
+			                	<form action="<?php echo e(url('nonsubs/billings/confirm', $billing->id)); ?>" method="POST" role="form" enctype="multipart/form-data">
+			                		<input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+			                		<input type="hidden" name="billing_id" value="<?php echo e($billing->id); ?>">
+			                		<input type="hidden" name="edit" value="true">
+			                		<legend>Confirm Payment</legend>
+			                		
+			                		<div class="form-group">
+			                			<label for="">Confirm Message</label>
+										<textarea class="form-control"  id="message" value="<?php echo e($billing->confirm_message); ?>" rows="5" name="message"></textarea>
+			                		</div>
+			                		
+			                		<script type="text/javascript">
+			                			document.getElementById("message").defaultValue = "<?php echo e($billing->confirm_message); ?>";
+			                		</script>
+			                		<div class="form-group">
+			                			<label>Bukti Pembayaran</label>
+			                			<input type="file" name="image" value="<?php echo e($billing->bukti_pembayaran); ?>" accept=".pdf,image/*">
+			                			<em>(Leave this empty if your proff of payment is correct)</em>
+			                		</div>
+
+			                		<?php if($billing->bukti_pembayaran == '' && $billing->confirm_message == ''): ?>
+			                		<button type="submit" class="btn btn-primary">Confirm</button>
+			                		<?php elseif(isset($edit) && $edit == true && ($billing->bukti_pembayaran !== '' || $billing->confirm_message !== '')): ?>
+			                		<button type="submit" class="btn btn-primary">Update</button>
+			                		<?php elseif($billing->bukti_pembayaran !== '' || $billing->confirm_message !== ''): ?>
+			                		<a class="btn btn-primary" href="<?php echo e(url('nonsubs/billings/confirm/edit', $billing->id)); ?>" role="button"><i class=""></i> Edit Confirm Payment</a>
+			                		<?php endif; ?>
+			                	</form>
+			                </div>
+		            </div>
+		        </div>
+			</div>
+		</div>
+	</div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('nonSubscriber.base', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

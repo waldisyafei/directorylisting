@@ -1,0 +1,231 @@
+<?php $__env->startSection('title', 'Edit Listing'); ?>
+
+<?php $__env->startSection('content'); ?>
+	<ol class="breadcrumb">
+	    <li class=""><a href="<?php echo e(url('app-admin/listings')); ?>">My Listings</a></li>
+	    <li>Edit Listings</li>
+	</ol>
+	<div class="container-fluid">
+		<div class="row">
+			<?php if(Session::has('error')): ?>
+				<div class="col-md-12">
+					<div class="alert alert-dismissable alert-danger">
+						<i class="ti ti-check"></i>&nbsp; <strong>Oh snap!</strong> <?php echo e(Session::get('error')); ?>.
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+					</div>
+				</div>
+			<?php endif; ?>
+			<?php if(Session::has('success')): ?>
+				<div class="col-md-12">
+					<div class="alert alert-dismissable alert-success">
+						<i class="ti ti-check"></i>&nbsp; <strong>Well Done!</strong> <?php echo e(Session::get('success')); ?>.
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+					</div>
+				</div>
+			<?php endif; ?>
+			<?php if($errors->has()): ?>
+				<div class="col-md-12">
+					<div class="alert alert-dismissable alert-danger">
+						<i class="ti ti-close"></i>&nbsp; <strong>Oh snap!</strong>
+						<ul>
+							<?php foreach($errors->all() as $error): ?>
+								<li><?php echo e($error); ?></li>
+							<?php endforeach; ?>
+						</ul>
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+					</div>
+				</div>
+			<?php endif; ?>
+
+			<form method="post" action="<?php echo e(url('app-admin/listings/edit', $listing->id)); ?>" class="form-horizontal">
+				<input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+				<div class="col-md-12">
+					<div class="panel panel-blue">
+						<div class="panel-heading">
+							<h2>Edit Listing Form</h2>
+						</div>
+						<div class="panel-body">
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Title</label>
+								<div class="col-sm-8">
+									<input type="text" name="title" value="<?php echo e($listing->title); ?>" class="form-control">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Category</label>
+								<div class="col-sm-8">
+									<select class="form-control" name="category">
+										<option value="choose-category"<?php echo e($listing->category == null ? ' selected' : null); ?>>-- SELECT CATEGORY --</option>
+										<?php
+										$categories = \App\Models\ListingCategory::all();
+										?>
+										<?php foreach($categories as $category): ?>
+											<option value="<?php echo e($category->id); ?>"<?php echo e($listing->category == $category->id ? ' selected' : null); ?>><?php echo e($category->title); ?></option>
+										<?php endforeach; ?>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Content</label>
+								<div class="col-sm-8">
+									<textarea id="listing-content" name="content" rows="10"><?php echo $listing->content; ?></textarea>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Keywords</label>
+								<div class="col-sm-8">
+									<input type="text" name="keywords" value="<?php echo e($listing->keywords); ?>" class="form-control">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Tags</label>
+								<div class="col-sm-8">
+									<input type="text" name="tags" value="<?php echo e($listing->tags); ?>" class="form-control">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Images</label>
+								<div class="col-sm-8">
+									<div class="images-list">
+										<div class="row">
+											<?php $images = json_decode($listing->assets); ?>
+											
+											<!--@//foreach ($images as $image)
+											<div class="col-sm-3">
+												<div class="thumbnail image-entry">
+													<?php
+													//$filename = substr($image, strrpos($image, '/') + 1);
+													//$img_entry = str_replace($filename, 'thumb-admin-'.$filename, $image);
+													?>
+													<img src="{//{ url($img_entry) }}" alt="">
+												</div>
+											</div>
+											@//endforeach-->
+											
+											<div class="col-sm-3">
+												<div class="thumbnail image-entry">
+													<a href="#" id="add-image" class="tooltips" data-trigger="hover" data-original-title="Click to add image(s)"><i class="ti ti-plus"></i></a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- ./End panel body -->
+
+						<!-- Panel Footer -->
+						<div class="panel-footer">
+							<div class="row">
+								<div class="col-sm-8 col-sm-offset-2">
+									<a href="<?php echo e(url('account/listings')); ?>" class="btn-default btn">Cancel</a>&nbsp;&nbsp;&nbsp;
+									<button class="btn-primary btn">Update</button>
+								</div>
+							</div>
+						</div>
+						<!-- ./End Panel Footer -->
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('page-styles'); ?>
+<!-- Summernote -->
+<link type="text/css" href="<?php echo e(asset('assets/backend/plugins/summernote/dist/summernote.css')); ?>" rel="stylesheet">
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('page-scripts'); ?>
+<!-- Summernote -->
+<script type="text/javascript" src="<?php echo e(asset('assets/backend/plugins/summernote/dist/summernote.js')); ?>"></script>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('inline-script'); ?>
+	<script type="text/javascript">
+	$(function(){
+		$('#listing-content').summernote({
+			height: 300
+		});
+
+		$('#add-image').click(function(e){
+			$(this).after('<input type="file" id="image-selector" accept="image/*" style="width:0;height:0;padding:0;margin:0;visibility:hidden;">');
+
+			$('#image-selector').click();
+
+			e.preventDefault();
+		});
+
+		$(document).on('change', '#image-selector', function(e){
+			var file = e.target.files[0];
+			console.log(file);
+			var data = new FormData();
+			var token = '<?php echo e(csrf_token()); ?>';
+
+			data.append('_token', token);
+			data.append('image', file);
+			data.append('title', 'just title');
+			$.ajax({
+				method: 'POST',
+				data: data,
+				headers:
+   				{
+        			'X-CSRF-Token': $('input[name="_token"]').val()
+    			},
+				url: '<?php echo e(url('account/listings/upload_image/')); ?>',
+				cache: false,
+				//dataType: 'json',
+				processData: false,
+				contentType: false,
+				success: function(data, textStatus, jqXHR) {
+					console.log(data);
+					if (data.status == 'success') {
+						var thumbDom = null;
+						console.log('success');
+						thumbDom = '<div class="col-md-3"><div class="thumbnail image-entry">';
+						thumbDom += '<img src="/' +data.relative_thumb_admin_path+'" alt="">';
+						thumbDom += '<input type="hidden" name="images[]" value="'+ data.relative_path +'">';
+						thumbDom += '</div></div>';
+
+						$('.images-list .row').prepend(thumbDom);
+					} else {
+						console.log('not success');
+					}
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					// Hangle errors
+					console.log('ERRORS: ' + textStatus);
+
+				}
+			})
+		});
+	});
+	</script>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('inline-style'); ?>
+<style type="text/css">
+.image-entry {
+    position: relative;
+    height: 120px;
+    text-align: center;
+}
+.image-entry #add-image {
+    position: absolute;
+    font-size: 53px;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    left: 0px;
+    top: 0px;
+}
+.image-entry #add-image i {
+    margin-top: 20px;
+    display: inline-block;
+}
+.image-entry {
+	margin-bottom: 15px;
+}
+</style>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('backend.base', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

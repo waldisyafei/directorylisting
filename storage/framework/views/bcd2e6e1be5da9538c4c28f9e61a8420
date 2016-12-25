@@ -1,0 +1,138 @@
+<?php $__env->startSection('title', 'Ads'); ?>
+
+<?php $__env->startSection('content'); ?>
+	<h3 class="page-title">Ads Management</h3>
+	<ol class="breadcrumb">
+	    <li><a href="<?php echo e(url('app-admin')); ?>">Dashboard</a></li>
+	    <li class="active">Ads</li>
+	</ol>
+
+	<div class="container-fluid">
+		<?php if(Session::has('success')): ?>
+			<div class="alert alert-dismissable alert-success">
+				<i class="ti ti-check"></i>&nbsp; <strong>Well done!</strong> <?php echo e(Session::get('success')); ?>.
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+			</div>
+		<?php endif; ?>
+
+		<?php if(Session::has('error')): ?>
+			<div class="alert alert-dismissable alert-danger">
+				<i class="ti ti-check"></i>&nbsp; <strong>Oh snap!</strong> <?php echo e(Session::get('error')); ?>.
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+			</div>
+		<?php endif; ?>
+
+		<?php if($errors->has()): ?>
+			<div class="alert alert-dismissable alert-danger">
+				<i class="ti ti-close"></i>&nbsp; <strong>Oh snap!</strong>
+				<ul>
+					<?php foreach($errors->all() as $error): ?>
+						<li><?php echo e($error); ?></li>
+					<?php endforeach; ?>
+				</ul>
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+			</div>
+		<?php endif; ?>
+
+		<div class="row">
+			<div class="action-menu col-md-12">
+				<a class="btn btn-primary" href="<?php echo e(url('app-admin/ads/create')); ?>" role="button"><i class="ti ti-plus"></i> Add new Non Customer Ads</a>
+			</div>
+		</div>
+
+		<div data-widget-group="group1">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h2>Ads List</h2>
+							<div class="panel-ctrls"></div>
+						</div>
+						<div class="panel-body no-padding">
+							<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+								<thead>
+									<tr>
+										<th width="80">Ad ID</th>
+										<th width="100">Image</th>
+										<th width="100">Title</th>
+										<th width="100">Status</th>
+										<th>Non Customer Link Ads</th>
+										<th width="150">Show Date</th>
+										<th width="150">Expired Date</th>
+										<!-- <th>Action</th> -->
+									</tr>
+								</thead>
+								<tbody>
+									<?php foreach ($ads as $ad): ?>
+									<?php
+									$assets = json_decode($ad->assets);
+									$filename = substr($assets[0], strrpos($assets[0], '/') + 1);
+									$img_entry = str_replace($filename, 'thumb-admin-'.$filename, $assets[0]);
+									?>
+									<tr>
+										<td class="text-center"><?php echo e($ad->ad_id); ?></td>
+										<td class="text-center">
+											<?php if ($img_entry != ''): ?>
+												<img class="img-thumbnail" src="<?php echo e(asset($img_entry)); ?>" width="70" height="70">
+											<?php endif ?>
+										</td>
+										<td><a href="<?php echo e(url('account/ads/edit', $ad->id)); ?>"><?php echo e($ad->title); ?></a></td>
+										<td>
+											<?php $status = $ad->adStatus->id; ?>
+											<?php if($status == 1): ?>
+												<label class="label label-default tooltips" title="<?php echo $ad->adStatus->info ?>"><?php echo e($ad->adStatus->display_name); ?></label>
+											<?php endif; ?>
+
+											<?php if($status == 2): ?>
+												<label class="label label-warning tooltips" title="<?php echo $ad->adStatus->info ?>"><?php echo e($ad->adStatus->display_name); ?></label>
+											<?php endif; ?>
+
+											<?php if($status == 3): ?>
+												<label class="label label-success"><?php echo e($ad->adStatus->display_name); ?></label>
+											<?php endif; ?>
+
+											<?php if($status == 4): ?>
+												<label class="label label-danger tooltips" title="<?php echo $ad->adStatus->info ?>"><?php echo e($ad->adStatus->display_name); ?></label>
+											<?php endif; ?>
+
+											<?php if($status == 5): ?>
+												<label class="label label-default tooltips" title="<?php echo $ad->adStatus->info ?>"><?php echo e($ad->adStatus->display_name); ?></label>
+											<?php endif; ?>
+
+											<?php if($status == 6): ?>
+												<label class="label label-info tooltips" title="<?php echo $ad->adStatus->info ?>"><?php echo e($ad->adStatus->display_name); ?></label>
+											<?php endif; ?>
+										</td>
+										<td><?php echo e($ad->customer_id ? null : $ad->noncust_ad_link); ?></td>
+										<td><?php echo e($ad->show_date != '' ? date('d M Y H:i', strtotime($ad->show_date)) : null); ?></td>
+										<td>
+										<?php if ($ad->status != 1 && $ad->status != 5 && $ad->status != 6): ?>
+											<?php echo date('d M Y H:i', strtotime($ad->expired_date)) ?>
+										<?php endif ?>
+										</td>
+									</tr>
+								<?php endforeach ?>
+								</tbody>
+							</table>
+						</div>
+						<div class="panel-footer"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('page-styles'); ?>
+
+	<style type="text/css">
+	table tr td {
+		vertical-align: middle;
+	}
+	</style>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('page-scripts'); ?>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('backend.base', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

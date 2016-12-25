@@ -65,7 +65,7 @@
 											<td>{{ $billing->customer_id ? $billing->customer_id : 'Non Customer' }}</td>
 											<td>
 											<?php
-												if($billing->customer_id){
+												if($billing->customer_id && $billing->customer_id !== 'ADMINISTRATOR' ){
 													$pos = strpos($billing->customer_id, "N");
 													if ($pos !== 0) {
 														echo $billing->customer->customer_name;		
@@ -73,7 +73,7 @@
 														echo $billing->customer->nonsub_name;
 													}
 												}else{
-													echo $billing->item->address->company;
+													echo $billing->customer_id;
 												}
 												
 											?>

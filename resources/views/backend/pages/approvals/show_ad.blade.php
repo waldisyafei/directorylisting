@@ -28,7 +28,7 @@
 							<div class="form-group">
 								<label class="col-sm-2 control-label">Link</label>
 								<div class="col-sm-8">
-									<span><?php echo $ad->link ?></span>
+									<span><a href="http://<?php echo $ad->link ?>" target="_blank">{{ $ad->link }}</span>
 								</div>
 							</div>
 							<?php $images = json_decode($ad->assets) ?>

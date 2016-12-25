@@ -66,7 +66,7 @@ class AdsController extends Controller
 
         foreach ($request->input('ads') as $adsRequest) {
             $ad = new Ad;
-            $ad->customer_id = Auth::user()->get()->user_id;
+            $ad->customer_id = 'ADMINISTRATOR';
             $ad->address_id = Auth::user()->get()->address_id;
             $ad->days = $adsRequest['days'];
 
