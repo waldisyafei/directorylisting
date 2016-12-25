@@ -4,7 +4,7 @@
 
 @section('content')
 	<ol class="breadcrumb">
-	    <li class=""><a href="{{ url('app-admin/listings') }}">My Listings</a></li>
+	    <li class=""><a href="{{ url('account/listings') }}">My Listings</a></li>
 	    <li>Edit Listings</li>
 	</ol>
 	<div class="container-fluid">
@@ -39,7 +39,7 @@
 				</div>
 			@endif
 
-			<form method="post" action="{{ url('app-admin/listings/edit', $listing->id) }}" class="form-horizontal">
+			<form method="post" action="{{ url('app-admin/listings/edit', $listing->id) }}" class="form-horizontal" enctype="multipart/form-data">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				<div class="col-md-12">
 					<div class="panel panel-blue">
@@ -53,24 +53,75 @@
 									<input type="text" name="title" value="{{ $listing->title }}" class="form-control">
 								</div>
 							</div>
+							<?php
+							$categories = \App\Models\ListingCategory::all();
+							?>
 							<div class="form-group">
-								<label class="col-sm-2 control-label">Category</label>
+								<label class="col-sm-2 control-label">Main Category</label>
 								<div class="col-sm-8">
 									<select class="form-control" name="category">
-										<option value="choose-category"{{ $listing->category == null ? ' selected' : null }}>-- SELECT CATEGORY --</option>
-										<?php
-										$categories = \App\Models\ListingCategory::all();
-										?>
+										<option value="choose-category"{{ $listing->category == null ? ' selected' : null }} disabled>-- SELECT MAIN CATEGORY --</option>
 										@foreach ($categories as $category)
-											<option value="{{ $category->id }}"{{ $listing->category == $category->id ? ' selected' : null }}>{{ $category->title }}</option>
+											@if ($category->parent == 0)
+												<option value="{{ $category->id }}">
+												{{ $category->title }}
+												</option>
+											@endif
 										@endforeach
 									</select>
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-2 control-label">Content</label>
+								<label class="col-sm-2 control-label">Sub Category</label>
 								<div class="col-sm-8">
-									<textarea id="listing-content" name="content" rows="10">{!! $listing->content !!}</textarea>
+									<select class="form-control" name="sub_category">
+										<option value="choose-category"{{ $listing->category == null ? ' selected' : null }}>-- SELECT SUB CATEGORY --</option>
+									</select>
+								</div>
+							</div>
+							<div role="tabpanel" style="margin: 0 60px 40px;">
+								<!-- Nav tabs -->
+								<ul class="nav nav-tabs" role="tablist">
+									<li role="presentation" class="active">
+										<a href="#description" aria-controls="description" role="tab" data-toggle="tab">Description</a>
+									</li>
+									<li role="presentation">
+										<a href="#review" aria-controls="tab" role="tab" data-toggle="tab">Review</a>
+									</li>
+									<li role="presentation">
+										<a href="#custom" aria-controls="tab" role="tab" data-toggle="tab">Custom</a>
+									</li>
+								</ul>
+							
+								<!-- Tab panes -->
+								<div class="tab-content" style="border: 1px solid #E2E2E2; border-top-width: 0;">
+									<div role="tabpanel" class="tab-pane active" id="description" style="padding: 20px;">
+										<div class="form-group">
+											<div class="col-sm-10">
+												<textarea id="listing-content" name="content" rows="10">{!! $listing->content !!}</textarea>
+											</div>
+										</div>
+									</div>
+									<div role="tabpanel" class="tab-pane" id="review" style="padding: 20px;">
+										<div class="form-group">
+											<div class="col-sm-10">
+												<textarea id="listing-review" name="review" rows="10">{!! $listing->review !!}</textarea>
+											</div>
+										</div>
+									</div>
+									<div role="tabpanel" class="tab-pane" id="custom" style="padding: 20px;">
+										<div class="form-group">
+											<label class="col-sm-2 control-label">Custom Title</label>
+											<div class="col-sm-10">
+												<input type="text" name="custom_title" value="{!! $listing->custom_tab_title !!}" class="form-control">
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-sm-10">
+												<textarea id="listing-custom" name="custom" rows="10">{!! $listing->custom_tab !!}</textarea>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 							<div class="form-group">
@@ -86,29 +137,42 @@
 								</div>
 							</div>
 							<div class="form-group">
+								<label class="col-sm-2 control-label">URL Website</label>
+								<div class="col-sm-8">
+									<input type="text" name="url" value="{{ $listing->url }}" class="form-control">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Price Range</label>
+								<div class="col-sm-4">
+									<input type="text" name="price_from" value="{{ $listing->price_from }}" class="form-control">
+								</div>
+								<div class="col-sm-4">
+									<input type="text" name="price_to" value="{{ $listing->price_to }}" class="form-control">
+								</div>
+							</div>
+							<div class="form-group">
 								<label class="col-sm-2 control-label">Images</label>
 								<div class="col-sm-8">
+									<input type="file" name="image">
 									<div class="images-list">
 										<div class="row">
 											<?php $images = json_decode($listing->assets); ?>
-											
-											<!--@//foreach ($images as $image)
-											<div class="col-sm-3">
-												<div class="thumbnail image-entry">
-													<?php
-													//$filename = substr($image, strrpos($image, '/') + 1);
-													//$img_entry = str_replace($filename, 'thumb-admin-'.$filename, $image);
-													?>
-													<img src="{//{ url($img_entry) }}" alt="">
+
+											@if ($images)
+												@foreach ($images as $image)
+												<div class="col-sm-3">
+													<div class="thumbnail image-entry">
+														<?php
+														$filename = substr($image, strrpos($image, '/') + 1);
+														$img_entry = str_replace($filename, 'thumb-admin-'.$filename, $image);
+														?>
+														<img src="{{ url($img_entry) }}" alt="">
+													</div>
 												</div>
-											</div>
-											@//endforeach-->
-											
-											<div class="col-sm-3">
-												<div class="thumbnail image-entry">
-													<a href="#" id="add-image" class="tooltips" data-trigger="hover" data-original-title="Click to add image(s)"><i class="ti ti-plus"></i></a>
-												</div>
-											</div>
+												@endforeach
+											@endif
+												
 										</div>
 									</div>
 								</div>
@@ -141,66 +205,74 @@
 @section('page-scripts')
 <!-- Summernote -->
 <script type="text/javascript" src="{{ asset('assets/backend/plugins/summernote/dist/summernote.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/backend/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js') }}"></script>
 @endsection
 
 @section('inline-script')
 	<script type="text/javascript">
 	$(function(){
-		$('#listing-content').summernote({
+		$('#listing-content, #listing-review, #listing-custom').summernote({
 			height: 300
 		});
 
-		$('#add-image').click(function(e){
-			$(this).after('<input type="file" id="image-selector" accept="image/*" style="width:0;height:0;padding:0;margin:0;visibility:hidden;">');
+		$('input[name="show_date"]').datetimepicker({format: 'yyyy-mm-dd hh:ii'});
 
-			$('#image-selector').click();
+		$('select[name="category"]').change(function(){
+			var thisVal = $(this).find(':selected').val();
+			var subCatEl = $('select[name="sub_category"]');
 
-			e.preventDefault();
-		});
-
-		$(document).on('change', '#image-selector', function(e){
-			var file = e.target.files[0];
-			console.log(file);
-			var data = new FormData();
-			var token = '{{ csrf_token() }}';
-
-			data.append('_token', token);
-			data.append('image', file);
-			data.append('title', 'just title');
 			$.ajax({
-				method: 'POST',
-				data: data,
-				headers:
-   				{
-        			'X-CSRF-Token': $('input[name="_token"]').val()
-    			},
-				url: '{{ url('account/listings/upload_image/') }}',
-				cache: false,
-				//dataType: 'json',
-				processData: false,
-				contentType: false,
-				success: function(data, textStatus, jqXHR) {
-					console.log(data);
-					if (data.status == 'success') {
-						var thumbDom = null;
-						console.log('success');
-						thumbDom = '<div class="col-md-3"><div class="thumbnail image-entry">';
-						thumbDom += '<img src="/' +data.relative_thumb_admin_path+'" alt="">';
-						thumbDom += '<input type="hidden" name="images[]" value="'+ data.relative_path +'">';
-						thumbDom += '</div></div>';
-
-						$('.images-list .row').prepend(thumbDom);
-					} else {
-						console.log('not success');
-					}
+				method: 'get',
+				url: '{{ url('account/listings/get_sub_categories') }}',
+				data: {
+					_token: '{{ csrf_token() }}',
+					main_id: thisVal
 				},
-				error: function(jqXHR, textStatus, errorThrown) {
-					// Hangle errors
-					console.log('ERRORS: ' + textStatus);
+				success: function(res) {
+					if (res.status === 'success') {
+						var output = '';
+						var categories = res.categories;
 
+						for (var i = 0; i < categories.length; i++) {
+							output += '<option value="' + categories[i].id + '">' + categories[i].title + '</option>';
+						}
+
+						subCatEl.find('option').remove();
+						subCatEl.append(output);
+					}
 				}
-			})
+			});
 		});
+
+		if ($('select[name="category"]').find(':selected').val() != '') {
+			var subCatEl = $('select[name="sub_category"]');
+			$.ajax({
+				method: 'get',
+				url: '{{ url('account/listings/get_sub_categories') }}',
+				data: {
+					_token: '{{ csrf_token() }}',
+					main_id: $('select[name="category"]').find(':selected').val()
+				},
+				success: function(res) {
+					if (res.status === 'success') {
+						var output = '';
+						var categories = res.categories;
+						var currentCat = '{{ $listing->category }}';
+
+						for (var i = 0; i < categories.length; i++) {
+							if (currentCat === categories[i].id) {
+								output += '<option value="' + categories[i].id + ' selected">' + categories[i].title + '</option>';
+							} else {
+								output += '<option value="' + categories[i].id + '">' + categories[i].title + '</option>';
+							}
+						}
+
+						subCatEl.find('option').remove();
+						subCatEl.append(output);
+					}
+				}
+			});
+		}
 	});
 	</script>
 @endsection

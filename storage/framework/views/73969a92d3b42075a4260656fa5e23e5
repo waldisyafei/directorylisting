@@ -44,7 +44,9 @@
                             <!-- Listing -->
                             <li class="<?php echo e(Request::is('app-admin/listings*') ? 'active open' : null); ?>"><a href="javascript:;"><i class="ti ti-layout-list-thumb"></i><span>Listings</span></a>
                                 <ul class="acc-menu" style="<?php echo e(Request::is('app-admin/listings*') ? 'display: block;' : null); ?>">
-                                    <li class="<?php echo e(Request::is('app-admin/listings') ? ' active' : null); ?>"><a href="<?php echo e(url('app-admin/listings')); ?>">Listings</a></li>
+                                    <li class="<?php echo e(Request::is('app-admin/listings/create') ? 'active' : null); ?>"><a href="<?php echo e(url('app-admin/listings/create')); ?>">Create New Non Customer Listing</a></li>
+                                    <li class="<?php echo e(Request::is('app-admin/listings/noncust') ? ' active' : null); ?>"><a href="<?php echo e(url('app-admin/listings/noncust')); ?>">Manage Non Customer Listing</a></li>
+                                    <li class="<?php echo e(Request::is('app-admin/listings') ? ' active' : null); ?>"><a href="<?php echo e(url('app-admin/listings')); ?>">Listings Management</a></li>
 
                                     <?php if(Auth::user()->get()->can('can_view_all_category')): ?>
                                     <li class="<?php echo e(Request::is('app-admin/listings/categories*') ? 'active' : null); ?>"><a href="<?php echo e(url('app-admin/listings/categories')); ?>">Categories</a></li>
@@ -57,8 +59,8 @@
                             <!-- Ads -->
                             <li class="<?php echo e(Request::is('app-admin/ads*') ? 'active open' : null); ?>"><a href="javascript:;"><i class="ti ti-layout-accordion-list"></i><span>Ads</span></a>
                                 <ul class="acc-menu" style="<?php echo e(Request::is('app-admin/ads*') ? 'display: block;' : null); ?>">
-                                    <li class="<?php echo e(Request::is('app-admin/ads/create') ? 'active' : null); ?>"><a href="<?php echo e(url('app-admin/ads/create')); ?>">Create New Non Customer Ads</a></li>
-                                    <li class="<?php echo e(Request::is('app-admin/ads/noncust') ? ' active' : null); ?>"><a href="<?php echo e(url('app-admin/ads/noncust')); ?>">Manage Non Customer Ads</a></li>
+                                    <li class="<?php echo e(Request::is('app-admin/ads/create') ? 'active' : null); ?>"><a href="<?php echo e(url('app-admin/ads/create')); ?>">Create New Non Customer Ad</a></li>
+                                    <li class="<?php echo e(Request::is('app-admin/ads/noncust') ? ' active' : null); ?>"><a href="<?php echo e(url('app-admin/ads/noncust')); ?>">Manage Non Customer Ad</a></li>
                                     <li class="<?php echo e(Request::is('app-admin/ads') ? ' active' : null); ?>"><a href="<?php echo e(url('app-admin/ads')); ?>">Ads Management</a></li>
                                 </ul>
                             </li>

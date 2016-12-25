@@ -55,10 +55,8 @@ class BillingsController extends Controller
     public function show($id)
     {
 
-
-        //$pos = strpos('N-0120160300026', "N");
         $billing = Billing::find($id);
-//dd($pos);
+
         if ($billing) {//dd($billing->item->address->company );
             return view('backend.pages.billings.view', ['billing' => $billing]);
         }

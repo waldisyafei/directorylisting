@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 24 Des 2016 pada 18.30
+-- Generation Time: 25 Des 2016 pada 16.28
 -- Versi Server: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -203,7 +203,10 @@ INSERT INTO `billings` (`id`, `customer_id`, `item_id`, `image_pembayaran`, `fil
 (2, 'N-0120160300026', '2', 'storage/app/listings/billings/2/Koala.jpg', NULL, 'ini dari nonsubs edit', 'ads', '1150000.00', 2, '2016-12-24 09:00:40', '2016-12-24 09:18:15'),
 (3, '012016030002682', '1', 'storage/app/listings/billings/3/79886.jpg', NULL, 'Pembayaran 24 Desember 2016. Transfer lunas', 'listing', '548800.00', 2, '2016-12-24 09:25:11', '2016-12-24 09:28:10'),
 (4, NULL, '3', NULL, NULL, NULL, 'ads', '1541000.00', 0, '2016-12-24 15:22:12', '2016-12-24 15:22:12'),
-(5, 'ADMINISTRATOR', '4', NULL, NULL, NULL, 'ads', '69000.00', 2, '2016-12-24 16:48:17', '2016-12-24 16:54:02');
+(5, 'ADMINISTRATOR', '4', NULL, NULL, NULL, 'ads', '69000.00', 2, '2016-12-24 16:48:17', '2016-12-24 16:54:02'),
+(6, '012016030002682', '3', NULL, NULL, 'ini konfirm pertama', 'listing', '548800.00', 2, '2016-12-25 10:01:59', '2016-12-25 10:05:56'),
+(7, 'ADMINISTRATOR', '4', NULL, NULL, NULL, 'listing', '548800.00', 0, '2016-12-25 10:59:40', '2016-12-25 10:59:40'),
+(8, 'ADMINISTRATOR', '5', NULL, NULL, NULL, 'listing', '548800.00', 2, '2016-12-25 11:00:04', '2016-12-25 14:00:28');
 
 -- --------------------------------------------------------
 
@@ -507,7 +510,7 @@ CREATE TABLE `customers` (
 
 INSERT INTO `customers` (`id`, `customer_id`, `customer_name`, `address_id`, `phone`, `fax`, `pic`, `pic_phone`, `pic_mobile1`, `pic_mobile2`, `pic_email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (9, '012016030001936', 'Grafich Dev Pte Ltd', 1, '082298078502', '', 'Gufron RA', '082298078502', '082298078502', '', 'test@gmail.com', '$2y$10$eK.ei902n59yqGI4EAzM2.QuTX0B1yNvcRqZ1kc77GUKXQ9WwFAQ6', '1zwKp4N00gBJNwLEPsM1oxwmS5a9ADfwaXYfhJUS7HEN2Vr2zri3NiGiZAQl', '2016-03-15 22:25:40', '2016-05-11 23:13:11'),
-(10, '012016030002682', 'Customer 2', 2, '123455678', '', 'TEST01', '1234567', '123456', '', 'test01@gmail.com', '$2y$10$ErY9JZ8ES4J1c.MFUWDNmuXIPQSIBECGR9ZQl1EkOB4xkezZnf706', 'bsS74hoIVnVk9oMFFnIdPFFtViRiXFkY5UtPMUF1G96jEXUScx1K8h31TpXb', '2016-03-17 08:52:37', '2016-12-24 08:59:07'),
+(10, '012016030002682', 'Customer 2', 2, '123455678', '', 'TEST01', '1234567', '123456', '', 'test01@gmail.com', '$2y$10$ErY9JZ8ES4J1c.MFUWDNmuXIPQSIBECGR9ZQl1EkOB4xkezZnf706', 'wL7lI0co4oyNjvJB4UWeqsqUENuk43JHpHxZ67NFhTwObyzOkz1vx93yfo3f', '2016-03-17 08:52:37', '2016-12-25 15:27:09'),
 (11, '012016030003972', 'Pt Test02', 3, '1234556', '', 'Test02', '123445', '1234566789', '', 'Test02@gmail.com', '$2y$10$J6E6I/FRmvXx/.t/1AecEu6g9fwBSZvEuwx.eAJaHcKTg41W4/e7u', 'kD82eOAjvdA7RmpTRdYsUrbFP1KquZrsLKRVAojzDyFKvRqb4PTrI1EyuPjS', '2016-03-28 03:43:34', '2016-03-28 04:12:25'),
 (12, '012016050004935', 'PT. TEST03', 17, '12354656', '', 'test03', '1341', '12324', '', 'test03@gmail.com', '$2y$10$hk386w4hmarO6hzRbUoEjOu76odzlYxx/oGxfSLGXubFPAb6I5kxS', NULL, '2016-05-10 05:12:45', '2016-05-10 05:12:46');
 
@@ -638,7 +641,13 @@ INSERT INTO `history` (`customer_id`, `item_id`, `item_type`, `updated_at`, `cre
 ('012016030002682', 'CUSTOMER21', 'listing', '2016-12-24 09:31:43', '2016-12-24 09:31:43'),
 ('012016030002682', 'CUSTOMER21', 'listing', '2016-12-24 09:31:43', '2016-12-24 09:31:43'),
 ('Non Customer', '2820161200003', 'ads', '2016-12-24 16:55:04', '2016-12-24 16:55:04'),
-('Non Customer', '2820161200003', 'ads', '2016-12-24 16:55:04', '2016-12-24 16:55:04');
+('Non Customer', '2820161200003', 'ads', '2016-12-24 16:55:04', '2016-12-24 16:55:04'),
+('012016030002682', 'CUSTOMER23', 'listing', '2016-12-25 10:07:21', '2016-12-25 10:07:21'),
+('012016030002682', 'CUSTOMER23', 'listing', '2016-12-25 10:07:21', '2016-12-25 10:07:21'),
+('ADMINISTRATOR', 'ADMINISTRATOR5', 'listing', '2016-12-25 14:12:58', '2016-12-25 14:12:58'),
+('ADMINISTRATOR', 'ADMINISTRATOR5', 'listing', '2016-12-25 14:12:58', '2016-12-25 14:12:58'),
+('ADMINISTRATOR', 'ADMINISTRATOR5', 'listing', '2016-12-25 14:51:37', '2016-12-25 14:51:37'),
+('ADMINISTRATOR', 'ADMINISTRATOR5', 'listing', '2016-12-25 14:51:37', '2016-12-25 14:51:37');
 
 -- --------------------------------------------------------
 
@@ -736,6 +745,7 @@ CREATE TABLE `listings` (
   `been_active` int(1) NOT NULL DEFAULT '0',
   `status` int(1) NOT NULL DEFAULT '1',
   `edit` int(5) NOT NULL,
+  `address_id` int(3) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -744,9 +754,12 @@ CREATE TABLE `listings` (
 -- Dumping data untuk tabel `listings`
 --
 
-INSERT INTO `listings` (`id`, `customer_id`, `listing_id`, `title`, `slug`, `content`, `review`, `custom_tab`, `custom_tab_title`, `category`, `keywords`, `tags`, `url`, `price_from`, `price_to`, `assets`, `package_id`, `expired_date`, `been_active`, `status`, `edit`, `created_at`, `updated_at`) VALUES
-(1, '012016030002682', 'CUSTOMER21', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, '2017-01-23 09:28:10', 0, 2, 0, '2016-12-24 09:25:11', '2016-12-24 09:31:43'),
-(2, '', NULL, 'Rumah kosong Bogor Listing', 'rumah-kosong-bogor-listing', '<p>Kontennya disini<br></p>', NULL, NULL, NULL, 23, 'rumah ksosong', 'rumah kosong', NULL, NULL, NULL, '["storage\\/app\\/listings\\/assets\\/assets\\/Chrysanthemum.jpg"]', 0, NULL, 0, 1, 0, '2016-12-24 16:56:55', '2016-12-24 16:56:55');
+INSERT INTO `listings` (`id`, `customer_id`, `listing_id`, `title`, `slug`, `content`, `review`, `custom_tab`, `custom_tab_title`, `category`, `keywords`, `tags`, `url`, `price_from`, `price_to`, `assets`, `package_id`, `expired_date`, `been_active`, `status`, `edit`, `address_id`, `created_at`, `updated_at`) VALUES
+(1, '012016030002682', 'CUSTOMER21', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, '2017-01-23 09:28:10', 0, 2, 0, 0, '2016-12-24 09:25:11', '2016-12-24 09:31:43'),
+(2, '', NULL, 'Rumah kosong Bogor Listing', 'rumah-kosong-bogor-listing', '<p>Kontennya disini<br></p>', NULL, NULL, NULL, 23, 'rumah ksosong', 'rumah kosong', NULL, NULL, NULL, '["storage\\/app\\/listings\\/assets\\/assets\\/Chrysanthemum.jpg"]', 0, NULL, 0, 1, 0, 0, '2016-12-24 16:56:55', '2016-12-24 16:56:55'),
+(3, '012016030002682', 'CUSTOMER23', 'Rumah baru di Jln. Margonda Raya APo APo ajl.', 'rumah-baru-di-jln-margonda-raya-apo-apo-ajl', '<p>Ini kontennya </p>', NULL, NULL, NULL, 23, 'rumah', 'rumah', 'www.rumah.com', '2000000', '4000000', '["storage\\/app\\/listings\\/assets\\/Lighthouse.jpg"]', 3, '2017-01-24 10:05:55', 1, 3, 2, 0, '2016-12-25 10:01:59', '2016-12-25 10:08:00'),
+(4, 'ADMINISTRATOR', 'ADMINISTRATOR4', NULL, '-1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, NULL, 0, 1, 0, 0, '2016-12-25 10:59:40', '2016-12-25 10:59:40'),
+(5, 'ADMINISTRATOR', 'ADMINISTRATOR5', 'Rumah kosong Bogor Admin 2', 'rumah-kosong-bogor-admin-2', '<p>Keteranagan<br></p>', NULL, NULL, NULL, 22, 'asd', 'asd', 'www.apa.com', '2000', '4000', '["storage\\/app\\/listings\\/assets\\/Chrysanthemum.jpg"]', 3, '2017-01-24 14:00:28', 1, 3, 4, 1, '2016-12-25 11:00:04', '2016-12-25 14:52:03');
 
 -- --------------------------------------------------------
 
@@ -839,7 +852,10 @@ CREATE TABLE `listing_edits` (
 --
 
 INSERT INTO `listing_edits` (`id`, `customer_id`, `listing_edit_id`, `title`, `slug`, `content`, `review`, `custom_tab`, `custom_tab_title`, `category`, `keywords`, `tags`, `url`, `price_from`, `price_to`, `assets`, `package_id`, `expired_date`, `been_active`, `status`, `edit`, `created_at`, `updated_at`) VALUES
-(1, '012016030002682', 'CUSTOMER21', 'Rumah baru di Jln. Margonda Raya', 'rumah-baru-di-jln-margonda-raya', '<p>Rumah Lighthouse</p>', NULL, NULL, NULL, 23, 'rumah', 'rumah', 'www.rumah.com', '2000000', '4000000', '["storage\\/app\\/listings\\/assets\\/Chrysanthemum.jpg"]', 0, NULL, 0, 2, 1, '2016-12-24 09:31:43', '2016-12-24 09:31:43');
+(1, '012016030002682', 'CUSTOMER21', 'Rumah baru di Jln. Margonda Raya', 'rumah-baru-di-jln-margonda-raya', '<p>Rumah Lighthouse</p>', NULL, NULL, NULL, 23, 'rumah', 'rumah', 'www.rumah.com', '2000000', '4000000', '["storage\\/app\\/listings\\/assets\\/Chrysanthemum.jpg"]', 0, NULL, 0, 2, 1, '2016-12-24 09:31:43', '2016-12-24 09:31:43'),
+(2, '012016030002682', 'CUSTOMER23', 'Rumah baru di Jln. Margonda Raya APo APo ajl.', 'rumah-baru-di-jln-margonda-raya-apo-apo-ajl', '<p>Ini kontennya </p>', NULL, NULL, NULL, 23, 'rumah', 'rumah', 'www.rumah.com', '2000000', '4000000', '["storage\\/app\\/listings\\/assets\\/Lighthouse.jpg"]', 0, NULL, 0, 7, 3, '2016-12-25 10:07:21', '2016-12-25 10:08:00'),
+(3, 'ADMINISTRATOR', 'ADMINISTRATOR5', 'Rumah kosong Bogor Admin', 'rumah-kosong-bogor-admin', '<p>Keteranagan<br></p>', NULL, NULL, NULL, 22, 'asd', 'asd', 'www.apa.com', '2000', '4000', '["storage\\/app\\/listings\\/assets\\/Chrysanthemum.jpg"]', 0, NULL, 0, 7, 5, '2016-12-25 14:12:57', '2016-12-25 14:46:23'),
+(4, 'ADMINISTRATOR', 'ADMINISTRATOR5', 'Rumah kosong Bogor Admin 2', 'rumah-kosong-bogor-admin-2', '<p>Keteranagan<br></p>', NULL, NULL, NULL, 22, 'asd', 'asd', 'www.apa.com', '2000', '4000', '["storage\\/app\\/listings\\/assets\\/Chrysanthemum.jpg"]', 0, NULL, 0, 7, 5, '2016-12-25 14:51:37', '2016-12-25 14:52:03');
 
 -- --------------------------------------------------------
 
@@ -1279,7 +1295,10 @@ INSERT INTO `system_logs` (`id`, `user`, `log_text`, `created_at`, `updated_at`)
 (77, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Ads from Customer</a>', '2016-11-13 11:02:43', '2016-11-13 11:02:43'),
 (78, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">dddd</a>', '2016-11-13 13:55:15', '2016-11-13 13:55:15'),
 (79, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">sfdsdf</a>', '2016-11-13 13:55:32', '2016-11-13 13:55:32'),
-(80, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">asdasd</a>', '2016-11-13 14:00:27', '2016-11-13 14:00:27');
+(80, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">asdasd</a>', '2016-11-13 14:00:27', '2016-11-13 14:00:27'),
+(81, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Rumah baru di Jln. Margonda Raya APo APo ajl.</a>', '2016-12-25 10:08:00', '2016-12-25 10:08:00'),
+(82, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Rumah kosong Bogor Admin</a>', '2016-12-25 14:46:23', '2016-12-25 14:46:23'),
+(83, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Rumah kosong Bogor Admin 2</a>', '2016-12-25 14:52:03', '2016-12-25 14:52:03');
 
 -- --------------------------------------------------------
 
@@ -1304,7 +1323,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `status`, `address_id`, `created_at`, `updated_at`) VALUES
-(1, 'Digi', 'grafich.dev@gmail.com', '$2y$10$XQuBCrxFwr4N8et.0VSSK.eavlEYymjNdl7DB5VFaaNgkRqid23.K', 'ZzP3E0FbPewotijMRb3cnxKCA1jJWBqsbtmjGKcFfpAkmLJSechLjcRC8ceS', 1, 1, '0000-00-00 00:00:00', '2016-11-13 03:26:44'),
+(1, 'Digi', 'grafich.dev@gmail.com', '$2y$10$XQuBCrxFwr4N8et.0VSSK.eavlEYymjNdl7DB5VFaaNgkRqid23.K', 'iagKVUWRcKpEZi5odC8st0v31KUiXI1wpZthbDmq6KbbdPya4xtSUZEEaMtJ', 1, 1, '0000-00-00 00:00:00', '2016-12-25 15:12:27'),
 (2, 'User Admin', 'irhsad.seifaldin@gmail.com', '$2y$10$wtb3McLO/3Ak29lm3/vy/.2m3WlAcjPZZgEmoid8hiwQAG49DG9mW', NULL, 0, 0, '2015-12-16 06:21:18', '2015-12-16 06:21:18'),
 (3, 'User Manager', '31x389@gmail.com', '$2y$10$InGEkucqe6DBfuL76M6xVuRU1qgDUdXgYgKCSP5kYf7LdaHTfzLIO', 'QTNSc7J38AuSZb1HRzq9NcsOmM8wQA3spJ0Xd7ojbuIkuY7nueeyZreYS9Pj', 0, 0, '2015-12-16 06:21:47', '2015-12-28 07:44:52'),
 (4, 'Irwan Sales', 'baponk.smoker@gmail.com', '$2y$10$UTQvH/xnww5zN.LL8qUCrucPa.RJ4BLbS02wr5aIh3MK70G/dT4n6', NULL, 0, 0, '2015-12-16 06:22:17', '2015-12-16 06:22:17'),
@@ -5654,7 +5673,7 @@ ALTER TABLE `ad_edits`
 -- AUTO_INCREMENT for table `billings`
 --
 ALTER TABLE `billings`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `country`
 --
@@ -5679,7 +5698,7 @@ ALTER TABLE `listingmeta`
 -- AUTO_INCREMENT for table `listings`
 --
 ALTER TABLE `listings`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `listings_categories`
 --
@@ -5689,7 +5708,7 @@ ALTER TABLE `listings_categories`
 -- AUTO_INCREMENT for table `listing_edits`
 --
 ALTER TABLE `listing_edits`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `messages`
 --
@@ -5734,7 +5753,7 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `system_logs`
 --
 ALTER TABLE `system_logs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 --
 -- AUTO_INCREMENT for table `users`
 --

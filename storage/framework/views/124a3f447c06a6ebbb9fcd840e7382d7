@@ -1,32 +1,30 @@
-@extends('backend.base')
+<?php $__env->startSection('title', 'My Listing'); ?>
 
-@section('title', 'Buy Ads Complete')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 	<ol class="breadcrumb">
-	    <li class="">Complete</li>
+	    <li class="">My Listings</li>
 	</ol>
 	<div class="container-fluid">
 
-		<!-- Ads Table -->
+		<!-- Listings Table -->
 		<div data-widget-group="group1">
 			<div class="row">
-				@if (Session::has('success'))
+				<?php if(Session::has('success')): ?>
 					<div class="col-md-12">
 						<div class="alert alert-dismissable alert-success">
-							<i class="ti ti-check"></i>&nbsp; <strong>Well Done!</strong> {{ Session::get('success') }}.
+							<i class="ti ti-check"></i>&nbsp; <strong>Well Done!</strong> <?php echo e(Session::get('success')); ?>.
 							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 						</div>
 					</div>
-				@endif
-				@if (Session::has('error'))
+				<?php endif; ?>
+				<?php if(Session::has('error')): ?>
 					<div class="col-md-12">
 						<div class="alert alert-dismissable alert-danger">
-							<i class="ti ti-close"></i>&nbsp; <strong>Access denied!</strong> {{ Session::get('error') }}.
+							<i class="ti ti-close"></i>&nbsp; <strong>Access denied!</strong> <?php echo e(Session::get('error')); ?>.
 							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 						</div>
 					</div>
-				@endif
+				<?php endif; ?>
 				<div class="col-md-12">
 					<div class="panel panel-default">
 						<div class="panel-heading">
@@ -38,7 +36,7 @@
 					            <div class="panel-body">
 					                <div class="clearfix">
 					                    <div class="pull-left">
-					                        <img src="{{ asset('assets/backend/img/app-logo.png') }}" class="mt-md mb-md" alt="Avenxo">
+					                        <img src="<?php echo e(asset('assets/backend/img/app-logo.png')); ?>" class="mt-md mb-md" alt="Avenxo">
 					                        <address class="mt-md mb-md">
 					                            <strong>MyListing, PT.</strong><br>
 					                            Jl. Margonda Raya No. 834<br>
@@ -61,25 +59,25 @@
 					                        <div class="pull-left">
 					                            <h3 class="text-muted">To</h3>
 					                            <address>
-					                                <strong>{{ Auth::user()->get()->name }}</strong><br>
+					                                <strong><?php echo e(Auth::user()->get()->name); ?></strong><br>
 					                                <?php $address = Auth::user()->get()->address; ?>
 					                                <?php echo $address->address_1 . '<br>'; ?>
 					                                <?php echo $address->address_2 != '' ? $address->address_1 . '<br>' : null; ?>
-					                                {{ $address->city }}, {{ App\Models\Zone::find($address->zone_id)->name }}. {{ $address->postcode }}<br>
-					                                {{ App\Models\Country::find($address->country_id)->name }}
+					                                <?php echo e($address->city); ?>, <?php echo e(App\Models\Zone::find($address->zone_id)->name); ?>. <?php echo e($address->postcode); ?><br>
+					                                <?php echo e(App\Models\Country::find($address->country_id)->name); ?>
+
 					                            </address>
 					                        </div>
 					                        <div class="pull-right">
 					                            <h3 class="text-muted">Info</h3>
 					                            <ul class="text-left list-unstyled">
 					                            	<?php $createdDate = date('d/m/Y'); ?>
-					                                <li><strong>Date:</strong> {{ date('d/m/Y') }}</li>
-					                                <li><strong>Due:</strong> {{ date('d/m/Y',  strtotime("+10 days")) }}</li>
+					                                <li><strong>Date:</strong> <?php echo e(date('d/m/Y')); ?></li>
+					                                <li><strong>Due:</strong> <?php echo e(date('d/m/Y',  strtotime("+10 days"))); ?></li>
 					                                <li><strong>Late Fee:</strong> 0.5%</li>
 					                            </ul>
 					                        </div>
 					                    </div>
-					                </div>
 					                <div class="row mb-xl">
 					                    <div class="col-md-12">
 					                        <div class="panel" style="visibility: visible; opacity: 1; display: block; transform: translateY(0px);">
@@ -89,7 +87,7 @@
 					                                        <thead>
 					                                            <tr>
 					                                                <th>#</th>
-					                                                <th>Ads ID</th>
+					                                                <th>Listing ID</th>
 					                                                <th>Description</th>
 					                                                <th class="text-right">Quantity</th>
 					                                                <th class="text-right">Unit Cost</th>
@@ -104,10 +102,10 @@
 					                                        	$discSum = 0.00;
 					                                        	$counter = 0;
 					                                        	?>
-					                                        	@foreach ($ads as $ad)
+					                                        	<?php foreach($listings as $listing): ?>
 					                                        		<?php
-					                                        		$disc = Setting::get('ads.price_discount');
-					                                        		$harga = Setting::get('ads.price_per_day') * $ad->days;
+					                                        		$disc = $listing->package->discount;
+					                                        		$harga = $listing->package->price;
 					                                        		$potongan = $disc / 100 * $harga;
 					                                        		$potonganHarga = $harga - $potongan;
 					                                        		$totalPrice = $totalPrice + $potonganHarga;
@@ -116,15 +114,15 @@
 					                                        		$counter++;
 					                                        		?>
 					                                        		<tr>
-					                                        			<td>{{ $counter }}</td>
-						                                        		<td>{{ $ad->ad_id }}</td>
-						                                        		<td>{{ Setting::get('ads.price_notes') }}</td>
+					                                        			<td><?php echo e($counter); ?></td>
+						                                        		<td><?php echo e($listing->listing_id); ?></td>
+						                                        		<td><?php echo e($listing->package->name); ?></td>
 						                                        		<td class="text-right">1</td>
-						                                        		<td class="text-right">Rp {{ number_format($harga, 0, '.', ',') }}</td>
-						                                        		<td class="text-right">{{ $disc }}%</td>
-						                                        		<td class="text-right">Rp {{ number_format($potonganHarga, 0, '.', ',') }}</td>
+						                                        		<td class="text-right">Rp <?php echo e(number_format($harga, 0, '.', ',')); ?></td>
+						                                        		<td class="text-right"><?php echo e($disc); ?>%</td>
+						                                        		<td class="text-right">Rp <?php echo e(number_format($potonganHarga, 0, '.', ',')); ?></td>
 					                                        		</tr>
-					                                        	@endforeach
+					                                        	<?php endforeach; ?>
 					                                        </tbody>
 					                                    </table>
 					                                </div>
@@ -135,11 +133,11 @@
 					                    <div class="col-md-12">
 					                        <div class="row" style="border-top-left-radius: 0px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px;">
 					                            <div class="col-md-4 col-md-offset-8">
-					                                <p class="text-right"><strong>SUB TOTAL: Rp {{ number_format($subtotal, 0, '.', ',') }}</strong></p>
-					                                <p class="text-right">TOTAL POTONGAN HARGA: Rp {{ number_format($discSum, 0, '.', ',') }}</p>
+					                                <p class="text-right"><strong>SUB TOTAL: Rp <?php echo e(number_format($subtotal, 0, '.', ',')); ?></strong></p>
+					                                <p class="text-right">TOTAL POTONGAN HARGA: Rp <?php echo e(number_format($discSum, 0, '.', ',')); ?></p>
 					                                <p class="text-right">VAT: 0%</p>
 					                                <hr>
-					                                <h3 class="text-right text-danger" style="font-weight: bold;">Rp {{ number_format($totalPrice, 0, '.', ',') }}</h3>
+					                                <h3 class="text-right text-danger" style="font-weight: bold;">Rp <?php echo e(number_format($totalPrice, 0, '.', ',')); ?></h3>
 					                            </div>
 					                        </div>
 					                    </div>
@@ -152,28 +150,29 @@
 						<div class="panel-footer text-right">
 							<a class="btn btn-info" href="javascript:;" role="button" onClick="alert('Service unavailable!')"><i class="ti ti-email"></i>&nbsp;&nbsp;Email</a>
 							<a class="btn btn-success" href="javascript:window.print()" role="button"><i class="ti ti-printer"></i>&nbsp;&nbsp;Print</a>
-							<a class="btn btn-default" href="{{ url('app-admin/ads/noncust') }}" role="button"><i class="ti ti-list"></i>&nbsp;&nbsp;Manage</a>
+							<a class="btn btn-default" href="<?php echo e(url('app-admin/listings/noncust')); ?>" role="button"><i class="ti ti-list"></i>&nbsp;&nbsp;Manage</a>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<!-- ./End Ads Table -->
+		<!-- ./End Listings Table -->
 	</div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('page-styles')
-@endsection
+<?php $__env->startSection('page-styles'); ?>
+<?php $__env->stopSection(); ?>
 
-@section('page-scripts')
-@endsection
+<?php $__env->startSection('page-scripts'); ?>
+<?php $__env->stopSection(); ?>
 
-@section('inline-script')
+<?php $__env->startSection('inline-script'); ?>
 	<script type="text/javascript">
 	</script>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('inline-style')
+<?php $__env->startSection('inline-style'); ?>
 <style type="text/css">
 </style>
-@stop
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('backend.base', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -15,7 +15,7 @@ use Auth;
 class AuthCustomersController extends Controller
 {
     protected $loginPath = '/auth-customers/login';
-    protected $redirectPath = '/account';
+    protected $redirectPath = '/subs';
     /*
     |--------------------------------------------------------------------------
     | Registration & Login Controller
@@ -50,8 +50,7 @@ class AuthCustomersController extends Controller
         return Validator::make($data, [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
-            'g-recaptcha-response' => 'required|captcha'
+            'password' => 'required|confirmed|min:6'
         ]);
     }
 
@@ -74,10 +73,11 @@ class AuthCustomersController extends Controller
     {
         $rules = [
             'email' => 'required|min:5',
-            'password' => 'required'
+            'password' => 'required',
+            'g-recaptcha-response' => 'required|captcha'
         ];
 
-        $validation = Validator::make($request->only('email', 'password'), $rules);
+        $validation = Validator::make($request->only('email', 'password','g-recaptcha-response'), $rules);
 
         if ($validation->fails()) {
             return redirect($this->loginPath())->withInput($request->only('email', 'remember'))->withErrors($validation);
