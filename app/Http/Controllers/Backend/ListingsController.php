@@ -333,6 +333,7 @@ class ListingsController extends Controller
         foreach ($request->input('listings') as $listingRequest) {
             $listing = new Listing;
             $listing->customer_id = 'ADMINISTRATOR';
+            $listing->address_id = Auth::user()->get()->address_id;
             $listing->package_id = $listingRequest['package_id'];
             
             //$stop_date = Package::find($listing->package_id)->days;//dd($stop_date);

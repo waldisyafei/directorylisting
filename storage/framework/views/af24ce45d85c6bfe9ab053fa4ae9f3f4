@@ -3,7 +3,7 @@
 <?php $__env->startSection('content'); ?>
 	<ol class="breadcrumb">
 	    <li class=""><a href="<?php echo e(url('account/listings')); ?>">My Listings</a></li>
-	    <li>BUy</li>
+	    <li>Buy</li>
 	</ol>
 	<div class="container-fluid">
 		<div class="row">

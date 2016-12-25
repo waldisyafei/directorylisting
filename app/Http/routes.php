@@ -33,6 +33,13 @@ Route::group(['prefix' => 'noncust-ads'], function(){
 	Route::post('{ads_hash}', 'Frontend\NonCustomersAds@update');
 });
 
+Route::get('admin', function () {
+    return redirect('app-admin/auth/login');
+});
+Route::get('subs', function () {
+    return redirect('auth-customers/login');
+});
+
 
 
 Route::controllers([
@@ -48,7 +55,7 @@ Route::controllers([
 	'auth-nonsubs' => 'Auth\AuthNonSubscriberController'
 ]);
 
-Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
+Route::group(['prefix' => 'app-admin', 'middleware' => 'auth'], function() {
 
 	Route::get('/', 'Backend\BackendController@index');
 
@@ -213,7 +220,7 @@ Route::group(['prefix' => 'notif'], function(){
 	Route::get('send', 'Frontend\FrontendController@updatePost');
 });
 
-Route::group(['prefix' => 'subs', 'middleware' => 'authCustomer'], function() {
+Route::group(['prefix' => 'account', 'middleware' => 'authCustomer'], function() {
 
 	// Index (Dashboard) of subscriber page
 	Route::get('/', 'Customers\CustomersController@index');
