@@ -32,7 +32,7 @@ class ListingsController extends Controller
 
     public function index_noncust()
     {
-        $listings = Listing::where('customer_id', 'ADMINISTRATOR')->orderBy('created_at', 'DSC')->paginate(10);
+        $listings = Listing::where('customer_id', Auth::user()->get()->user_id)->orderBy('created_at', 'DSC')->paginate(10);
 
         return view('backend.pages.listing.list-noncust', ['listings' => $listings]);
     }
@@ -173,7 +173,8 @@ class ListingsController extends Controller
         $listing_old->status = 2;
 
         $listing = new ListingEdit;
-        $listing->customer_id = 'ADMINISTRATOR';
+        $listing->customer_id = Auth::user()->get()->user_id;
+            $listing->user_category = 1;
         $listing->listing_edit_id = $listing_old->listing_id;
         $listing->status = 2;
         $listing->edit = $listing_old->id;
@@ -332,7 +333,8 @@ class ListingsController extends Controller
 
         foreach ($request->input('listings') as $listingRequest) {
             $listing = new Listing;
-            $listing->customer_id = 'ADMINISTRATOR';
+            $listing->customer_id = Auth::user()->get()->user_id;
+            $listing->user_category = 1;
             $listing->address_id = Auth::user()->get()->address_id;
             $listing->package_id = $listingRequest['package_id'];
             
@@ -348,7 +350,7 @@ class ListingsController extends Controller
             $disc = $listing->package->discount;
             $potongan = $disc / 100 * $package_price;
             $total = $package_price - $potongan;
-            create_billing($listing->customer_id, $listing->id, 'listing', $total);
+            create_billing($listing->customer_id, $listing->id, 'listing', $total, 1);
 
             $listing_id[] = $listing->id;
         }
@@ -365,7 +367,7 @@ class ListingsController extends Controller
 
     private function generateListingID()
     {
-        $customerName = 'ADMINISTRATOR';
+        $customerName = Auth::user()->get()->user_id;
         $customerNameFormat = $this->clean($customerName);
 
         return $customerNameFormat;

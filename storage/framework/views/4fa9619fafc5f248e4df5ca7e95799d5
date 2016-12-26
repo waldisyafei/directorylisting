@@ -42,16 +42,13 @@
 											<td><?php echo $listing->listing_edit_id ?></td>
 											<td><?php echo $listing->customer_id ?></td>
 											<td>
-											<?php
-												if($listing->customer_id && $listing->customer_id !== 'ADMINISTRATOR' ){
-													$pos = strpos($listing->customer_id, "N");
-													if ($pos !== 0) {
-														echo $listing->customer->customer_name;		
-													} else {
-														echo $listing->customer->nonsub_name;
-													}
+											<?php //dd($listing->customer);
+												if ($listing->user_category == 1 ){
+													echo $listing->customer->name;		
+												} elseif ($listing->user_category == 2 ){
+													echo $listing->customer->customer_name;
 												}else{
-													echo $listing->customer_id;
+													echo $listing->customer->nonsub_name;	
 												}
 												
 											?>												

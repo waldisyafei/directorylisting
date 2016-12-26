@@ -157,6 +157,7 @@ class AdsController extends Controller
         $ad->edit = $ad_old->id;
         $ad->link = $request->input('link');
         $ad->customer_id = Auth::nonsubs()->get()->nonsub_id;
+        $ad->user_category = 3;
         $ad->show_date = $request->input('show_date');
         //$ad->expired_date = $request->input('expired_date');
         $ad->status = 2;
@@ -235,6 +236,7 @@ class AdsController extends Controller
         foreach ($request->input('ads') as $adsRequest) {
             $ad = new Ad;
             $ad->customer_id = Auth::nonsubs()->get()->nonsub_id;
+            $ad->user_category = 3;
             $ad->address_id = Auth::nonsubs()->get()->address_id;
             $ad->days = $adsRequest['days'];
 
@@ -245,7 +247,7 @@ class AdsController extends Controller
                 $discount = Setting::get('ads.price_discount');
                 $potongan = $discount / 100 * $price;
                 $total = $price - $potongan;
-                create_billing($ad->customer_id, $ad->id, 'ads', $total);
+                create_billing($ad->customer_id, $ad->id, 'ads', $total, 3);
             }
             $ad_id[] = $ad->id;
         }
@@ -312,7 +314,7 @@ class AdsController extends Controller
                 $discount = Setting::get('ads.price_discount');
                 $potongan = $discount / 100 * $price;
                 $total = $price - $potongan;
-                create_billing($ad->customer_id, $ad->id, 'ads', $total);
+                create_billing($ad->customer_id, $ad->id, 'ads', $total, 3);
 
                 $ads_id[] = $ad->id;
             }

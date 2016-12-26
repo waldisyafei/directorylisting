@@ -34,11 +34,6 @@
 			</div>
 		<?php endif; ?>
 
-		<div class="row">
-			<div class="action-menu col-md-12">
-				<a class="btn btn-primary" href="<?php echo e(url('app-admin/ads/create')); ?>" role="button"><i class="ti ti-plus"></i> Add new Non Customer Ads</a>
-			</div>
-		</div>
 
 		<div data-widget-group="group1">
 			<div class="row">
