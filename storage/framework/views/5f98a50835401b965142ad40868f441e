@@ -1,43 +1,41 @@
-@extends('customer.base')
+<?php $__env->startSection('title', 'Buy Listing'); ?>
 
-@section('title', 'Buy Listing')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 	<ol class="breadcrumb">
-	    <li class=""><a href="{{ url('account/listings') }}">My Listings</a></li>
+	    <li class=""><a href="<?php echo e(url('app-admin/listings')); ?>">My Listings</a></li>
 	    <li>Buy</li>
 	</ol>
 	<div class="container-fluid">
 		<div class="row">
-			@if (Session::has('error'))
+			<?php if(Session::has('error')): ?>
 				<div class="col-md-12">
 					<div class="alert alert-dismissable alert-danger">
-						<i class="ti ti-check"></i>&nbsp; <strong>Oh snap!</strong> {{ Session::get('error') }}.
+						<i class="ti ti-check"></i>&nbsp; <strong>Oh snap!</strong> <?php echo e(Session::get('error')); ?>.
 						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 					</div>
 				</div>
-			@endif
-			@if (Session::has('success'))
+			<?php endif; ?>
+			<?php if(Session::has('success')): ?>
 				<div class="col-md-12">
 					<div class="alert alert-dismissable alert-success">
-						<i class="ti ti-check"></i>&nbsp; <strong>Well Done!</strong> {{ Session::get('success') }}.
+						<i class="ti ti-check"></i>&nbsp; <strong>Well Done!</strong> <?php echo e(Session::get('success')); ?>.
 						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 					</div>
 				</div>
-			@endif
-			@if ($errors->has())
+			<?php endif; ?>
+			<?php if($errors->has()): ?>
 				<div class="col-md-12">
 					<div class="alert alert-dismissable alert-danger">
 						<i class="ti ti-close"></i>&nbsp; <strong>Oh snap!</strong>
 						<ul>
-							@foreach ($errors->all() as $error)
-								<li>{{ $error }}</li>
-							@endforeach
+							<?php foreach($errors->all() as $error): ?>
+								<li><?php echo e($error); ?></li>
+							<?php endforeach; ?>
 						</ul>
 						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 					</div>
 				</div>
-			@endif
+			<?php endif; ?>
 			<div class="col-md-12">
 				<div class="panel panel-blue">
 					<div class="panel-heading">
@@ -45,8 +43,8 @@
 					</div>
 					<div class="panel-body">
 						<p>You are select buy new Listing, please follow the steps to finish</p>
-						<form action="{{ url('account/listings/buy') }}" method="post" id="buy-listing-wizard" class="form-horizontal">
-							<input type="hidden" name="_token" value="{{ csrf_token() }}">
+						<form action="<?php echo e(url('app-admin/listings/create')); ?>" method="post" id="buy-listing-wizard" class="form-horizontal">
+							<input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
 							<fieldset title="Step 1">
 								<legend>How Long Listings to show</legend>
 								<?php
@@ -58,11 +56,11 @@
 										<div class="col-md-6">
 											<select class="select-package form-control" name="listings[0][package_id]" required>
 												<option selected disabled>--- SELECT PACKAGE ---</option>
-												@forelse ($packages as $package)
-													<option value="{{ $package->id }}" data-info="{{ $package->notes }}" data-price="{{ $package->price }}" data-days="{{ $package->days }}" data-discount="{{ $package->discount }}">{{ $package->name }}</option>
-												@empty
-													{{-- empty expr --}}
-												@endforelse
+												<?php $__empty_1 = true; foreach($packages as $package): $__empty_1 = false; ?>
+													<option value="<?php echo e($package->id); ?>" data-info="<?php echo e($package->notes); ?>" data-price="<?php echo e($package->price); ?>" data-days="<?php echo e($package->days); ?>" data-discount="<?php echo e($package->discount); ?>"><?php echo e($package->name); ?></option>
+												<?php endforeach; if ($__empty_1): ?>
+													<?php /* empty expr */ ?>
+												<?php endif; ?>
 											</select>
 										</div>
 									</div>
@@ -88,19 +86,19 @@
 			</div>
 		</div>
 	</div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('page-styles')
-@endsection
+<?php $__env->startSection('page-styles'); ?>
+<?php $__env->stopSection(); ?>
 
-@section('page-scripts')
+<?php $__env->startSection('page-scripts'); ?>
     <!-- Validate Plugin -->
-	<script type="text/javascript" src="{{ asset('assets/backend/plugins/form-validation/jquery.validate.min.js') }}"></script>
+	<script type="text/javascript" src="<?php echo e(asset('assets/backend/plugins/form-validation/jquery.validate.min.js')); ?>"></script>
 	<!-- Stepy Plugin -->
-	<script type="text/javascript" src="{{ asset('assets/backend/plugins/form-stepy/jquery.stepy.js') }}"></script>
-@endsection
+	<script type="text/javascript" src="<?php echo e(asset('assets/backend/plugins/form-stepy/jquery.stepy.js')); ?>"></script>
+<?php $__env->stopSection(); ?>
 
-@section('inline-script')
+<?php $__env->startSection('inline-script'); ?>
 	<script type="text/javascript">
 	$(function(){
 			$(document).on('ready', function(){
@@ -236,16 +234,17 @@
 	/**
 	 * Number.prototype.format(n, x)
 	 * 
-	 * @param integer n: length of decimal
-	 * @param integer x: length of sections
+	 * @param  integer n: length of decimal
+	 * @param  integer x: length of sections
 	 */
 	Number.prototype.format = function(n, x) {
 	    var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
 	    return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
 	};
 	</script>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('inline-style')
+<?php $__env->startSection('inline-style'); ?>
 </style>
-@stop
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('backend.base', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -33,6 +33,13 @@ Route::group(['prefix' => 'noncust-ads'], function(){
 	Route::post('{ads_hash}', 'Frontend\NonCustomersAds@update');
 });
 
+Route::get('admin', function () {
+    return redirect('app-admin/auth/login');
+});
+Route::get('subs', function () {
+    return redirect('auth-customers/login');
+});
+
 
 
 Route::controllers([
@@ -83,13 +90,23 @@ Route::group(['prefix' => 'app-admin', 'middleware' => 'auth'], function() {
 
 	Route::group(['prefix' => 'listings'], function() {
 		Route::get('/', 'Backend\ListingsController@index');
+		Route::get('noncust', 'Backend\ListingsController@index_noncust');
 		Route::get('create', 'Backend\ListingsController@create');
-		Route::post('create', 'Backend\ListingsController@store');
+		Route::post('create', 'Backend\ListingsController@buy_listing_slot');
 		Route::get('edit/{id}', 'Backend\ListingsController@edit');
 		Route::post('edit/{id}', 'Backend\ListingsController@update');
 		Route::get('approve/{id}', 'Backend\ListingsController@approve');
 		Route::get('suspend/{id}', 'Backend\ListingsController@suspend');
 		Route::get('delete/{id}', 'Backend\ListingsController@destroy');
+
+		Route::get('buy', 'Backend\ListingsController@buy');
+		Route::get('buy/complete', 'Backend\ListingsController@buyComplete');
+
+		Route::get('renew', 'Backend\ListingsController@renew');
+		Route::post('renew', 'Backend\ListingsController@renew_listing_slot');
+		Route::get('renew/complete', 'Backend\ListingsController@renewComplete');
+
+		Route::get('get_sub_categories', 'Backend\ListingsController@getSubcategory');
 
 		Route::group(['prefix' => 'categories'], function(){
 			Route::get('/', 'Backend\ListingCategoriesController@index');

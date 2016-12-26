@@ -27,7 +27,7 @@ class AuthController extends Controller
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
-    protected $redirectPath = 'app-admin';
+    protected $redirectPath = 'admin';
 
     /**
      * Create a new authentication controller instance.
@@ -72,7 +72,9 @@ class AuthController extends Controller
     public function postLogin(Request $request)
     {
         $this->validate($request, [
-            'email' => 'required|email', 'password' => 'required','g-recaptcha-response' => 'required|captcha',
+            'email' => 'required|email', 
+            'password' => 'required',
+            'g-recaptcha-response' => 'required|captcha',
         ]);
 
         $credentials = $this->getCredentials($request);

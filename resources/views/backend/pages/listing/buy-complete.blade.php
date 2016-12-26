@@ -1,14 +1,14 @@
 @extends('backend.base')
 
-@section('title', 'Buy Ads Complete')
+@section('title', 'My Listing')
 
 @section('content')
 	<ol class="breadcrumb">
-	    <li class="">Complete</li>
+	    <li class="">My Listings</li>
 	</ol>
 	<div class="container-fluid">
 
-		<!-- Ads Table -->
+		<!-- Listings Table -->
 		<div data-widget-group="group1">
 			<div class="row">
 				@if (Session::has('success'))
@@ -79,7 +79,6 @@
 					                            </ul>
 					                        </div>
 					                    </div>
-					                </div>
 					                <div class="row mb-xl">
 					                    <div class="col-md-12">
 					                        <div class="panel" style="visibility: visible; opacity: 1; display: block; transform: translateY(0px);">
@@ -89,7 +88,7 @@
 					                                        <thead>
 					                                            <tr>
 					                                                <th>#</th>
-					                                                <th>Ads ID</th>
+					                                                <th>Listing ID</th>
 					                                                <th>Description</th>
 					                                                <th class="text-right">Quantity</th>
 					                                                <th class="text-right">Unit Cost</th>
@@ -104,10 +103,10 @@
 					                                        	$discSum = 0.00;
 					                                        	$counter = 0;
 					                                        	?>
-					                                        	@foreach ($ads as $ad)
+					                                        	@foreach ($listings as $listing)
 					                                        		<?php
-					                                        		$disc = Setting::get('ads.price_discount');
-					                                        		$harga = Setting::get('ads.price_per_day') * $ad->days;
+					                                        		$disc = $listing->package->discount;
+					                                        		$harga = $listing->package->price;
 					                                        		$potongan = $disc / 100 * $harga;
 					                                        		$potonganHarga = $harga - $potongan;
 					                                        		$totalPrice = $totalPrice + $potonganHarga;
@@ -117,8 +116,8 @@
 					                                        		?>
 					                                        		<tr>
 					                                        			<td>{{ $counter }}</td>
-						                                        		<td>{{ $ad->ad_id }}</td>
-						                                        		<td>{{ Setting::get('ads.price_notes') }}</td>
+						                                        		<td>{{ $listing->listing_id }}</td>
+						                                        		<td>{{ $listing->package->name }}</td>
 						                                        		<td class="text-right">1</td>
 						                                        		<td class="text-right">Rp {{ number_format($harga, 0, '.', ',') }}</td>
 						                                        		<td class="text-right">{{ $disc }}%</td>
@@ -152,13 +151,13 @@
 						<div class="panel-footer text-right">
 							<a class="btn btn-info" href="javascript:;" role="button" onClick="alert('Service unavailable!')"><i class="ti ti-email"></i>&nbsp;&nbsp;Email</a>
 							<a class="btn btn-success" href="javascript:window.print()" role="button"><i class="ti ti-printer"></i>&nbsp;&nbsp;Print</a>
-							<a class="btn btn-default" href="{{ url('app-admin/ads/noncust') }}" role="button"><i class="ti ti-list"></i>&nbsp;&nbsp;Manage</a>
+							<a class="btn btn-default" href="{{ url('app-admin/listings/noncust') }}" role="button"><i class="ti ti-list"></i>&nbsp;&nbsp;Manage</a>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<!-- ./End Ads Table -->
+		<!-- ./End Listings Table -->
 	</div>
 @endsection
 

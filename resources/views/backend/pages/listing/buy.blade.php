@@ -1,10 +1,10 @@
-@extends('customer.base')
+@extends('backend.base')
 
 @section('title', 'Buy Listing')
 
 @section('content')
 	<ol class="breadcrumb">
-	    <li class=""><a href="{{ url('account/listings') }}">My Listings</a></li>
+	    <li class=""><a href="{{ url('app-admin/listings') }}">My Listings</a></li>
 	    <li>Buy</li>
 	</ol>
 	<div class="container-fluid">
@@ -45,7 +45,7 @@
 					</div>
 					<div class="panel-body">
 						<p>You are select buy new Listing, please follow the steps to finish</p>
-						<form action="{{ url('account/listings/buy') }}" method="post" id="buy-listing-wizard" class="form-horizontal">
+						<form action="{{ url('app-admin/listings/create') }}" method="post" id="buy-listing-wizard" class="form-horizontal">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
 							<fieldset title="Step 1">
 								<legend>How Long Listings to show</legend>

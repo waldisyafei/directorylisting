@@ -34,4 +34,9 @@ class Listing extends Model implements SluggableInterface
     {
         return $this->hasOne('App\Models\Customer', 'customer_id', 'customer_id');
     }
+
+    public function address()
+    {
+        return $this->hasOne('App\Models\Address', 'address_id', 'address_id');
+    }
 }
