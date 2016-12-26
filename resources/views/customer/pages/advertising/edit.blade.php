@@ -64,6 +64,12 @@
 									<input type="text" name="link" class="form-control" value="{{ $ad->link }}">
 								</div>
 							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Days</label>
+								<div class="col-sm-8">
+									<input type="text" name="link" class="form-control" value="{{ $ad->days }} days left" disabled>
+								</div>
+							</div>
 							<div class="row form-inline">
 								<label class="col-sm-2 control-label">Show Date</label>
 								<div class="col-sm-8">

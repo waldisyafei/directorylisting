@@ -64,16 +64,13 @@
 											<td>{{ $billing->id }}</td>
 											<td>{{ $billing->customer_id ? $billing->customer_id : 'Non Customer' }}</td>
 											<td>
-											<?php
-												if($billing->customer_id && $billing->customer_id !== 'ADMINISTRATOR' ){
-													$pos = strpos($billing->customer_id, "N");
-													if ($pos !== 0) {
-														echo $billing->customer->customer_name;		
-													} else {
-														echo $billing->customer->nonsub_name;
-													}
+											<?php //dd($billing->customer);
+												if ($billing->user_category == 1 ){
+													echo $billing->customer->name;		
+												} elseif ($billing->user_category == 2 ){
+													echo $billing->customer->customer_name;
 												}else{
-													echo $billing->customer_id;
+													echo $billing->customer->nonsub_name;	
 												}
 												
 											?>

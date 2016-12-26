@@ -43,18 +43,15 @@
 											<td><?php echo $ad->customer ? $ad->customer_id : 'Non Customer' ?></td>
 											<td>
 											<?php
-												if($ad->customer_id){
-													$pos = strpos($ad->customer_id, "N");
-													if ($pos !== 0) {
-														echo $ad->customer->customer_name;		
-													} else {
-														echo '$ad->customer->nonsub_name';
-													}
+												if ($ad->user_category == 1 ){
+													echo $ad->customer->name;		
+												} elseif ($ad->user_category == 2 ){
+													echo $ad->customer->customer_name;
 												}else{
-													echo '$ad->item->address->company';
+													echo $ad->customer->nonsub_name;	
 												}
 												
-											?>
+											?>	
 											</td>
 											<td>
 												@if ($ad->status == 2)

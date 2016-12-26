@@ -36,12 +36,6 @@
 			</div>
 		@endif
 
-		<div class="row">
-			<div class="action-menu col-md-12">
-				<a class="btn btn-primary" href="{{ url('app-admin/ads/create') }}" role="button"><i class="ti ti-plus"></i> Add new Non Customer Ads</a>
-			</div>
-		</div>
-
 		<div data-widget-group="group1">
 			<div class="row">
 				<div class="col-md-12">
