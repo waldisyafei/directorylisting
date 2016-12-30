@@ -190,6 +190,9 @@ class ListingsController extends Controller
         $listing->edit = $listing_old->id;
         $listing->title = $request->input('title');
         $listing->content = $request->input('content');
+        $listing->review = $request->input('review');
+        $listing->custom_tab = $request->input('custom');
+        $listing->custom_tab_title = $request->input('custom_title');
         $listing->keywords = $request->input('keywords');
         $listing->tags = $request->input('tags');
         $listing->url = $request->input('url');
