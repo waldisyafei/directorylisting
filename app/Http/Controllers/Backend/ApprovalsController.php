@@ -39,6 +39,9 @@ class ApprovalsController extends Controller
         //isi update ke ad yg lama
         $listing->title = $listing_update->title;
         $listing->content = $listing_update->content;
+        $listing->review = $listing_update->review;
+        $listing->custom_tab = $listing_update->custom_tab;
+        $listing->custom_tab_title = $listing_update->custom_tab_title;
         $listing->keywords = $listing_update->keywords;
         $listing->tags = $listing_update->tags;
         $listing->url = $listing_update->url;
