@@ -69,12 +69,16 @@ class ApprovalsController extends Controller
      */
     public function reject_listing($id)
     {
-        $listing = Listing::find($id);
+
+        $listing_update = ListingEdit::find($id);
+        $listing = Listing::find($listing_update->edit);
 
         if ($listing) {
             $listing->status = 4;
+            $listing_update->status = 4;
 
             $listing->save();
+            $listing_update->save();
             
             add_system_log(Auth::user()->get()->id, '<a href="javascript:;" class="name">' . Auth::user()->get()->name . '</a> Rejected Listing <a href="javascript:;">' . $listing->title . '</a>');
 
@@ -200,12 +204,15 @@ class ApprovalsController extends Controller
      */
     public function reject_ad($id)
     {
-        $ad = Ad::find($id);
+        $ad_update = AdEdit::find($id);
+        $ad = Ad::find($ad_update->edit);
 
         if ($ad) {
             $ad->status = 4;
+            $ad_update->status = 4;
 
             $ad->save();
+            $ad_update->save();
             
             add_system_log(Auth::user()->get()->id, '<a href="javascript:;" class="name">' . Auth::user()->get()->name . '</a> Rejected Ad <a href="javascript:;">' . $ad->title . '</a>');
 
