@@ -36,12 +36,25 @@
 								</thead>
 								<tbody>
 									@foreach ($listings as $listing)
-										<tr>
+										<tr><?php
+										//dd($listing->customer->customer_name);;
+										?>
 											<td><?php echo $listing->id ?></td>
 											<td><?php echo $listing->title ?></td>
-											<td><?php echo $listing->listing_id ?></td>
+											<td><?php echo $listing->listing_edit_id ?></td>
 											<td><?php echo $listing->customer_id ?></td>
-											<td><?php echo $listing->customer->customer_name ?></td>
+											<td>
+											<?php //dd($listing->customer);
+												if ($listing->user_category == 1 ){
+													echo $listing->customer->name;		
+												} elseif ($listing->user_category == 2 ){
+													echo $listing->customer->customer_name;
+												}else{
+													echo $listing->customer->nonsub_name;	
+												}
+												
+											?>												
+											</td>
 											<td>
 												@if ($listing->status == 2)
 													<label class="label label-warning tooltips" title="<?php echo $listing->listingStatus->info ?>"><?php echo $listing->listingStatus->display_name ?></label>

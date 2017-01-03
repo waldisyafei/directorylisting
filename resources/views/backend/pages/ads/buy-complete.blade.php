@@ -152,7 +152,7 @@
 						<div class="panel-footer text-right">
 							<a class="btn btn-info" href="javascript:;" role="button" onClick="alert('Service unavailable!')"><i class="ti ti-email"></i>&nbsp;&nbsp;Email</a>
 							<a class="btn btn-success" href="javascript:window.print()" role="button"><i class="ti ti-printer"></i>&nbsp;&nbsp;Print</a>
-							<a class="btn btn-default" href="{{ url('account/ads') }}" role="button"><i class="ti ti-list"></i>&nbsp;&nbsp;Manage</a>
+							<a class="btn btn-default" href="{{ url('app-admin/ads/noncust') }}" role="button"><i class="ti ti-list"></i>&nbsp;&nbsp;Manage</a>
 						</div>
 					</div>
 				</div>

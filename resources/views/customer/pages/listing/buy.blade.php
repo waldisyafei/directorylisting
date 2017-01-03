@@ -5,7 +5,7 @@
 @section('content')
 	<ol class="breadcrumb">
 	    <li class=""><a href="{{ url('account/listings') }}">My Listings</a></li>
-	    <li>BUy</li>
+	    <li>Buy</li>
 	</ol>
 	<div class="container-fluid">
 		<div class="row">
@@ -48,10 +48,10 @@
 						<form action="{{ url('account/listings/buy') }}" method="post" id="buy-listing-wizard" class="form-horizontal">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
 							<fieldset title="Step 1">
+								<legend>How Long Listings to show</legend>
 								<?php
 								$packages = App\Models\Package::all();
 								?>
-								<legend>Please Select a Package</legend>
 								<div class="listing-entry first">
 									<div class="form-group">
 										<label for="fieldname" class="col-md-3 control-label">Select Package</label>
@@ -70,22 +70,17 @@
 									<button type="button" class="add-listing-entry btn tooltips" title="Add New Listing Slot"><i class="fa fa-plus"></i></button>
 									<button type="button" class="remove-listing-entry btn tooltips" title="Remove Slot"><i class="fa fa-close"></i></button>
 								</div>
-
-								<legend>RINCIAN HARGA</legend>
-								<div class="info-price-list clearfix">
-
-								</div>
 							</fieldset>
-							<fieldset title="Step 2">
-								<legend>Info Order</legend>
+							<!--<fieldset title="Step 2">
+								<legend>Info Order</legend>-->
 
 								<div class="info-order-list clearfix">
 									<div class="col-md-6">
 										
 									</div>
 								</div>
-							</fieldset>
-							<input type="submit" class="finish btn-success btn" value="Submit" />
+							<!--</fieldset>-->
+							<input type="submit" style="float: right;" class="finish btn-success btn" value="Submit" />
 						</form>
 					</div>
 					<!-- ./End panel body -->
@@ -109,7 +104,6 @@
 	<script type="text/javascript">
 	$(function(){
 			$(document).on('ready', function(){
-				$('body').on('change', '.select-package', function(){
 					var infoOrders = '';
 					var totalHarga = 0;
 
@@ -134,14 +128,9 @@
 					$('.info-price-list .panels').remove();
 
 					$('.info-price-list').append(infoOrders);
-				});
-			});
-		$('#buy-listing-wizard').stepy(
-			{finishButton: true,
-				titleClick: true,
-				block: true,
-				validate: true,
-				next: function(){
+
+		$('body').on('change', '.select-package', function(){
+			$('.info-price-list .col-md-6 .panel').remove();
 					var infoOrders = '';
 					var totalHarga = 0;
 
@@ -178,8 +167,9 @@
 					//jQuery('html, body').animate({
 			        //	scrollTop: 0
 			    	//}, 1000);
-				}
+				});
 			});
+		});
 
 	    //Add Wizard Compability - see docs
 	    $('.stepy-navigator').wrapInner('<div class="pull-right"></div>');
@@ -243,7 +233,6 @@
 				selectPackage.eq(i).attr('name', 'listings[' + i + '][package_id]');
 			}
 		}
-	});
 	/**
 	 * Number.prototype.format(n, x)
 	 * 

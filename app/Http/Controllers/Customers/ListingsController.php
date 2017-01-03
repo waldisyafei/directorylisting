@@ -184,11 +184,15 @@ class ListingsController extends Controller
 
         $listing = new ListingEdit;
         $listing->customer_id = Auth::customer()->get()->customer_id;
+        $listing->user_category = 2;
         $listing->listing_edit_id = $listing_old->listing_id;
         $listing->status = 2;
         $listing->edit = $listing_old->id;
         $listing->title = $request->input('title');
         $listing->content = $request->input('content');
+        $listing->review = $request->input('review');
+        $listing->custom_tab = $request->input('custom');
+        $listing->custom_tab_title = $request->input('custom_title');
         $listing->keywords = $request->input('keywords');
         $listing->tags = $request->input('tags');
         $listing->url = $request->input('url');
@@ -342,6 +346,7 @@ class ListingsController extends Controller
         foreach ($request->input('listings') as $listingRequest) {
             $listing = new Listing;
             $listing->customer_id = Auth::customer()->get()->customer_id;
+            $listing->user_category = 2;
             $listing->package_id = $listingRequest['package_id'];
             
             //$stop_date = Package::find($listing->package_id)->days;//dd($stop_date);
@@ -356,7 +361,7 @@ class ListingsController extends Controller
             $disc = $listing->package->discount;
             $potongan = $disc / 100 * $package_price;
             $total = $package_price - $potongan;
-            create_billing($listing->customer_id, $listing->id, 'listing', $total);
+            create_billing($listing->customer_id, $listing->id, 'listing', $total, 2);
 
             $listing_id[] = $listing->id;
         }
@@ -423,6 +428,7 @@ class ListingsController extends Controller
         foreach ($request->input('listings') as $key => $listingRequest) {
             if ($listingRequest['package_id'] != '--- SELECT PACKAGE ---') {
                 $listing = Listing::where('listing_id', $key)->first();
+                $listing->user_category = 2;
                 $listing->package_id = $listingRequest['package_id'];
 
                 if ($listing->status == 5) {
@@ -434,7 +440,7 @@ class ListingsController extends Controller
                 $disc = $listing->package->discount;
                 $potongan = $disc / 100 * $package_price;
                 $total = $package_price - $potongan;
-                create_billing($listing->customer_id, $listing->id, 'listing', $total);
+                create_billing($listing->customer_id, $listing->id, 'listing', $total, 2);
 
                 $listing_id[] = $listing->id;
             }

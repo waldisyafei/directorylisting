@@ -67,6 +67,7 @@ class AdsController extends Controller
         foreach ($request->input('ads') as $adsRequest) {
             $ad = new Ad;
             $ad->customer_id = Auth::user()->get()->user_id;
+            $ad->user_category = 1;
             $ad->address_id = Auth::user()->get()->address_id;
             $ad->days = $adsRequest['days'];
 
@@ -77,7 +78,7 @@ class AdsController extends Controller
                 $discount = Setting::get('ads.price_discount');
                 $potongan = $discount / 100 * $price;
                 $total = $price - $potongan;
-                create_billing($ad->customer_id, $ad->id, 'ads', $total);
+                create_billing($ad->customer_id, $ad->id, 'ads', $total, 1);
             }
             $ad_id[] = $ad->id;
         }
@@ -91,71 +92,7 @@ class AdsController extends Controller
 
         //return redirect('app-admin/ads/buy/complete');
         return redirect('app-admin/ads')->with('success', 'Ad inserted successfully');
-        /*if (!Auth::user()->get()->can('can_create_ads')) return abort(403);
-
-        $validation = Validator::make($request->all(), [
-            'days' => 'required|numeric',
-            'customer_name' => 'required|max:100',
-            'address_1' => 'required',
-            'country' => 'required',
-            'province' => 'required',
-            'city' => 'required',
-            'password' => 'required'
-            ]);
-
-        if ($validation->fails()) {
-            return redirect()->back()->withInput()->withErrors($validation);
-        }
-
-        $address = new Address;
-        $address->company = $request->input('customer_name');
-        $address->address_1 = $request->input('address_1');
-        $address->address_2 = $request->input('address_2');
-        $address->city = $request->input('city');
-        $address->postcode = $request->input('postcode');
-        $address->country_id = $request->input('country');
-        $address->zone_id = $request->input('province');
-
-        $address->save();
-
-        $ads = new Ad;
-        $ads->days = $request->input('days');
-        $ads->address_id = $address->address_id;
-        $ads->password = bcrypt($request->input('password'));
-        $ads->save();
-        $ads->ad_id = '28' . date('Y') . date('m') . str_pad((string)$ads->id, 5, 0, STR_PAD_LEFT);
-
-        $ads->noncust_ad_link = url('noncust-ads/' . md5((string)$ads->ad_id, false));
-
-        $price = Setting::get('ads.noncust.price_per_day') * $ads->days;
-        $discount = Setting::get('ads.noncust.price_discount');
-        $potongan = $discount / 100 * $price;
-        $total = $price - $potongan;
-        create_billing($ads->customer_id, $ads->id, 'ads', $total);
-
-        $billing = Billing::where('item_id', $ads->id)->first();
-
-        if ($billing) {
-            $billing->status = 2;
-            $billing->save();
-            $ads->status = 6;
-        }
-
-        $ads->save();
-        
-        return redirect('app-admin/ads')->with('success', 'Non customer ads created!');
-        */
-
-        /*if ($request->has('customer_id') && $request->input('customer_id') != 'choose-customer') {
-            $ad = new Ad;
-            $ad_count = (int)Ad::count() + 1;
-            $ad->ad_id = '28' . date('Y') . date('m') . str_pad((string)$ad_count, 5, 0, STR_PAD_LEFT);
-            $ad->customer_id = $request->customer_id != 'non-customer' ? $request->customer_id : null;
-
-            if ($ad->save()) {
-                return redirect('app-admin/ads/edit/'. $ad->id)->withSuccess('success', 'Ad create success.');
-            }
-        }*/
+       
     }
 
     public function buyComplete()
@@ -240,6 +177,7 @@ class AdsController extends Controller
         $ad->edit = $ad_old->id;
         $ad->link = $request->input('link');
         $ad->customer_id = Auth::user()->get()->user_id;
+        $ad->user_category = 1;
         $ad->show_date = $request->input('show_date');
         $ad->expired_date = $request->input('expired_date');
         $ad->status = 2;
@@ -340,7 +278,7 @@ class AdsController extends Controller
                 $discount = Setting::get('ads.price_discount');
                 $potongan = $discount / 100 * $price;
                 $total = $price - $potongan;
-                create_billing($ad->customer_id, $ad->id, 'ads', $total);
+                create_billing($ad->customer_id, $ad->id, 'ads', $total, 1);
 
                 $ads_id[] = $ad->id;
             }
@@ -353,6 +291,6 @@ class AdsController extends Controller
 
         Session::put('ads', $ads);
 
-        return redirect('app-admin/ads');
+        return redirect('app-admin/ads/buy/complete');
     }
 }

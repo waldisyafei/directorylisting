@@ -1,11 +1,11 @@
 @extends('backend.base')
 
-@section('title', "Review Listing")
+@section('title', "Review Ads")
 
 @section('content')
 	<ol class="breadcrumb">
 		<li><a href="<?php echo url('app-admin/approvals') ?>">Approvals</a></li>
-		<li class="active">Review Listing</li>
+		<li class="active">Review Ads</li>
 	</ol>
 
 	<div class="container-fluid">
@@ -15,7 +15,7 @@
 
 				<div class="panel panel-blue">
 					<div class="panel-heading">
-						<h2>Review Listing</h2>
+						<h2>Review Ads</h2>
 					</div>
 					<div class="panel-body">
 						<form class="form-horizontal">
@@ -28,7 +28,7 @@
 							<div class="form-group">
 								<label class="col-sm-2 control-label">Link</label>
 								<div class="col-sm-8">
-									<span><?php echo $ad->link ?></span>
+									<span><a href="http://<?php echo $ad->link ?>" target="_blank">{{ $ad->link }}</span>
 								</div>
 							</div>
 							<?php $images = json_decode($ad->assets) ?>

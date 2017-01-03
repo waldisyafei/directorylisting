@@ -8,10 +8,11 @@ class Billing extends Model
 {
     public function customer()
         {       
-            $pos = strpos($this->customer_id, "N");
-            if ($pos !== 0) {
+            if ($this->user_category == 1){
+                return $this->hasOne('App\Models\User', 'user_id', 'customer_id');
+            } elseif ($this->user_category == 2){
                 return $this->hasOne('App\Models\Customer', 'customer_id', 'customer_id');
-            } else {
+            }else {
                 return $this->hasOne('App\Models\NonSubscriber', 'nonsub_id', 'customer_id');
             }
     }

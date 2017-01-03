@@ -97,6 +97,13 @@ class PDFLib implements Canvas
     private $_last_stroke_color;
 
     /**
+     * The current opacity level
+     *
+     * @var array
+     */
+    private $_current_opacity;
+
+    /**
      * Cache of image handles
      *
      * @var array
@@ -116,6 +123,13 @@ class PDFLib implements Canvas
      * @var array
      */
     private $_objs;
+
+    /**
+     * List of gstate objects created for this PDF (for reuse)
+     *
+     * @var array
+     */
+    private $_gstates = array();
 
     /**
      * Current page number
@@ -480,8 +494,14 @@ class PDFLib implements Canvas
      */
     protected function _set_stroke_color($color)
     {
-        if ($this->_last_stroke_color == $color)
-            return;
+        if ($this->_last_stroke_color == $color) {
+            //return;
+        }
+
+        $alpha = isset($color["alpha"]) ? $color["alpha"] : 1;
+        if (isset($this->_current_opacity)) {
+            $alpha *= $this->_current_opacity;
+        }
 
         $this->_last_stroke_color = $color;
 
@@ -496,6 +516,7 @@ class PDFLib implements Canvas
             list($c1, $c2, $c3, $c4) = array($color[0], $color[1], null, null);
         }
 
+        $this->_set_stroke_opacity($alpha);
         $this->_pdf->setcolor("stroke", $type, $c1, $c2, $c3, $c4);
     }
 
@@ -508,6 +529,11 @@ class PDFLib implements Canvas
     {
         if ($this->_last_fill_color == $color)
             return;
+
+        $alpha = isset($color["alpha"]) ? $color["alpha"] : 1;
+        if (isset($this->_current_opacity)) {
+            $alpha *= $this->_current_opacity;
+        }
 
         $this->_last_fill_color = $color;
 
@@ -522,7 +548,34 @@ class PDFLib implements Canvas
             list($c1, $c2, $c3, $c4) = array($color[0], $color[1], null, null);
         }
 
+        $this->_set_fill_opacity($alpha);
         $this->_pdf->setcolor("fill", $type, $c1, $c2, $c3, $c4);
+    }
+
+    /**
+     * Sets the fill opacity
+     *
+     * @param $opacity
+     * @param $mode
+     */
+    function _set_fill_opacity($opacity, $mode = "Normal")
+    {
+        if ($mode === "Normal") {
+            $this->_set_gstate("opacityfill=$opacity");
+        }
+    }
+
+    /**
+     * Sets the stroke opacity
+     *
+     * @param $opacity
+     * @param $mode
+     */
+    function _set_stroke_opacity($opacity, $mode = "Normal")
+    {
+        if ($mode === "Normal") {
+            $this->_set_gstate("opacitystroke=$opacity");
+        }
     }
 
     /**
@@ -534,9 +587,24 @@ class PDFLib implements Canvas
     function set_opacity($opacity, $mode = "Normal")
     {
         if ($mode === "Normal") {
-            $gstate = $this->_pdf->create_gstate("opacityfill=$opacity opacitystroke=$opacity");
-            $this->_pdf->set_gstate($gstate);
+            $this->_set_gstate("opacityfill=$opacity opacitystroke=$opacity");
+            $this->_current_opacity = $opacity;
         }
+    }
+
+    /**
+     * Sets the gstate
+     *
+     * @param $gstate_options
+     * @return int
+     */
+    function _set_gstate($gstate_options)
+    {
+        if (($gstate = array_search($gstate_options, $this->_gstates)) === false) {
+            $gstate = $this->_pdf->create_gstate($gstate_options);
+            $this->_gstates[$gstate] = $gstate_options;
+        }
+        return $this->_pdf->set_gstate($gstate);
     }
 
     function set_default_view($view, $options = array())
@@ -1031,6 +1099,7 @@ class PDFLib implements Canvas
         if (!count($this->_page_text))
             return;
 
+        $eval = null;
         $this->_pdf->suspend_page("");
 
         for ($p = 1; $p <= $this->_page_count; $p++) {

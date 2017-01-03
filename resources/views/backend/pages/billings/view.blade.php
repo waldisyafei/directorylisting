@@ -174,12 +174,26 @@
 											<p>{{ $billing->confirm_message }}
 				                		</div>
 				                		
-				                		<div class="form-group">
-				                			<label>Bukti Pembayaran</label>
-				                			@if ($billing->bukti_pembayaran != '')
-				                				<img src="{{ asset($billing->bukti_pembayaran) }}" class="img-responsive" alt="">
-				                			@endif
-				                		</div>
+				                	@if($billing->image_pembayaran == null && $billing->file_pembayaran == null)
+			                		<div class="form-group">
+			                			<label>Bukti Pembayaran</label>
+			                				<p><em>Belum ada bukti pembayaran yang diupload</em></p>
+				                	</div>
+				                	@elseif($billing->image_pembayaran !== null)
+			                		<div class="form-group">
+			                			<label>Bukti Pembayaran</label>
+			                				<img src="{{ asset($billing->image_pembayaran) }}" class="img-responsive" alt="">
+				                	</div>
+				                	@else
+				                	<div class="form-group">
+			                			<label>Bukti Pembayaran</label>
+			                			<?php
+			                			$filename = explode( '/', $billing->file_pembayaran );
+			                			$filename = $filename[5];
+			                			?>
+			                			<p><a class="img-responsive" href="{{ asset($billing->file_pembayaran) }}" > {{ $filename }}</a>
+			                		</div>
+			                		@endif
 			                		</div>
 			                	</div>
 			                </div>

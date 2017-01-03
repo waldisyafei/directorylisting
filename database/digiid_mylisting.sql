@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.2
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Nov 01, 2016 at 06:40 PM
--- Server version: 10.1.16-MariaDB
--- PHP Version: 5.6.24
+-- Host: 127.0.0.1
+-- Generation Time: 26 Des 2016 pada 06.54
+-- Versi Server: 10.1.19-MariaDB
+-- PHP Version: 5.6.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -23,7 +23,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `address`
+-- Struktur dari tabel `address`
 --
 
 CREATE TABLE `address` (
@@ -41,12 +41,12 @@ CREATE TABLE `address` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `address`
+-- Dumping data untuk tabel `address`
 --
 
 INSERT INTO `address` (`address_id`, `customer_id`, `company`, `address_1`, `address_2`, `city`, `postcode`, `country_id`, `zone_id`, `created_at`, `updated_at`) VALUES
 (1, 9, 'Grafich Dev Pte Ltd', 'St. Margonda Raya No. 578 Kemirimuka Beji', '', 'Depok', '16423', 100, 1515, '2016-03-15 22:25:40', '2016-03-15 22:25:40'),
-(2, 10, 'PYT. TEST01', 'kdhfskflsdfj', '', 'jakarta barat', '', 100, 1513, '2016-03-17 08:52:37', '2016-03-17 08:52:37'),
+(2, 10, 'PYT. TEST01', 'address 1', 'address 2', 'jakarta barat', '202012', 100, 1513, '2016-03-17 08:52:37', '2016-03-17 08:52:37'),
 (3, 11, 'Pt Test02', 'jkgfgjjn hhjk', '', 'Jakarta utara', '', 100, 1513, '2016-03-28 03:43:34', '2016-03-28 03:43:34'),
 (16, NULL, 'Test Non Customer', 'sdsa dsadsadsa', '', 'Depok', '16423', 100, 1515, '2016-03-31 23:25:44', '2016-03-31 23:25:44'),
 (17, 12, 'PT. TEST03', 'adds', '', 'jakarta pusat', '', 100, 1513, '2016-05-10 05:12:46', '2016-05-10 05:12:46'),
@@ -55,7 +55,7 @@ INSERT INTO `address` (`address_id`, `customer_id`, `company`, `address_1`, `add
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ads`
+-- Struktur dari tabel `ads`
 --
 
 CREATE TABLE `ads` (
@@ -63,6 +63,7 @@ CREATE TABLE `ads` (
   `ad_id` varchar(13) COLLATE utf8_unicode_ci DEFAULT NULL,
   `title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `customer_id` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `user_category` int(1) NOT NULL,
   `password` varchar(60) COLLATE utf8_unicode_ci DEFAULT NULL,
   `link` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `days` int(11) NOT NULL DEFAULT '0',
@@ -70,6 +71,7 @@ CREATE TABLE `ads` (
   `show_date` datetime DEFAULT NULL,
   `expired_date` datetime DEFAULT NULL,
   `status` int(1) NOT NULL DEFAULT '1',
+  `edit` int(5) NOT NULL,
   `assets` longtext COLLATE utf8_unicode_ci,
   `address_id` int(11) DEFAULT NULL,
   `noncust_ad_link` longtext COLLATE utf8_unicode_ci,
@@ -78,44 +80,18 @@ CREATE TABLE `ads` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `ads`
+-- Dumping data untuk tabel `ads`
 --
 
-INSERT INTO `ads` (`id`, `ad_id`, `title`, `customer_id`, `password`, `link`, `days`, `been_active`, `show_date`, `expired_date`, `status`, `assets`, `address_id`, `noncust_ad_link`, `created_at`, `updated_at`) VALUES
-(17, '2820160300002', 'Test Ads hehe', '012016030001936', NULL, 'http://www.yahoo.co.id/', 3, 1, '2016-03-21 10:30:00', '2016-05-15 06:55:00', 2, '["storage\\/app\\/cs\\/assets\\/12-car-ads-creative-advertising.jpg"]', NULL, NULL, '2016-03-18 00:54:18', '2016-05-11 23:30:06'),
-(18, '2820160300003', 'Test Ads 5', '012016030001936', NULL, 'http://www.google.co.id', 5, 1, '2016-03-24 15:30:00', '2016-03-29 21:05:00', 5, '["storage\\/app\\/cs\\/assets\\/autosolutions.jpg"]', NULL, NULL, '2016-03-18 00:54:18', '2016-03-30 07:00:27'),
-(36, '2820160400036', 'Test Ads Non Customer', NULL, '$2y$10$NE5FKl85fKI/BTEDnQfBAuzQdhW1dw5gIRHmzVKfWh3MWnktq0LS6', 'http://kaskus.co.id', 34, 1, '2016-04-01 06:45:00', '2016-05-05 06:45:00', 5, '["storage\\/app\\/cs\\/assets\\/img-2.jpg"]', 16, 'http://mylisting.grafich.com/noncust-ads/ca357a4c21a6300c1d9cd06ab71a03e2', '2016-03-31 23:25:44', '2016-05-05 04:48:49'),
-(37, '2820160500037', NULL, '012016030001936', NULL, NULL, 1, 0, NULL, NULL, 1, NULL, NULL, NULL, '2016-05-09 14:21:48', '2016-05-09 14:21:48'),
-(38, '2820161000038', NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, 1, NULL, NULL, NULL, '2016-10-26 16:59:56', '2016-10-26 16:59:56'),
-(39, '2820161000039', NULL, NULL, NULL, NULL, 3, 0, NULL, NULL, 1, NULL, NULL, NULL, '2016-10-27 01:56:04', '2016-10-27 01:56:04'),
-(40, '2820161000040', NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, 1, NULL, NULL, NULL, '2016-10-27 01:57:47', '2016-10-27 01:57:47'),
-(41, '2820161000041', NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, 1, NULL, NULL, NULL, '2016-10-27 01:58:35', '2016-10-27 01:58:35'),
-(42, '2820161000042', NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, 1, NULL, NULL, NULL, '2016-10-27 01:59:16', '2016-10-27 01:59:16'),
-(43, '2820161000043', NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, 1, NULL, NULL, NULL, '2016-10-27 01:59:29', '2016-10-27 01:59:30'),
-(44, '2820161000044', 'Asasdas', NULL, NULL, 'asdasd', 1, 0, '1899-12-31 00:00:00', '1899-12-12 00:00:00', 2, NULL, NULL, NULL, '2016-10-27 02:03:00', '2016-10-27 02:08:00'),
-(45, '2820161000045', '234234234', '012016030002682', NULL, '2342342342', 1, 1, '2016-11-05 00:00:00', '2016-11-06 00:00:00', 3, '["storage\\/app\\/cs\\/assets\\/Screenshot_from_2016-10-14_21-56-35.png"]', NULL, NULL, '2016-10-27 02:05:13', '2016-10-31 16:20:11'),
-(46, '2820161000046', 'sdfdsf', '012016030002682', NULL, 'sdfsdf', 1, 1, '2016-10-10 00:00:00', '2016-10-11 00:00:00', 5, NULL, NULL, NULL, '2016-10-27 02:08:50', '2016-10-27 02:09:52'),
-(47, '2820161100047', '345', '012016030002682', NULL, '345', 1, 1, '2016-11-10 00:00:00', '2016-11-11 00:00:00', 3, NULL, NULL, NULL, '2016-11-01 12:44:09', '2016-11-01 12:45:04'),
-(48, '2820161100048', NULL, NULL, '$2y$10$LS8rl3VWWjidpVCpbcgcBepJBh/2/AGVXVXKVGg5/m0JfF28AthYO', NULL, 1, 0, NULL, NULL, 6, NULL, 18, 'http://localhost:8000/noncust-ads/4b1b3b8ee387cc8ca07aacdf25e6a4ba', '2016-11-01 12:46:59', '2016-11-01 12:47:00'),
-(49, '2820161100049', 'www', '012016030002682', NULL, 'www', 3, 1, '1899-11-28 05:25:00', '1899-12-01 05:25:00', 5, NULL, NULL, NULL, '2016-11-01 13:14:54', '2016-11-01 13:33:26'),
-(50, '2820161100050', NULL, '012016030002682', NULL, NULL, 1, 0, NULL, NULL, 1, NULL, NULL, NULL, '2016-11-01 13:14:54', '2016-11-01 13:14:54'),
-(51, 'up-49-161101-', 'dsasda', '012016030002682', NULL, 'sadasda', 0, 0, '1899-12-06 14:30:00', '1899-12-09 14:30:00', 2, NULL, NULL, NULL, '2016-11-01 13:29:20', '2016-11-01 13:29:20'),
-(52, 'up-49-161101-', 'dsasda', '012016030002682', NULL, 'sadasda', 0, 0, '1899-12-06 14:30:00', '1899-12-09 14:30:00', 2, NULL, NULL, NULL, '2016-11-01 13:32:30', '2016-11-01 13:32:30'),
-(53, 'up-49-161101-', 'www', '012016030002682', NULL, 'www', 0, 1, '1899-11-28 05:25:00', '1899-11-28 05:25:00', 5, NULL, NULL, NULL, '2016-11-01 13:33:12', '2016-11-01 13:33:26'),
-(54, '2820161100054', NULL, NULL, NULL, NULL, 3, 0, NULL, NULL, 1, NULL, NULL, NULL, '2016-11-01 14:00:58', '2016-11-01 14:00:58'),
-(55, '2820161100055', NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, 1, NULL, NULL, NULL, '2016-11-01 14:00:59', '2016-11-01 14:00:59'),
-(56, '2820161100056', NULL, NULL, NULL, NULL, 3, 0, NULL, NULL, 1, NULL, NULL, NULL, '2016-11-01 14:01:22', '2016-11-01 14:01:22'),
-(57, '2820161100057', NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, 1, NULL, NULL, NULL, '2016-11-01 14:01:22', '2016-11-01 14:01:22'),
-(58, '2820161100058', NULL, NULL, NULL, NULL, 4, 0, NULL, NULL, 1, NULL, NULL, NULL, '2016-11-01 14:02:20', '2016-11-01 14:02:20'),
-(59, '2820161100059', NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, 1, NULL, NULL, NULL, '2016-11-01 14:02:21', '2016-11-01 14:02:21'),
-(60, '2820161100060', NULL, '012016030002682', NULL, NULL, 1, 0, NULL, NULL, 1, NULL, NULL, NULL, '2016-11-01 14:03:09', '2016-11-01 14:03:09'),
-(61, '2820161100061', NULL, NULL, NULL, NULL, 3, 0, NULL, NULL, 1, NULL, NULL, NULL, '2016-11-01 14:08:27', '2016-11-01 14:08:27'),
-(62, '2820161100062', NULL, NULL, NULL, NULL, 4, 0, NULL, NULL, 1, NULL, NULL, NULL, '2016-11-01 14:09:01', '2016-11-01 14:09:01');
+INSERT INTO `ads` (`id`, `ad_id`, `title`, `customer_id`, `user_category`, `password`, `link`, `days`, `been_active`, `show_date`, `expired_date`, `status`, `edit`, `assets`, `address_id`, `noncust_ad_link`, `created_at`, `updated_at`) VALUES
+(3, '2820161200003', 'Rumah Baru Margonda Raya ', '1234567890', 1, NULL, 'www.w.com', 95, 1, '2016-12-26 00:00:00', '2016-12-27 00:00:00', 2, 1, '["storage\\/app\\/cs\\/assets\\/Chrysanthemum.jpg"]', 1, NULL, '2016-12-26 05:02:55', '2016-12-26 05:53:57'),
+(4, '2820161200004', 'Rumah kosong Bogor Admin 4', '012016030002682', 2, NULL, 'www.rumahksosong.com', 101, 1, '2016-12-26 00:00:00', '2017-04-06 00:00:00', 3, 6, '["storage\\/app\\/cs\\/assets\\/Lighthouse.jpg"]', 2, NULL, '2016-12-26 05:32:54', '2016-12-26 05:48:24'),
+(5, '2820161200005', 'Rumah baru Tangerang 2', 'N-0120160300026', 3, NULL, 'www.batanyo.com', 45, 1, '2016-12-26 00:00:00', '2017-02-09 00:00:00', 3, 5, '["storage\\/app\\/cs\\/assets\\/Lighthouse.jpg"]', 2, NULL, '2016-12-26 05:37:30', '2016-12-26 05:45:39');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `adsmeta`
+-- Struktur dari tabel `adsmeta`
 --
 
 CREATE TABLE `adsmeta` (
@@ -128,7 +104,7 @@ CREATE TABLE `adsmeta` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
--- Dumping data for table `adsmeta`
+-- Dumping data untuk tabel `adsmeta`
 --
 
 INSERT INTO `adsmeta` (`meta_id`, `ad_id`, `meta_key`, `meta_value`, `created_at`, `updated_at`) VALUES
@@ -141,7 +117,47 @@ INSERT INTO `adsmeta` (`meta_id`, `ad_id`, `meta_key`, `meta_value`, `created_at
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ad_status`
+-- Struktur dari tabel `ad_edits`
+--
+
+CREATE TABLE `ad_edits` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `ad_edit_id` varchar(13) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `customer_id` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `user_category` int(1) NOT NULL,
+  `password` varchar(60) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `link` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `days` int(11) NOT NULL DEFAULT '0',
+  `been_active` int(1) NOT NULL DEFAULT '0',
+  `show_date` datetime DEFAULT NULL,
+  `expired_date` datetime DEFAULT NULL,
+  `status` int(1) NOT NULL DEFAULT '1',
+  `edit` int(5) NOT NULL,
+  `assets` longtext COLLATE utf8_unicode_ci,
+  `address_id` int(11) DEFAULT NULL,
+  `noncust_ad_link` longtext COLLATE utf8_unicode_ci,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data untuk tabel `ad_edits`
+--
+
+INSERT INTO `ad_edits` (`id`, `ad_edit_id`, `title`, `customer_id`, `user_category`, `password`, `link`, `days`, `been_active`, `show_date`, `expired_date`, `status`, `edit`, `assets`, `address_id`, `noncust_ad_link`, `created_at`, `updated_at`) VALUES
+(1, '2820161200003', 'Rumah Baru Margonda Raya ', '1234567890', 1, NULL, 'www.w.com', 0, 0, '2016-12-26 00:00:00', '2016-12-27 00:00:00', 7, 3, '["storage\\/app\\/cs\\/assets\\/Chrysanthemum.jpg"]', NULL, NULL, '2016-12-26 05:03:59', '2016-12-26 05:10:12'),
+(2, '2820161200004', 'Rumah kosong Bogor Admin 2', '012016030002682', 2, NULL, 'www.rumahksosong.com', 0, 0, '2016-12-26 00:00:00', '2017-02-09 00:00:00', 7, 4, '["storage\\/app\\/cs\\/assets\\/Lighthouse.jpg"]', NULL, NULL, '2016-12-26 05:34:06', '2016-12-26 05:34:33'),
+(3, '2820161200004', 'Rumah kosong Bogor Admin 4', '012016030002682', 2, NULL, 'www.rumahksosong.com', 0, 0, '2016-12-26 00:00:00', '2017-02-09 00:00:00', 7, 4, '["storage\\/app\\/cs\\/assets\\/Lighthouse.jpg"]', NULL, NULL, '2016-12-26 05:35:00', '2016-12-26 05:35:16'),
+(4, '2820161200005', 'Rumah baru Tangerang', 'N-0120160300026', 3, NULL, 'www.batanyo.com', 0, 0, '2016-12-26 00:00:00', '2017-02-09 00:00:00', 7, 5, '["storage\\/app\\/cs\\/assets\\/Lighthouse.jpg"]', NULL, NULL, '2016-12-26 05:38:39', '2016-12-26 05:40:24'),
+(5, '2820161200005', 'Rumah baru Tangerang 2', 'N-0120160300026', 3, NULL, 'www.batanyo.com', 0, 0, '2016-12-26 00:00:00', '2017-02-09 00:00:00', 7, 5, '["storage\\/app\\/cs\\/assets\\/Lighthouse.jpg"]', NULL, NULL, '2016-12-26 05:44:30', '2016-12-26 05:45:39'),
+(6, '2820161200004', 'Rumah kosong Bogor Admin 4', '012016030002682', 2, NULL, 'www.rumahksosong.com', 0, 0, '2016-12-26 00:00:00', '2017-04-06 00:00:00', 7, 4, '["storage\\/app\\/cs\\/assets\\/Lighthouse.jpg"]', NULL, NULL, '2016-12-26 05:48:03', '2016-12-26 05:48:24'),
+(7, '2820161200003', 'Rumah Baru Margonda Raya ', '1234567890', 1, NULL, 'www.w.com', 0, 0, '2016-12-26 00:00:00', NULL, 2, 3, '["storage\\/app\\/cs\\/assets\\/Chrysanthemum.jpg"]', NULL, NULL, '2016-12-26 05:53:57', '2016-12-26 05:53:57');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `ad_status`
 --
 
 CREATE TABLE `ad_status` (
@@ -152,7 +168,7 @@ CREATE TABLE `ad_status` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
--- Dumping data for table `ad_status`
+-- Dumping data untuk tabel `ad_status`
 --
 
 INSERT INTO `ad_status` (`id`, `name`, `display_name`, `info`) VALUES
@@ -166,14 +182,16 @@ INSERT INTO `ad_status` (`id`, `name`, `display_name`, `info`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `billings`
+-- Struktur dari tabel `billings`
 --
 
 CREATE TABLE `billings` (
   `id` int(10) UNSIGNED NOT NULL,
   `customer_id` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `user_category` int(1) NOT NULL,
   `item_id` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
-  `bukti_pembayaran` longtext COLLATE utf8_unicode_ci,
+  `image_pembayaran` longtext COLLATE utf8_unicode_ci,
+  `file_pembayaran` longtext COLLATE utf8_unicode_ci,
   `confirm_message` longtext COLLATE utf8_unicode_ci,
   `item_type` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `amount` decimal(10,2) NOT NULL,
@@ -183,63 +201,24 @@ CREATE TABLE `billings` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `billings`
+-- Dumping data untuk tabel `billings`
 --
 
-INSERT INTO `billings` (`id`, `customer_id`, `item_id`, `bukti_pembayaran`, `confirm_message`, `item_type`, `amount`, `status`, `created_at`, `updated_at`) VALUES
-(21, '012016030001936', '77', '', NULL, 'listing', '1360000.00', 2, '2016-03-15 23:37:37', '2016-03-16 00:08:08'),
-(22, '012016030001936', '78', '', NULL, 'listing', '560000.00', 2, '2016-03-15 23:37:37', '2016-03-16 05:34:40'),
-(23, '012016030001936', '79', '', NULL, 'listing', '1360000.00', 2, '2016-03-16 05:47:10', '2016-03-16 05:49:16'),
-(24, '012016030001936', '80', '', NULL, 'listing', '1360000.00', 2, '2016-03-16 05:47:10', '2016-03-16 05:49:23'),
-(25, '012016030001936', '81', '', NULL, 'listing', '1360000.00', 2, '2016-03-16 05:47:10', '2016-03-16 05:49:30'),
-(26, '012016030001936', '82', 'storage/app/listings/billings/26/post-1.jpg', 'Test Send Confirm', 'listing', '560000.00', 2, '2016-03-16 05:47:10', '2016-03-16 10:16:22'),
-(27, '012016030001936', '83', 'storage/app/listings/billings/27/post-3.jpg', 'Testttttt', 'listing', '560000.00', 2, '2016-03-16 08:50:30', '2016-03-17 05:03:31'),
-(28, '012016030001936', '84', NULL, NULL, 'listing', '560000.00', 2, '2016-03-17 05:47:35', '2016-03-17 06:12:27'),
-(29, '012016030001936', '79', NULL, NULL, 'listing', '1360000.00', 2, '2016-03-17 07:18:02', '2016-03-17 08:43:11'),
-(30, '012016030001936', '80', NULL, NULL, 'listing', '560000.00', 2, '2016-03-17 07:18:02', '2016-03-17 08:43:58'),
-(31, '012016030001936', '86', NULL, NULL, 'listing', '560000.00', 2, '2016-03-17 08:46:41', '2016-03-17 09:34:19'),
-(32, '012016030001936', '87', NULL, '', 'listing', '560000.00', 2, '2016-03-17 08:46:41', '2016-03-28 07:28:43'),
-(33, '012016030002682', '88', NULL, 'Paid via cimb tgl 17maret', 'listing', '560000.00', 2, '2016-03-17 08:54:23', '2016-03-17 08:57:33'),
-(34, '012016030002682', '89', 'storage/app/listings/billings/34/image.jpeg', '', 'listing', '560000.00', 2, '2016-03-17 09:13:14', '2016-03-17 09:16:22'),
-(35, '012016030002682', '90', NULL, 'sudah bayar tgl 10 bulan 3 via bank abc', 'listing', '1360000.00', 2, '2016-03-17 09:36:05', '2016-03-28 04:00:22'),
-(38, '012016030001936', '84', NULL, NULL, 'listing', '1360000.00', 2, '2016-03-17 23:05:52', '2016-03-17 23:06:06'),
-(43, '012016030001936', '17', NULL, NULL, 'ads', '69000.00', 2, '2016-03-18 00:54:18', '2016-03-18 13:26:04'),
-(44, '012016030001936', '18', NULL, NULL, 'ads', '69000.00', 2, '2016-03-18 00:54:18', '2016-03-18 13:59:19'),
-(47, '012016030001936', '18', NULL, NULL, 'ads', '115000.00', 2, '2016-03-24 08:14:45', '2016-03-24 08:24:24'),
-(48, '012016030003972', '91', NULL, 'transfer tgl 25 maret via bank abc', 'listing', '560000.00', 2, '2016-03-28 03:50:13', '2016-03-28 04:01:08'),
-(49, '012016030003972', '92', NULL, 'Setor tgl 22 maret via bank abc', 'listing', '560000.00', 2, '2016-03-28 03:50:13', '2016-03-28 04:05:07'),
-(50, '012016030003972', '93', NULL, 'setor tgl 22 maret via bank abc', 'listing', '1360000.00', 2, '2016-03-28 03:50:13', '2016-03-28 04:05:17'),
-(61, NULL, '36', NULL, NULL, 'ads', '969000.00', 2, '2016-03-31 23:25:44', '2016-03-31 23:25:44'),
-(62, '012016030001936', '94', NULL, 'Inv via bank abc tgl ', 'listing', '560000.00', 2, '2016-05-09 13:54:45', '2016-05-09 14:03:41'),
-(63, '012016030001936', '95', NULL, NULL, 'listing', '560000.00', 0, '2016-05-09 13:54:45', '2016-05-09 13:54:45'),
-(64, '012016030001936', '37', NULL, NULL, 'ads', '23000.00', 0, '2016-05-09 14:21:48', '2016-05-09 14:21:48'),
-(65, NULL, '38', NULL, NULL, 'ads', '23000.00', 0, '2016-10-26 16:59:56', '2016-10-26 16:59:56'),
-(66, NULL, '39', NULL, NULL, 'ads', '69000.00', 0, '2016-10-27 01:56:04', '2016-10-27 01:56:04'),
-(67, NULL, '40', NULL, NULL, 'ads', '23000.00', 0, '2016-10-27 01:57:48', '2016-10-27 01:57:48'),
-(68, NULL, '41', NULL, NULL, 'ads', '23000.00', 0, '2016-10-27 01:58:35', '2016-10-27 01:58:35'),
-(69, NULL, '42', NULL, NULL, 'ads', '23000.00', 0, '2016-10-27 01:59:16', '2016-10-27 01:59:16'),
-(70, NULL, '43', NULL, NULL, 'ads', '23000.00', 0, '2016-10-27 01:59:30', '2016-10-27 01:59:30'),
-(71, '012016030002682', '44', NULL, NULL, 'ads', '23000.00', 2, '2016-10-27 02:03:00', '2016-10-27 02:03:20'),
-(72, '012016030002682', '45', NULL, NULL, 'ads', '23000.00', 2, '2016-10-27 02:05:14', '2016-10-31 16:18:57'),
-(73, '012016030002682', '46', NULL, NULL, 'ads', '23000.00', 2, '2016-10-27 02:08:50', '2016-10-27 02:09:23'),
-(74, '012016030002682', '47', NULL, NULL, 'ads', '23000.00', 2, '2016-11-01 12:44:09', '2016-11-01 12:44:25'),
-(75, NULL, '48', NULL, NULL, 'ads', '28500.00', 2, '2016-11-01 12:46:59', '2016-11-01 12:47:00'),
-(76, '012016030002682', '49', NULL, NULL, 'ads', '69000.00', 2, '2016-11-01 13:14:54', '2016-11-01 13:29:04'),
-(77, '012016030002682', '50', NULL, NULL, 'ads', '23000.00', 0, '2016-11-01 13:14:54', '2016-11-01 13:14:54'),
-(78, NULL, '54', NULL, NULL, 'ads', '69000.00', 0, '2016-11-01 14:00:58', '2016-11-01 14:00:58'),
-(79, NULL, '55', NULL, NULL, 'ads', '23000.00', 0, '2016-11-01 14:00:59', '2016-11-01 14:00:59'),
-(80, NULL, '56', NULL, NULL, 'ads', '69000.00', 0, '2016-11-01 14:01:22', '2016-11-01 14:01:22'),
-(81, NULL, '57', NULL, NULL, 'ads', '23000.00', 0, '2016-11-01 14:01:22', '2016-11-01 14:01:22'),
-(82, NULL, '58', NULL, NULL, 'ads', '92000.00', 0, '2016-11-01 14:02:21', '2016-11-01 14:02:21'),
-(83, NULL, '59', NULL, NULL, 'ads', '23000.00', 0, '2016-11-01 14:02:21', '2016-11-01 14:02:21'),
-(84, '012016030002682', '60', NULL, NULL, 'ads', '23000.00', 0, '2016-11-01 14:03:09', '2016-11-01 14:03:09'),
-(85, NULL, '61', NULL, NULL, 'ads', '69000.00', 0, '2016-11-01 14:08:27', '2016-11-01 14:08:27'),
-(86, NULL, '62', NULL, NULL, 'ads', '92000.00', 0, '2016-11-01 14:09:01', '2016-11-01 14:09:01');
+INSERT INTO `billings` (`id`, `customer_id`, `user_category`, `item_id`, `image_pembayaran`, `file_pembayaran`, `confirm_message`, `item_type`, `amount`, `status`, `created_at`, `updated_at`) VALUES
+(4, '1234567890', 1, '2', NULL, NULL, NULL, 'ads', '23000.00', 2, '2016-12-26 04:31:15', '2016-12-26 04:49:40'),
+(5, '1234567890', 1, '3', NULL, NULL, NULL, 'listing', '548800.00', 2, '2016-12-26 04:52:17', '2016-12-26 04:52:33'),
+(6, '1234567890', 1, '3', NULL, NULL, NULL, 'ads', '115000.00', 2, '2016-12-26 05:02:55', '2016-12-26 05:03:12'),
+(7, '1234567890', 1, '4', NULL, NULL, NULL, 'listing', '548800.00', 2, '2016-12-26 05:11:43', '2016-12-26 05:15:54'),
+(8, '012016030002682', 2, '5', 'storage/app/listings/billings/8/Chrysanthemum.jpg', NULL, 'Berhasil bayar', 'listing', '548800.00', 2, '2016-12-26 05:27:16', '2016-12-26 05:30:28'),
+(9, '012016030002682', 2, '4', 'storage/app/listings/billings/9/Hydrangeas.jpg', NULL, 'Sudah Bayar yaa', 'ads', '1035000.00', 2, '2016-12-26 05:32:55', '2016-12-26 05:33:38'),
+(10, 'N-0120160300026', 3, '5', 'storage/app/listings/billings/10/Tulips.jpg', NULL, 'Nonsubs Konfirmasi', 'ads', '1035000.00', 2, '2016-12-26 05:37:30', '2016-12-26 05:38:06'),
+(11, '012016030002682', 2, '4', 'storage/app/listings/billings/11/Tulips.jpg', NULL, 'Bayaran 2', 'ads', '1288000.00', 2, '2016-12-26 05:46:51', '2016-12-26 05:47:34'),
+(12, '1234567890', 1, '3', NULL, NULL, NULL, 'ads', '782000.00', 2, '2016-12-26 05:51:09', '2016-12-26 05:52:38');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `country`
+-- Struktur dari tabel `country`
 --
 
 CREATE TABLE `country` (
@@ -250,7 +229,7 @@ CREATE TABLE `country` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `country`
+-- Dumping data untuk tabel `country`
 --
 
 INSERT INTO `country` (`country_id`, `name`, `iso_code_2`, `iso_code_3`) VALUES
@@ -511,7 +490,7 @@ INSERT INTO `country` (`country_id`, `name`, `iso_code_2`, `iso_code_3`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customers`
+-- Struktur dari tabel `customers`
 --
 
 CREATE TABLE `customers` (
@@ -533,19 +512,19 @@ CREATE TABLE `customers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `customers`
+-- Dumping data untuk tabel `customers`
 --
 
 INSERT INTO `customers` (`id`, `customer_id`, `customer_name`, `address_id`, `phone`, `fax`, `pic`, `pic_phone`, `pic_mobile1`, `pic_mobile2`, `pic_email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (9, '012016030001936', 'Grafich Dev Pte Ltd', 1, '082298078502', '', 'Gufron RA', '082298078502', '082298078502', '', 'test@gmail.com', '$2y$10$eK.ei902n59yqGI4EAzM2.QuTX0B1yNvcRqZ1kc77GUKXQ9WwFAQ6', '1zwKp4N00gBJNwLEPsM1oxwmS5a9ADfwaXYfhJUS7HEN2Vr2zri3NiGiZAQl', '2016-03-15 22:25:40', '2016-05-11 23:13:11'),
-(10, '012016030002682', 'PYT. TEST01', 2, '123455678', '', 'TEST01', '1234567', '123456', '', 'test01@gmail.com', '$2y$10$Nw0TyIu19sacR3f4zCyvleFM5PBv/b7TBsPP3MlDhheMh6X.5lOe.', 't8aq07rwkulZyj94uAo1j0026npLqTsqvzU9Kl4CXNtgZzN0HqZ2OJ5JAQcO', '2016-03-17 08:52:37', '2016-11-01 13:40:47'),
+(10, '012016030002682', 'Customer 2', 2, '123455678', '', 'TEST01', '1234567', '123456', '', 'test01@gmail.com', '$2y$10$ErY9JZ8ES4J1c.MFUWDNmuXIPQSIBECGR9ZQl1EkOB4xkezZnf706', 'Gohn0OEDSKn3CY5QpHt2sC35YqmVcWzQJoT1RlgUkTjybo2CvSTvd4phhgeJ', '2016-03-17 08:52:37', '2016-12-25 16:28:37'),
 (11, '012016030003972', 'Pt Test02', 3, '1234556', '', 'Test02', '123445', '1234566789', '', 'Test02@gmail.com', '$2y$10$J6E6I/FRmvXx/.t/1AecEu6g9fwBSZvEuwx.eAJaHcKTg41W4/e7u', 'kD82eOAjvdA7RmpTRdYsUrbFP1KquZrsLKRVAojzDyFKvRqb4PTrI1EyuPjS', '2016-03-28 03:43:34', '2016-03-28 04:12:25'),
 (12, '012016050004935', 'PT. TEST03', 17, '12354656', '', 'test03', '1341', '12324', '', 'test03@gmail.com', '$2y$10$hk386w4hmarO6hzRbUoEjOu76odzlYxx/oGxfSLGXubFPAb6I5kxS', NULL, '2016-05-10 05:12:45', '2016-05-10 05:12:46');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `history`
+-- Struktur dari tabel `history`
 --
 
 CREATE TABLE `history` (
@@ -557,19 +536,156 @@ CREATE TABLE `history` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `history`
+-- Dumping data untuk tabel `history`
 --
 
 INSERT INTO `history` (`customer_id`, `item_id`, `item_type`, `updated_at`, `created_at`) VALUES
-('012016030002682', 'up-49-161101-08', 'ads', '2016-11-01 13:32:30', '2016-11-01 13:32:30'),
-('012016030002682', '2820161100049', 'ads', '2016-11-01 13:32:30', '2016-11-01 13:32:30'),
-('012016030002682', 'up-49-161101-08', 'ads', '2016-11-01 13:33:12', '2016-11-01 13:33:12'),
-('012016030002682', '2820161100049', 'ads', '2016-11-01 13:33:12', '2016-11-01 13:33:12');
+('012016030002682', 'up-3-161102-023', 'ads', '2016-11-01 19:30:12', '2016-11-01 19:30:12'),
+('012016030002682', '2820161100003', 'ads', '2016-11-01 19:30:12', '2016-11-01 19:30:12'),
+('012016030002682', 'up-6-161102-095', 'ads', '2016-11-02 14:55:42', '2016-11-02 14:55:42'),
+('012016030002682', '2820161100006', 'ads', '2016-11-02 14:55:43', '2016-11-02 14:55:43'),
+('012016030002682', 'up-9-161102-102', 'ads', '2016-11-02 15:23:54', '2016-11-02 15:23:54'),
+('012016030002682', '2820161100009', 'ads', '2016-11-02 15:23:55', '2016-11-02 15:23:55'),
+('012016030002682', 'up-12-161103-09', 'ads', '2016-11-03 14:08:05', '2016-11-03 14:08:05'),
+('012016030002682', 'up-9-161102-1', 'ads', '2016-11-03 14:08:05', '2016-11-03 14:08:05'),
+('NULL', 'up-13-161104-07', 'ads', '2016-11-04 12:20:23', '2016-11-04 12:20:23'),
+('NULL123', 'up-13-161104-07', 'ads', '2016-11-04 12:20:37', '2016-11-04 12:20:37'),
+('NULL', 'up-13-161104-07', 'ads', '2016-11-04 12:21:42', '2016-11-04 12:21:42'),
+('NULL', 'up-13-161104-07', 'ads', '2016-11-04 12:22:18', '2016-11-04 12:22:18'),
+('NULL', '2820161100013', 'ads', '2016-11-04 12:22:18', '2016-11-04 12:22:18'),
+('NULL', 'up-1-161104-090', 'ads', '2016-11-04 14:09:04', '2016-11-04 14:09:04'),
+('NULL', '2820161100001', 'ads', '2016-11-04 14:09:04', '2016-11-04 14:09:04'),
+('012016030002682', 'up-1-161104-091', 'ads', '2016-11-04 14:12:04', '2016-11-04 14:12:04'),
+('012016030002682', '2820161100001', 'ads', '2016-11-04 14:12:04', '2016-11-04 14:12:04'),
+('012016030002682', 'up-2-161104-091', 'ads', '2016-11-04 14:14:20', '2016-11-04 14:14:20'),
+('012016030002682', 'up-1-161104-0', 'ads', '2016-11-04 14:14:21', '2016-11-04 14:14:21'),
+('012016030002682', 'up-4-161104-093', 'ads', '2016-11-04 14:34:43', '2016-11-04 14:34:43'),
+('012016030002682', '2820161100004', 'ads', '2016-11-04 14:34:43', '2016-11-04 14:34:43'),
+('012016030002682', '2820161100006', 'ads', '2016-11-04 14:39:49', '2016-11-04 14:39:49'),
+('012016030002682', '2820161100008', 'ads', '2016-11-04 14:41:32', '2016-11-04 14:41:32'),
+('012016030002682', '2820161100008', 'ads', '2016-11-04 14:51:16', '2016-11-04 14:51:16'),
+('012016030002682', '2820161100008', 'ads', '2016-11-04 14:52:18', '2016-11-04 14:52:18'),
+('012016030002682', '2820161100008', 'ads', '2016-11-04 15:08:10', '2016-11-04 15:08:10'),
+('012016030002682', '2820161100010', 'ads', '2016-11-04 15:09:11', '2016-11-04 15:09:11'),
+('012016030002682', '2820161100010', 'ads', '2016-11-04 15:09:33', '2016-11-04 15:09:33'),
+('012016030002682', '11', 'ads', '2016-11-04 15:28:51', '2016-11-04 15:28:51'),
+('012016030002682', '2820161100011', 'ads', '2016-11-04 15:28:51', '2016-11-04 15:28:51'),
+('012016030002682', '2820161100011', 'ads', '2016-11-04 15:34:11', '2016-11-04 15:34:11'),
+('012016030002682', '2820161100011', 'ads', '2016-11-04 15:34:12', '2016-11-04 15:34:12'),
+('012016030002682', '2820161100014', 'ads', '2016-11-04 15:41:13', '2016-11-04 15:41:13'),
+('012016030002682', '2820161100014', 'ads', '2016-11-04 15:41:14', '2016-11-04 15:41:14'),
+('012016030002682', '2820161100016', 'ads', '2016-11-04 15:52:15', '2016-11-04 15:52:15'),
+('012016030002682', '2820161100016', 'ads', '2016-11-04 15:52:15', '2016-11-04 15:52:15'),
+('012016030002682', '2820161100018', 'ads', '2016-11-04 16:07:14', '2016-11-04 16:07:14'),
+('012016030002682', '2820161100018', 'ads', '2016-11-04 16:07:15', '2016-11-04 16:07:15'),
+('012016030002682', '2820161100020', 'ads', '2016-11-04 16:20:26', '2016-11-04 16:20:26'),
+('012016030002682', '2820161100020', 'ads', '2016-11-04 16:20:26', '2016-11-04 16:20:26'),
+('012016030002682', '2820161100022', 'ads', '2016-11-04 16:24:24', '2016-11-04 16:24:24'),
+('012016030002682', '2820161100022', 'ads', '2016-11-04 16:24:24', '2016-11-04 16:24:24'),
+('012016030002682', '2820161100024', 'ads', '2016-11-04 16:31:32', '2016-11-04 16:31:32'),
+('012016030002682', '2820161100024', 'ads', '2016-11-04 16:31:32', '2016-11-04 16:31:32'),
+('012016030002682', '2820161100026', 'ads', '2016-11-05 01:46:33', '2016-11-05 01:46:33'),
+('012016030002682', '2820161100026', 'ads', '2016-11-05 01:46:33', '2016-11-05 01:46:33'),
+('012016030002682', '2820161100026', 'ads', '2016-11-05 02:15:36', '2016-11-05 02:15:36'),
+('012016030002682', '2820161100026', 'ads', '2016-11-05 02:15:36', '2016-11-05 02:15:36'),
+('012016030002682', '2820161100030', 'ads', '2016-11-05 13:34:16', '2016-11-05 13:34:16'),
+('012016030002682', '2820161100030', 'ads', '2016-11-05 13:34:16', '2016-11-05 13:34:16'),
+('012016030002682', '2820161100031', 'ads', '2016-11-05 13:35:42', '2016-11-05 13:35:42'),
+('012016030002682', '2820161100031', 'ads', '2016-11-05 13:35:42', '2016-11-05 13:35:42'),
+('012016030002682', '2820161100032', 'ads', '2016-11-05 13:37:07', '2016-11-05 13:37:07'),
+('012016030002682', '2820161100032', 'ads', '2016-11-05 13:37:07', '2016-11-05 13:37:07'),
+('012016030002682', '2820161100033', 'ads', '2016-11-05 13:58:07', '2016-11-05 13:58:07'),
+('012016030002682', '2820161100033', 'ads', '2016-11-05 13:58:07', '2016-11-05 13:58:07'),
+('012016030002682', '2820161100034', 'ads', '2016-11-05 14:00:34', '2016-11-05 14:00:34'),
+('012016030002682', '2820161100034', 'ads', '2016-11-05 14:00:34', '2016-11-05 14:00:34'),
+('012016030002682', '2820161100035', 'ads', '2016-11-05 14:06:29', '2016-11-05 14:06:29'),
+('012016030002682', '2820161100035', 'ads', '2016-11-05 14:06:29', '2016-11-05 14:06:29'),
+('012016030002682', '2820161100034', 'ads', '2016-11-05 14:07:13', '2016-11-05 14:07:13'),
+('012016030002682', '2820161100034', 'ads', '2016-11-05 14:07:13', '2016-11-05 14:07:13'),
+('N-0120160300026', '2820161100036', 'ads', '2016-11-05 14:23:03', '2016-11-05 14:23:03'),
+('N-0120160300026', '2820161100036', 'ads', '2016-11-05 14:23:03', '2016-11-05 14:23:03'),
+('N-0120160300026', '2820161100036', 'ads', '2016-11-05 14:25:11', '2016-11-05 14:25:11'),
+('N-0120160300026', '2820161100036', 'ads', '2016-11-05 14:25:11', '2016-11-05 14:25:11'),
+('Non Customer', '2820161100037', 'ads', '2016-11-05 14:34:26', '2016-11-05 14:34:26'),
+('Non Customer', '2820161100037', 'ads', '2016-11-05 14:34:29', '2016-11-05 14:34:29'),
+('Non Customer', '2820161100037', 'ads', '2016-11-05 14:34:45', '2016-11-05 14:34:45'),
+('Non Customer', '2820161100037', 'ads', '2016-11-05 14:35:57', '2016-11-05 14:35:57'),
+('Non Customer', '2820161100037', 'ads', '2016-11-05 14:35:58', '2016-11-05 14:35:58'),
+('Non Customer', '2820161100037', 'ads', '2016-11-05 14:37:22', '2016-11-05 14:37:22'),
+('Non Customer', '2820161100037', 'ads', '2016-11-05 14:37:22', '2016-11-05 14:37:22'),
+('012016030002682', '2820161100035', 'ads', '2016-11-06 05:27:12', '2016-11-06 05:27:12'),
+('012016030002682', '2820161100035', 'ads', '2016-11-06 05:27:12', '2016-11-06 05:27:12'),
+('N-0120160300026', '2820161100036', 'ads', '2016-11-06 11:50:06', '2016-11-06 11:50:06'),
+('N-0120160300026', '2820161100036', 'ads', '2016-11-06 11:50:06', '2016-11-06 11:50:06'),
+('N-0120160300026', '2820161100036', 'ads', '2016-11-06 12:02:20', '2016-11-06 12:02:20'),
+('N-0120160300026', '2820161100036', 'ads', '2016-11-06 12:02:20', '2016-11-06 12:02:20'),
+('N-0120160300026', '2820161100036', 'ads', '2016-11-06 12:03:30', '2016-11-06 12:03:30'),
+('N-0120160300026', '2820161100036', 'ads', '2016-11-06 12:03:30', '2016-11-06 12:03:30'),
+('N-0120160300026', '2820161100036', 'ads', '2016-11-06 12:04:55', '2016-11-06 12:04:55'),
+('N-0120160300026', '2820161100036', 'ads', '2016-11-06 12:04:55', '2016-11-06 12:04:55'),
+('N-0120160300026', '2820161100001', 'ads', '2016-11-06 12:07:00', '2016-11-06 12:07:00'),
+('N-0120160300026', '2820161100001', 'ads', '2016-11-06 12:07:00', '2016-11-06 12:07:00'),
+('012016030002682', 'CUSTOMER21', 'listing', '2016-11-13 04:10:26', '2016-11-13 04:10:26'),
+('012016030002682', 'CUSTOMER21', 'listing', '2016-11-13 04:10:26', '2016-11-13 04:10:26'),
+('012016030002682', 'CUSTOMER24', 'listing', '2016-11-13 04:15:21', '2016-11-13 04:15:21'),
+('012016030002682', 'CUSTOMER24', 'listing', '2016-11-13 04:15:22', '2016-11-13 04:15:22'),
+('012016030002682', 'CUSTOMER26', 'listing', '2016-11-13 06:24:48', '2016-11-13 06:24:48'),
+('012016030002682', 'CUSTOMER26', 'listing', '2016-11-13 06:24:48', '2016-11-13 06:24:48'),
+('012016030002682', 'CUSTOMER28', 'listing', '2016-11-13 08:58:56', '2016-11-13 08:58:56'),
+('012016030002682', 'CUSTOMER28', 'listing', '2016-11-13 08:58:56', '2016-11-13 08:58:56'),
+('012016030002682', 'CUSTOMER27', 'listing', '2016-11-13 10:57:06', '2016-11-13 10:57:06'),
+('012016030002682', 'CUSTOMER27', 'listing', '2016-11-13 10:57:06', '2016-11-13 10:57:06'),
+('012016030002682', '2820161100006', 'ads', '2016-11-13 11:02:28', '2016-11-13 11:02:28'),
+('012016030002682', '2820161100006', 'ads', '2016-11-13 11:02:28', '2016-11-13 11:02:28'),
+('012016030002682', 'CUSTOMER29', 'listing', '2016-11-13 13:53:46', '2016-11-13 13:53:46'),
+('012016030002682', 'CUSTOMER29', 'listing', '2016-11-13 13:53:46', '2016-11-13 13:53:46'),
+('012016030002682', 'CUSTOMER212', 'listing', '2016-11-13 14:00:12', '2016-11-13 14:00:12'),
+('012016030002682', 'CUSTOMER212', 'listing', '2016-11-13 14:00:12', '2016-11-13 14:00:12'),
+('N-0120160300026', '2820161200002', 'ads', '2016-12-24 09:19:37', '2016-12-24 09:19:37'),
+('N-0120160300026', '2820161200002', 'ads', '2016-12-24 09:19:37', '2016-12-24 09:19:37'),
+('012016030002682', '2820161200001', 'ads', '2016-12-24 09:23:47', '2016-12-24 09:23:47'),
+('012016030002682', '2820161200001', 'ads', '2016-12-24 09:23:47', '2016-12-24 09:23:47'),
+('012016030002682', 'CUSTOMER21', 'listing', '2016-12-24 09:31:43', '2016-12-24 09:31:43'),
+('012016030002682', 'CUSTOMER21', 'listing', '2016-12-24 09:31:43', '2016-12-24 09:31:43'),
+('Non Customer', '2820161200003', 'ads', '2016-12-24 16:55:04', '2016-12-24 16:55:04'),
+('Non Customer', '2820161200003', 'ads', '2016-12-24 16:55:04', '2016-12-24 16:55:04'),
+('012016030002682', 'CUSTOMER23', 'listing', '2016-12-25 10:07:21', '2016-12-25 10:07:21'),
+('012016030002682', 'CUSTOMER23', 'listing', '2016-12-25 10:07:21', '2016-12-25 10:07:21'),
+('ADMINISTRATOR', 'ADMINISTRATOR5', 'listing', '2016-12-25 14:12:58', '2016-12-25 14:12:58'),
+('ADMINISTRATOR', 'ADMINISTRATOR5', 'listing', '2016-12-25 14:12:58', '2016-12-25 14:12:58'),
+('ADMINISTRATOR', 'ADMINISTRATOR5', 'listing', '2016-12-25 14:51:37', '2016-12-25 14:51:37'),
+('ADMINISTRATOR', 'ADMINISTRATOR5', 'listing', '2016-12-25 14:51:37', '2016-12-25 14:51:37'),
+('ADMINISTRATOR', 'ADMINISTRATOR8', 'listing', '2016-12-25 16:42:01', '2016-12-25 16:42:01'),
+('ADMINISTRATOR', 'ADMINISTRATOR8', 'listing', '2016-12-25 16:42:01', '2016-12-25 16:42:01'),
+('ADMINISTRATOR', 'ADMINISTRATOR1', 'listing', '2016-12-26 04:06:16', '2016-12-26 04:06:16'),
+('ADMINISTRATOR', 'ADMINISTRATOR1', 'listing', '2016-12-26 04:06:16', '2016-12-26 04:06:16'),
+('1234567890', '12345678903', 'listing', '2016-12-26 04:54:05', '2016-12-26 04:54:05'),
+('1234567890', '12345678903', 'listing', '2016-12-26 04:54:06', '2016-12-26 04:54:06'),
+('Non Customer', '2820161200003', 'ads', '2016-12-26 05:03:59', '2016-12-26 05:03:59'),
+('Non Customer', '2820161200003', 'ads', '2016-12-26 05:04:00', '2016-12-26 05:04:00'),
+('1234567890', '12345678904', 'listing', '2016-12-26 05:16:32', '2016-12-26 05:16:32'),
+('1234567890', '12345678904', 'listing', '2016-12-26 05:16:32', '2016-12-26 05:16:32'),
+('1234567890', '12345678904', 'listing', '2016-12-26 05:21:49', '2016-12-26 05:21:49'),
+('1234567890', '12345678904', 'listing', '2016-12-26 05:21:50', '2016-12-26 05:21:50'),
+('012016030002682', 'CUSTOMER25', 'listing', '2016-12-26 05:31:05', '2016-12-26 05:31:05'),
+('012016030002682', 'CUSTOMER25', 'listing', '2016-12-26 05:31:06', '2016-12-26 05:31:06'),
+('012016030002682', '2820161200004', 'ads', '2016-12-26 05:34:07', '2016-12-26 05:34:07'),
+('012016030002682', '2820161200004', 'ads', '2016-12-26 05:34:07', '2016-12-26 05:34:07'),
+('012016030002682', '2820161200004', 'ads', '2016-12-26 05:35:00', '2016-12-26 05:35:00'),
+('012016030002682', '2820161200004', 'ads', '2016-12-26 05:35:01', '2016-12-26 05:35:01'),
+('N-0120160300026', '2820161200005', 'ads', '2016-12-26 05:38:39', '2016-12-26 05:38:39'),
+('N-0120160300026', '2820161200005', 'ads', '2016-12-26 05:38:39', '2016-12-26 05:38:39'),
+('N-0120160300026', '2820161200005', 'ads', '2016-12-26 05:44:30', '2016-12-26 05:44:30'),
+('N-0120160300026', '2820161200005', 'ads', '2016-12-26 05:44:31', '2016-12-26 05:44:31'),
+('012016030002682', '2820161200004', 'ads', '2016-12-26 05:48:03', '2016-12-26 05:48:03'),
+('012016030002682', '2820161200004', 'ads', '2016-12-26 05:48:03', '2016-12-26 05:48:03'),
+('Non Customer', '2820161200003', 'ads', '2016-12-26 05:53:57', '2016-12-26 05:53:57'),
+('Non Customer', '2820161200003', 'ads', '2016-12-26 05:53:57', '2016-12-26 05:53:57');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `invoices`
+-- Struktur dari tabel `invoices`
 --
 
 CREATE TABLE `invoices` (
@@ -590,7 +706,7 @@ CREATE TABLE `invoices` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `listingmeta`
+-- Struktur dari tabel `listingmeta`
 --
 
 CREATE TABLE `listingmeta` (
@@ -603,7 +719,7 @@ CREATE TABLE `listingmeta` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `listingmeta`
+-- Dumping data untuk tabel `listingmeta`
 --
 
 INSERT INTO `listingmeta` (`meta_id`, `listing_id`, `meta_key`, `meta_value`, `created_at`, `updated_at`) VALUES
@@ -637,12 +753,13 @@ INSERT INTO `listingmeta` (`meta_id`, `listing_id`, `meta_key`, `meta_value`, `c
 -- --------------------------------------------------------
 
 --
--- Table structure for table `listings`
+-- Struktur dari tabel `listings`
 --
 
 CREATE TABLE `listings` (
   `id` int(10) UNSIGNED NOT NULL,
   `customer_id` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `user_category` int(1) NOT NULL,
   `listing_id` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `slug` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -661,38 +778,24 @@ CREATE TABLE `listings` (
   `expired_date` timestamp NULL DEFAULT NULL,
   `been_active` int(1) NOT NULL DEFAULT '0',
   `status` int(1) NOT NULL DEFAULT '1',
+  `edit` int(5) NOT NULL,
+  `address_id` int(3) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `listings`
+-- Dumping data untuk tabel `listings`
 --
 
-INSERT INTO `listings` (`id`, `customer_id`, `listing_id`, `title`, `slug`, `content`, `review`, `custom_tab`, `custom_tab_title`, `category`, `keywords`, `tags`, `url`, `price_from`, `price_to`, `assets`, `package_id`, `expired_date`, `been_active`, `status`, `created_at`, `updated_at`) VALUES
-(77, '012016030001936', 'GRAFICHDEVPTELTD77', 'Test Listing edit', 'test-listing-edit', '<p><strong style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">edit Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;"> adalah contoh teks atau dummy dalam industri percetakan dan penataan huruf atau typesetting. Lorem Ipsum telah menjadi standar contoh teks sejak tahun 1500an, saat seorang tukang cetak yang tidak dikenal mengambil sebuah kumpulan teks dan mengacaknya untuk menjadi sebuah buku contoh huruf. Ia tidak hanya bertahan selama 5 abad, tapi juga telah beralih ke penataan huruf elektronik, tanpa ada perubahan apapun. Ia mulai dipopulerkan pada tahun 1960 dengan diluncurkannya lembaran-lembaran Letraset yang menggunakan kalimat-kalimat dari Lorem Ipsum, dan seiring munculnya perangkat lunak Desktop Publishing seperti Aldus PageMaker juga memiliki versi Lorem Ipsum.</span><br></p><p><strong style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;"> adalah contoh teks atau dummy dalam industri percetakan dan penataan huruf atau typesetting. Lorem Ipsum telah menjadi standar contoh teks sejak tahun 1500an, saat seorang tukang cetak yang tidak dikenal mengambil sebuah kumpulan teks dan mengacaknya untuk menjadi sebuah buku contoh huruf. Ia tidak hanya bertahan selama 5 abad, tapi juga telah beralih ke penataan huruf elektronik, tanpa ada perubahan apapun. Ia mulai dipopulerkan pada tahun 1960 dengan diluncurkannya lembaran-lembaran Letraset yang menggunakan kalimat-kalimat dari Lorem Ipsum, dan seiring munculnya perangkat lunak Desktop Publishing seperti Aldus PageMaker juga memiliki versi Lorem Ipsum.</span><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;"><br></span></p>', NULL, NULL, NULL, 22, 'editkey', 'edittgs', '', '', '', NULL, 4, '2016-06-15 06:34:39', 1, 5, '2016-03-15 23:37:37', '2016-10-26 16:52:40'),
-(78, '012016030001936', 'GRAFICHDEVPTELTD78', 'Test Listing 2  edit', 'test-listing-2-edit', '<p style="line-height: 20.3px;"><strong style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">edit Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;"> adalah contoh teks atau dummy dalam industri percetakan dan penataan huruf atau typesetting. Lorem Ipsum telah menjadi standar contoh teks sejak tahun 1500an, saat seorang tukang cetak yang tidak dikenal mengambil sebuah kumpulan teks dan mengacaknya untuk menjadi sebuah buku contoh huruf. Ia tidak hanya bertahan selama 5 abad, tapi juga telah beralih ke penataan huruf elektronik, tanpa ada perubahan apapun. Ia mulai dipopulerkan pada tahun 1960 dengan diluncurkannya lembaran-lembaran Letraset yang menggunakan kalimat-kalimat dari Lorem Ipsum, dan seiring munculnya perangkat lunak Desktop Publishing seperti Aldus PageMaker juga memiliki versi Lorem Ipsum.</span><br></p><p style="line-height: 20.3px;"><strong style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;"> adalah contoh teks atau dummy dalam industri percetakan dan penataan huruf atau typesetting. Lorem Ipsum telah menjadi standar contoh teks sejak tahun 1500an, saat seorang tukang cetak yang tidak dikenal mengambil sebuah kumpulan teks dan mengacaknya untuk menjadi sebuah buku contoh huruf. Ia tidak hanya bertahan selama 5 abad, tapi juga telah beralih ke penataan huruf elektronik, tanpa ada perubahan apapun. Ia mulai dipopulerkan pada tahun 1960 dengan diluncurkannya lembaran-lembaran Letraset yang menggunakan kalimat-kalimat dari Lorem Ipsum, dan seiring munculnya perangkat lunak Desktop Publishing seperti Aldus PageMaker juga memiliki versi Lorem Ipsum.</span></p>', NULL, NULL, NULL, 22, 'edit key', 'edit tags', '', '', '', NULL, 3, '2016-04-16 06:34:59', 1, 5, '2016-03-15 23:37:37', '2016-10-26 16:52:40'),
-(79, '012016030001936', 'GRAFICHDEVPTELTD79', 'Accusantium doloremque laudantium', 'accusantium-doloremque-laudantium', '<p><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"</span><br></p>', NULL, NULL, NULL, 32, '', '', '', '', '', NULL, 4, '2016-09-13 08:41:50', 1, 5, '2016-03-16 05:47:10', '2016-10-26 16:52:40'),
-(80, '012016030001936', 'GRAFICHDEVPTELTD80', 'edit Test Listing 3', 'edit-test-listing-3', '<p><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">edit Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"</span><br></p>', NULL, NULL, NULL, 22, 'edit key', 'edit tags', '', '', '', NULL, 3, '2016-07-15 06:35:06', 1, 5, '2016-03-16 05:47:10', '2016-10-26 16:52:41'),
-(81, '012016030001936', 'GRAFICHDEVPTELTD81', 'Quasi architecto beatae eedit', 'quasi-architecto-beatae-eedit', '<p><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"</span><br></p>', NULL, NULL, NULL, 44, '', '', '', '', '', NULL, 4, '2016-06-15 06:35:09', 1, 5, '2016-03-16 05:47:10', '2016-10-26 16:52:41'),
-(82, '012016030001936', 'GRAFICHDEVPTELTD82', 'Architecto beatae vitae ', 'architecto-beatae-vitae', '<p><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">edit Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"</span><br></p>', NULL, NULL, NULL, 22, 'edit key', 'edit tags', '', '', '', '["storage\\/app\\/listings\\/assets\\/post-3.jpg"]', 3, '2016-04-16 06:35:30', 1, 5, '2016-03-16 05:47:10', '2016-10-26 16:52:41'),
-(83, '012016030001936', 'GRAFICHDEVPTELTD83', 'Test Listing hehehe', 'test-listing-hehehe', '<p>Test Lorem Ipsum</p>', '<p><br></p>', '<p><br></p>', '', 32, '', '', '', '', '', '["storage\\/app\\/listings\\/assets\\/car-painting.png"]', 3, '2016-04-16 06:35:26', 1, 2, '2016-03-16 08:50:30', '2016-05-11 23:26:41'),
-(84, '012016030001936', 'GRAFICHDEVPTELTD84', 'At vero eos et accusamus', 'at-vero-eos-et-accusamus', '<p><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat</span><br></p>', '<p><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat</span><br></p>', '<p><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat</span><br></p>', 'Custom Tab Title', 32, '', '', '', '', '', '["storage\\/app\\/listings\\/assets\\/20130801_075319_20130801_GaransiCarCare-01.jpg"]', 4, '2016-06-15 23:06:06', 1, 4, '2016-03-17 05:47:35', '2016-05-10 05:08:30'),
-(86, '012016030001936', 'GRAFICHDEVPTELTD86', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, NULL, 0, 6, '2016-03-17 08:46:41', '2016-03-17 09:34:19'),
-(87, '012016030001936', 'GRAFICHDEVPTELTD87', NULL, '-16', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, NULL, 0, 6, '2016-03-17 08:46:41', '2016-03-28 07:28:43'),
-(88, '012016030002682', 'PYTTEST0188', 'Test 01 17 maret', 'test-01-17-maret', '<p>Fghkkjuijnvbm ggyikmn cfhik,nn</p>', NULL, NULL, NULL, 41, '', '', 'www.test01.com', '1000', '2000', '["storage\\/app\\/listings\\/assets\\/Default2.jpg"]', 3, '2016-04-16 09:07:12', 1, 5, '2016-03-17 08:54:23', '2016-10-26 16:52:41'),
-(89, '012016030002682', 'PYTTEST0189', 'Test02', 'test02', '<p>Ksksjiknh nbxgys hxusu hxgsg gn,ocusbxhild bxyui hhmxjsh</p>', NULL, NULL, NULL, 32, '', '', '', '500000', '', '["storage\\/app\\/listings\\/assets\\/image.jpeg"]', 3, '2016-04-16 09:18:50', 1, 5, '2016-03-17 09:13:14', '2016-10-26 16:52:41'),
-(90, '012016030002682', 'PYTTEST0190', NULL, '-12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4, NULL, 0, 6, '2016-03-17 09:36:05', '2016-03-28 04:00:22'),
-(91, '012016030003972', 'PTTEST0291', NULL, '-13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, NULL, 0, 6, '2016-03-28 03:50:13', '2016-03-28 04:01:08'),
-(92, '012016030003972', 'PTTEST0292', NULL, '-14', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, NULL, 0, 6, '2016-03-28 03:50:13', '2016-03-28 04:05:07'),
-(93, '012016030003972', 'PTTEST0293', NULL, '-15', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4, NULL, 0, 6, '2016-03-28 03:50:13', '2016-03-28 04:05:17'),
-(94, '012016030001936', 'GRAFICHDEVPTELTD94', NULL, '-19', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, NULL, 0, 6, '2016-05-09 13:54:45', '2016-05-09 14:03:41'),
-(95, '012016030001936', 'GRAFICHDEVPTELTD95', NULL, '-18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, NULL, 0, 1, '2016-05-09 13:54:45', '2016-05-09 13:54:45');
+INSERT INTO `listings` (`id`, `customer_id`, `user_category`, `listing_id`, `title`, `slug`, `content`, `review`, `custom_tab`, `custom_tab_title`, `category`, `keywords`, `tags`, `url`, `price_from`, `price_to`, `assets`, `package_id`, `expired_date`, `been_active`, `status`, `edit`, `address_id`, `created_at`, `updated_at`) VALUES
+(4, '1234567890', 1, '12345678904', 'Rumah Baru Margonda Raya  2', 'rumah-baru-margonda-raya-2', '<p>asdasdasdasd</p>', NULL, NULL, NULL, 22, 'asdasda', 'sdasdas', 'www.ww.com', '30000', '4000000', '["storage\\/app\\/listings\\/assets\\/Desert.jpg"]', 3, '2017-01-25 05:15:54', 1, 3, 4, 1, '2016-12-26 05:11:42', '2016-12-26 05:22:02'),
+(5, '012016030002682', 2, 'CUSTOMER25', 'Rumah kosong Bogor', 'rumah-kosong-bogor', '<p>sdasdasdasd<br></p>', NULL, NULL, NULL, 22, 'asdasd', 'asdasd', 'www.apa.com', '20000', '40000', '["storage\\/app\\/listings\\/assets\\/Desert.jpg"]', 3, '2017-01-25 05:30:28', 1, 3, 5, 0, '2016-12-26 05:27:16', '2016-12-26 05:32:26');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `listings_categories`
+-- Struktur dari tabel `listings_categories`
 --
 
 CREATE TABLE `listings_categories` (
@@ -706,7 +809,7 @@ CREATE TABLE `listings_categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `listings_categories`
+-- Dumping data untuk tabel `listings_categories`
 --
 
 INSERT INTO `listings_categories` (`id`, `title`, `slug`, `parent`, `status`, `created_at`, `updated_at`) VALUES
@@ -746,7 +849,49 @@ INSERT INTO `listings_categories` (`id`, `title`, `slug`, `parent`, `status`, `c
 -- --------------------------------------------------------
 
 --
--- Table structure for table `listing_status`
+-- Struktur dari tabel `listing_edits`
+--
+
+CREATE TABLE `listing_edits` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `customer_id` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `user_category` int(1) NOT NULL,
+  `listing_edit_id` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `slug` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `content` longtext COLLATE utf8_unicode_ci,
+  `review` longtext COLLATE utf8_unicode_ci,
+  `custom_tab` longtext COLLATE utf8_unicode_ci,
+  `custom_tab_title` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `category` int(11) DEFAULT NULL,
+  `keywords` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tags` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `price_from` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `price_to` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `assets` longtext COLLATE utf8_unicode_ci,
+  `package_id` int(10) NOT NULL,
+  `expired_date` timestamp NULL DEFAULT NULL,
+  `been_active` int(1) NOT NULL DEFAULT '0',
+  `status` int(1) NOT NULL DEFAULT '1',
+  `edit` int(5) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data untuk tabel `listing_edits`
+--
+
+INSERT INTO `listing_edits` (`id`, `customer_id`, `user_category`, `listing_edit_id`, `title`, `slug`, `content`, `review`, `custom_tab`, `custom_tab_title`, `category`, `keywords`, `tags`, `url`, `price_from`, `price_to`, `assets`, `package_id`, `expired_date`, `been_active`, `status`, `edit`, `created_at`, `updated_at`) VALUES
+(3, '1234567890', 1, '12345678904', 'Rumah Baru Margonda Raya ', 'rumah-baru-margonda-raya', '<p>asdasdasdasd</p>', NULL, NULL, NULL, 22, 'asdasda', 'sdasdas', 'www.ww.com', '30000', '4000000', '["storage\\/app\\/listings\\/assets\\/Desert.jpg"]', 0, NULL, 0, 7, 4, '2016-12-26 05:16:32', '2016-12-26 05:21:26'),
+(4, '1234567890', 1, '12345678904', 'Rumah Baru Margonda Raya  2', 'rumah-baru-margonda-raya-2', '<p>asdasdasdasd</p>', NULL, NULL, NULL, 22, 'asdasda', 'sdasdas', 'www.ww.com', '30000', '4000000', '["storage\\/app\\/listings\\/assets\\/Desert.jpg"]', 0, NULL, 0, 7, 4, '2016-12-26 05:21:49', '2016-12-26 05:22:02'),
+(5, '012016030002682', 2, 'CUSTOMER25', 'Rumah kosong Bogor', 'rumah-kosong-bogor', '<p>sdasdasdasd<br></p>', NULL, NULL, NULL, 22, 'asdasd', 'asdasd', 'www.apa.com', '20000', '40000', '["storage\\/app\\/listings\\/assets\\/Desert.jpg"]', 0, NULL, 0, 7, 5, '2016-12-26 05:31:05', '2016-12-26 05:32:26');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `listing_status`
 --
 
 CREATE TABLE `listing_status` (
@@ -757,7 +902,7 @@ CREATE TABLE `listing_status` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `listing_status`
+-- Dumping data untuk tabel `listing_status`
 --
 
 INSERT INTO `listing_status` (`id`, `name`, `display_name`, `info`) VALUES
@@ -771,7 +916,7 @@ INSERT INTO `listing_status` (`id`, `name`, `display_name`, `info`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `messages`
+-- Struktur dari tabel `messages`
 --
 
 CREATE TABLE `messages` (
@@ -786,7 +931,7 @@ CREATE TABLE `messages` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `migrations`
+-- Struktur dari tabel `migrations`
 --
 
 CREATE TABLE `migrations` (
@@ -795,7 +940,7 @@ CREATE TABLE `migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `migrations`
+-- Dumping data untuk tabel `migrations`
 --
 
 INSERT INTO `migrations` (`migration`, `batch`) VALUES
@@ -812,7 +957,7 @@ INSERT INTO `migrations` (`migration`, `batch`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `nonsubs`
+-- Struktur dari tabel `nonsubs`
 --
 
 CREATE TABLE `nonsubs` (
@@ -834,19 +979,19 @@ CREATE TABLE `nonsubs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `nonsubs`
+-- Dumping data untuk tabel `nonsubs`
 --
 
 INSERT INTO `nonsubs` (`id`, `nonsub_id`, `nonsub_name`, `address_id`, `phone`, `fax`, `pic`, `pic_phone`, `pic_mobile1`, `pic_mobile2`, `pic_email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (9, '012016030001936', 'Grafich Dev Pte Ltd', 1, '082298078502', '', 'Gufron RA', '082298078502', '082298078502', '', 'test@gmail.com', '$2y$10$eK.ei902n59yqGI4EAzM2.QuTX0B1yNvcRqZ1kc77GUKXQ9WwFAQ6', '1zwKp4N00gBJNwLEPsM1oxwmS5a9ADfwaXYfhJUS7HEN2Vr2zri3NiGiZAQl', '2016-03-15 22:25:40', '2016-05-11 23:13:11'),
-(10, '012016030002682', 'PYT. TEST01', 2, '123455678', '', 'TEST01', '1234567', '123456', '', 'test01@gmail.com', '$2y$10$Nw0TyIu19sacR3f4zCyvleFM5PBv/b7TBsPP3MlDhheMh6X.5lOe.', '7lJuOuYMYbuD09sZAq7QNqBnwynyUVWO7JyyIiyiFGQjtPvXqkYDvw47ImG5', '2016-03-17 08:52:37', '2016-11-01 13:46:01'),
+(10, 'N-0120160300026', 'Nonsubscriber 22', 2, '123455678', '', 'TEST01', '1234567', '123456', '', 'test01@gmail.com', '$2y$10$cJCT6y7kNtuir7kQIMF/KeGim6PfjckO2yplz/4w/qq0esj93Hd62', 'PO6tXev9OW5iPN6jHi9w5kaR4IV0WvWbOqyz9Awh53KENSWWCZjkGhuU7ZXw', '2016-03-17 08:52:37', '2016-12-25 15:30:55'),
 (11, '012016030003972', 'Pt Test02', 3, '1234556', '', 'Test02', '123445', '1234566789', '', 'Test02@gmail.com', '$2y$10$J6E6I/FRmvXx/.t/1AecEu6g9fwBSZvEuwx.eAJaHcKTg41W4/e7u', 'kD82eOAjvdA7RmpTRdYsUrbFP1KquZrsLKRVAojzDyFKvRqb4PTrI1EyuPjS', '2016-03-28 03:43:34', '2016-03-28 04:12:25'),
 (12, '012016050004935', 'PT. TEST03', 17, '12354656', '', 'test03', '1341', '12324', '', 'test03@gmail.com', '$2y$10$hk386w4hmarO6hzRbUoEjOu76odzlYxx/oGxfSLGXubFPAb6I5kxS', NULL, '2016-05-10 05:12:45', '2016-05-10 05:12:46');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `non_customers`
+-- Struktur dari tabel `non_customers`
 --
 
 CREATE TABLE `non_customers` (
@@ -857,7 +1002,7 @@ CREATE TABLE `non_customers` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `notifications`
+-- Struktur dari tabel `notifications`
 --
 
 CREATE TABLE `notifications` (
@@ -873,7 +1018,7 @@ CREATE TABLE `notifications` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `packages`
+-- Struktur dari tabel `packages`
 --
 
 CREATE TABLE `packages` (
@@ -888,7 +1033,7 @@ CREATE TABLE `packages` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `packages`
+-- Dumping data untuk tabel `packages`
 --
 
 INSERT INTO `packages` (`id`, `name`, `price`, `notes`, `days`, `discount`, `created_at`, `updated_at`) VALUES
@@ -898,7 +1043,7 @@ INSERT INTO `packages` (`id`, `name`, `price`, `notes`, `days`, `discount`, `cre
 -- --------------------------------------------------------
 
 --
--- Table structure for table `password_resets`
+-- Struktur dari tabel `password_resets`
 --
 
 CREATE TABLE `password_resets` (
@@ -910,7 +1055,7 @@ CREATE TABLE `password_resets` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `permissions`
+-- Struktur dari tabel `permissions`
 --
 
 CREATE TABLE `permissions` (
@@ -923,7 +1068,7 @@ CREATE TABLE `permissions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `permissions`
+-- Dumping data untuk tabel `permissions`
 --
 
 INSERT INTO `permissions` (`id`, `name`, `display_name`, `description`, `created_at`, `updated_at`) VALUES
@@ -973,7 +1118,7 @@ INSERT INTO `permissions` (`id`, `name`, `display_name`, `description`, `created
 -- --------------------------------------------------------
 
 --
--- Table structure for table `permission_role`
+-- Struktur dari tabel `permission_role`
 --
 
 CREATE TABLE `permission_role` (
@@ -982,7 +1127,7 @@ CREATE TABLE `permission_role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `permission_role`
+-- Dumping data untuk tabel `permission_role`
 --
 
 INSERT INTO `permission_role` (`permission_id`, `role_id`) VALUES
@@ -1072,7 +1217,7 @@ INSERT INTO `permission_role` (`permission_id`, `role_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `roles`
+-- Struktur dari tabel `roles`
 --
 
 CREATE TABLE `roles` (
@@ -1085,7 +1230,7 @@ CREATE TABLE `roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `roles`
+-- Dumping data untuk tabel `roles`
 --
 
 INSERT INTO `roles` (`id`, `name`, `display_name`, `description`, `created_at`, `updated_at`) VALUES
@@ -1098,7 +1243,7 @@ INSERT INTO `roles` (`id`, `name`, `display_name`, `description`, `created_at`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `role_user`
+-- Struktur dari tabel `role_user`
 --
 
 CREATE TABLE `role_user` (
@@ -1107,7 +1252,7 @@ CREATE TABLE `role_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `role_user`
+-- Dumping data untuk tabel `role_user`
 --
 
 INSERT INTO `role_user` (`user_id`, `role_id`) VALUES
@@ -1121,7 +1266,7 @@ INSERT INTO `role_user` (`user_id`, `role_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `settings`
+-- Struktur dari tabel `settings`
 --
 
 CREATE TABLE `settings` (
@@ -1133,7 +1278,7 @@ CREATE TABLE `settings` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `system_logs`
+-- Struktur dari tabel `system_logs`
 --
 
 CREATE TABLE `system_logs` (
@@ -1145,7 +1290,7 @@ CREATE TABLE `system_logs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `system_logs`
+-- Dumping data untuk tabel `system_logs`
 --
 
 INSERT INTO `system_logs` (`id`, `user`, `log_text`, `created_at`, `updated_at`) VALUES
@@ -1156,41 +1301,81 @@ INSERT INTO `system_logs` (`id`, `user`, `log_text`, `created_at`, `updated_at`)
 (52, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">sdfdsf</a>', '2016-10-27 02:09:52', '2016-10-27 02:09:52'),
 (53, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">234234234</a>', '2016-10-31 16:20:11', '2016-10-31 16:20:11'),
 (54, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">345</a>', '2016-11-01 12:45:04', '2016-11-01 12:45:04'),
-(55, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">www</a>', '2016-11-01 13:33:25', '2016-11-01 13:33:25');
+(55, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">www</a>', '2016-11-01 13:33:25', '2016-11-01 13:33:25'),
+(56, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Tes Add Ads</a>', '2016-11-01 19:09:05', '2016-11-01 19:09:05'),
+(57, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Tes Add Ads - Tes Edit and Approval</a>', '2016-11-01 19:12:19', '2016-11-01 19:12:19'),
+(58, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Tes Add Ads subscriber</a>', '2016-11-01 19:30:36', '2016-11-01 19:30:36'),
+(59, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Ads from Nonsubs</a>', '2016-11-02 15:10:20', '2016-11-02 15:10:20'),
+(60, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Ads from Subscriber</a>', '2016-11-02 15:10:58', '2016-11-02 15:10:58'),
+(61, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Ads from Admin</a>', '2016-11-04 14:09:18', '2016-11-04 14:09:18'),
+(62, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Ads from Customer</a>', '2016-11-04 15:07:15', '2016-11-04 15:07:15'),
+(63, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Ads from Customer</a>', '2016-11-04 15:09:21', '2016-11-04 15:09:21'),
+(64, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">ads from customer</a>', '2016-11-05 02:05:57', '2016-11-05 02:05:57'),
+(65, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Ads from Customer</a>', '2016-11-05 14:04:33', '2016-11-05 14:04:33'),
+(66, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Ads from Customer</a>', '2016-11-05 14:06:56', '2016-11-05 14:06:56'),
+(67, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Ads from Customer 2</a>', '2016-11-05 14:07:28', '2016-11-05 14:07:28'),
+(68, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Ads from Subscriber</a>', '2016-11-05 14:23:54', '2016-11-05 14:23:54'),
+(69, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Ads from Subscriber 2</a>', '2016-11-05 14:25:42', '2016-11-05 14:25:42'),
+(70, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Ads from Admin</a>', '2016-11-05 14:37:11', '2016-11-05 14:37:11'),
+(71, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Ads from Admin 2</a>', '2016-11-05 14:37:32', '2016-11-05 14:37:32'),
+(72, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Ads from Customer</a>', '2016-11-06 05:27:54', '2016-11-06 05:27:54'),
+(73, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Ads from Nonsubs</a>', '2016-11-06 12:07:11', '2016-11-06 12:07:11'),
+(74, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Ads from Admin</a>', '2016-11-13 06:33:33', '2016-11-13 06:33:33'),
+(75, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">dddd</a>', '2016-11-13 08:59:12', '2016-11-13 08:59:12'),
+(76, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">wqeqwe</a>', '2016-11-13 10:57:22', '2016-11-13 10:57:22'),
+(77, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Ads from Customer</a>', '2016-11-13 11:02:43', '2016-11-13 11:02:43'),
+(78, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">dddd</a>', '2016-11-13 13:55:15', '2016-11-13 13:55:15'),
+(79, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">sfdsdf</a>', '2016-11-13 13:55:32', '2016-11-13 13:55:32'),
+(80, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">asdasd</a>', '2016-11-13 14:00:27', '2016-11-13 14:00:27'),
+(81, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Rumah baru di Jln. Margonda Raya APo APo ajl.</a>', '2016-12-25 10:08:00', '2016-12-25 10:08:00'),
+(82, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Rumah kosong Bogor Admin</a>', '2016-12-25 14:46:23', '2016-12-25 14:46:23'),
+(83, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Rumah kosong Bogor Admin 2</a>', '2016-12-25 14:52:03', '2016-12-25 14:52:03'),
+(84, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">asd</a>', '2016-12-25 16:42:14', '2016-12-25 16:42:14'),
+(85, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Rumah Baru Margonda Raya </a>', '2016-12-26 05:10:12', '2016-12-26 05:10:12'),
+(86, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Rumah Baru Margonda Raya </a>', '2016-12-26 05:21:26', '2016-12-26 05:21:26'),
+(87, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Rumah Baru Margonda Raya  2</a>', '2016-12-26 05:22:02', '2016-12-26 05:22:02'),
+(88, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Rumah kosong Bogor</a>', '2016-12-26 05:32:26', '2016-12-26 05:32:26'),
+(89, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Rumah kosong Bogor Admin 2</a>', '2016-12-26 05:34:33', '2016-12-26 05:34:33'),
+(90, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Rumah kosong Bogor Admin 4</a>', '2016-12-26 05:35:16', '2016-12-26 05:35:16'),
+(91, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Rumah baru Tangerang</a>', '2016-12-26 05:40:24', '2016-12-26 05:40:24'),
+(92, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Rumah baru Tangerang 2</a>', '2016-12-26 05:45:39', '2016-12-26 05:45:39'),
+(93, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Rumah kosong Bogor Admin 4</a>', '2016-12-26 05:48:24', '2016-12-26 05:48:24');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Struktur dari tabel `users`
 --
 
 CREATE TABLE `users` (
   `id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `status` int(1) NOT NULL DEFAULT '0',
+  `address_id` int(3) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `users`
+-- Dumping data untuk tabel `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Digi', 'grafich.dev@gmail.com', '$2y$10$XQuBCrxFwr4N8et.0VSSK.eavlEYymjNdl7DB5VFaaNgkRqid23.K', '86IMXaARJhHJlwg5XV9p6yRdGPJlkCA0UH61S56kJmWXQCJgSy1qPPfZkpbt', 1, '0000-00-00 00:00:00', '2016-11-01 13:46:32'),
-(2, 'User Admin', 'irhsad.seifaldin@gmail.com', '$2y$10$wtb3McLO/3Ak29lm3/vy/.2m3WlAcjPZZgEmoid8hiwQAG49DG9mW', NULL, 0, '2015-12-16 06:21:18', '2015-12-16 06:21:18'),
-(3, 'User Manager', '31x389@gmail.com', '$2y$10$InGEkucqe6DBfuL76M6xVuRU1qgDUdXgYgKCSP5kYf7LdaHTfzLIO', 'QTNSc7J38AuSZb1HRzq9NcsOmM8wQA3spJ0Xd7ojbuIkuY7nueeyZreYS9Pj', 0, '2015-12-16 06:21:47', '2015-12-28 07:44:52'),
-(4, 'Irwan Sales', 'baponk.smoker@gmail.com', '$2y$10$UTQvH/xnww5zN.LL8qUCrucPa.RJ4BLbS02wr5aIh3MK70G/dT4n6', NULL, 0, '2015-12-16 06:22:17', '2015-12-16 06:22:17'),
-(5, 'Anis Finance', 'aniez.cex@gmail.com', '$2y$10$aguCv.vFUPed1JCB9kaJj.jPe5YjyDofx3CKnx0ZasHUY2wvBGn7W', 'L89mDB5JeicQb7SI0tZOwVN3ju94pvsU4ub8GrSy6x8qzxcKHXJd5bGk6W2F', 0, '2015-12-28 07:48:17', '2015-12-28 08:33:34'),
-(6, 'waldi syafei', 'waldi.syafei@gmail.com', '$2y$10$BAgZmwH/xPhMlkN/ZGpL2.gw4CeCu2OKYTYV9wP6L0YkB9NqGSNV.', NULL, 0, '2016-05-11 23:11:30', '2016-05-11 23:11:30');
+INSERT INTO `users` (`id`, `user_id`, `name`, `email`, `password`, `remember_token`, `status`, `address_id`, `created_at`, `updated_at`) VALUES
+(1, 1234567890, 'Digi', 'grafich.dev@gmail.com', '$2y$10$XQuBCrxFwr4N8et.0VSSK.eavlEYymjNdl7DB5VFaaNgkRqid23.K', 'u3R1x3gRvndhG1bqDrY7rvmQeTh2IKPC95WqA6RYuTU37Kpv5I1lmIBSxkjs', 1, 1, '0000-00-00 00:00:00', '2016-12-25 16:21:55'),
+(2, 0, 'User Admin', 'irhsad.seifaldin@gmail.com', '$2y$10$wtb3McLO/3Ak29lm3/vy/.2m3WlAcjPZZgEmoid8hiwQAG49DG9mW', NULL, 0, 0, '2015-12-16 06:21:18', '2015-12-16 06:21:18'),
+(3, 0, 'User Manager', '31x389@gmail.com', '$2y$10$InGEkucqe6DBfuL76M6xVuRU1qgDUdXgYgKCSP5kYf7LdaHTfzLIO', 'QTNSc7J38AuSZb1HRzq9NcsOmM8wQA3spJ0Xd7ojbuIkuY7nueeyZreYS9Pj', 0, 0, '2015-12-16 06:21:47', '2015-12-28 07:44:52'),
+(4, 0, 'Irwan Sales', 'baponk.smoker@gmail.com', '$2y$10$UTQvH/xnww5zN.LL8qUCrucPa.RJ4BLbS02wr5aIh3MK70G/dT4n6', NULL, 0, 0, '2015-12-16 06:22:17', '2015-12-16 06:22:17'),
+(5, 0, 'Anis Finance', 'aniez.cex@gmail.com', '$2y$10$aguCv.vFUPed1JCB9kaJj.jPe5YjyDofx3CKnx0ZasHUY2wvBGn7W', 'L89mDB5JeicQb7SI0tZOwVN3ju94pvsU4ub8GrSy6x8qzxcKHXJd5bGk6W2F', 0, 0, '2015-12-28 07:48:17', '2015-12-28 08:33:34'),
+(6, 0, 'waldi syafei', 'waldi.syafei@gmail.com', '$2y$10$BAgZmwH/xPhMlkN/ZGpL2.gw4CeCu2OKYTYV9wP6L0YkB9NqGSNV.', NULL, 0, 0, '2016-05-11 23:11:30', '2016-05-11 23:11:30');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `zone`
+-- Struktur dari tabel `zone`
 --
 
 CREATE TABLE `zone` (
@@ -1201,7 +1386,7 @@ CREATE TABLE `zone` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `zone`
+-- Dumping data untuk tabel `zone`
 --
 
 INSERT INTO `zone` (`zone_id`, `country_id`, `name`, `code`) VALUES
@@ -5340,6 +5525,12 @@ ALTER TABLE `adsmeta`
   ADD KEY `meta_key` (`meta_key`);
 
 --
+-- Indexes for table `ad_edits`
+--
+ALTER TABLE `ad_edits`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `ad_status`
 --
 ALTER TABLE `ad_status`
@@ -5390,6 +5581,12 @@ ALTER TABLE `listings`
 -- Indexes for table `listings_categories`
 --
 ALTER TABLE `listings_categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `listing_edits`
+--
+ALTER TABLE `listing_edits`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -5503,17 +5700,22 @@ ALTER TABLE `address`
 -- AUTO_INCREMENT for table `ads`
 --
 ALTER TABLE `ads`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `adsmeta`
 --
 ALTER TABLE `adsmeta`
   MODIFY `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
+-- AUTO_INCREMENT for table `ad_edits`
+--
+ALTER TABLE `ad_edits`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
 -- AUTO_INCREMENT for table `billings`
 --
 ALTER TABLE `billings`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `country`
 --
@@ -5538,12 +5740,17 @@ ALTER TABLE `listingmeta`
 -- AUTO_INCREMENT for table `listings`
 --
 ALTER TABLE `listings`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `listings_categories`
 --
 ALTER TABLE `listings_categories`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+--
+-- AUTO_INCREMENT for table `listing_edits`
+--
+ALTER TABLE `listing_edits`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `messages`
 --
@@ -5588,7 +5795,7 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `system_logs`
 --
 ALTER TABLE `system_logs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 --
 -- AUTO_INCREMENT for table `users`
 --
@@ -5600,18 +5807,18 @@ ALTER TABLE `users`
 ALTER TABLE `zone`
   MODIFY `zone_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4232;
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `permission_role`
+-- Ketidakleluasaan untuk tabel `permission_role`
 --
 ALTER TABLE `permission_role`
   ADD CONSTRAINT `permission_role_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `permission_role_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `role_user`
+-- Ketidakleluasaan untuk tabel `role_user`
 --
 ALTER TABLE `role_user`
   ADD CONSTRAINT `role_user_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,

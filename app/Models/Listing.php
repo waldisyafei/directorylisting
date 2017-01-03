@@ -32,6 +32,17 @@ class Listing extends Model implements SluggableInterface
 
     public function customer()
     {
-        return $this->hasOne('App\Models\Customer', 'customer_id', 'customer_id');
+        if ($this->user_category == 1){
+            return $this->hasOne('App\Models\User', 'user_id', 'customer_id');
+        } elseif ($this->user_category == 2){
+            return $this->hasOne('App\Models\Customer', 'customer_id', 'customer_id');
+        }else {
+            return $this->hasOne('App\Models\NonSubscriber', 'nonsub_id', 'customer_id');
+        }
+    }
+
+    public function address()
+    {
+        return $this->hasOne('App\Models\Address', 'address_id', 'address_id');
     }
 }
