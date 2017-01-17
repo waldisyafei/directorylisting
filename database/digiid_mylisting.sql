@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 26 Des 2016 pada 06.54
+-- Generation Time: 17 Jan 2017 pada 12.33
 -- Versi Server: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -84,9 +84,12 @@ CREATE TABLE `ads` (
 --
 
 INSERT INTO `ads` (`id`, `ad_id`, `title`, `customer_id`, `user_category`, `password`, `link`, `days`, `been_active`, `show_date`, `expired_date`, `status`, `edit`, `assets`, `address_id`, `noncust_ad_link`, `created_at`, `updated_at`) VALUES
-(3, '2820161200003', 'Rumah Baru Margonda Raya ', '1234567890', 1, NULL, 'www.w.com', 95, 1, '2016-12-26 00:00:00', '2016-12-27 00:00:00', 2, 1, '["storage\\/app\\/cs\\/assets\\/Chrysanthemum.jpg"]', 1, NULL, '2016-12-26 05:02:55', '2016-12-26 05:53:57'),
+(3, '2820161200003', 'Rumah Baru Margonda Raya ', '1234567890', 1, NULL, 'www.w.com', 95, 1, '2016-12-26 00:00:00', '2016-12-27 00:00:00', 4, 1, '["storage\\/app\\/cs\\/assets\\/Chrysanthemum.jpg"]', 1, NULL, '2016-12-26 05:02:55', '2017-01-03 05:10:22'),
 (4, '2820161200004', 'Rumah kosong Bogor Admin 4', '012016030002682', 2, NULL, 'www.rumahksosong.com', 101, 1, '2016-12-26 00:00:00', '2017-04-06 00:00:00', 3, 6, '["storage\\/app\\/cs\\/assets\\/Lighthouse.jpg"]', 2, NULL, '2016-12-26 05:32:54', '2016-12-26 05:48:24'),
-(5, '2820161200005', 'Rumah baru Tangerang 2', 'N-0120160300026', 3, NULL, 'www.batanyo.com', 45, 1, '2016-12-26 00:00:00', '2017-02-09 00:00:00', 3, 5, '["storage\\/app\\/cs\\/assets\\/Lighthouse.jpg"]', 2, NULL, '2016-12-26 05:37:30', '2016-12-26 05:45:39');
+(5, '2820161200005', 'Rumah baru Tangerang 2', 'N-0120160300026', 3, NULL, 'www.batanyo.com', 45, 1, '2016-12-26 00:00:00', '2017-02-09 00:00:00', 3, 5, '["storage\\/app\\/cs\\/assets\\/Lighthouse.jpg"]', 2, NULL, '2016-12-26 05:37:30', '2016-12-26 05:45:39'),
+(6, '2820170100006', NULL, '012016030002682', 2, NULL, NULL, 1, 0, NULL, NULL, 4, 0, NULL, 2, NULL, '2017-01-03 05:12:05', '2017-01-03 05:15:09'),
+(7, '2820170100007', 'Kamera Baru', '012016030002682', 2, NULL, 'www.kamera.com', 4, 1, '2017-01-17 00:00:00', '2017-01-21 00:00:00', 3, 9, '["storage\\/app\\/cs\\/assets\\/Desert.jpg"]', 2, NULL, '2017-01-16 04:03:12', '2017-01-16 04:07:35'),
+(8, '2820170100008', 'Speaker Baru', '012016030002682', 2, NULL, 'www.speaker.com', 3, 1, '2017-01-17 00:00:00', '2017-01-20 00:00:00', 3, 10, '["storage\\/app\\/cs\\/assets\\/Hydrangeas.jpg"]', 2, NULL, '2017-01-16 04:03:12', '2017-01-16 04:07:29');
 
 -- --------------------------------------------------------
 
@@ -152,7 +155,10 @@ INSERT INTO `ad_edits` (`id`, `ad_edit_id`, `title`, `customer_id`, `user_catego
 (4, '2820161200005', 'Rumah baru Tangerang', 'N-0120160300026', 3, NULL, 'www.batanyo.com', 0, 0, '2016-12-26 00:00:00', '2017-02-09 00:00:00', 7, 5, '["storage\\/app\\/cs\\/assets\\/Lighthouse.jpg"]', NULL, NULL, '2016-12-26 05:38:39', '2016-12-26 05:40:24'),
 (5, '2820161200005', 'Rumah baru Tangerang 2', 'N-0120160300026', 3, NULL, 'www.batanyo.com', 0, 0, '2016-12-26 00:00:00', '2017-02-09 00:00:00', 7, 5, '["storage\\/app\\/cs\\/assets\\/Lighthouse.jpg"]', NULL, NULL, '2016-12-26 05:44:30', '2016-12-26 05:45:39'),
 (6, '2820161200004', 'Rumah kosong Bogor Admin 4', '012016030002682', 2, NULL, 'www.rumahksosong.com', 0, 0, '2016-12-26 00:00:00', '2017-04-06 00:00:00', 7, 4, '["storage\\/app\\/cs\\/assets\\/Lighthouse.jpg"]', NULL, NULL, '2016-12-26 05:48:03', '2016-12-26 05:48:24'),
-(7, '2820161200003', 'Rumah Baru Margonda Raya ', '1234567890', 1, NULL, 'www.w.com', 0, 0, '2016-12-26 00:00:00', NULL, 2, 3, '["storage\\/app\\/cs\\/assets\\/Chrysanthemum.jpg"]', NULL, NULL, '2016-12-26 05:53:57', '2016-12-26 05:53:57');
+(7, '2820161200003', 'Rumah Baru Margonda Raya ', '1234567890', 1, NULL, 'www.w.com', 0, 0, '2016-12-26 00:00:00', NULL, 4, 3, '["storage\\/app\\/cs\\/assets\\/Chrysanthemum.jpg"]', NULL, NULL, '2016-12-26 05:53:57', '2017-01-03 05:10:22'),
+(8, '2820170100006', 'Tes Reject', '012016030002682', 2, NULL, 'www.batanyo.com', 0, 0, '2017-01-03 00:00:00', '2017-01-04 00:00:00', 4, 6, '["storage\\/app\\/cs\\/assets\\/Chrysanthemum.jpg"]', NULL, NULL, '2017-01-03 05:14:47', '2017-01-03 05:15:09'),
+(9, '2820170100007', 'Kamera Baru', '012016030002682', 2, NULL, 'www.kamera.com', 0, 0, '2017-01-17 00:00:00', '2017-01-21 00:00:00', 7, 7, '["storage\\/app\\/cs\\/assets\\/Desert.jpg"]', NULL, NULL, '2017-01-16 04:05:18', '2017-01-16 04:07:35'),
+(10, '2820170100008', 'Speaker Baru', '012016030002682', 2, NULL, 'www.speaker.com', 0, 0, '2017-01-17 00:00:00', '2017-01-20 00:00:00', 7, 8, '["storage\\/app\\/cs\\/assets\\/Hydrangeas.jpg"]', NULL, NULL, '2017-01-16 04:05:42', '2017-01-16 04:07:29');
 
 -- --------------------------------------------------------
 
@@ -213,7 +219,14 @@ INSERT INTO `billings` (`id`, `customer_id`, `user_category`, `item_id`, `image_
 (9, '012016030002682', 2, '4', 'storage/app/listings/billings/9/Hydrangeas.jpg', NULL, 'Sudah Bayar yaa', 'ads', '1035000.00', 2, '2016-12-26 05:32:55', '2016-12-26 05:33:38'),
 (10, 'N-0120160300026', 3, '5', 'storage/app/listings/billings/10/Tulips.jpg', NULL, 'Nonsubs Konfirmasi', 'ads', '1035000.00', 2, '2016-12-26 05:37:30', '2016-12-26 05:38:06'),
 (11, '012016030002682', 2, '4', 'storage/app/listings/billings/11/Tulips.jpg', NULL, 'Bayaran 2', 'ads', '1288000.00', 2, '2016-12-26 05:46:51', '2016-12-26 05:47:34'),
-(12, '1234567890', 1, '3', NULL, NULL, NULL, 'ads', '782000.00', 2, '2016-12-26 05:51:09', '2016-12-26 05:52:38');
+(12, '1234567890', 1, '3', NULL, NULL, NULL, 'ads', '782000.00', 2, '2016-12-26 05:51:09', '2016-12-26 05:52:38'),
+(13, '012016030002682', 2, '6', NULL, NULL, NULL, 'ads', '23000.00', 2, '2017-01-03 05:12:05', '2017-01-03 05:14:03'),
+(14, '012016030002682', 2, '6', NULL, NULL, NULL, 'listing', '548800.00', 2, '2017-01-03 05:15:46', '2017-01-03 05:16:05'),
+(15, '012016030002682', 2, '7', NULL, NULL, NULL, 'ads', '92000.00', 2, '2017-01-16 04:03:12', '2017-01-16 04:04:16'),
+(16, '012016030002682', 2, '8', NULL, NULL, NULL, 'ads', '69000.00', 2, '2017-01-16 04:03:13', '2017-01-16 04:04:08'),
+(17, '012016030002682', 2, '7', NULL, NULL, NULL, 'listing', '1700000.00', 2, '2017-01-16 04:03:20', '2017-01-16 04:04:01'),
+(18, '1234567890', 1, '8', NULL, NULL, NULL, 'listing', '1700000.00', 2, '2017-01-17 10:36:18', '2017-01-17 10:36:35'),
+(19, '012016030002682', 2, '9', NULL, NULL, NULL, 'listing', '548800.00', 2, '2017-01-17 10:48:16', '2017-01-17 10:48:26');
 
 -- --------------------------------------------------------
 
@@ -517,7 +530,7 @@ CREATE TABLE `customers` (
 
 INSERT INTO `customers` (`id`, `customer_id`, `customer_name`, `address_id`, `phone`, `fax`, `pic`, `pic_phone`, `pic_mobile1`, `pic_mobile2`, `pic_email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (9, '012016030001936', 'Grafich Dev Pte Ltd', 1, '082298078502', '', 'Gufron RA', '082298078502', '082298078502', '', 'test@gmail.com', '$2y$10$eK.ei902n59yqGI4EAzM2.QuTX0B1yNvcRqZ1kc77GUKXQ9WwFAQ6', '1zwKp4N00gBJNwLEPsM1oxwmS5a9ADfwaXYfhJUS7HEN2Vr2zri3NiGiZAQl', '2016-03-15 22:25:40', '2016-05-11 23:13:11'),
-(10, '012016030002682', 'Customer 2', 2, '123455678', '', 'TEST01', '1234567', '123456', '', 'test01@gmail.com', '$2y$10$ErY9JZ8ES4J1c.MFUWDNmuXIPQSIBECGR9ZQl1EkOB4xkezZnf706', 'Gohn0OEDSKn3CY5QpHt2sC35YqmVcWzQJoT1RlgUkTjybo2CvSTvd4phhgeJ', '2016-03-17 08:52:37', '2016-12-25 16:28:37'),
+(10, '012016030002682', 'Customer 2', 2, '123455678', '', 'TEST01', '1234567', '123456', '', 'test01@gmail.com', '$2y$10$ErY9JZ8ES4J1c.MFUWDNmuXIPQSIBECGR9ZQl1EkOB4xkezZnf706', 'kGZ88Ms3tg5fIIVl9gU1exqcbqaQPBf2omoqZLvbXiwldr04AeV7MokftCtO', '2016-03-17 08:52:37', '2017-01-16 04:06:57'),
 (11, '012016030003972', 'Pt Test02', 3, '1234556', '', 'Test02', '123445', '1234566789', '', 'Test02@gmail.com', '$2y$10$J6E6I/FRmvXx/.t/1AecEu6g9fwBSZvEuwx.eAJaHcKTg41W4/e7u', 'kD82eOAjvdA7RmpTRdYsUrbFP1KquZrsLKRVAojzDyFKvRqb4PTrI1EyuPjS', '2016-03-28 03:43:34', '2016-03-28 04:12:25'),
 (12, '012016050004935', 'PT. TEST03', 17, '12354656', '', 'test03', '1341', '12324', '', 'test03@gmail.com', '$2y$10$hk386w4hmarO6hzRbUoEjOu76odzlYxx/oGxfSLGXubFPAb6I5kxS', NULL, '2016-05-10 05:12:45', '2016-05-10 05:12:46');
 
@@ -680,7 +693,35 @@ INSERT INTO `history` (`customer_id`, `item_id`, `item_type`, `updated_at`, `cre
 ('012016030002682', '2820161200004', 'ads', '2016-12-26 05:48:03', '2016-12-26 05:48:03'),
 ('012016030002682', '2820161200004', 'ads', '2016-12-26 05:48:03', '2016-12-26 05:48:03'),
 ('Non Customer', '2820161200003', 'ads', '2016-12-26 05:53:57', '2016-12-26 05:53:57'),
-('Non Customer', '2820161200003', 'ads', '2016-12-26 05:53:57', '2016-12-26 05:53:57');
+('Non Customer', '2820161200003', 'ads', '2016-12-26 05:53:57', '2016-12-26 05:53:57'),
+('012016030002682', 'CUSTOMER25', 'listing', '2016-12-30 08:28:56', '2016-12-30 08:28:56'),
+('012016030002682', 'CUSTOMER25', 'listing', '2016-12-30 08:28:56', '2016-12-30 08:28:56'),
+('012016030002682', 'CUSTOMER25', 'listing', '2016-12-30 08:35:34', '2016-12-30 08:35:34'),
+('012016030002682', 'CUSTOMER25', 'listing', '2016-12-30 08:35:34', '2016-12-30 08:35:34'),
+('012016030002682', 'CUSTOMER25', 'listing', '2016-12-30 08:38:25', '2016-12-30 08:38:25'),
+('012016030002682', 'CUSTOMER25', 'listing', '2016-12-30 08:38:25', '2016-12-30 08:38:25'),
+('1234567890', '12345678904', 'listing', '2016-12-30 09:07:00', '2016-12-30 09:07:00'),
+('1234567890', '12345678904', 'listing', '2016-12-30 09:07:00', '2016-12-30 09:07:00'),
+('012016030002682', '2820170100006', 'ads', '2017-01-03 05:14:47', '2017-01-03 05:14:47'),
+('012016030002682', '2820170100006', 'ads', '2017-01-03 05:14:47', '2017-01-03 05:14:47'),
+('012016030002682', 'CUSTOMER26', 'listing', '2017-01-03 05:16:35', '2017-01-03 05:16:35'),
+('012016030002682', 'CUSTOMER26', 'listing', '2017-01-03 05:16:35', '2017-01-03 05:16:35'),
+('012016030002682', '2820170100007', 'ads', '2017-01-16 04:05:19', '2017-01-16 04:05:19'),
+('012016030002682', '2820170100007', 'ads', '2017-01-16 04:05:19', '2017-01-16 04:05:19'),
+('012016030002682', '2820170100008', 'ads', '2017-01-16 04:05:42', '2017-01-16 04:05:42'),
+('012016030002682', '2820170100008', 'ads', '2017-01-16 04:05:42', '2017-01-16 04:05:42'),
+('012016030002682', 'CUSTOMER27', 'listing', '2017-01-16 04:06:54', '2017-01-16 04:06:54'),
+('012016030002682', 'CUSTOMER27', 'listing', '2017-01-16 04:06:54', '2017-01-16 04:06:54'),
+('012016030002682', 'CUSTOMER27', 'listing', '2017-01-17 05:02:31', '2017-01-17 05:02:31'),
+('012016030002682', 'CUSTOMER27', 'listing', '2017-01-17 05:02:31', '2017-01-17 05:02:31'),
+('1234567890', '12345678908', 'listing', '2017-01-17 10:36:55', '2017-01-17 10:36:55'),
+('1234567890', '12345678908', 'listing', '2017-01-17 10:36:55', '2017-01-17 10:36:55'),
+('1234567890', '12345678908', 'listing', '2017-01-17 10:46:46', '2017-01-17 10:46:46'),
+('1234567890', '12345678908', 'listing', '2017-01-17 10:46:46', '2017-01-17 10:46:46'),
+('012016030002682', 'CUSTOMER29', 'listing', '2017-01-17 10:49:24', '2017-01-17 10:49:24'),
+('012016030002682', 'CUSTOMER29', 'listing', '2017-01-17 10:49:24', '2017-01-17 10:49:24'),
+('012016030002682', 'CUSTOMER25', 'listing', '2017-01-17 10:50:34', '2017-01-17 10:50:34'),
+('012016030002682', 'CUSTOMER25', 'listing', '2017-01-17 10:50:34', '2017-01-17 10:50:34');
 
 -- --------------------------------------------------------
 
@@ -748,7 +789,11 @@ INSERT INTO `listingmeta` (`meta_id`, `listing_id`, `meta_key`, `meta_value`, `c
 (63, 82, 'listing_views_20160401', '1', '2016-04-01 05:31:38', '2016-04-01 05:31:38'),
 (64, 89, 'listing_views_20160504', '1', '2016-05-04 07:19:13', '2016-05-04 07:19:13'),
 (65, 80, 'listing_views_20160509', '2', '2016-05-09 14:33:37', '2016-05-09 14:34:21'),
-(66, 83, 'listing_views_20160512', '1', '2016-05-11 23:05:37', '2016-05-11 23:05:37');
+(66, 83, 'listing_views_20160512', '1', '2016-05-11 23:05:37', '2016-05-11 23:05:37'),
+(67, 4, 'listing_views_20170116', '63', '2017-01-16 05:23:27', '2017-01-16 16:19:40'),
+(68, 5, 'listing_views_20170116', '1', '2017-01-16 05:28:54', '2017-01-16 05:28:54'),
+(69, 4, 'listing_views_20170117', '12', '2017-01-17 02:12:24', '2017-01-17 04:38:29'),
+(70, 5, 'listing_views_20170117', '4', '2017-01-17 02:41:46', '2017-01-17 04:38:17');
 
 -- --------------------------------------------------------
 
@@ -789,8 +834,11 @@ CREATE TABLE `listings` (
 --
 
 INSERT INTO `listings` (`id`, `customer_id`, `user_category`, `listing_id`, `title`, `slug`, `content`, `review`, `custom_tab`, `custom_tab_title`, `category`, `keywords`, `tags`, `url`, `price_from`, `price_to`, `assets`, `package_id`, `expired_date`, `been_active`, `status`, `edit`, `address_id`, `created_at`, `updated_at`) VALUES
-(4, '1234567890', 1, '12345678904', 'Rumah Baru Margonda Raya  2', 'rumah-baru-margonda-raya-2', '<p>asdasdasdasd</p>', NULL, NULL, NULL, 22, 'asdasda', 'sdasdas', 'www.ww.com', '30000', '4000000', '["storage\\/app\\/listings\\/assets\\/Desert.jpg"]', 3, '2017-01-25 05:15:54', 1, 3, 4, 1, '2016-12-26 05:11:42', '2016-12-26 05:22:02'),
-(5, '012016030002682', 2, 'CUSTOMER25', 'Rumah kosong Bogor', 'rumah-kosong-bogor', '<p>sdasdasdasd<br></p>', NULL, NULL, NULL, 22, 'asdasd', 'asdasd', 'www.apa.com', '20000', '40000', '["storage\\/app\\/listings\\/assets\\/Desert.jpg"]', 3, '2017-01-25 05:30:28', 1, 3, 5, 0, '2016-12-26 05:27:16', '2016-12-26 05:32:26');
+(4, '1234567890', 1, '12345678904', 'Rumah Baru Margonda Raya  2', 'rumah-baru-margonda-raya-2', '<p>asdasdasdasd</p>', '<p>a<br></p>', '<p>c<br></p>', 'b', 22, 'asdasda', 'sdasdas', 'www.ww.com', '30000', '4000000', '["storage\\/app\\/listings\\/assets\\/Desert.jpg"]', 3, '2017-01-25 05:15:54', 1, 3, 9, 1, '2016-12-26 05:11:42', '2016-12-30 09:07:24'),
+(5, '012016030002682', 2, 'CUSTOMER25', 'Rumah kosong Bogor', 'rumah-kosong-bogor', '<p>ini description perpetua ad eos, alia atqui cu est. Aperiam alienum vituperatoribus ea his. An omnes incorrupte interesset quo, te mel nostro convenire. Quo ea eripuit assentior, ne congue laboramus sed, in ius paulo singulis efficiendi. Vero omnis invidunt no sit, omnium tractatos explicari eos ex. Malis nemore quaestio vim eu. Solum labore expetenda no nam, ea pri homero reformidans.</p>', '<p>ini reviewVeniam dolore perpetua ad eos, alia atqui cu est. Aperiam alienum vituperatoribus ea his. An omnes incorrupte interesset quo, te mel nostro convenire. Quo ea eripuit assentior, ne congue laboramus sed, in ius paulo singulis efficiendi. Vero omnis invidunt no sit, omnium tractatos explicari eos ex. Malis nemore quaestio vim eu. Solum labore expetenda no nam, ea pri homero reformidans.</p>', '<p>Veniam dolore perpetua ad eos, alia atqui cu est. Aperiam alienum vituperatoribus ea his. An omnes incorrupte interesset quo, te mel nostro convenire. Quo ea eripuit assentior, ne congue laboramus sed, in ius paulo singulis efficiendi. Vero omnis invidunt no sit, omnium tractatos explicari eos ex. Malis nemore quaestio vim eu. Solum labore expetenda no nam, ea pri homero reformidans.<br></p>', 'Rumah kosong Bogor', 42, 'asdasd', 'asdasd', 'www.apa.com', '20000', '40000', '["storage\\/app\\/listings\\/assets\\/Desert.jpg"]', 3, '2017-01-25 05:30:28', 1, 3, 16, 0, '2016-12-26 05:27:16', '2017-01-17 10:50:43'),
+(6, '012016030002682', 2, 'CUSTOMER26', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, '2017-02-02 05:16:05', 0, 4, 0, 0, '2017-01-03 05:15:45', '2017-01-03 05:17:21'),
+(8, '1234567890', 1, '12345678908', 'Tes Categori', 'tes-categori', ' dolor sit amet, et habeo fugit paulo ius, pri quod hinc constituto in. Quod vituperatoribus at quo, ex mei simul veniam copiosae. In vero omnesque consulatu pri, omnesque intellegebat id ius. Error principes signiferumque ut pro, ad per purto detraxit,  constituam ut vis. dolor sit amet, et habeo fugit paulo ius, pri quod hinc constituto in. Quod vituperatoribus at quo, ex mei simul veniam copiosae. In vero omnesque consulatu pri, omnesque intellegebat id ius. Error principes signiferumque ut pro, ad per purto detraxit,  constituam ut vis. dolor sit amet, et habeo fugit paulo ius, pri quod hinc constituto in. Quod vituperatoribus at quo, ex mei simul veniam copiosae. In vero omnesque consulatu pri, omnesque intellegebat id ius. Error principes signiferumque ut pro, ad per purto detraxit,  constituam ut vis.', '<p> dolor sit amet, et habeo fugit paulo ius, pri quod hinc constituto in. Quod vituperatoribus at quo, ex mei simul veniam copiosae. In vero omnesque consulatu pri, omnesque intellegebat id ius. Error principes signiferumque ut pro, ad per purto detraxit,  constituam ut vis.<br></p>', '<p> dolor sit amet, et habeo fugit paulo ius, pri quod hinc constituto in. Quod vituperatoribus at quo, ex mei simul veniam copiosae. In vero omnesque consulatu pri, omnesque intellegebat id ius. Error principes signiferumque ut pro, ad per purto detraxit,  constituam ut vis.<br></p>', 'Lisitng', 25, 'Lisitng', 'Lisitng', 'www.w.com', '2000', '20000', '["storage\\/app\\/listings\\/assets\\/Chrysanthemum.jpg"]', 4, '2017-04-17 10:36:34', 1, 3, 14, 1, '2017-01-17 10:36:17', '2017-01-17 10:46:57'),
+(9, '012016030002682', 2, 'CUSTOMER29', 'Listing dari subs', 'listing-dari-subs', '<p><br></p><p>Veniam dolore perpetua ad eos, alia atqui cu est. Aperiam alienum vituperatoribus ea his. An omnes incorrupte interesset quo, te mel nostro convenire. Quo ea eripuit assentior, ne congue laboramus sed, in ius paulo singulis efficiendi. Vero omnis invidunt no sit, omnium tractatos explicari eos ex. Malis nemore quaestio vim eu. Solum labore expetenda no nam, ea pri homero reformidans.</p>', '<p><br></p><p>Veniam dolore perpetua ad eos, alia atqui cu est. Aperiam alienum vituperatoribus ea his. An omnes incorrupte interesset quo, te mel nostro convenire. Quo ea eripuit assentior, ne congue laboramus sed, in ius paulo singulis efficiendi. Vero omnis invidunt no sit, omnium tractatos explicari eos ex. Malis nemore quaestio vim eu. Solum labore expetenda no nam, ea pri homero reformidans.</p>', '<p><br></p><p>Veniam dolore perpetua ad eos, alia atqui cu est. Aperiam alienum vituperatoribus ea his. An omnes incorrupte interesset quo, te mel nostro convenire. Quo ea eripuit assentior, ne congue laboramus sed, in ius paulo singulis efficiendi. Vero omnis invidunt no sit, omnium tractatos explicari eos ex. Malis nemore quaestio vim eu. Solum labore expetenda no nam, ea pri homero reformidans.</p>', 'Listing dari subs', 34, 'Listing dari subs', 'Listing dari subs', 'www.w.com', '3000', '30000', '["storage\\/app\\/listings\\/assets\\/Penguins.jpg"]', 3, '2017-02-16 10:48:26', 1, 3, 15, 0, '2017-01-17 10:48:16', '2017-01-17 10:49:39');
 
 -- --------------------------------------------------------
 
@@ -886,7 +934,16 @@ CREATE TABLE `listing_edits` (
 INSERT INTO `listing_edits` (`id`, `customer_id`, `user_category`, `listing_edit_id`, `title`, `slug`, `content`, `review`, `custom_tab`, `custom_tab_title`, `category`, `keywords`, `tags`, `url`, `price_from`, `price_to`, `assets`, `package_id`, `expired_date`, `been_active`, `status`, `edit`, `created_at`, `updated_at`) VALUES
 (3, '1234567890', 1, '12345678904', 'Rumah Baru Margonda Raya ', 'rumah-baru-margonda-raya', '<p>asdasdasdasd</p>', NULL, NULL, NULL, 22, 'asdasda', 'sdasdas', 'www.ww.com', '30000', '4000000', '["storage\\/app\\/listings\\/assets\\/Desert.jpg"]', 0, NULL, 0, 7, 4, '2016-12-26 05:16:32', '2016-12-26 05:21:26'),
 (4, '1234567890', 1, '12345678904', 'Rumah Baru Margonda Raya  2', 'rumah-baru-margonda-raya-2', '<p>asdasdasdasd</p>', NULL, NULL, NULL, 22, 'asdasda', 'sdasdas', 'www.ww.com', '30000', '4000000', '["storage\\/app\\/listings\\/assets\\/Desert.jpg"]', 0, NULL, 0, 7, 4, '2016-12-26 05:21:49', '2016-12-26 05:22:02'),
-(5, '012016030002682', 2, 'CUSTOMER25', 'Rumah kosong Bogor', 'rumah-kosong-bogor', '<p>sdasdasdasd<br></p>', NULL, NULL, NULL, 22, 'asdasd', 'asdasd', 'www.apa.com', '20000', '40000', '["storage\\/app\\/listings\\/assets\\/Desert.jpg"]', 0, NULL, 0, 7, 5, '2016-12-26 05:31:05', '2016-12-26 05:32:26');
+(5, '012016030002682', 2, 'CUSTOMER25', 'Rumah kosong Bogor', 'rumah-kosong-bogor', '<p>sdasdasdasd<br></p>', NULL, NULL, NULL, 22, 'asdasd', 'asdasd', 'www.apa.com', '20000', '40000', '["storage\\/app\\/listings\\/assets\\/Desert.jpg"]', 0, NULL, 0, 7, 5, '2016-12-26 05:31:05', '2016-12-26 05:32:26'),
+(6, '012016030002682', 2, 'CUSTOMER25', 'Rumah kosong Bogor', 'rumah-kosong-bogor-1', '<p>ini description<br></p>', NULL, NULL, NULL, 22, 'asdasd', 'asdasd', 'www.apa.com', '20000', '40000', '["storage\\/app\\/listings\\/assets\\/Desert.jpg"]', 0, NULL, 0, 4, 5, '2016-12-30 08:28:56', '2017-01-03 05:09:46'),
+(7, '012016030002682', 2, 'CUSTOMER25', 'Rumah kosong Bogor', 'rumah-kosong-bogor-2', '<p>ini description<br></p>', '<p>ini review</p>', NULL, NULL, 22, 'asdasd', 'asdasd', 'www.apa.com', '20000', '40000', '["storage\\/app\\/listings\\/assets\\/Desert.jpg"]', 0, NULL, 0, 7, 5, '2016-12-30 08:35:34', '2017-01-16 04:07:22'),
+(8, '012016030002682', 2, 'CUSTOMER25', 'Rumah kosong Bogor', 'rumah-kosong-bogor-3', '<p>ini description<br></p>', '<p>ini review</p>', '<p>ini custom</p>', 'ini custom title', 22, 'asdasd', 'asdasd', 'www.apa.com', '20000', '40000', '["storage\\/app\\/listings\\/assets\\/Desert.jpg"]', 0, NULL, 0, 7, 5, '2016-12-30 08:38:25', '2016-12-30 08:49:57'),
+(9, '1234567890', 1, '12345678904', 'Rumah Baru Margonda Raya  2', 'rumah-baru-margonda-raya-2-1', '<p>asdasdasdasd</p>', '<p>a<br></p>', '<p>c<br></p>', 'b', 22, 'asdasda', 'sdasdas', 'www.ww.com', '30000', '4000000', '["storage\\/app\\/listings\\/assets\\/Desert.jpg"]', 0, NULL, 0, 7, 4, '2016-12-30 09:07:00', '2016-12-30 09:07:25'),
+(10, '012016030002682', 2, 'CUSTOMER26', 'Tes Reject', 'tes-reject', '<p><br></p>', '<p><br></p>', '<p><br></p>', '', 23, '', '', '', '', '', NULL, 0, NULL, 0, 4, 6, '2017-01-03 05:16:35', '2017-01-03 05:17:21'),
+(13, '1234567890', 1, '12345678908', 'Tes Categori', 'tes-categori', '<p><br></p>', '<p><br></p>', '<p><br></p>', '', 41, '', '', '', '', '', NULL, 0, NULL, 0, 7, 8, '2017-01-17 10:36:55', '2017-01-17 10:42:11'),
+(14, '1234567890', 1, '12345678908', 'Tes Categori', 'tes-categori-1', ' dolor sit amet, et habeo fugit paulo ius, pri quod hinc constituto in. Quod vituperatoribus at quo, ex mei simul veniam copiosae. In vero omnesque consulatu pri, omnesque intellegebat id ius. Error principes signiferumque ut pro, ad per purto detraxit,  constituam ut vis. dolor sit amet, et habeo fugit paulo ius, pri quod hinc constituto in. Quod vituperatoribus at quo, ex mei simul veniam copiosae. In vero omnesque consulatu pri, omnesque intellegebat id ius. Error principes signiferumque ut pro, ad per purto detraxit,  constituam ut vis. dolor sit amet, et habeo fugit paulo ius, pri quod hinc constituto in. Quod vituperatoribus at quo, ex mei simul veniam copiosae. In vero omnesque consulatu pri, omnesque intellegebat id ius. Error principes signiferumque ut pro, ad per purto detraxit,  constituam ut vis.', '<p> dolor sit amet, et habeo fugit paulo ius, pri quod hinc constituto in. Quod vituperatoribus at quo, ex mei simul veniam copiosae. In vero omnesque consulatu pri, omnesque intellegebat id ius. Error principes signiferumque ut pro, ad per purto detraxit,  constituam ut vis.<br></p>', '<p> dolor sit amet, et habeo fugit paulo ius, pri quod hinc constituto in. Quod vituperatoribus at quo, ex mei simul veniam copiosae. In vero omnesque consulatu pri, omnesque intellegebat id ius. Error principes signiferumque ut pro, ad per purto detraxit,  constituam ut vis.<br></p>', 'Lisitng', 25, 'Lisitng', 'Lisitng', 'www.w.com', '2000', '20000', '["storage\\/app\\/listings\\/assets\\/Chrysanthemum.jpg"]', 0, NULL, 0, 7, 8, '2017-01-17 10:46:46', '2017-01-17 10:46:57'),
+(15, '012016030002682', 2, 'CUSTOMER29', 'Listing dari subs', 'listing-dari-subs', '<p><br></p><p>Veniam dolore perpetua ad eos, alia atqui cu est. Aperiam alienum vituperatoribus ea his. An omnes incorrupte interesset quo, te mel nostro convenire. Quo ea eripuit assentior, ne congue laboramus sed, in ius paulo singulis efficiendi. Vero omnis invidunt no sit, omnium tractatos explicari eos ex. Malis nemore quaestio vim eu. Solum labore expetenda no nam, ea pri homero reformidans.</p>', '<p><br></p><p>Veniam dolore perpetua ad eos, alia atqui cu est. Aperiam alienum vituperatoribus ea his. An omnes incorrupte interesset quo, te mel nostro convenire. Quo ea eripuit assentior, ne congue laboramus sed, in ius paulo singulis efficiendi. Vero omnis invidunt no sit, omnium tractatos explicari eos ex. Malis nemore quaestio vim eu. Solum labore expetenda no nam, ea pri homero reformidans.</p>', '<p><br></p><p>Veniam dolore perpetua ad eos, alia atqui cu est. Aperiam alienum vituperatoribus ea his. An omnes incorrupte interesset quo, te mel nostro convenire. Quo ea eripuit assentior, ne congue laboramus sed, in ius paulo singulis efficiendi. Vero omnis invidunt no sit, omnium tractatos explicari eos ex. Malis nemore quaestio vim eu. Solum labore expetenda no nam, ea pri homero reformidans.</p>', 'Listing dari subs', 34, 'Listing dari subs', 'Listing dari subs', 'www.w.com', '3000', '30000', '["storage\\/app\\/listings\\/assets\\/Penguins.jpg"]', 0, NULL, 0, 7, 9, '2017-01-17 10:49:24', '2017-01-17 10:49:39'),
+(16, '012016030002682', 2, 'CUSTOMER25', 'Rumah kosong Bogor', 'rumah-kosong-bogor-4', '<p>ini description perpetua ad eos, alia atqui cu est. Aperiam alienum vituperatoribus ea his. An omnes incorrupte interesset quo, te mel nostro convenire. Quo ea eripuit assentior, ne congue laboramus sed, in ius paulo singulis efficiendi. Vero omnis invidunt no sit, omnium tractatos explicari eos ex. Malis nemore quaestio vim eu. Solum labore expetenda no nam, ea pri homero reformidans.</p>', '<p>ini reviewVeniam dolore perpetua ad eos, alia atqui cu est. Aperiam alienum vituperatoribus ea his. An omnes incorrupte interesset quo, te mel nostro convenire. Quo ea eripuit assentior, ne congue laboramus sed, in ius paulo singulis efficiendi. Vero omnis invidunt no sit, omnium tractatos explicari eos ex. Malis nemore quaestio vim eu. Solum labore expetenda no nam, ea pri homero reformidans.</p>', '<p>Veniam dolore perpetua ad eos, alia atqui cu est. Aperiam alienum vituperatoribus ea his. An omnes incorrupte interesset quo, te mel nostro convenire. Quo ea eripuit assentior, ne congue laboramus sed, in ius paulo singulis efficiendi. Vero omnis invidunt no sit, omnium tractatos explicari eos ex. Malis nemore quaestio vim eu. Solum labore expetenda no nam, ea pri homero reformidans.<br></p>', 'Rumah kosong Bogor', 42, 'asdasd', 'asdasd', 'www.apa.com', '20000', '40000', '["storage\\/app\\/listings\\/assets\\/Desert.jpg"]', 0, NULL, 0, 7, 5, '2017-01-17 10:50:33', '2017-01-17 10:50:43');
 
 -- --------------------------------------------------------
 
@@ -984,7 +1041,7 @@ CREATE TABLE `nonsubs` (
 
 INSERT INTO `nonsubs` (`id`, `nonsub_id`, `nonsub_name`, `address_id`, `phone`, `fax`, `pic`, `pic_phone`, `pic_mobile1`, `pic_mobile2`, `pic_email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (9, '012016030001936', 'Grafich Dev Pte Ltd', 1, '082298078502', '', 'Gufron RA', '082298078502', '082298078502', '', 'test@gmail.com', '$2y$10$eK.ei902n59yqGI4EAzM2.QuTX0B1yNvcRqZ1kc77GUKXQ9WwFAQ6', '1zwKp4N00gBJNwLEPsM1oxwmS5a9ADfwaXYfhJUS7HEN2Vr2zri3NiGiZAQl', '2016-03-15 22:25:40', '2016-05-11 23:13:11'),
-(10, 'N-0120160300026', 'Nonsubscriber 22', 2, '123455678', '', 'TEST01', '1234567', '123456', '', 'test01@gmail.com', '$2y$10$cJCT6y7kNtuir7kQIMF/KeGim6PfjckO2yplz/4w/qq0esj93Hd62', 'PO6tXev9OW5iPN6jHi9w5kaR4IV0WvWbOqyz9Awh53KENSWWCZjkGhuU7ZXw', '2016-03-17 08:52:37', '2016-12-25 15:30:55'),
+(10, 'N-0120160300026', 'Nonsubscriber 22', 2, '123455678', '', 'TEST01', '1234567', '123456', '', 'test01@gmail.com', '$2y$10$cJCT6y7kNtuir7kQIMF/KeGim6PfjckO2yplz/4w/qq0esj93Hd62', 'gqfrFaWcB4RwpXihEPEoR4sOLL4j2lJoX0rCFdA9QMEcNrFsy4FgMt5sft26', '2016-03-17 08:52:37', '2016-12-26 06:23:10'),
 (11, '012016030003972', 'Pt Test02', 3, '1234556', '', 'Test02', '123445', '1234566789', '', 'Test02@gmail.com', '$2y$10$J6E6I/FRmvXx/.t/1AecEu6g9fwBSZvEuwx.eAJaHcKTg41W4/e7u', 'kD82eOAjvdA7RmpTRdYsUrbFP1KquZrsLKRVAojzDyFKvRqb4PTrI1EyuPjS', '2016-03-28 03:43:34', '2016-03-28 04:12:25'),
 (12, '012016050004935', 'PT. TEST03', 17, '12354656', '', 'test03', '1341', '12324', '', 'test03@gmail.com', '$2y$10$hk386w4hmarO6hzRbUoEjOu76odzlYxx/oGxfSLGXubFPAb6I5kxS', NULL, '2016-05-10 05:12:45', '2016-05-10 05:12:46');
 
@@ -1339,7 +1396,20 @@ INSERT INTO `system_logs` (`id`, `user`, `log_text`, `created_at`, `updated_at`)
 (90, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Rumah kosong Bogor Admin 4</a>', '2016-12-26 05:35:16', '2016-12-26 05:35:16'),
 (91, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Rumah baru Tangerang</a>', '2016-12-26 05:40:24', '2016-12-26 05:40:24'),
 (92, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Rumah baru Tangerang 2</a>', '2016-12-26 05:45:39', '2016-12-26 05:45:39'),
-(93, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Rumah kosong Bogor Admin 4</a>', '2016-12-26 05:48:24', '2016-12-26 05:48:24');
+(93, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Rumah kosong Bogor Admin 4</a>', '2016-12-26 05:48:24', '2016-12-26 05:48:24'),
+(94, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Rumah kosong Bogor</a>', '2016-12-30 08:49:57', '2016-12-30 08:49:57'),
+(95, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Rumah Baru Margonda Raya  2</a>', '2016-12-30 09:07:25', '2016-12-30 09:07:25'),
+(96, 1, '<a href="javascript:;" class="name">Digi</a> Rejected Listing <a href="javascript:;">Rumah kosong Bogor</a>', '2017-01-03 05:09:46', '2017-01-03 05:09:46'),
+(97, 1, '<a href="javascript:;" class="name">Digi</a> Rejected Ad <a href="javascript:;">Rumah Baru Margonda Raya </a>', '2017-01-03 05:10:22', '2017-01-03 05:10:22'),
+(98, 1, '<a href="javascript:;" class="name">Digi</a> Rejected Ad <a href="javascript:;"></a>', '2017-01-03 05:15:09', '2017-01-03 05:15:09'),
+(99, 1, '<a href="javascript:;" class="name">Digi</a> Rejected Listing <a href="javascript:;"></a>', '2017-01-03 05:17:21', '2017-01-03 05:17:21'),
+(100, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Rumah kosong Bogor</a>', '2017-01-16 04:07:22', '2017-01-16 04:07:22'),
+(101, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Speaker Baru</a>', '2017-01-16 04:07:29', '2017-01-16 04:07:29'),
+(102, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Kamera Baru</a>', '2017-01-16 04:07:35', '2017-01-16 04:07:35'),
+(103, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Tes Categori</a>', '2017-01-17 10:42:11', '2017-01-17 10:42:11'),
+(104, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Tes Categori</a>', '2017-01-17 10:46:57', '2017-01-17 10:46:57'),
+(105, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Listing dari subs</a>', '2017-01-17 10:49:39', '2017-01-17 10:49:39'),
+(106, 1, '<a href="javascript:;">Digi</a> Approved Ad <a href="javascript:;" class="name">Rumah kosong Bogor</a>', '2017-01-17 10:50:43', '2017-01-17 10:50:43');
 
 -- --------------------------------------------------------
 
@@ -1365,7 +1435,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `user_id`, `name`, `email`, `password`, `remember_token`, `status`, `address_id`, `created_at`, `updated_at`) VALUES
-(1, 1234567890, 'Digi', 'grafich.dev@gmail.com', '$2y$10$XQuBCrxFwr4N8et.0VSSK.eavlEYymjNdl7DB5VFaaNgkRqid23.K', 'u3R1x3gRvndhG1bqDrY7rvmQeTh2IKPC95WqA6RYuTU37Kpv5I1lmIBSxkjs', 1, 1, '0000-00-00 00:00:00', '2016-12-25 16:21:55'),
+(1, 1234567890, 'Digi', 'grafich.dev@gmail.com', '$2y$10$XQuBCrxFwr4N8et.0VSSK.eavlEYymjNdl7DB5VFaaNgkRqid23.K', 'ErudNE80ombqjI6S5tAZaQl7U1ZF52y2jNL96VFsbirnW3YlHMynhJU1CMSn', 1, 1, '0000-00-00 00:00:00', '2017-01-16 04:07:51'),
 (2, 0, 'User Admin', 'irhsad.seifaldin@gmail.com', '$2y$10$wtb3McLO/3Ak29lm3/vy/.2m3WlAcjPZZgEmoid8hiwQAG49DG9mW', NULL, 0, 0, '2015-12-16 06:21:18', '2015-12-16 06:21:18'),
 (3, 0, 'User Manager', '31x389@gmail.com', '$2y$10$InGEkucqe6DBfuL76M6xVuRU1qgDUdXgYgKCSP5kYf7LdaHTfzLIO', 'QTNSc7J38AuSZb1HRzq9NcsOmM8wQA3spJ0Xd7ojbuIkuY7nueeyZreYS9Pj', 0, 0, '2015-12-16 06:21:47', '2015-12-28 07:44:52'),
 (4, 0, 'Irwan Sales', 'baponk.smoker@gmail.com', '$2y$10$UTQvH/xnww5zN.LL8qUCrucPa.RJ4BLbS02wr5aIh3MK70G/dT4n6', NULL, 0, 0, '2015-12-16 06:22:17', '2015-12-16 06:22:17'),
@@ -5700,7 +5770,7 @@ ALTER TABLE `address`
 -- AUTO_INCREMENT for table `ads`
 --
 ALTER TABLE `ads`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `adsmeta`
 --
@@ -5710,12 +5780,12 @@ ALTER TABLE `adsmeta`
 -- AUTO_INCREMENT for table `ad_edits`
 --
 ALTER TABLE `ad_edits`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `billings`
 --
 ALTER TABLE `billings`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `country`
 --
@@ -5735,12 +5805,12 @@ ALTER TABLE `invoices`
 -- AUTO_INCREMENT for table `listingmeta`
 --
 ALTER TABLE `listingmeta`
-  MODIFY `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 --
 -- AUTO_INCREMENT for table `listings`
 --
 ALTER TABLE `listings`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `listings_categories`
 --
@@ -5750,7 +5820,7 @@ ALTER TABLE `listings_categories`
 -- AUTO_INCREMENT for table `listing_edits`
 --
 ALTER TABLE `listing_edits`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `messages`
 --
@@ -5795,7 +5865,7 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `system_logs`
 --
 ALTER TABLE `system_logs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
 --
 -- AUTO_INCREMENT for table `users`
 --
