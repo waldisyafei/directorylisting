@@ -21,6 +21,7 @@ Route::get('category', 'Frontend\FrontendController@category');
 
 Route::group(['prefix' => 'category'], function(){
 	Route::get('{slug}', 'Frontend\ListingsController@category');
+	Route::get('{slug}/{listing}', 'Frontend\ListingsController@listings_details');
 });
 
 Route::group(['prefix' => 'listings'], function(){

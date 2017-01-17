@@ -51,14 +51,14 @@
 					?>
 					<div class="col-md-6">
 						<div class="listing-entry">
-							<h3 class="listing-title"><a href="<?php // echo url('listings', array($listing->listingCategory->slug, $listing->slug)) ?>">{{ $listing->title }}</a></h3>
+							<h3 class="listing-title"><a href="<?php echo url('category', array($listing->listingCategory->slug, $listing->slug)) ?>">{{ $listing->title }}</a></h3>
 							<div class="listing-content">
 								<div class="listing-thumb">
 									<a href="javascript:;"><img src="{{ asset($img_entry) }}" alt=""></a>
 								</div>
 								<div class="listing-text">
 									<p>{!! substr(strip_tags($listing->content), 0, 175) !!}</p>
-									<a href="{//{ url('listings', array($listing->listingCategory->slug, $listing->slug)) }}" class="listing-more">View More &raquo;</a>
+									<a href="{{ url('listings', array($listing->listingCategory->slug, $listing->slug)) }}" class="listing-more">View More &raquo;</a>
 								</div>
 							</div>
 						</div>
