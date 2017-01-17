@@ -1,6 +1,6 @@
 @extends('frontend.base')
 
-@section('title', $ad->title)
+@section('title', $item->title)
 
 @section('content')
 	<div id="search-section">
@@ -45,10 +45,10 @@
 				<div class="listing-meta-tag clearfix">
 					<div class="col-md-8">
 						<div class="listing-info">
-							<h1 class="listing-detail-title">{{ strtoupper($ad->title) }}</h1>
+							<h1 class="listing-detail-title">{{ strtoupper($item->title) }}</h1>
 							<div class="listing-detail-thumb">
 								<?php
-								$assets = json_decode($ad->assets);
+								$assets = json_decode($item->assets);
 								$filename = $assets[0];
 								?>
 								<a href="javascript:;"><img src="{{ asset($filename) }}" alt=""></a>
@@ -59,15 +59,15 @@
 						<div class="listing-vendor-info">
 							<div class="info-inner">
 								<?php
-								$address = $ad->customer->address;
-								$province = App\Models\Zone::find($address->zone_id);
-								$country = App\Models\Country::find($address->country_id)->name;
+								$itemdress = $item->customer->address;
+								$province = App\Models\Zone::find($itemdress->zone_id);
+								$country = App\Models\Country::find($itemdress->country_id)->name;
 								?>
-								<span class="vendor-name">{{ $ad->customer->customer_name }}</span>
-								<p class="vendor-address">{{ $address->address_1 }}, {{ $province->name }} {{ $address->postcode }} <br>{{ $country }}</p>
-								<span class="vendor-phone"><i class="glyphicon glyphicon-earphone"></i> {{ $ad->customer->phone }}</span>
-								<a href="<?php echo !empty($ad->url) ? $ad->url : '#' ?>" target="_blank" class="vendor-site-link">VISIT WEBSITE <i class="glyphicon glyphicon-play pull-right"></i></a>
-								<a href="<?php echo !empty($ad->url) ? $ad->url : '#' ?>" target="_blank" class="listing-goto-link">Produk ini dapat diperoleh di &raquo;</a>
+								<span class="vendor-name">{{ $item->customer->customer_name }}</span>
+								<p class="vendor-address">{{ $itemdress->address_1 }}, {{ $province->name }} {{ $itemdress->postcode }} <br>{{ $country }}</p>
+								<span class="vendor-phone"><i class="glyphicon glyphicon-earphone"></i> {{ $item->customer->phone }}</span>
+								<a href="<?php echo !empty($item->url) ? $item->url : '#' ?>" target="_blank" class="vendor-site-link">VISIT WEBSITE <i class="glyphicon glyphicon-play pull-right"></i></a>
+								<a href="<?php echo !empty($item->url) ? $item->url : '#' ?>" target="_blank" class="listing-goto-link">Produk ini dapat diperoleh di &raquo;</a>
 							</div>
 							<!-- <div class="vendor-btn">
 								<a href="javascript:;" class="grey-dark">DESKRIPSI</a>
@@ -91,7 +91,7 @@
 								<a href="#review" aria-controls="review" role="tab" data-toggle="tab">REVIEW</a>
 							</li>
 							<li role="presentation">
-								<a href="#custom" aria-controls="custom" role="tab" data-toggle="tab">{{ $ad->custom_tab_title != '' ? $ad->custom_tab_title : 'CUSTOM' }}</a>
+								<a href="#custom" aria-controls="custom" role="tab" data-toggle="tab">{{ $item->custom_tab_title != '' ? $item->custom_tab_title : 'CUSTOM' }}</a>
 							</li>
 						</ul>
 					
@@ -102,30 +102,30 @@
 									<div class="desc-inner">
 										<div class="clearfix">
 											<div class="col-md-4">
-												<span class="listing-price-range">HARGA: <strong>Rp <?php echo $ad->price_from ? number_format($ad->price_from, 0, ',', '.') : '0' ?><!--  - Rp <?php echo $ad->price_to ? number_format($ad->price_to, 0, ',', '.') : '0' ?> --></strong></span>
+												<span class="listing-price-range">HARGA: <strong>Rp <?php echo $item->price_from ? number_format($item->price_from, 0, ',', '.') : '0' ?><!--  - Rp <?php echo $item->price_to ? number_format($item->price_to, 0, ',', '.') : '0' ?> --></strong></span>
 											</div>
 											<div class="col-md-8">
-												<a href="<?php echo !empty($ad->url) ? $ad->url : '#' ?>" target="_blank" class="listing-goto-link">Produk ini dapat diperoleh di &raquo;</a>
+												<a href="<?php echo !empty($item->url) ? $item->url : '#' ?>" target="_blank" class="listing-goto-link">Produk ini dapat diperoleh di &raquo;</a>
 											</div>
 										</div>
 										<div class="clearfix">
 											<div class="listing-desc-content">
-												{!! $ad->content !!}
+												{!! $item->content !!}
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 							<div role="tabpanel" class="tab-pane fade" id="review">
-								@if ($ad->review != '')
-									{!! $ad->review !!}
+								@if ($item->review != '')
+									{!! $item->review !!}
 								@else
 									<p>No Review</p>
 								@endif
 							</div>
 							<div role="tabpanel" class="tab-pane fade" id="custom">
-								@if ($ad->custom_tab != '')
-									{!! $ad->custom_tab !!}
+								@if ($item->custom_tab != '')
+									{!! $item->custom_tab !!}
 								@else
 									<p>No Custom Tab Set</p>
 								@endif
@@ -144,14 +144,14 @@
 	</div>
 
 	<?php
-	if (get_listing_meta('listing_views_'.date('Ymd'), $ad->id)) {
-		$count = get_listing_meta('listing_views_'.date('Ymd'), $ad->id);
+	if (get_listing_meta('listing_views_'.date('Ymd'), $item->id)) {
+		$count = get_listing_meta('listing_views_'.date('Ymd'), $item->id);
 
 		$count = $count + 1;
 
-		update_listing_meta('listing_views_'.date('Ymd'), $count, $ad->id);
+		update_listing_meta('listing_views_'.date('Ymd'), $count, $item->id);
 	} else {
-		add_listing_meta('listing_views_'.date('Ymd'), 1, $ad->id);
+		add_listing_meta('listing_views_'.date('Ymd'), 1, $item->id);
 	}
 	?>
 @stop

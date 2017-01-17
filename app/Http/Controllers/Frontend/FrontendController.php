@@ -49,7 +49,7 @@ class FrontendController extends Controller
     {   
         $ad = Ad::where('link', $link)->first();
     
-        return view('frontend.pages.details', ['ad' => $ad]);
+        return view('frontend.pages.details', ['item' => $ad]);
     }
 
     public function updatePost(Request $request)

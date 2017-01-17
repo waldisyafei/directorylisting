@@ -1,4 +1,4 @@
-<?php $__env->startSection('title', $ad->title); ?>
+<?php $__env->startSection('title', $item->title); ?>
 
 <?php $__env->startSection('content'); ?>
 	<div id="search-section">
@@ -43,10 +43,10 @@
 				<div class="listing-meta-tag clearfix">
 					<div class="col-md-8">
 						<div class="listing-info">
-							<h1 class="listing-detail-title"><?php echo e(strtoupper($ad->title)); ?></h1>
+							<h1 class="listing-detail-title"><?php echo e(strtoupper($item->title)); ?></h1>
 							<div class="listing-detail-thumb">
 								<?php
-								$assets = json_decode($ad->assets);
+								$assets = json_decode($item->assets);
 								$filename = $assets[0];
 								?>
 								<a href="javascript:;"><img src="<?php echo e(asset($filename)); ?>" alt=""></a>
@@ -57,15 +57,15 @@
 						<div class="listing-vendor-info">
 							<div class="info-inner">
 								<?php
-								$address = $ad->customer->address;
-								$province = App\Models\Zone::find($address->zone_id);
-								$country = App\Models\Country::find($address->country_id)->name;
+								$itemdress = $item->customer->address;
+								$province = App\Models\Zone::find($itemdress->zone_id);
+								$country = App\Models\Country::find($itemdress->country_id)->name;
 								?>
-								<span class="vendor-name"><?php echo e($ad->customer->customer_name); ?></span>
-								<p class="vendor-address"><?php echo e($address->address_1); ?>, <?php echo e($province->name); ?> <?php echo e($address->postcode); ?> <br><?php echo e($country); ?></p>
-								<span class="vendor-phone"><i class="glyphicon glyphicon-earphone"></i> <?php echo e($ad->customer->phone); ?></span>
-								<a href="<?php echo !empty($ad->url) ? $ad->url : '#' ?>" target="_blank" class="vendor-site-link">VISIT WEBSITE <i class="glyphicon glyphicon-play pull-right"></i></a>
-								<a href="<?php echo !empty($ad->url) ? $ad->url : '#' ?>" target="_blank" class="listing-goto-link">Produk ini dapat diperoleh di &raquo;</a>
+								<span class="vendor-name"><?php echo e($item->customer->customer_name); ?></span>
+								<p class="vendor-address"><?php echo e($itemdress->address_1); ?>, <?php echo e($province->name); ?> <?php echo e($itemdress->postcode); ?> <br><?php echo e($country); ?></p>
+								<span class="vendor-phone"><i class="glyphicon glyphicon-earphone"></i> <?php echo e($item->customer->phone); ?></span>
+								<a href="<?php echo !empty($item->url) ? $item->url : '#' ?>" target="_blank" class="vendor-site-link">VISIT WEBSITE <i class="glyphicon glyphicon-play pull-right"></i></a>
+								<a href="<?php echo !empty($item->url) ? $item->url : '#' ?>" target="_blank" class="listing-goto-link">Produk ini dapat diperoleh di &raquo;</a>
 							</div>
 							<!-- <div class="vendor-btn">
 								<a href="javascript:;" class="grey-dark">DESKRIPSI</a>
@@ -89,7 +89,7 @@
 								<a href="#review" aria-controls="review" role="tab" data-toggle="tab">REVIEW</a>
 							</li>
 							<li role="presentation">
-								<a href="#custom" aria-controls="custom" role="tab" data-toggle="tab"><?php echo e($ad->custom_tab_title != '' ? $ad->custom_tab_title : 'CUSTOM'); ?></a>
+								<a href="#custom" aria-controls="custom" role="tab" data-toggle="tab"><?php echo e($item->custom_tab_title != '' ? $item->custom_tab_title : 'CUSTOM'); ?></a>
 							</li>
 						</ul>
 					
@@ -100,15 +100,15 @@
 									<div class="desc-inner">
 										<div class="clearfix">
 											<div class="col-md-4">
-												<span class="listing-price-range">HARGA: <strong>Rp <?php echo $ad->price_from ? number_format($ad->price_from, 0, ',', '.') : '0' ?><!--  - Rp <?php echo $ad->price_to ? number_format($ad->price_to, 0, ',', '.') : '0' ?> --></strong></span>
+												<span class="listing-price-range">HARGA: <strong>Rp <?php echo $item->price_from ? number_format($item->price_from, 0, ',', '.') : '0' ?><!--  - Rp <?php echo $item->price_to ? number_format($item->price_to, 0, ',', '.') : '0' ?> --></strong></span>
 											</div>
 											<div class="col-md-8">
-												<a href="<?php echo !empty($ad->url) ? $ad->url : '#' ?>" target="_blank" class="listing-goto-link">Produk ini dapat diperoleh di &raquo;</a>
+												<a href="<?php echo !empty($item->url) ? $item->url : '#' ?>" target="_blank" class="listing-goto-link">Produk ini dapat diperoleh di &raquo;</a>
 											</div>
 										</div>
 										<div class="clearfix">
 											<div class="listing-desc-content">
-												<?php echo $ad->content; ?>
+												<?php echo $item->content; ?>
 
 											</div>
 										</div>
@@ -116,16 +116,16 @@
 								</div>
 							</div>
 							<div role="tabpanel" class="tab-pane fade" id="review">
-								<?php if($ad->review != ''): ?>
-									<?php echo $ad->review; ?>
+								<?php if($item->review != ''): ?>
+									<?php echo $item->review; ?>
 
 								<?php else: ?>
 									<p>No Review</p>
 								<?php endif; ?>
 							</div>
 							<div role="tabpanel" class="tab-pane fade" id="custom">
-								<?php if($ad->custom_tab != ''): ?>
-									<?php echo $ad->custom_tab; ?>
+								<?php if($item->custom_tab != ''): ?>
+									<?php echo $item->custom_tab; ?>
 
 								<?php else: ?>
 									<p>No Custom Tab Set</p>
@@ -145,14 +145,14 @@
 	</div>
 
 	<?php
-	if (get_listing_meta('listing_views_'.date('Ymd'), $ad->id)) {
-		$count = get_listing_meta('listing_views_'.date('Ymd'), $ad->id);
+	if (get_listing_meta('listing_views_'.date('Ymd'), $item->id)) {
+		$count = get_listing_meta('listing_views_'.date('Ymd'), $item->id);
 
 		$count = $count + 1;
 
-		update_listing_meta('listing_views_'.date('Ymd'), $count, $ad->id);
+		update_listing_meta('listing_views_'.date('Ymd'), $count, $item->id);
 	} else {
-		add_listing_meta('listing_views_'.date('Ymd'), 1, $ad->id);
+		add_listing_meta('listing_views_'.date('Ymd'), 1, $item->id);
 	}
 	?>
 <?php $__env->stopSection(); ?>

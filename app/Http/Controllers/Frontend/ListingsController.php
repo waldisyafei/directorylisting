@@ -25,7 +25,7 @@ class ListingsController extends Controller
         return view('frontend.pages.category', ['listings' => $listings]);
     }
 
-    public function listing_details($category_slug, $listing_slug)
+    public function listings_details($category_slug, $listing_slug)
     {
         $category = ListingCategory::where('slug', $category_slug)->first();
 
@@ -39,6 +39,6 @@ class ListingsController extends Controller
             return abort(404);
         }
 
-        return view('frontend.pages.details', ['listing' => $listing]);
+        return view('frontend.pages.details', ['item' => $listing]);
     }
 }
