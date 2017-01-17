@@ -58,7 +58,7 @@
 								</div>
 								<div class="listing-text">
 									<p>{!! substr(strip_tags($listing->content), 0, 175) !!}</p>
-									<a href="{{ url('listings', array($listing->listingCategory->slug, $listing->slug)) }}" class="listing-more">View More &raquo;</a>
+									<a href="{{ url('category', array($listing->listingCategory->slug, $listing->slug)) }}" class="listing-more">View More &raquo;</a>
 								</div>
 							</div>
 						</div>
