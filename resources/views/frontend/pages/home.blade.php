@@ -9,8 +9,7 @@
 				<div class="col-md-9">
 					<div class="teaser-home">
 						<img src="{{ asset('assets/frontend/images/slider-bg.jpg') }}" alt="">
-						<?php
-						$categories = App\Models\ListingCategory::where('parent', 0)->get();
+						<?php $categories = App\Models\ListingCategory::where('parent', 0)->get();
 						$counter = 1;
 						?>
 						@foreach ($categories as $category)
@@ -35,9 +34,9 @@
 						@if (!empty($category->children))
 							<div class="flexslider">
 								<ul class="slides">
-									@foreach ($category->children as $children)<?php// dd($children); ?> 
-										<?php
-										$childrenListings = getActiveListings($children->id, 'active');
+									@foreach ($category->children as $children)
+					<?php // dd($children); ?> 
+										<?php $childrenListings = getActiveListings($children->id, 'active');
 										$childrenImages = array();
 										foreach ($childrenListings as $childrenListing) {
 											$assets = json_decode($childrenListing->assets);
@@ -57,8 +56,7 @@
 							<img src="{{ asset('assets/frontend/images/empty-listing.png') }}" alt="">
 						@endif
 					</div>
-					<?php
-					unset($categories[$key]);
+					<?php unset($categories[$key]);
 					$categories = $categories;
 					$counter++;
 					if ($counter > 2) {
@@ -77,8 +75,7 @@
 				@foreach ($categories as $key => &$category)
 				<div class="col-md-3">
 					<div class="random-listing type-1">
-						<?php
-						$childrenImages = array();
+						<?php $childrenImages = array();
 						if (!empty($category->children)) {
 							foreach ($category->children as $children) {
 								$childrenListings = getActiveListings($children->id, 'active');
