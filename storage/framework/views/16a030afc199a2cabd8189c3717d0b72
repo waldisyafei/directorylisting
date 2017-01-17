@@ -56,7 +56,7 @@
 								</div>
 								<div class="listing-text">
 									<p><?php echo substr(strip_tags($listing->content), 0, 175); ?></p>
-									<a href="<?php echo e(url('listings', array($listing->listingCategory->slug, $listing->slug))); ?>" class="listing-more">View More &raquo;</a>
+									<a href="<?php echo e(url('category', array($listing->listingCategory->slug, $listing->slug))); ?>" class="listing-more">View More &raquo;</a>
 								</div>
 							</div>
 						</div>
