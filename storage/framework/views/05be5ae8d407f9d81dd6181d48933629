@@ -95,7 +95,7 @@
 					?>
 					<div class="col-md-4">
 						<div class="header-top-r">
-							<a href="<?php echo $ad->link ?>" target="_blank" class="topra top-r1"><img src="<?php echo url($img_entry); ?>"></a>
+							<a href="<?php echo url('ads' .'/'.  $ad->link) ?>" target="_blank" class="topra top-r1"><img src="<?php echo url($img_entry); ?>"></a>
 						</div>
 					</div>
 				<?php endforeach ?>

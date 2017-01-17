@@ -164,7 +164,7 @@ class ListingsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {//dd($request->all());
         $rules = [
             'title' => 'required|min:2|max:255',
             'sub_category' => 'required',
@@ -200,7 +200,7 @@ class ListingsController extends Controller
         $listing->price_to = $request->input('price_to');
       //  $listing->package_id = $request->input('package');
         if ($request->input('category') != 'choose-category') {
-            $listing->category = $request->input('category');
+            $listing->category = $request->input('sub_category');
         }
 
         

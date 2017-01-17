@@ -1,22 +1,20 @@
-@extends('frontend.base')
+<?php $__env->startSection('title', $ad->title); ?>
 
-@section('title', $ad->title)
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 	<div id="search-section">
 		<div class="container clearfix">
 			<div class="search-in-cat">
 				<form method="get" role="form" class="clearfix" action="search">
 					<input type="text" name="q" id="search-input" placeholder="Search Keywords" class="form-control">
 					<button type="submit" class="btn-search">Search</button>
-					<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					<input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
 				</form>
 			</div>
 			<div class="subscribe">
 				<form method="get" role="form" class="clearfix">
 					<input type="text" name="email" id="search-input" placeholder="Your Email" class="form-control">
 					<button type="submit" class="btn-search">SUBSCRIBE</button>
-					<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					<input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
 				</form>
 			</div>
 		</div>
@@ -31,7 +29,7 @@
 				<?php foreach ($categories as $category): ?>
 					<?php if ($category->parent == 0): ?>
 						<?php foreach ($category->children as $child): ?>
-						<li><a href="{{ url('category', $child->slug) }}">{{ $child->title }}</a></li>
+						<li><a href="<?php echo e(url('category', $child->slug)); ?>"><?php echo e($child->title); ?></a></li>
 						<?php endforeach ?>
 					<?php endif ?>
 				<?php endforeach ?>
@@ -45,13 +43,13 @@
 				<div class="listing-meta-tag clearfix">
 					<div class="col-md-8">
 						<div class="listing-info">
-							<h1 class="listing-detail-title">{{ strtoupper($ad->title) }}</h1>
+							<h1 class="listing-detail-title"><?php echo e(strtoupper($ad->title)); ?></h1>
 							<div class="listing-detail-thumb">
 								<?php
 								$assets = json_decode($ad->assets);
 								$filename = $assets[0];
 								?>
-								<a href="javascript:;"><img src="{{ asset($filename) }}" alt=""></a>
+								<a href="javascript:;"><img src="<?php echo e(asset($filename)); ?>" alt=""></a>
 							</div>
 						</div>
 					</div>
@@ -63,9 +61,9 @@
 								$province = App\Models\Zone::find($address->zone_id);
 								$country = App\Models\Country::find($address->country_id)->name;
 								?>
-								<span class="vendor-name">{{ $ad->customer->customer_name }}</span>
-								<p class="vendor-address">{{ $address->address_1 }}, {{ $province->name }} {{ $address->postcode }} <br>{{ $country }}</p>
-								<span class="vendor-phone"><i class="glyphicon glyphicon-earphone"></i> {{ $ad->customer->phone }}</span>
+								<span class="vendor-name"><?php echo e($ad->customer->customer_name); ?></span>
+								<p class="vendor-address"><?php echo e($address->address_1); ?>, <?php echo e($province->name); ?> <?php echo e($address->postcode); ?> <br><?php echo e($country); ?></p>
+								<span class="vendor-phone"><i class="glyphicon glyphicon-earphone"></i> <?php echo e($ad->customer->phone); ?></span>
 								<a href="<?php echo !empty($ad->url) ? $ad->url : '#' ?>" target="_blank" class="vendor-site-link">VISIT WEBSITE <i class="glyphicon glyphicon-play pull-right"></i></a>
 								<a href="<?php echo !empty($ad->url) ? $ad->url : '#' ?>" target="_blank" class="listing-goto-link">Produk ini dapat diperoleh di &raquo;</a>
 							</div>
@@ -91,7 +89,7 @@
 								<a href="#review" aria-controls="review" role="tab" data-toggle="tab">REVIEW</a>
 							</li>
 							<li role="presentation">
-								<a href="#custom" aria-controls="custom" role="tab" data-toggle="tab">{{ $ad->custom_tab_title != '' ? $ad->custom_tab_title : 'CUSTOM' }}</a>
+								<a href="#custom" aria-controls="custom" role="tab" data-toggle="tab"><?php echo e($ad->custom_tab_title != '' ? $ad->custom_tab_title : 'CUSTOM'); ?></a>
 							</li>
 						</ul>
 					
@@ -110,25 +108,28 @@
 										</div>
 										<div class="clearfix">
 											<div class="listing-desc-content">
-												{!! $ad->content !!}
+												<?php echo $ad->content; ?>
+
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 							<div role="tabpanel" class="tab-pane fade" id="review">
-								@if ($ad->review != '')
-									{!! $ad->review !!}
-								@else
+								<?php if($ad->review != ''): ?>
+									<?php echo $ad->review; ?>
+
+								<?php else: ?>
 									<p>No Review</p>
-								@endif
+								<?php endif; ?>
 							</div>
 							<div role="tabpanel" class="tab-pane fade" id="custom">
-								@if ($ad->custom_tab != '')
-									{!! $ad->custom_tab !!}
-								@else
+								<?php if($ad->custom_tab != ''): ?>
+									<?php echo $ad->custom_tab; ?>
+
+								<?php else: ?>
 									<p>No Custom Tab Set</p>
-								@endif
+								<?php endif; ?>
 							</div>
 						</div>
 					</div>
@@ -154,9 +155,9 @@
 		add_listing_meta('listing_views_'.date('Ymd'), 1, $ad->id);
 	}
 	?>
-@stop
+<?php $__env->stopSection(); ?>
 
-@section('page-styles')
+<?php $__env->startSection('page-styles'); ?>
 <style type="text/css">
 	.listing-detail-thumb {
 	    height: 320px;
@@ -193,8 +194,9 @@
 
 	}
 </style>
-@stop
+<?php $__env->stopSection(); ?>
 
-@section('page-scripts')
-	{{-- expr --}}
-@stop
+<?php $__env->startSection('page-scripts'); ?>
+	<?php /* expr */ ?>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('frontend.base', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
