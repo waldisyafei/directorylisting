@@ -28,13 +28,13 @@
 							<div class="form-group">
 								<label class="col-sm-2 control-label">Main Category</label>
 								<div class="col-sm-8">
-									<label class="control-label"><strong><?php echo $listing->listingCategory->parentCategory->title ?></strong></label>
+									<label class="control-label"><strong><?php echo $listing->listingCategory->title ?></strong></label>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label">Category</label>
 								<div class="col-sm-8">
-									<label class="control-label"><strong><?php echo $listing->listingCategory->title ?></strong></label>
+									<label class="control-label"><strong><?php echo $listing->listingCategory->parentCategory->title ?></strong></label>
 								</div>
 							</div>
 							<div role="tabpanel" style="margin: 0 60px 40px;">

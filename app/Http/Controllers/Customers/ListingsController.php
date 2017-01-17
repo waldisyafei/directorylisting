@@ -200,7 +200,7 @@ class ListingsController extends Controller
         $listing->price_to = $request->input('price_to');
       //  $listing->package_id = $request->input('package');
         if ($request->input('category') != 'choose-category') {
-            $listing->category = $request->input('category');
+            $listing->category = $request->input('sub_category');
         }
 
         

@@ -44,9 +44,9 @@
 											$filename = substr($assets[0], strrpos($assets[0], '/') + 1);
 											$childrenImages[] = str_replace($filename, 'thumb-'.$filename, $assets[0]);
 										}
-										?> <?php if (isset($filename)) dd($filename); ?> 
+										?> <?php if (isset($filename)) ?> 
 										@if (!empty($childrenImages))
-											@foreach ($childrenImages as $childrenImage)<?php dd($childrenImages); ?> 
+											@foreach ($childrenImages as $childrenImage)
 												<li><img src="{{ $childrenImage }}" alt=""></li>
 											@endforeach
 										@endif

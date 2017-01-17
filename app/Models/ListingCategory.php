@@ -29,7 +29,7 @@ class ListingCategory extends Model implements SluggableInterface
 
     public function parentCategory()
     {
-        return $this->belongsTo('App\Models\ListingCategory', 'id', 'parent');
+        return $this->belongsTo('App\Models\ListingCategory', 'parent', 'id');
     }
 
     public function parentCat()
