@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Listing;
+use App\Models\ListingCategory;
 use App\Models\Ad;
 use App\Http\Controllers\NotificationsController as Notification;
 use Mail;
@@ -23,7 +24,7 @@ class FrontendController extends Controller
     {
         $listings = Listing::where('status', '3')->orderBy(\DB::raw('RAND()'))->paginate(6);
         $ads = Ad::where('status', '3')->orderBy(\DB::raw('RAND()'))->paginate(20);
-
+        //dd($listings);
         return view('frontend.pages.home', ['listings' => $listings, 'ads' => $ads]);
     }
 
@@ -35,9 +36,20 @@ class FrontendController extends Controller
         return view('frontend.pages.category', ['listings' => $listings]);
     }
 
-    public function details()
-    {
-        return view('frontend.pages.details');
+    // public function sub_category($slug)
+    // { 
+    //     $sub = ListingCategory::where('slug', $slug)->select('id')->first();
+
+    //     $listings = Listing::where('category', $sub->id)->orderBy(\DB::raw('RAND()'))->get();
+
+    //     return view('frontend.pages.category', ['listings' => $listings]);
+    // }    
+
+    public function ads_details( $link)
+    {   
+        $ad = Ad::where('link', $link)->first();
+    
+        return view('frontend.pages.details', ['ad' => $ad]);
     }
 
     public function updatePost(Request $request)

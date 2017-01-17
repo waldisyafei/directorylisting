@@ -14,8 +14,10 @@ use App\Models\Message;
 */
 
 Route::get('/', 'Frontend\FrontendController@index');
-//Route::get('category', 'Frontend\FrontendController@category');
-Route::get('details', 'Frontend\FrontendController@details');
+Route::get('ads/{link}', 'Frontend\FrontendController@ads_details');
+Route::get('listing/{link}', 'Frontend\FrontendController@listings_details');
+Route::get('category', 'Frontend\FrontendController@category');
+//Route::get('category/{sub}', 'Frontend\FrontendController@sub_category');
 
 Route::group(['prefix' => 'category'], function(){
 	Route::get('{slug}', 'Frontend\ListingsController@category');

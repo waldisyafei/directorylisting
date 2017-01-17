@@ -164,7 +164,7 @@ class ListingsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {//dd($request->all());
         $rules = [
             'title' => 'required|min:2|max:255',
             'sub_category' => 'required',

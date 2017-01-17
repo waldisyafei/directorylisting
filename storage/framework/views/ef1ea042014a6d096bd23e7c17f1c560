@@ -33,7 +33,7 @@
 						<?php if(!empty($category->children)): ?>
 							<div class="flexslider">
 								<ul class="slides">
-									<?php foreach($category->children as $children): ?>
+									<?php foreach($category->children as $children): ?><?php// dd($children); ?> 
 										<?php
 										$childrenListings = getActiveListings($children->id, 'active');
 										$childrenImages = array();
@@ -42,9 +42,9 @@
 											$filename = substr($assets[0], strrpos($assets[0], '/') + 1);
 											$childrenImages[] = str_replace($filename, 'thumb-'.$filename, $assets[0]);
 										}
-										?>
+										?> <?php if (isset($filename)) dd($filename); ?> 
 										<?php if(!empty($childrenImages)): ?>
-											<?php foreach($childrenImages as $childrenImage): ?>
+											<?php foreach($childrenImages as $childrenImage): ?><?php dd($childrenImages); ?> 
 												<li><img src="<?php echo e($childrenImage); ?>" alt=""></li>
 											<?php endforeach; ?>
 										<?php endif; ?>

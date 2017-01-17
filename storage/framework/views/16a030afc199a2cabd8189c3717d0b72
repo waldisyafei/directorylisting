@@ -1,22 +1,20 @@
-@extends('frontend.base')
+<?php $__env->startSection('title', 'Category'); ?>
 
-@section('title', 'Category')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 	<div id="search-section">
 		<div class="container clearfix">
 			<div class="search-in-cat">
 				<form method="get" role="form" class="clearfix" action="search">
 					<input type="text" name="q" id="search-input" placeholder="Search Keywords" class="form-control">
 					<button type="submit" class="btn-search">Search</button>
-					<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					<input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
 				</form>
 			</div>
 			<div class="subscribe">
 				<form method="get" role="form" class="clearfix">
 					<input type="text" name="email" id="search-input" placeholder="Your Email" class="form-control">
 					<button type="submit" class="btn-search">SUBSCRIBE</button>
-					<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					<input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
 				</form>
 			</div>
 		</div>
@@ -31,7 +29,7 @@
 				<?php foreach ($categories as $category): ?>
 					<?php if ($category->parent == 0): ?>
 						<?php foreach ($category->children as $child): ?>
-						<li><a href="{{ url('category', $child->slug) }}">{{ $child->title }}</a></li>
+						<li><a href="<?php echo e(url('category', $child->slug)); ?>"><?php echo e($child->title); ?></a></li>
 						<?php endforeach ?>
 					<?php endif ?>
 				<?php endforeach ?>
@@ -43,7 +41,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="listings">
-				@foreach ($listings as $listing)
+				<?php foreach($listings as $listing): ?>
 					<?php
 					$assets = json_decode($listing->assets);
 					$filename = substr($assets[0], strrpos($assets[0], '/') + 1);
@@ -51,26 +49,26 @@
 					?>
 					<div class="col-md-6">
 						<div class="listing-entry">
-							<h3 class="listing-title"><a href="<?php// echo url('listings', array($listing->listingCategory->slug, $listing->slug)) ?>">{{ $listing->title }}</a></h3>
+							<h3 class="listing-title"><a href="<?php// echo url('listings', array($listing->listingCategory->slug, $listing->slug)) ?>"><?php echo e($listing->title); ?></a></h3>
 							<div class="listing-content">
 								<div class="listing-thumb">
-									<a href="javascript:;"><img src="{{ asset($img_entry) }}" alt=""></a>
+									<a href="javascript:;"><img src="<?php echo e(asset($img_entry)); ?>" alt=""></a>
 								</div>
 								<div class="listing-text">
-									<p>{!! substr(strip_tags($listing->content), 0, 175) !!}</p>
+									<p><?php echo substr(strip_tags($listing->content), 0, 175); ?></p>
 									<a href="{//{ url('listings', array($listing->listingCategory->slug, $listing->slug)) }}" class="listing-more">View More &raquo;</a>
 								</div>
 							</div>
 						</div>
 					</div>
-				@endforeach
+				<?php endforeach; ?>
 				<!-- 
 					<div class="col-md-6">
 						<div class="listing-entry">
 							<h3 class="listing-title"><a href="javascript:;">KACA FILM V-KOOL ALL VARIANT</a></h3>
 							<div class="listing-content">
 								<div class="listing-thumb">
-									<a href="javascript:;"><img src="{{ asset('assets/frontend/img/listing-item.jpg') }}" alt=""></a>
+									<a href="javascript:;"><img src="<?php echo e(asset('assets/frontend/img/listing-item.jpg')); ?>" alt=""></a>
 								</div>
 								<div class="listing-text">
 									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
@@ -85,7 +83,7 @@
 							<h3 class="listing-title"><a href="javascript:;">KACA FILM V-KOOL ALL VARIANT</a></h3>
 							<div class="listing-content">
 								<div class="listing-thumb">
-									<a href="javascript:;"><img src="{{ asset('assets/frontend/img/listing-item.jpg') }}" alt=""></a>
+									<a href="javascript:;"><img src="<?php echo e(asset('assets/frontend/img/listing-item.jpg')); ?>" alt=""></a>
 								</div>
 								<div class="listing-text">
 									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
@@ -100,7 +98,7 @@
 							<h3 class="listing-title"><a href="javascript:;">KACA FILM V-KOOL ALL VARIANT</a></h3>
 							<div class="listing-content">
 								<div class="listing-thumb">
-									<a href="javascript:;"><img src="{{ asset('assets/frontend/img/listing-item.jpg') }}" alt=""></a>
+									<a href="javascript:;"><img src="<?php echo e(asset('assets/frontend/img/listing-item.jpg')); ?>" alt=""></a>
 								</div>
 								<div class="listing-text">
 									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
@@ -115,7 +113,7 @@
 							<h3 class="listing-title"><a href="javascript:;">KACA FILM V-KOOL ALL VARIANT</a></h3>
 							<div class="listing-content">
 								<div class="listing-thumb">
-									<a href="javascript:;"><img src="{{ asset('assets/frontend/img/listing-item.jpg') }}" alt=""></a>
+									<a href="javascript:;"><img src="<?php echo e(asset('assets/frontend/img/listing-item.jpg')); ?>" alt=""></a>
 								</div>
 								<div class="listing-text">
 									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
@@ -130,7 +128,7 @@
 							<h3 class="listing-title"><a href="javascript:;">KACA FILM V-KOOL ALL VARIANT</a></h3>
 							<div class="listing-content">
 								<div class="listing-thumb">
-									<a href="javascript:;"><img src="{{ asset('assets/frontend/img/listing-item.jpg') }}" alt=""></a>
+									<a href="javascript:;"><img src="<?php echo e(asset('assets/frontend/img/listing-item.jpg')); ?>" alt=""></a>
 								</div>
 								<div class="listing-text">
 									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
@@ -145,7 +143,7 @@
 							<h3 class="listing-title"><a href="javascript:;">KACA FILM V-KOOL ALL VARIANT</a></h3>
 							<div class="listing-content">
 								<div class="listing-thumb">
-									<a href="javascript:;"><img src="{{ asset('assets/frontend/img/listing-item.jpg') }}" alt=""></a>
+									<a href="javascript:;"><img src="<?php echo e(asset('assets/frontend/img/listing-item.jpg')); ?>" alt=""></a>
 								</div>
 								<div class="listing-text">
 									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
@@ -159,12 +157,13 @@
 			</div>
 		</div>
 	</div>
-@stop
+<?php $__env->stopSection(); ?>
 
-@section('page-styles')
-	{{-- expr --}}
-@stop
+<?php $__env->startSection('page-styles'); ?>
+	<?php /* expr */ ?>
+<?php $__env->stopSection(); ?>
 
-@section('page-scripts')
-	{{-- expr --}}
-@stop
+<?php $__env->startSection('page-scripts'); ?>
+	<?php /* expr */ ?>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('frontend.base', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

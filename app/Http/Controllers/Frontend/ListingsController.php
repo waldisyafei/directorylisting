@@ -18,8 +18,9 @@ class ListingsController extends Controller
         if (!$category) {
             return abort(404, 'Category not found');
         }
+        //dd($category->id);
 
-        $listings = Listing::where('category', $category->id)->orderBy(\DB::raw('RAND()'))->get();
+        $listings = Listing::where('category', $category->parent)->orderBy(\DB::raw('RAND()'))->get();
 
         return view('frontend.pages.category', ['listings' => $listings]);
     }
