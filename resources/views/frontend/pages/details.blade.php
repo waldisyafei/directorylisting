@@ -67,6 +67,7 @@
 								<p class="vendor-address">{{ $itemdress->address_1 }}, {{ $province->name }} {{ $itemdress->postcode }} <br>{{ $country }}</p>
 								<span class="vendor-phone"><i class="glyphicon glyphicon-earphone"></i> {{ $item->customer->phone }}</span>
 								<a href="<?php echo !empty($item->url) ? $item->url : '#' ?>" target="_blank" class="vendor-site-link">VISIT WEBSITE <i class="glyphicon glyphicon-play pull-right"></i></a>
+								<span class="listing-goto-harga">HARGA: Rp <?php echo $item->price_from ? number_format($item->price_from, 0, ',', '.') : '0' ?></span>
 								<a href="<?php echo !empty($item->url) ? $item->url : '#' ?>" target="_blank" class="listing-goto-link">Produk ini dapat diperoleh di &raquo;</a>
 							</div>
 							<!-- <div class="vendor-btn">
@@ -100,14 +101,6 @@
 							<div role="tabpanel" class="tab-pane fade in active" id="deskripsi">
 								<div class="listing-description">
 									<div class="desc-inner">
-										<div class="clearfix">
-											<div class="col-md-4">
-												<span class="listing-price-range">HARGA: <strong>Rp <?php echo $item->price_from ? number_format($item->price_from, 0, ',', '.') : '0' ?><!--  - Rp <?php echo $item->price_to ? number_format($item->price_to, 0, ',', '.') : '0' ?> --></strong></span>
-											</div>
-											<div class="col-md-8">
-												<a href="<?php echo !empty($item->url) ? $item->url : '#' ?>" target="_blank" class="listing-goto-link">Produk ini dapat diperoleh di &raquo;</a>
-											</div>
-										</div>
 										<div class="clearfix">
 											<div class="listing-desc-content">
 												{!! $item->content !!}
@@ -189,9 +182,21 @@
 	    font-family: 'Roboto', sans-serif;
 	    text-decoration: none;
 	    border-radius: 5px;
-
-
 	}
+	.listing-goto-harga {
+    padding-top: 25px;
+    padding-bottom: 25px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background: #b3b3b3;
+    display: block;
+    font-size: 18px;
+    text-align: center;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    text-decoration: none;
+    border-radius: 5px;
+}
 </style>
 @stop
 
