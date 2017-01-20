@@ -26,14 +26,22 @@
 		<div class="container">
 			<ul class="nav cat-menu">
 				<li class="home"><a href="javascript:;"></a></li>
-
-				<?php $categories = App\Models\ListingCategory::all(); ?>
+				<?php
+				$current_link = $_SERVER['REQUEST_URI'];
+				$explode = explode("/",$current_link);
+				if($explode[3] == 'category'){
+					$category = App\Models\ListingCategory::where('slug', $explode[4])->first();
+				}
+				//dd($category);
+				$categories = App\Models\ListingCategory::where('id', $category->parent)->get();
+				?>
+				<?php //$categories = App\Models\ListingCategory::all(); ?>
 				<?php foreach ($categories as $category): ?>
-					<?php if ($category->parent == 0): ?>
+					<?php //if ($category->parent == 0): ?>
 						<?php foreach ($category->children as $child): ?>
 						<li><a href="{{ url('category', $child->slug) }}">{{ $child->title }}</a></li>
 						<?php endforeach ?>
-					<?php endif ?>
+					<?php //endif ?>
 				<?php endforeach ?>
 			</ul>
 		</div>
