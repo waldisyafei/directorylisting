@@ -22,7 +22,7 @@ class ListingsController extends Controller
 
         $listings = Listing::where('category', $category->id)->orderBy(\DB::raw('RAND()'))->get();
 //dd($category->id);
-        return view('frontend.pages.category', ['listings' => $listings]);
+        return view('frontend.pages.category', ['listings' => $listings, 'slug' => $slug]);
     }
 
     public function listings_details($category_slug, $listing_slug)
@@ -39,6 +39,6 @@ class ListingsController extends Controller
             return abort(404);
         }
 
-        return view('frontend.pages.details', ['item' => $listing]);
+        return view('frontend.pages.details', ['item' => $listing, 'slug' => $category_slug]);
     }
 }
