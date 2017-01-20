@@ -27,21 +27,22 @@
 			<ul class="nav cat-menu">
 				<li class="home"><a href="javascript:;"></a></li>
 				<?php
-				$current_link = $_SERVER['REQUEST_URI'];
-				$explode = explode("/",$current_link);
-				if($explode[3] == 'category'){
-					$category = App\Models\ListingCategory::where('slug', $explode[4])->first();
+				// $current_link = $_SERVER['REQUEST_URI'];
+				// $explode = explode("/",$current_link);
+				// if($explode[3] == 'category'){
+				// }
+				if(isset($slug)) {
+					$sub_category = App\Models\ListingCategory::where('slug', $slug)->first();
+					$categories = App\Models\ListingCategory::where('id', $sub_category->parent)->get();
+				}else{
+					$categories = App\Models\ListingCategory::all();
 				}
 				//dd($category);
-				$categories = App\Models\ListingCategory::where('id', $category->parent)->get();
 				?>
-				<?php //$categories = App\Models\ListingCategory::all(); ?>
 				<?php foreach ($categories as $category): ?>
-					<?php //if ($category->parent == 0): ?>
-						<?php foreach ($category->children as $child): ?>
-						<li><a href="{{ url('category', $child->slug) }}">{{ $child->title }}</a></li>
-						<?php endforeach ?>
-					<?php //endif ?>
+					<?php foreach ($category->children as $child): ?>
+					<li><a href="{{ url('category', $child->slug) }}">{{ $child->title }}</a></li>
+					<?php endforeach ?>
 				<?php endforeach ?>
 			</ul>
 		</div>
