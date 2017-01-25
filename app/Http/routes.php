@@ -153,7 +153,8 @@ Route::group(['prefix' => 'app-admin', 'middleware' => 'auth'], function() {
 		Route::get('renew/{id}', 'Backend\AdsController@renew');
 		Route::post('renew/{id}', 'Backend\AdsController@renew_ads_slot');
 		Route::get('delete/{id}', 'Backend\AdsController@destroy');
-
+		Route::get('suspend/{id}', 'Backend\AdsController@suspend');
+		
 		Route::get('buy/complete', 'Backend\AdsController@buyComplete');
 	});
 

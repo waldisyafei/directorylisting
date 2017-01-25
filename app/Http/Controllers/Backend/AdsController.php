@@ -240,6 +240,7 @@ class AdsController extends Controller
         $ad = Ad::find($id);
 
         $ad->delete();
+        return redirect()->back()->with('success', 'Ad deleted successfully.');
     }
 
     public function renew($id)
@@ -292,5 +293,20 @@ class AdsController extends Controller
         Session::put('ads', $ads);
 
         return redirect('app-admin/ads/buy/complete');
+    }
+
+    public function suspend($id)
+    {
+        $ad_update = AdEdit::find($id);
+        $ad = Ad::find($ad_update->edit);
+
+        if ($ad_update) {
+            $ad_update->status = 2;
+            $ad->status = 2;
+            $ad_update->save();
+            $ad->save();
+
+            return redirect('app-admin/ads')->with('success', 'Ad suspended successfully');
+        }
     }
 }

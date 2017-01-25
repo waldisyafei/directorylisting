@@ -39,15 +39,19 @@
 										<?php
 										$childrenListings = getActiveListings($children->id, 'active');
 										$childrenImages = array();
+										$childrenUrl = array();
 										foreach ($childrenListings as $childrenListing) {
 											$assets = json_decode($childrenListing->assets);
 											$filename = substr($assets[0], strrpos($assets[0], '/') + 1);
 											$childrenImages[] = str_replace($filename, 'thumb-'.$filename, $assets[0]);
+											$childrenUrl[] = $childrenListing->slug;
 										}
 										?> <?php if (isset($filename)) ?> 
 										@if (!empty($childrenImages))
+											<?php $c = 0; ?>
 											@foreach ($childrenImages as $childrenImage)
-												<li><img src="{{ $childrenImage }}" alt=""></li>
+												<li><a href="{{ url('category/'.$children->slug ."/". $childrenUrl[$c]) }}"><img src="{{ $childrenImage }}" alt=""></a></li>
+												<?php $c++; ?>
 											@endforeach
 										@endif
 									@endforeach
@@ -79,6 +83,7 @@
 					<div class="random-listing type-1">
 						<?php
 						$childrenImages = array();
+						$childrenUrl = array();
 						if (!empty($category->children)) {
 							foreach ($category->children as $children) {
 								$childrenListings = getActiveListings($children->id, 'active');
@@ -86,6 +91,7 @@
 									$assets = json_decode($childrenListing->assets);
 									$filename = substr($assets[0], strrpos($assets[0], '/') + 1);
 									$childrenImages[] = str_replace($filename, 'thumb-'.$filename, $assets[0]);
+									$childrenUrl[] = $childrenListing->slug;
 								}
 							}
 						}
@@ -93,9 +99,11 @@
 						<?php if (count($childrenImages) > 0): ?>
 							<div class="flexslider">
 								<ul class="slides">
-									<?php foreach ($childrenImages as $childrenImage): ?>
-										<li><img src="{{ $childrenImage }}" alt=""></li>
-									<?php endforeach ?>	
+									<?php $c = 0; ?>
+									@foreach ($childrenImages as $childrenImage)
+										<li><a href="{{ url('category/'.$children->slug ."/". $childrenUrl[$c]) }}"><img src="{{ $childrenImage }}" alt=""></a></li>
+										<?php $c++; ?>
+									@endforeach
 								</ul>
 							</div>
 						<?php endif ?>

@@ -84,7 +84,7 @@
 			</div>
 			<!-- ./End logo -->
 
-			<?php $ads = getActiveAds(true); ?>
+			<?php $ads = getActiveAds(true);// dd($ads); ?>
 
 			<?php if (count($ads) > 0): ?>
 				<?php foreach ($ads as $ad): ?>
@@ -113,6 +113,8 @@
 					<a href="#" class="ads top-r1"><img src="<?php echo e(asset('assets/frontend/img/cs/ads-300x92.png')); ?>"></a>
 				</div>
 			</div> -->
+
+			
 		</div>
 	</div>
 </header>

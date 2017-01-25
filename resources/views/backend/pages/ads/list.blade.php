@@ -54,7 +54,7 @@
 										<th width="100">Status</th>
 										<th>Non Customer Link Ads</th>
 										<th width="150">Show Date</th>
-										<th width="150">Expired Date</th>
+										<th width="130">Actions</th>
 										<!-- <th>Action</th> -->
 									</tr>
 								</thead>
@@ -72,7 +72,7 @@
 												<img class="img-thumbnail" src="{{ asset($img_entry) }}" width="70" height="70">
 											<?php endif ?>
 										</td>
-										<td><a href="{{ url('account/ads/edit', $ad->id) }}">{{ $ad->title }}</a></td>
+										<td><a href="{{ url('app-admin/ads/edit', $ad->id) }}">{{ $ad->title }}</a></td>
 										<td>
 											<?php $status = $ad->adStatus->id; ?>
 											@if ($status == 1)
@@ -99,13 +99,27 @@
 												<label class="label label-info tooltips" title="<?php echo $ad->adStatus->info ?>">{{ $ad->adStatus->display_name }}</label>
 											@endif
 										</td>
-										<td>{{ $ad->customer_id ? null : $ad->noncust_ad_link }}</td>
+										<td><?php if( $ad->link )echo $ad->link; ?></td>
 										<td>{{ $ad->show_date != '' ? date('d M Y H:i', strtotime($ad->show_date)) : null }}</td>
 										<td>
-										<?php if ($ad->status != 1 && $ad->status != 5 && $ad->status != 6): ?>
-											<?php echo date('d M Y H:i', strtotime($ad->expired_date)) ?>
-										<?php endif ?>
-										</td>
+												<?php $auth_user = Auth::user()->get(); ?>
+
+												@if ($auth_user->can('can_approve_ads'))
+													@if ($ad->status == 3)
+														<a href="{{ url('app-admin/ads/suspend', $ad->id) }}" class="btn btn-warning-alt btn-sm tooltips" title="Suspend Listing"><i class="ti ti-close"></i></a>&nbsp;&nbsp;
+													@elseif($ad->status == 2)
+														<a href="{{ url('app-admin/approvals/ads/view/'. $ad->id . '/approve') }}" class="btn btn-success-alt btn-sm tooltips" title="Approve this ad"><i class="ti ti-check-box"></i></a>&nbsp;&nbsp;
+													@endif
+												@endif
+
+												@if ($auth_user->can('can_edit_ads'))
+													<a href="{{ url('app-admin/ads/edit', $ad->id) }}" class="btn btn-primary-alt btn-sm tooltips" title="Edit this ad"><i class="ti ti-pencil"></i></a>&nbsp;&nbsp;
+												@endif
+												
+												@if ($auth_user->can('can_delete_ads'))
+													<a href="{{ url('app-admin/ads/delete', $ad->id) }}" class="btn btn-danger-alt btn-sm tooltips" title="Delete this ad"><i class="ti ti-trash"></i></a>
+												@endif
+											</td>
 									</tr>
 								<?php endforeach ?>
 								</tbody>

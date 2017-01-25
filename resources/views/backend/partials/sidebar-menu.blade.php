@@ -68,8 +68,8 @@
 
                         @if (Auth::user()->get()->can('can_approve_listing'))
                             <?php
-                            $unapproved = getListings('checking')->count();
-                            $unapproved = $unapproved + getAds('checking')->count();
+                            $unapproved = getListingsApprove('checking')->count();
+                            $unapproved = $unapproved + getAdsApprove('checking')->count();
                             ?>
                             <li class="{{ Request::is('app-admin/approvals*') ? ' active' : null }}"><a href="javascript:;"><i class="ti ti-check-box"></i><span>Approvals</span>{!! $unapproved > 0 ? ' <span class="badge badge-teal">'. $unapproved .'</span>' : null !!}</a>
                                 <ul class="acc-menu"{!! Request::is('app-admin/approvals*') ? ' style="display: block"' : null !!}>
