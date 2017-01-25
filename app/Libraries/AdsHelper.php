@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Ad;
+use App\Models\AdEdit;
 use App\Models\AdStatus;
 use App\Models\AdMeta;
 use App\Models\SystemLog;
@@ -10,6 +11,15 @@ function getAds($status)
 	$listingStatus = AdStatus::where('name', $status)->first();
 
 	$listings = Ad::where('status', $listingStatus->id)->get();
+
+	return $listings;
+}
+
+function getAdsApprove($status)
+{
+	$listingStatus = AdStatus::where('name', $status)->first();
+
+	$listings = AdEdit::where('status', $listingStatus->id)->get();
 
 	return $listings;
 }

@@ -9,7 +9,8 @@
 				<div class="col-md-9">
 					<div class="teaser-home">
 						<img src="{{ asset('assets/frontend/images/slider-bg.jpg') }}" alt="">
-						<?php $categories = App\Models\ListingCategory::where('parent', 0)->get();
+						<?php
+						$categories = App\Models\ListingCategory::where('parent', 0)->get();
 						$counter = 1;
 						?>
 						@foreach ($categories as $category)
@@ -34,19 +35,23 @@
 						@if (!empty($category->children))
 							<div class="flexslider">
 								<ul class="slides">
-									@foreach ($category->children as $children)
-					<?php // dd($children); ?> 
-										<?php $childrenListings = getActiveListings($children->id, 'active');
+									@foreach ($category->children as $children)<?php// dd($children); ?> 
+										<?php
+										$childrenListings = getActiveListings($children->id, 'active');
 										$childrenImages = array();
+										$childrenUrl = array();
 										foreach ($childrenListings as $childrenListing) {
 											$assets = json_decode($childrenListing->assets);
 											$filename = substr($assets[0], strrpos($assets[0], '/') + 1);
 											$childrenImages[] = str_replace($filename, 'thumb-'.$filename, $assets[0]);
+											$childrenUrl[] = $childrenListing->slug;
 										}
 										?> <?php if (isset($filename)) ?> 
 										@if (!empty($childrenImages))
+											<?php $c = 0; ?>
 											@foreach ($childrenImages as $childrenImage)
-												<li><img src="{{ $childrenImage }}" alt=""></li>
+												<li><a href="{{ url('category/'.$children->slug ."/". $childrenUrl[$c]) }}"><img src="{{ $childrenImage }}" alt=""></a></li>
+												<?php $c++; ?>
 											@endforeach
 										@endif
 									@endforeach
@@ -56,7 +61,8 @@
 							<img src="{{ asset('assets/frontend/images/empty-listing.png') }}" alt="">
 						@endif
 					</div>
-					<?php unset($categories[$key]);
+					<?php
+					unset($categories[$key]);
 					$categories = $categories;
 					$counter++;
 					if ($counter > 2) {
@@ -75,7 +81,9 @@
 				@foreach ($categories as $key => &$category)
 				<div class="col-md-3">
 					<div class="random-listing type-1">
-						<?php $childrenImages = array();
+						<?php
+						$childrenImages = array();
+						$childrenUrl = array();
 						if (!empty($category->children)) {
 							foreach ($category->children as $children) {
 								$childrenListings = getActiveListings($children->id, 'active');
@@ -83,6 +91,7 @@
 									$assets = json_decode($childrenListing->assets);
 									$filename = substr($assets[0], strrpos($assets[0], '/') + 1);
 									$childrenImages[] = str_replace($filename, 'thumb-'.$filename, $assets[0]);
+									$childrenUrl[] = $childrenListing->slug;
 								}
 							}
 						}
@@ -90,9 +99,11 @@
 						<?php if (count($childrenImages) > 0): ?>
 							<div class="flexslider">
 								<ul class="slides">
-									<?php foreach ($childrenImages as $childrenImage): ?>
-										<li><img src="{{ $childrenImage }}" alt=""></li>
-									<?php endforeach ?>	
+									<?php $c = 0; ?>
+									@foreach ($childrenImages as $childrenImage)
+										<li><a href="{{ url('category/'.$children->slug ."/". $childrenUrl[$c]) }}"><img src="{{ $childrenImage }}" alt=""></a></li>
+										<?php $c++; ?>
+									@endforeach
 								</ul>
 							</div>
 						<?php endif ?>
