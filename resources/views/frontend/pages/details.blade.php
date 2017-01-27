@@ -95,9 +95,11 @@
 							<li role="presentation">
 								<a href="#review" aria-controls="review" role="tab" data-toggle="tab">REVIEW</a>
 							</li>
+							@if ($item->custom_tab_title != '' )
 							<li role="presentation">
 								<a href="#custom" aria-controls="custom" role="tab" data-toggle="tab">{{ $item->custom_tab_title != '' ? $item->custom_tab_title : 'CUSTOM' }}</a>
 							</li>
+							@endif
 						</ul>
 					
 						<!-- Tab panes -->
@@ -121,7 +123,7 @@
 								@endif
 							</div>
 							<div role="tabpanel" class="tab-pane fade" id="custom">
-								@if ($item->custom_tab != '')
+								@if ($item->custom_tab != '' )
 									{!! $item->custom_tab !!}
 								@else
 									<p>No Custom Tab Set</p>
