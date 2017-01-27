@@ -55,6 +55,7 @@
 							</div>
 							<?php
 							$categories = \App\Models\ListingCategory::all();
+							$selected = \App\Models\ListingCategory::find($listing->category);
 							?>
 							<div class="form-group">
 								<label class="col-sm-2 control-label">Main Category</label>
@@ -63,9 +64,9 @@
 										<option value="choose-category"{{ $listing->category == null ? ' selected' : null }} disabled>-- SELECT MAIN CATEGORY --</option>
 										@foreach ($categories as $category)
 											@if ($category->parent == 0)
-												<option value="{{ $category->id }}">
-												{{ $category->title }}
-												</option>
+											<option value="{{ $category->id }}" {{ $selected->parent == $category->id ?'selected' : '' }}>
+											{{ $category->title }}
+											</option>
 											@endif
 										@endforeach
 									</select>
@@ -260,8 +261,8 @@
 						var currentCat = '{{ $listing->category }}';
 
 						for (var i = 0; i < categories.length; i++) {
-							if (currentCat === categories[i].id) {
-								output += '<option value="' + categories[i].id + ' selected">' + categories[i].title + '</option>';
+							if (currentCat == categories[i].id) {
+								output += '<option value="' + categories[i].id + '" selected>' + categories[i].title + '</option>';
 							} else {
 								output += '<option value="' + categories[i].id + '">' + categories[i].title + '</option>';
 							}
