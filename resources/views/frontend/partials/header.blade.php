@@ -5,7 +5,6 @@
 	  position: relative;
 	  line-height: 40px;
 	}
-
 	.marquee div {
 	  display: block;
 	  width: 200%;
@@ -18,12 +17,10 @@
 	  -moz-animation: marquee 20s linear infinite;
 	  -webkit-animation: marquee 20s linear infinite;
 	}
-
 	.marquee span {
 	  float: left;
 	  width: 50%;
 	}
-
 	@keyframes marquee {
 	  0% { left: 100%; }
 	  100% { left: -100%; }
@@ -112,9 +109,7 @@
 				<div class="header-top-r">
 					<a href="#" class="ads top-r1"><img src="{{ asset('assets/frontend/img/cs/ads-300x92.png') }}"></a>
 				</div>
-			</div> -->
-
-			
+			</div> -->	
 		</div>
 	</div>
 </header>

@@ -297,8 +297,8 @@ class AdsController extends Controller
 
     public function suspend($id)
     {
-        $ad_update = AdEdit::find($id);
-        $ad = Ad::find($ad_update->edit);
+        $ad = Ad::find($id);
+        $ad_update = AdEdit::find($ad->edit);
 
         if ($ad_update) {
             $ad_update->status = 2;
