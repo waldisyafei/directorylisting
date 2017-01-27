@@ -80,24 +80,66 @@
 				</div>
 			</div>
 			<!-- ./End logo -->
+<!-- 
+			<?php// $ads = getActiveAds(true);// dd($ads); ?>
 
-			<?php $ads = getActiveAds(true);// dd($ads); ?>
-
-			<?php if (count($ads) > 0): ?>
-				<?php foreach ($ads as $ad): ?>
-					<?php
+			<?php// if (count($ads) > 0): ?>
+				<?php// foreach ($ads as $ad): ?>
+					<?php/*
 					$assets = json_decode($ad->assets);
 					$filename = substr($assets[0], strrpos($assets[0], '/') + 1);
-					$img_entry = str_replace($filename, 'thumb-'.$filename, $assets[0]);
+					$img_entry = str_replace($filename, 'thumb-'.$filename, $assets[0]);*/
 					?>
 					<div class="col-md-4">
 						<div class="header-top-r">
-							<a href="<?php echo url('ads' .'/'.  $ad->link) ?>" target="_blank" class="topra top-r1"><img src="<?php echo url($img_entry); ?>"></a>
+							<a href="<?php// echo url('ads' .'/'.  $ad->link) ?>" target="_blank" class="topra top-r1"><img src="<?php// echo url($img_entry); ?>"></a>
 						</div>
 					</div>
-				<?php endforeach ?>
-			<?php endif ?>
-
+				<?php// endforeach ?>
+			<?php// endif ?> -->
+						<div class="col-md-4">
+							<div class="header-top-r">
+								<?php $ads = getActiveAdsAsc(true);// dd($ads); ?>
+								<?php if (count($ads) > 0): ?>
+								<div class="flexslider">
+									<ul class="slides">
+										<?php $c = 0; ?>
+										@foreach ($ads as $ad)
+											<?php
+											$assets = json_decode($ad->assets);
+											$filename = substr($assets[0], strrpos($assets[0], '/') + 1);
+											$img_entry = str_replace($filename, 'thumb-'.$filename, $assets[0]);
+											?>
+											<li><a href="<?php echo url('ads' .'/'.  $ad->link) ?>" class="topra top-r1"><img style="height: 94px; border-radius: 5px;" src="{{ url($img_entry) }}" alt=""></a></li>
+											<?php $c++; ?>
+										@endforeach
+									</ul>
+								</div>
+								<?php endif ?>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="header-top-r">
+								<?php $ads = getActiveAdsDsc(false);// dd($ads); ?>
+								<?php if (count($ads) > 0): ?>
+								<div class="flexslider">
+									<ul class="slides">
+										<?php $c = 0; ?>
+										@foreach ($ads as $ad)
+											<?php
+											$assets = json_decode($ad->assets);
+											$filename = substr($assets[0], strrpos($assets[0], '/') + 1);
+											$img_entry = str_replace($filename, 'thumb-'.$filename, $assets[0]);
+											?>
+											<li><a href="" class="topra top-r1"><img style="height: 94px; border-radius: 5px;" src="{{ url($img_entry) }}" alt=""></a></li>
+											<?php $c++; ?>
+										@endforeach
+									</ul>
+								</div>
+								<?php endif ?>
+							</div>
+						</div>
+					</div>
 			<!-- 
 			<div class="col-md-4">
 				<div class="header-top-r">

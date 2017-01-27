@@ -90,7 +90,7 @@
 						<!-- Nav tabs -->
 						<ul class="nav nav-tabs" role="tablist">
 							<li role="presentation" class="active">
-								<a href="#deskripsi" aria-controls="deskripsi" role="tab" data-toggle="tab">DESKRIPSI</a>
+								<a href="#review" aria-controls="deskripsi" role="tab" data-toggle="tab">DESKRIPSI</a>
 							</li>
 							<li role="presentation">
 								<a href="#review" aria-controls="review" role="tab" data-toggle="tab">REVIEW</a>
