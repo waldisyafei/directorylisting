@@ -36,7 +36,7 @@ function getActiveAds($order = false)
 		if ($rowOrder === true) {
 			$q->orderByRaw('RAND()');
 		}
-	})->get();
+	})->paginate(10);
 
 	return $ads;
 }
@@ -44,14 +44,8 @@ function getActiveAds($order = false)
 function getActiveAdsDsc($order = false)
 {
 	$rowOrder = $order;
-	$ads = Ad::where(function($q) use($rowOrder){
-		$now_date = date('Y-m-d H:i:s');
-		$q->where('status', 3);
-		$q->where('show_date', '<=', $now_date);
-		$q->where('expired_date', '>=', $now_date);
-		$q->orderByRaw('RAND()');
-		
-	})->get();
+	$now_date = date('Y-m-d H:i:s');
+	$ads = Ad::where('status', 3)->where('show_date', '<=', $now_date)->where('expired_date', '>=', $now_date)->orderBy('id', 'DSC')->paginate(10);
 
 	return $ads;
 }
@@ -60,14 +54,8 @@ function getActiveAdsDsc($order = false)
 function getActiveAdsAsc($order = false)
 {
 	$rowOrder = $order;
-	$ads = Ad::where(function($q) use($rowOrder){
-		$now_date = date('Y-m-d H:i:s');
-		$q->where('status', 3);
-		$q->where('show_date', '<=', $now_date);
-		$q->where('expired_date', '>=', $now_date);
-		$q->orderByRaw('RAND()');
-		
-	})->get();
+	$now_date = date('Y-m-d H:i:s');
+	$ads = Ad::where('status', 3)->where('show_date', '<=', $now_date)->where('expired_date', '>=', $now_date)->orderBy('id', 'ASC')->paginate(10);
 
 	return $ads;
 }

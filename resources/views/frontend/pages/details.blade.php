@@ -207,5 +207,54 @@
 @stop
 
 @section('page-scripts')
-	{{-- expr --}}
+	<script type="text/javascript" src="{{ asset('assets/frontend/js/jquery.flexslider-min.js') }}"></script>
+@stop
+
+@section('inline-script')
+	<script type="text/javascript">
+		$(function(){
+			$('.teaser-home .cat-item').eq(0).css({
+				'left': '73px',
+				'top': '3px'
+			});
+			$('.teaser-home .cat-item').eq(1).css({
+				'left': '303px',
+				'top': '3px'
+			});
+			$('.teaser-home .cat-item').eq(2).css({
+				'left': '534px',
+				'top': '3px'
+			});
+			$('.teaser-home .cat-item').eq(3).css({
+				'left': '73px',
+				'bottom': '3px'
+			});
+			$('.teaser-home .cat-item').eq(4).css({
+				'left': '305px',
+				'bottom': '3px'
+			});
+			$('.teaser-home .cat-item').eq(5).css({
+				'left': '535px',
+				'bottom': '3px'
+			});
+
+			$('.flexslider').each(function(){
+				var sliderSettings = {
+					controlNav: false,
+					directionNav: false,
+					animationSpeed: 700,
+					slideshowSpeed: randomIntFromInterval(5000, 2000),
+					easing: 'easeInOutBack',
+					useCSS: false
+				};
+
+				$(this).flexslider(sliderSettings);
+			});
+
+			function randomIntFromInterval(min,max)
+			{
+			    return Math.floor(Math.random()*(max-min+1)+min);
+			}
+		});
+	</script>
 @stop

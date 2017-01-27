@@ -23,9 +23,8 @@ class FrontendController extends Controller
     public function index()
     {
         $listings = Listing::where('status', '3')->orderBy(\DB::raw('RAND()'))->paginate(6);
-        $ads = Ad::where('status', '3')->orderBy(\DB::raw('RAND()'))->paginate(20);
         //dd($listings);
-        return view('frontend.pages.home', ['listings' => $listings, 'ads' => $ads]);
+        return view('frontend.pages.home', ['listings' => $listings]);
     }
 
     
