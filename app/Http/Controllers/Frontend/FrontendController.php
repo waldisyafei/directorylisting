@@ -46,7 +46,7 @@ class FrontendController extends Controller
 
     public function ads_details( $link)
     {   
-        $ad = Ad::where('link', $link)->first();
+        $ad = Ad::where('ad_id', $link)->first();
     
         return view('frontend.pages.details', ['item' => $ad]);
     }
