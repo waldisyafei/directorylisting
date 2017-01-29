@@ -35,7 +35,7 @@
 						@if (!empty($category->children))
 							<div class="flexslider">
 								<ul class="slides">
-									@foreach ($category->children as $children)<?php// dd($children); ?> 
+									@foreach ($category->children as $children)<?php // dd($children); ?> 
 										<?php
 										$childrenListings = getActiveListings($children->id, 'active');
 										$childrenImages = array();
