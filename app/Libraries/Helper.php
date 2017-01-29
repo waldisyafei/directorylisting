@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 
 use App\Models\Listing;
+use App\Models\ListingEdit;
 use App\Models\ListingStatus;
 use App\Models\ListingMeta;
 use App\Models\SystemLog;
@@ -20,6 +21,15 @@ function getListings($status)
 	$listingStatus = ListingStatus::where('name', $status)->first();
 
 	$listings = Listing::where('status', $listingStatus->id)->get();
+
+	return $listings;
+}
+
+function getListingsApprove($status)
+{
+	$listingStatus = ListingStatus::where('name', $status)->first();
+
+	$listings = ListingEdit::where('status', $listingStatus->id)->get();
 
 	return $listings;
 }

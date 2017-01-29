@@ -53,6 +53,7 @@
 							</div>
 							<?php
 							$categories = \App\Models\ListingCategory::all();
+							$selected = \App\Models\ListingCategory::find($listing->category);
 							?>
 							<div class="form-group">
 								<label class="col-sm-2 control-label">Main Category</label>
@@ -61,10 +62,10 @@
 										<option value="choose-category"<?php echo e($listing->category == null ? ' selected' : null); ?> disabled>-- SELECT MAIN CATEGORY --</option>
 										<?php foreach($categories as $category): ?>
 											<?php if($category->parent == 0): ?>
-												<option value="<?php echo e($category->id); ?>">
-												<?php echo e($category->title); ?>
+											<option value="<?php echo e($category->id); ?>" <?php echo e($selected->parent == $category->id ?'selected' : ''); ?>>
+											<?php echo e($category->title); ?>
 
-												</option>
+											</option>
 											<?php endif; ?>
 										<?php endforeach; ?>
 									</select>
@@ -259,8 +260,8 @@
 						var currentCat = '<?php echo e($listing->category); ?>';
 
 						for (var i = 0; i < categories.length; i++) {
-							if (currentCat === categories[i].id) {
-								output += '<option value="' + categories[i].id + ' selected">' + categories[i].title + '</option>';
+							if (currentCat == categories[i].id) {
+								output += '<option value="' + categories[i].id + '" selected>' + categories[i].title + '</option>';
 							} else {
 								output += '<option value="' + categories[i].id + '">' + categories[i].title + '</option>';
 							}

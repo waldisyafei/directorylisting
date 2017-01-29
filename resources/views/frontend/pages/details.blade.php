@@ -90,14 +90,16 @@
 						<!-- Nav tabs -->
 						<ul class="nav nav-tabs" role="tablist">
 							<li role="presentation" class="active">
-								<a href="#deskripsi" aria-controls="deskripsi" role="tab" data-toggle="tab">DESKRIPSI</a>
+								<a href="#review" aria-controls="deskripsi" role="tab" data-toggle="tab">DESKRIPSI</a>
 							</li>
 							<li role="presentation">
 								<a href="#review" aria-controls="review" role="tab" data-toggle="tab">REVIEW</a>
 							</li>
+							@if ($item->custom_tab_title != '' )
 							<li role="presentation">
 								<a href="#custom" aria-controls="custom" role="tab" data-toggle="tab">{{ $item->custom_tab_title != '' ? $item->custom_tab_title : 'CUSTOM' }}</a>
 							</li>
+							@endif
 						</ul>
 					
 						<!-- Tab panes -->
@@ -121,7 +123,7 @@
 								@endif
 							</div>
 							<div role="tabpanel" class="tab-pane fade" id="custom">
-								@if ($item->custom_tab != '')
+								@if ($item->custom_tab != '' )
 									{!! $item->custom_tab !!}
 								@else
 									<p>No Custom Tab Set</p>
@@ -205,5 +207,54 @@
 @stop
 
 @section('page-scripts')
-	{{-- expr --}}
+	<script type="text/javascript" src="{{ asset('assets/frontend/js/jquery.flexslider-min.js') }}"></script>
+@stop
+
+@section('inline-script')
+	<script type="text/javascript">
+		$(function(){
+			$('.teaser-home .cat-item').eq(0).css({
+				'left': '73px',
+				'top': '3px'
+			});
+			$('.teaser-home .cat-item').eq(1).css({
+				'left': '303px',
+				'top': '3px'
+			});
+			$('.teaser-home .cat-item').eq(2).css({
+				'left': '534px',
+				'top': '3px'
+			});
+			$('.teaser-home .cat-item').eq(3).css({
+				'left': '73px',
+				'bottom': '3px'
+			});
+			$('.teaser-home .cat-item').eq(4).css({
+				'left': '305px',
+				'bottom': '3px'
+			});
+			$('.teaser-home .cat-item').eq(5).css({
+				'left': '535px',
+				'bottom': '3px'
+			});
+
+			$('.flexslider').each(function(){
+				var sliderSettings = {
+					controlNav: false,
+					directionNav: false,
+					animationSpeed: 700,
+					slideshowSpeed: randomIntFromInterval(5000, 2000),
+					easing: 'easeInOutBack',
+					useCSS: false
+				};
+
+				$(this).flexslider(sliderSettings);
+			});
+
+			function randomIntFromInterval(min,max)
+			{
+			    return Math.floor(Math.random()*(max-min+1)+min);
+			}
+		});
+	</script>
 @stop

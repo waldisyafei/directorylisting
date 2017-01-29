@@ -179,11 +179,11 @@ class AdsController extends Controller
         $ad->customer_id = Auth::user()->get()->user_id;
         $ad->user_category = 1;
         $ad->show_date = $request->input('show_date');
-        $ad->expired_date = $request->input('expired_date');
+        //$ad->expired_date = $request->input('expired_date');
+        $stop_date = $ad_old->days;
+        $ad->expired_date = date('Y-m-d H:i:s', strtotime($request->input('show_date') . ' +'. $stop_date .' day'));
         $ad->status = 2;
         $ad->ad_edit_id = $ad_old->ad_id;
-        //$stop_date = $ad_old->days;
-        //$ad->expired_date = date('Y-m-d H:i:s', strtotime($request->input('show_date') . ' +'. $stop_date .' day'));
         
         if ($request->hasFile('image')) {
             //$dir = storage_path().'/app/cs/assets/';
@@ -240,6 +240,7 @@ class AdsController extends Controller
         $ad = Ad::find($id);
 
         $ad->delete();
+        return redirect()->back()->with('success', 'Ad deleted successfully.');
     }
 
     public function renew($id)
@@ -292,5 +293,20 @@ class AdsController extends Controller
         Session::put('ads', $ads);
 
         return redirect('app-admin/ads/buy/complete');
+    }
+
+    public function suspend($id)
+    {
+        $ad = Ad::find($id);
+        $ad_update = AdEdit::find($ad->edit);
+
+        if ($ad_update) {
+            $ad_update->status = 2;
+            $ad->status = 2;
+            $ad_update->save();
+            $ad->save();
+
+            return redirect('app-admin/ads')->with('success', 'Ad suspended successfully');
+        }
     }
 }

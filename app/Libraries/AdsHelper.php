@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Ad;
+use App\Models\AdEdit;
 use App\Models\AdStatus;
 use App\Models\AdMeta;
 use App\Models\SystemLog;
@@ -10,6 +11,15 @@ function getAds($status)
 	$listingStatus = AdStatus::where('name', $status)->first();
 
 	$listings = Ad::where('status', $listingStatus->id)->get();
+
+	return $listings;
+}
+
+function getAdsApprove($status)
+{
+	$listingStatus = AdStatus::where('name', $status)->first();
+
+	$listings = AdEdit::where('status', $listingStatus->id)->get();
 
 	return $listings;
 }
@@ -26,7 +36,26 @@ function getActiveAds($order = false)
 		if ($rowOrder === true) {
 			$q->orderByRaw('RAND()');
 		}
-	})->paginate(2);
+	})->paginate(10);
+
+	return $ads;
+}
+
+function getActiveAdsDsc($order = false)
+{
+	$rowOrder = $order;
+	$now_date = date('Y-m-d H:i:s');
+	$ads = Ad::where('status', 3)->where('show_date', '<=', $now_date)->where('expired_date', '>=', $now_date)->orderBy('id', 'DSC')->paginate(10);
+
+	return $ads;
+}
+
+
+function getActiveAdsAsc($order = false)
+{
+	$rowOrder = $order;
+	$now_date = date('Y-m-d H:i:s');
+	$ads = Ad::where('status', 3)->where('show_date', '<=', $now_date)->where('expired_date', '>=', $now_date)->orderBy('id', 'ASC')->paginate(10);
 
 	return $ads;
 }
