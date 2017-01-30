@@ -64,7 +64,7 @@
 										<option value="choose-category"{{ $listing->category == null ? ' selected' : null }} disabled>-- SELECT MAIN CATEGORY --</option>
 										@foreach ($categories as $category)
 											@if ($category->parent == 0)
-											<option value="{{ $category->id }}" {{ $selected->parent == $category->id ?'selected' : '' }}>
+											<option value="{{ $category->id }}" {{ ($selected != null && $selected->parent == $category->id) ?'selected' : '' }}>
 											{{ $category->title }}
 											</option>
 											@endif
