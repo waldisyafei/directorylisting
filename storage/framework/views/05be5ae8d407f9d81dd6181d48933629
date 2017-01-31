@@ -97,46 +97,52 @@
 					</div>
 				<?php// endforeach ?>
 			<?php// endif ?> -->
+						<?php 
+							$ads = getActiveAds(true);
+							$ads_left = array();
+							$ads_right = array();
+							$c = 1;
+							foreach ($ads as $ad) {
+								$ad = $ad->toarray();
+								if(($c %2) == 0) array_push($ads_left, $ad);
+								else array_push($ads_right, $ad);
+								$c++;
+							}
+						?>
 						<div class="col-md-4">
 							<div class="header-top-r">
-								<?php $ads = getActiveAdsAsc(true);// dd($ads); ?>
-								<?php if (count($ads) > 0): ?>
 								<div class="flexslider">
 									<ul class="slides">
 										<?php $c = 0; ?>
-										<?php foreach($ads as $ad): ?>
+										<?php foreach($ads_left as $ad): ?>
 											<?php
-											$assets = json_decode($ad->assets);
+											$assets = json_decode($ad['assets']);
 											$filename = substr($assets[0], strrpos($assets[0], '/') + 1);
 											$img_entry = str_replace($filename, 'thumb-'.$filename, $assets[0]);
 											?>
-											<li><a href="<?php echo url('ads' .'/'.  $ad->ad_id) ?>" class="topra top-r1"><img style="height: 94px; border-radius: 5px;" src="<?php echo e(url($img_entry)); ?>" alt=""></a></li>
+											<li><a href="<?php echo url('ads' .'/'.  $ad['ad_id']) ?>" class="topra top-r1"><img style="height: 94px; border-radius: 5px;" src="<?php echo e(url($img_entry)); ?>" alt=""></a></li>
 											<?php $c++; ?>
 										<?php endforeach; ?>
 									</ul>
 								</div>
-								<?php endif ?>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="header-top-r">
-								<?php $ads = getActiveAdsDsc(true);// dd($ads); ?>
-								<?php if (count($ads) > 0): ?>
 								<div class="flexslider">
 									<ul class="slides">
 										<?php $c = 0; ?>
-										<?php foreach($ads as $ad): ?>
+										<?php foreach($ads_right as $ad): ?>
 											<?php
-											$assets = json_decode($ad->assets);
+											$assets = json_decode($ad['assets']);
 											$filename = substr($assets[0], strrpos($assets[0], '/') + 1);
 											$img_entry = str_replace($filename, 'thumb-'.$filename, $assets[0]);
 											?>
-											<li><a href="<?php echo url('ads' .'/'.  $ad->ad_id) ?>" class="topra top-r1"><img style="height: 94px; border-radius: 5px;" src="<?php echo e(url($img_entry)); ?>" alt=""></a></li>
+											<li><a href="<?php echo url('ads' .'/'.  $ad['ad_id']) ?>" class="topra top-r1"><img style="height: 94px; border-radius: 5px;" src="<?php echo e(url($img_entry)); ?>" alt=""></a></li>
 											<?php $c++; ?>
 										<?php endforeach; ?>
 									</ul>
 								</div>
-								<?php endif ?>
 							</div>
 						</div>
 					</div>
