@@ -81,22 +81,22 @@
 			</div>
 			<!-- ./End logo -->
 <!-- 
-			<?php// $ads = getActiveAds(true);// dd($ads); ?>
+			<?php // $ads = getActiveAds(true);// dd($ads); ?>
 
-			<?php// if (count($ads) > 0): ?>
-				<?php// foreach ($ads as $ad): ?>
-					<?php/*
+			<?php // if (count($ads) > 0): ?>
+				<?php // foreach ($ads as $ad): ?>
+					<?php /*
 					$assets = json_decode($ad->assets);
 					$filename = substr($assets[0], strrpos($assets[0], '/') + 1);
 					$img_entry = str_replace($filename, 'thumb-'.$filename, $assets[0]);*/
 					?>
 					<div class="col-md-4">
 						<div class="header-top-r">
-							<a href="<?php// echo url('ads' .'/'.  $ad->link) ?>" target="_blank" class="topra top-r1"><img src="<?php// echo url($img_entry); ?>"></a>
+							<a href="<?php // echo url('ads' .'/'.  $ad->link) ?>" target="_blank" class="topra top-r1"><img src="<?php // echo url($img_entry); ?>"></a>
 						</div>
 					</div>
-				<?php// endforeach ?>
-			<?php// endif ?> -->
+				<?php // endforeach ?>
+			<?php // endif ?> -->
 						<?php 
 							$ads = getActiveAds(true);
 							$ads_left = array();
