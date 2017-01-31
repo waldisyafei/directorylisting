@@ -5,6 +5,7 @@ use App\Models\AdEdit;
 use App\Models\AdStatus;
 use App\Models\AdMeta;
 use App\Models\SystemLog;
+use App\Quotation;
 
 function getAds($status)
 {

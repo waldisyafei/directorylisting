@@ -62,7 +62,7 @@
 										<option value="choose-category"<?php echo e($listing->category == null ? ' selected' : null); ?> disabled>-- SELECT MAIN CATEGORY --</option>
 										<?php foreach($categories as $category): ?>
 											<?php if($category->parent == 0): ?>
-											<option value="<?php echo e($category->id); ?>" <?php echo e($selected->parent == $category->id ?'selected' : ''); ?>>
+											<option value="<?php echo e($category->id); ?>" <?php echo e(($selected != null && $selected->parent == $category->id) ?'selected' : ''); ?>>
 											<?php echo e($category->title); ?>
 
 											</option>
