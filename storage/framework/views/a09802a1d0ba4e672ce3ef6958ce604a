@@ -1,35 +1,33 @@
-@extends('backend.base')
+<?php $__env->startSection('title', 'Create New Customer'); ?>
 
-@section('title', 'Create New Customer')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 	<h3 class="page-title">Create New Customer</h3>
 	<ol class="breadcrumb">
-	    <li><a href="{{ url('app-admin') }}">Dashboard</a></li>
-	    <li><a href="{{ url('app-admin/customers') }}">Customers</a></li>
+	    <li><a href="<?php echo e(url('app-admin')); ?>">Dashboard</a></li>
+	    <li><a href="<?php echo e(url('app-admin/customers')); ?>">Customers</a></li>
 	    <li class="active"><span>Create New Customer</span></li>
 	</ol>
 
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
-				@if (Session::has('error'))
+				<?php if(Session::has('error')): ?>
 					<div class="alert alert-dismissable alert-danger">
 						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-						<i class="ti ti-check"></i>&nbsp; <strong>Oh snap!</strong> {{ Session::get('error') }}.
+						<i class="ti ti-check"></i>&nbsp; <strong>Oh snap!</strong> <?php echo e(Session::get('error')); ?>.
 					</div>
-				@endif
-				@if ($errors->has())
+				<?php endif; ?>
+				<?php if($errors->has()): ?>
 					<div class="alert alert-dismissable alert-danger">
 						<i class="ti ti-close"></i>&nbsp; <strong>Oh snap!</strong>
 						<ul>
-							@foreach ($errors->all() as $error)
-								<li>{{ $error }}</li>
-							@endforeach
+							<?php foreach($errors->all() as $error): ?>
+								<li><?php echo e($error); ?></li>
+							<?php endforeach; ?>
 						</ul>
 						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 					</div>
-				@endif
+				<?php endif; ?>
 				
 				<div class="panel panel-midnightblue" data-widget='{"draggable": "false"}'>
 					<!-- Panel heading -->
@@ -38,14 +36,14 @@
 					</div>
 					<!-- ./End panel heading -->
 
-					<form class="form-horizontal row-border" method="post" action="{{ url('app-admin/customers/create') }}">
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					<form class="form-horizontal row-border" method="post" action="<?php echo e(url('app-admin/customers/create')); ?>">
+						<input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
 						<!-- Panel body -->
 						<div class="panel-body" style="padding: 40px 16px;">
 							<div class="form-group">
 								<label for="customer_name" class="col-sm-2 control-label">Company Name <small style="color: red;">*</small></label>
 								<div class="col-sm-4">
-									<input type="text" name="customer_name" class="form-control" id="customer_name" placeholder="Company Name" value="{{ old('customer_name') }}">
+									<input type="text" name="customer_name" class="form-control" id="customer_name" placeholder="Company Name" value="<?php echo e(old('customer_name')); ?>">
 								</div>
 								<label for="pic-input" class="col-sm-2 control-label">PIC Name <small style="color: red;">*</small></label>
 								<div class="col-sm-4">
@@ -55,7 +53,7 @@
 							<div class="form-group">
 								<label class="col-sm-2 control-label">Address 1<small style="color: red;">*</small></label>
 								<div class="col-sm-4">
-									<input type="text" placeholder="Address 1" name="address_1" class="form-control" value="{{ old('address_1') }}">
+									<input type="text" placeholder="Address 1" name="address_1" class="form-control" value="<?php echo e(old('address_1')); ?>">
 								</div>
 								<label for="picphone-input" class="col-sm-2 control-label">PIC Phone / Ext<small style="color: red;">*</small></label>
 								<div class="col-sm-4">
@@ -65,7 +63,7 @@
 							<div class="form-group">
 								<label class="col-sm-2 control-label">Address 2</label>
 								<div class="col-sm-4">
-									<input type="text"  placeholder="Address 2" name="address_2" class="form-control" value="{{ old('address_2') }}">
+									<input type="text"  placeholder="Address 2" name="address_2" class="form-control" value="<?php echo e(old('address_2')); ?>">
 								</div>
 								<label for="picmobile1-input" class="col-sm-2 control-label">PIC Mobile</label>
 								<div class="col-sm-4">
@@ -86,15 +84,15 @@
 								<label class="col-sm-2 control-label">Country<small style="color: red;">*</small></label>
 								<div class="col-sm-4">
 									<select name="country">
-										<option{{ old('country') == '' ? ' selected' : null }} disabled>-- SELECT COUNTRY--</option>
-										@foreach (App\Models\Country::all() as $country)
+										<option<?php echo e(old('country') == '' ? ' selected' : null); ?> disabled>-- SELECT COUNTRY--</option>
+										<?php foreach(App\Models\Country::all() as $country): ?>
 											<?php 
 											if($country->country_id == 100) { ?>	
-											<option selected="selected" value="{{ $country->country_id }}"{!! old('country') == $country->country_id ? ' selected' : null !!}>{{ $country->name }}</option>
+											<option selected="selected" value="<?php echo e($country->country_id); ?>"<?php echo old('country') == $country->country_id ? ' selected' : null; ?>><?php echo e($country->name); ?></option>
 											<?php }else{ ?>
-											<option value="{{ $country->country_id }}"{!! old('country') == $country->country_id ? ' selected' : null !!}>{{ $country->name }}</option>
+											<option value="<?php echo e($country->country_id); ?>"<?php echo old('country') == $country->country_id ? ' selected' : null; ?>><?php echo e($country->name); ?></option>
 											<?php } ?>
-										@endforeach
+										<?php endforeach; ?>
 									</select>
 								</div>
 								<label for="picpassword-input" class="col-sm-2 control-label">PIC Password <small style="color: red;">*</small></label>
@@ -107,7 +105,7 @@
 								<label class="col-sm-2 control-label">Province<small style="color: red;">*</small></label>
 								<div class="col-sm-4">
 									<select class="form-control" name="province">
-										<option{{ old('province') == '' ? ' selected' : null }} disabled>-- SELECT PROVINCE--</option>
+										<option<?php echo e(old('province') == '' ? ' selected' : null); ?> disabled>-- SELECT PROVINCE--</option>
 									</select>
 								</div>
 							</div> -->
@@ -156,7 +154,7 @@
 						<div class="panel-footer">
 							<div class="row">
 								<div class="col-sm-4 col-sm-offset-2">
-									<a href="{{ url('app-admin/customers') }}" class="btn-default btn">Cancel</a>&nbsp;&nbsp;&nbsp;
+									<a href="<?php echo e(url('app-admin/customers')); ?>" class="btn-default btn">Cancel</a>&nbsp;&nbsp;&nbsp;
 									<button class="btn-primary btn">Create</button>
 								</div>
 							</div>
@@ -167,21 +165,21 @@
 			</div>
 		</div>
 	</div>
-@stop
+<?php $__env->stopSection(); ?>
 
-@section('page-styles')
+<?php $__env->startSection('page-styles'); ?>
 	<!-- Code Prettifier -->
-    <link type="text/css" href="{{ asset('assets/backend/plugins/codeprettifier/prettify.css') }}" rel="stylesheet">
+    <link type="text/css" href="<?php echo e(asset('assets/backend/plugins/codeprettifier/prettify.css')); ?>" rel="stylesheet">
     <!-- iCheck -->
-    <link type="text/css" href="{{ asset('assets/backend/plugins/iCheck/skins/minimal/blue.css') }}" rel="stylesheet">
-    <link type="text/css" href="{{ asset('assets/backend/plugins/form-select2/select2.css') }}" rel="stylesheet">
-@stop
+    <link type="text/css" href="<?php echo e(asset('assets/backend/plugins/iCheck/skins/minimal/blue.css')); ?>" rel="stylesheet">
+    <link type="text/css" href="<?php echo e(asset('assets/backend/plugins/form-select2/select2.css')); ?>" rel="stylesheet">
+<?php $__env->stopSection(); ?>
 
-@section('page-scripts')
-<script type="text/javascript" src="{{ asset('assets/backend/plugins/form-select2/select2.min.js') }}"></script>
-@stop
+<?php $__env->startSection('page-scripts'); ?>
+<script type="text/javascript" src="<?php echo e(asset('assets/backend/plugins/form-select2/select2.min.js')); ?>"></script>
+<?php $__env->stopSection(); ?>
 
-@section('inline-script')
+<?php $__env->startSection('inline-script'); ?>
 	<script type="text/javascript">
 	$(function(){
 		$('#generate-pass').click(function(){
@@ -198,9 +196,9 @@
 
 			$.ajax({
 				method: 'get',
-				url: '{{ url('app-admin/geo/getZone') }}',
+				url: '<?php echo e(url('app-admin/geo/getZone')); ?>',
 				data: {
-					_token: '{{ csrf_token() }}',
+					_token: '<?php echo e(csrf_token()); ?>',
 					country_id: thisVal
 				},
 				success: function(res) {
@@ -222,4 +220,5 @@
 		$('select[name="country"]').select2({width: '100%'});
 	});
 	</script>
-@stop
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('backend.base', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

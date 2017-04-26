@@ -51,13 +51,13 @@ class CustomersController extends Controller
             'customer_name' => 'required|max:100',
             'address_1' => 'required|max:255',
             'country' => 'required',
-            'province' => 'required',
+            //'province' => 'required',
             'city' => 'required',
             'phone' => 'required|numeric',
             'picphone' => 'required|numeric',
-            'fax' => 'numeric',
-            'picmobile1' => 'required|numeric',
-            'picmobile2' => 'numeric',
+            //'fax' => 'numeric',
+            //'picmobile1' => 'required|numeric',
+            //'picmobile2' => 'numeric',
             'picemail' => 'required|max:255|unique:customers,pic_email',
             'password' => 'required|min:6',
         ];
@@ -74,11 +74,11 @@ class CustomersController extends Controller
         $customer->customer_id =  $original_cust_id . substr(crc32($original_cust_id), -3);
         $customer->customer_name = $request->input('customer_name');
         $customer->phone = $request->input('phone');
-        $customer->fax = $request->input('fax');
+        //$customer->fax = $request->input('fax');
         $customer->pic = $request->input('pic');
         $customer->pic_phone = $request->input('picphone');
         $customer->pic_mobile1 = $request->input('picmobile1');
-        $customer->pic_mobile2 = $request->input('picmobile2');
+        //$customer->pic_mobile2 = $request->input('picmobile2');
         $customer->pic_email = $request->input('picemail');
         $customer->password = bcrypt($request->input('password'));
 
@@ -91,7 +91,7 @@ class CustomersController extends Controller
             $address->city = $request->input('city');
             $address->postcode = $request->input('postcode');
             $address->country_id = $request->input('country');
-            $address->zone_id = $request->input('province');
+            //$address->zone_id = $request->input('province');
 
             $address->save();
 
@@ -145,13 +145,13 @@ class CustomersController extends Controller
             'customer_name' => 'required|max:100',
             'address_1' => 'required|max:255',
             'country' => 'required',
-            'province' => 'required',
+            //'province' => 'required',
             'city' => 'required',
             'phone' => 'required|numeric',
             'picphone' => 'required|numeric',
-            'fax' => 'numeric',
-            'picmobile1' => 'required|numeric',
-            'picmobile2' => 'numeric',
+            //'fax' => 'numeric',
+            //'picmobile1' => 'required|numeric',
+            //'picmobile2' => 'numeric',
             'picemail' => 'required|max:255|unique:customers,pic_email,'.$id
         ];
 
@@ -167,11 +167,11 @@ class CustomersController extends Controller
             //$customer->customer_id = '01'.date('Y').date('m') . str_pad((string)$customer_count, 4, 0, STR_PAD_LEFT);
             $customer->customer_name = $request->input('customer_name');
             $customer->phone = $request->input('phone');
-            $customer->fax = $request->input('fax');
+            //$customer->fax = $request->input('fax');
             $customer->pic = $request->input('pic');
             $customer->pic_phone = $request->input('picphone');
             $customer->pic_mobile1 = $request->input('picmobile1');
-            $customer->pic_mobile2 = $request->input('picmobile2');
+            //$customer->pic_mobile2 = $request->input('picmobile2');
             $customer->pic_email = $request->input('picemail');
 
             if ($request->has('password') && $request->input('password') != ''){
@@ -185,7 +185,7 @@ class CustomersController extends Controller
                 $address->city = $request->input('city');
                 $address->postcode = $request->input('postcode');
                 $address->country_id = $request->input('country');
-                $address->zone_id = $request->input('province');
+                //$address->zone_id = $request->input('province');
 
                 $address->save();
 
