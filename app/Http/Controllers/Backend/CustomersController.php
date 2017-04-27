@@ -246,13 +246,6 @@ class CustomersController extends Controller
                   ->setCompany('Klik Virtual');
 
             $excel->sheet('Customers List', function($sheet){
-                //tanggal dan uraian header merging MERGING VERTICAL
-                $sheet->mergeCells('A6:A7');
-                $sheet->mergeCells('B6:B7');
-                $sheet->mergeCells('C6:C7');
-                $sheet->mergeCells('D6:D7');
-                $sheet->mergeCells('H6:H7');
-
                 //KOP HEADER
                 $sheet->row(2, array(
                      'CUSTOMERS LIST'
@@ -261,20 +254,38 @@ class CustomersController extends Controller
                 $sheet->row(2, function($row) {
                     $row->setAlignment('center');
                 });
+                $sheet->cells('A2:N2', function($cells) {
+                    $cells->setFont(array(
+                        'size'       => '16',
+                        'bold'       =>  true
+                    ));
+                    $cells->setBackground('#b7aeaf');
+                });
                 //END KOP HEADER
 
                 //TABLE HEADER
                 $sheet->row(4, array(
-                     'CUSTOMER ID', 'CUSTOMER NAME', 'ADDRESS 1', 'ADDRESS 2', 'CITY', 'PHONE', 'FAX','PIC','PIC PHONE / EXT', 'PIC MOBILE', 'PIC EMAIL', 'CREATED AT', 'MODIFIED AT'
+                     'NO','CUSTOMER ID', 'CUSTOMER NAME', 'ADDRESS 1', 'ADDRESS 2', 'CITY', 'PHONE', 'FAX','PIC','PIC PHONE / EXT', 'PIC MOBILE', 'PIC EMAIL', 'CREATED AT', 'MODIFIED AT'
                 ));
+                $sheet->cells('A4:N4', function($cells) {
+                    $cells->setFont(array(
+                        'bold'       =>  true
+                    ));
+                    $cells->setBackground('#f4d942');
+                });
+                $sheet->row(4, function($row) {
+                    $row->setAlignment('center');
+                });
                 //END TABLE HEADER
 
                 //TABLE CONTENT
                 $customers = Customer::all();
                 $content_row = 5;
+                $c = 1;
                 foreach ($customers as $key => $customer) {
                     $sheet->row($content_row, array(
-                         $customer->customer_id,
+                         $c,
+                         $customer->customer_id . '', //DO NOT REMOVE THE EMPTY STRING
                          $customer->customer_name,
                          $customer->address->address_1,
                          $customer->address->address_2,
@@ -291,8 +302,14 @@ class CustomersController extends Controller
                     $sheet->row($content_row, function($row) {
                         $row->setAlignment('left');
                     });
+                    if($content_row % 2 == 0){
+                        $sheet->cells('A5:N'.$content_row, function($cells) {
+                            $cells->setBackground('#4198f4');
+                        });
+                    };
                     $content_row++;   
-                }
+                    $c++;
+                }         
                 //END TABLE CONTENT
             });
         })->export('xlsx');
