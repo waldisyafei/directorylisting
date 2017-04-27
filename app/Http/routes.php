@@ -80,6 +80,7 @@ Route::group(['prefix' => 'app-admin', 'middleware' => 'auth'], function() {
 		Route::post('edit/{id}', 'Backend\CustomersController@update');
 		Route::get('delete/{id}', 'Backend\CustomersController@destroy');
 		Route::get('profile/{id}', 'Backend\CustomersController@profile');
+		Route::get('export', 'Backend\CustomersController@export');
 	});
 
 	Route::group(['prefix' => 'roles'], function() {

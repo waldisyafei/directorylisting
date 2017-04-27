@@ -49,9 +49,9 @@
 						<!-- Panel body -->
 						<div class="panel-body" style="padding: 40px 16px;">
 							<div class="form-group">
-								<label for="customer_name" class="col-sm-2 control-label">Customer Name <small style="color: red;">*</small></label>
+								<label for="customer_name" class="col-sm-2 control-label">Company Name <small style="color: red;">*</small></label>
 								<div class="col-sm-4">
-									<input type="text" name="customer_name" class="form-control" id="customer_name" placeholder="Customer Name" value="{{ $customer->customer_name }}">
+									<input type="text" name="customer_name" class="form-control" id="customer_name" placeholder="Company Name" value="{{ $customer->customer_name }}">
 								</div>
 								<label for="pic-input" class="col-sm-2 control-label">PIC Name<small style="color: red;">*</small></label>
 								<div class="col-sm-4">
@@ -63,7 +63,7 @@
 								<div class="col-sm-4">
 									<input type="text" placeholder="Address 1" name="address_1" class="form-control" value="{{ $customer->address->address_1 }}">
 								</div>
-								<label for="picphone-input" class="col-sm-2 control-label">PIC Phone <small style="color: red;">*</small></label>
+								<label for="picphone-input" class="col-sm-2 control-label">PIC Phone / Ext</label>
 								<div class="col-sm-4">
 									<input type="text" name="picphone" class="form-control" id="picphone-input" placeholder="PIC Phone" value="{{ $customer->pic_phone }}">
 								</div>
@@ -79,14 +79,9 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-2 control-label">Country<small style="color: red;">*</small></label>
+								<label for="phone-input" class="col-sm-2 control-label">Phone <small style="color: red;">*</small></label>
 								<div class="col-sm-4">
-									<select name="country">
-										<option{{ old('country') == '' ? ' selected' : null }} disabled>-- SELECT COUNTRY--</option>
-										@foreach (App\Models\Country::all() as $country)
-											<option value="{{ $country->country_id }}"{!! $customer->address->country_id == $country->country_id ? ' selected' : null !!}>{{ $country->name }}</option>
-										@endforeach
-									</select>
+									<input type="text" name="phone" class="form-control" id="phone-input" placeholder="Phone" value="{{ $customer->phone }}">
 								</div>
 								<label for="picemail-input" class="col-sm-2 control-label">PIC Email <small style="color: red;">*</small></label>
 								<div class="col-sm-4">
@@ -102,9 +97,14 @@
 								</div>
 							</div> -->
 							<div class="form-group">
-								<label class="col-sm-2 control-label">City <small style="color: red;">*</small></label>
+								<label class="col-sm-2 control-label">Country<small style="color: red;">*</small></label>
 								<div class="col-sm-4">
-									<input type="text" name="city" class="form-control" placeholder="City" value="{{ $customer->address->city }}">
+									<select name="country">
+										<option{{ old('country') == '' ? ' selected' : null }} disabled>-- SELECT COUNTRY--</option>
+										@foreach (App\Models\Country::all() as $country)
+											<option value="{{ $country->country_id }}"{!! $customer->address->country_id == $country->country_id ? ' selected' : null !!}>{{ $country->name }}</option>
+										@endforeach
+									</select>
 								</div>
 								<label for="picpassword-input" class="col-sm-2 control-label">PIC Password <small style="color: red;">*</small></label>
 								<div class="col-sm-4">
@@ -119,9 +119,9 @@
 								</div>
 							</div> -->
 							<div class="form-group">
-								<label for="phone-input" class="col-sm-2 control-label">Phone <small style="color: red;">*</small></label>
+								<label class="col-sm-2 control-label">City <small style="color: red;">*</small></label>
 								<div class="col-sm-4">
-									<input type="text" name="phone" class="form-control" id="phone-input" placeholder="Phone" value="{{ $customer->phone }}">
+									<input type="text" name="city" class="form-control" placeholder="City" value="{{ $customer->address->city }}">
 								</div>
 								<label for="phone-input" class="col-sm-2 control-label"></label>
 								<div class="col-sm-4">

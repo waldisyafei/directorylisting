@@ -127,7 +127,7 @@ trait AuthenticatesUsers
      */
     public function loginPath()
     {
-        return property_exists($this, 'loginPath') ? $this->loginPath : '/app-admin/auth/login';
+        return property_exists($this, 'loginPath') ? $this->loginPath : '/auth/login';
     }
 
     /**

@@ -142,7 +142,7 @@
 									<input type="text" name="picemail" class="form-control" id="picemail-input" placeholder="PIC Email" value="<?php echo e($customer->pic_email); ?>">
 								</div>
 							</div>
-
+<!-- 
 							<div class="form-group">
 								<label for="picpassword-input" class="col-sm-2 control-label">PIC Password <small style="color: red;">*</small></label>
 								<div class="col-sm-4">
@@ -150,7 +150,7 @@
 									<span class="label label-default" id="generate-info" style="display: none;text-align: left;margin-top: 5px;text-transform: capitalize;padding: 3px 9px;">Please copy the password before save!</span>
 								</div>
 								
-							</div>
+							</div> -->
 						</div>
 						<!-- ./End panel body -->
 

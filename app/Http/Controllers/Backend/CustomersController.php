@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Auth;
+use Excel;
 use Validator;
 use App\Models\Customer;
 use App\Models\Address;
@@ -69,9 +70,11 @@ class CustomersController extends Controller
         }
 
         $customer = new Customer;
-        $customer_count = (int)Customer::count() + 1;
-        $original_cust_id = '01'.date('Y').date('m') . str_pad((string)$customer_count, 4, 0, STR_PAD_LEFT);
-        $customer->customer_id =  $original_cust_id . substr(crc32($original_cust_id), -3);
+        $customer_count = Customer::orderBy('id', 'desc')->select('customer_id')->first();
+        $customer_cust_id = $customer_count->customer_id + 1;
+        $original_cust_id = '01'.date('Y').date('m') . str_pad((string)$customer_count, 4, 0, STR_PAD_LEFT);var_dump($customer_count);die();
+        // $original_cust_id = '000000000000000';
+        $customer->customer_id =  $original_cust_id . substr(crc32($original_cust_id), -3);var_dump($customer->customer_id);die();
         $customer->customer_name = $request->input('customer_name');
         $customer->phone = $request->input('phone');
         //$customer->fax = $request->input('fax');
@@ -229,5 +232,69 @@ class CustomersController extends Controller
         }
 
         return abort(404, 'Request not found');
+    }
+
+    public function export()
+    {
+        Excel::create('Customers List', function($excel) {
+
+            // Set the title
+            $excel->setTitle('Customers List');
+
+            // Chain the setters
+            $excel->setCreator('Klik Virtual - System')
+                  ->setCompany('Klik Virtual');
+
+            $excel->sheet('Customers List', function($sheet){
+                //tanggal dan uraian header merging MERGING VERTICAL
+                $sheet->mergeCells('A6:A7');
+                $sheet->mergeCells('B6:B7');
+                $sheet->mergeCells('C6:C7');
+                $sheet->mergeCells('D6:D7');
+                $sheet->mergeCells('H6:H7');
+
+                //KOP HEADER
+                $sheet->row(2, array(
+                     'CUSTOMERS LIST'
+                ));
+                $sheet->mergeCells('A2:N2');
+                $sheet->row(2, function($row) {
+                    $row->setAlignment('center');
+                });
+                //END KOP HEADER
+
+                //TABLE HEADER
+                $sheet->row(4, array(
+                     'CUSTOMER ID', 'CUSTOMER NAME', 'ADDRESS 1', 'ADDRESS 2', 'CITY', 'PHONE', 'FAX','PIC','PIC PHONE / EXT', 'PIC MOBILE', 'PIC EMAIL', 'CREATED AT', 'MODIFIED AT'
+                ));
+                //END TABLE HEADER
+
+                //TABLE CONTENT
+                $customers = Customer::all();
+                $content_row = 5;
+                foreach ($customers as $key => $customer) {
+                    $sheet->row($content_row, array(
+                         $customer->customer_id,
+                         $customer->customer_name,
+                         $customer->address->address_1,
+                         $customer->address->address_2,
+                         $customer->address->city,
+                         $customer->phone,
+                         $customer->fax,
+                         $customer->pic,
+                         $customer->pic_phone,
+                         $customer->pic_mobile1,
+                         $customer->pic_email,
+                         $customer->created_at,
+                         $customer->modified_at
+                    )); 
+                    $sheet->row($content_row, function($row) {
+                        $row->setAlignment('left');
+                    });
+                    $content_row++;   
+                }
+                //END TABLE CONTENT
+            });
+        })->export('xlsx');
     }
 }

@@ -37,8 +37,11 @@
 		@endif
 		
 		<div class="row">
-			<div class="action-menu col-md-12">
+			<div class="action-menu col-md-6">
 				<a class="btn btn-primary" href="{{ url('app-admin/customers/create') }}" role="button"><i class="ti ti-plus"></i> Add new Customer</a>
+			</div>
+			<div class="action-menu col-md-6">
+				<a style="float: right;" class="btn btn-primary" href="{{ url('app-admin/customers/export') }}" role="button"><i class="ti ti-export"></i>  Export</a>
 			</div>
 		</div>
 
