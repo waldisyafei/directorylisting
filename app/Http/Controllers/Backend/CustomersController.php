@@ -302,14 +302,12 @@ class CustomersController extends Controller
                     $sheet->row($content_row, function($row) {
                         $row->setAlignment('left');
                     });
-                    if($content_row % 2 == 0){
-                        $sheet->cells('A5:N'.$content_row, function($cells) {
-                            $cells->setBackground('#4198f4');
-                        });
-                    };
                     $content_row++;   
                     $c++;
-                }         
+                }      
+                $sheet->cells('A5:N'.($content_row-1), function($cells) {
+                    $cells->setBackground('#2084e8');
+                });   
                 //END TABLE CONTENT
             });
         })->export('xlsx');
