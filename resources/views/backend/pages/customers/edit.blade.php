@@ -132,8 +132,8 @@
 								<label for="phone-input" class="col-sm-2 control-label">Membership<small style="color: red;">*</small></label>
 								<div class="col-sm-4">
 									<select name="membership" class="form-control">
-										<option value="02">Member</option>
-										<option value="01">Non Member</option>
+										<option value="02" {{ $customer->membership == '02' ? 'selected' : '' }}>Member</option>
+										<option value="01" {{ $customer->membership == '01' ? 'selected' : '' }}>Non Member</option>
 									</select>
 								</div>
 							</div>
