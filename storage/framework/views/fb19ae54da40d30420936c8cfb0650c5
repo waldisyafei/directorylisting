@@ -1,0 +1,3 @@
+User success created with following information :<br>
+Company name : <?php echo e($name); ?><br>
+Admin Editor Link : <?php echo e($link); ?>

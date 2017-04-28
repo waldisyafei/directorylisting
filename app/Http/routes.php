@@ -81,6 +81,7 @@ Route::group(['prefix' => 'app-admin', 'middleware' => 'auth'], function() {
 		Route::get('delete/{id}', 'Backend\CustomersController@destroy');
 		Route::get('profile/{id}', 'Backend\CustomersController@profile');
 		Route::get('export', 'Backend\CustomersController@export');
+		Route::get('mail', 'Backend\CustomersController@send_mail');
 	});
 
 	Route::group(['prefix' => 'roles'], function() {

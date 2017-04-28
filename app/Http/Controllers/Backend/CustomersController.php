@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Auth;
 use Excel;
+use Mail;
 use Validator;
 use App\Models\Customer;
 use App\Models\Address;
@@ -71,10 +72,10 @@ class CustomersController extends Controller
 
         $customer = new Customer;
         $customer_count = Customer::orderBy('id', 'desc')->select('customer_id')->first();
-        $customer_cust_id = $customer_count->customer_id + 1;
-        $original_cust_id = '01'.date('Y').date('m') . str_pad((string)$customer_count, 4, 0, STR_PAD_LEFT);var_dump($customer_count);die();
+        $customer_count = $customer_count->customer_id + 1;
+        $original_cust_id = $request->input('membership') . date('Y').date('m') . str_pad((string)$customer_count, 4, 0, STR_PAD_LEFT);
         // $original_cust_id = '000000000000000';
-        $customer->customer_id =  $original_cust_id . substr(crc32($original_cust_id), -3);var_dump($customer->customer_id);die();
+        $customer->customer_id =  $original_cust_id . substr(crc32($original_cust_id), -3);
         $customer->customer_name = $request->input('customer_name');
         $customer->phone = $request->input('phone');
         //$customer->fax = $request->input('fax');
@@ -100,6 +101,8 @@ class CustomersController extends Controller
 
             $customer->address_id = $address->address_id;
             $customer->save();
+
+            $this->success_mail(['name' => $customer->customer_name, 'link' => 'http://localhost/digirook/public/app-admin/customers/edit/'.$customer->id, 'email' => $customer->pic_email]);
 
             add_system_log(Auth::user()->get()->id, '<a href="javascript:;" class="name">' . Auth::user()->get()->name . '</a> created customer <a href="javascript:;" class="name">' . $customer->customer_name . '</a>');
             return redirect('app-admin/customers')->with('success', 'Customer created success.');
@@ -311,5 +314,12 @@ class CustomersController extends Controller
                 //END TABLE CONTENT
             });
         })->export('xlsx');
+    }
+    
+    public function success_mail($data){
+        Mail::send('backend.pages.customers.mail_success', $data, function($message) use ($data){
+            $message->to($data['email'], $data['name'])->subject('Klik Virtual - Success Created User Notification');
+            $message->from('noreplay@klikvirtual.com', 'Noreplay - Klik Virtual');
+        });
     }
 }
