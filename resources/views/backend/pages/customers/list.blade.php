@@ -60,6 +60,7 @@
 										<th width="120">Customer ID</th>
 										<th>Name</th>
 										<th>PIC</th>
+										<th>Membership</th>
 										<th>Created</th>
 										<th>Updated</th>
 										<th>Action</th>
@@ -71,6 +72,7 @@
 											<td style="text-align: center; font-weight: bold;">{{ $customer->customer_id }}</td>
 											<td>{{ $customer->customer_name }}</td>
 											<td>{{ $customer->pic }}</td>
+											<td>{{ substr($customer->customer_id, 0,2) == '01' ? 'Member' : 'Non Member' }}</td>
 											<td width="120">{{ date('d-m-Y H:i', strtotime($customer->created_at)) }}</td>
 											<td width="120">{{ date('d-m-Y H:i', strtotime($customer->updated_at)) }}</td>
 											<td width="70" style="text-align: center;">
