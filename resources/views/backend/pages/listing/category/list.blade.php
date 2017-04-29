@@ -10,22 +10,35 @@
 		@if (Auth::user()->get()->can('can_create_category'))
 			<!-- Action menu -->
 			<div class="row">
-				@if (Session::has('success'))
-					<div class="col-md-12">
-						<div class="alert alert-dismissable alert-success">
-							<i class="ti ti-check"></i>&nbsp; <strong>Well Done!</strong> {{ Session::get('success') }}.
-							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-						</div>
-					</div>
-				@endif
 				@if (Session::has('error'))
-					<div class="col-md-12">
-						<div class="alert alert-dismissable alert-danger">
-							<i class="ti ti-close"></i>&nbsp; <strong>Access denied!</strong> {{ Session::get('error') }}.
-							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-						</div>
+				<div class="col-md-12">
+					<div class="alert alert-dismissable alert-danger">
+						<i class="ti ti-check"></i>&nbsp; <strong>Oh snap!</strong> {{ Session::get('error') }}.
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 					</div>
-				@endif
+				</div>
+			@endif
+			@if (Session::has('success'))
+				<div class="col-md-12">
+					<div class="alert alert-dismissable alert-success">
+						<i class="ti ti-check"></i>&nbsp; <strong>Well Done!</strong> {{ Session::get('success') }}.
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+					</div>
+				</div>
+			@endif
+			@if ($errors->has())
+				<div class="col-md-12">
+					<div class="alert alert-dismissable alert-danger">
+						<i class="ti ti-close"></i>&nbsp; <strong>Oh snap!</strong>
+						<ul>
+							@foreach ($errors->all() as $error)
+								<li>{{ $error }}</li>
+							@endforeach
+						</ul>
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+					</div>
+				</div>
+			@endif
 				<div class="action-menu col-md-12">
 					<a class="btn btn-primary" href="{{ url('app-admin/listings/categories/create') }}" role="button"><i class="ti ti-plus"></i> Add new Category</a>
 				</div>
@@ -84,7 +97,7 @@
 											<td>{{ date('d M Y H:i', strtotime($category->updated_at)) }}</td>
 											<td>
 												<a href="{{ url('app-admin/listings/categories/edit', $category->id) }}" class="btn btn-primary-alt btn tooltips" title="Edit this category"><i class="ti ti-pencil"></i></a>&nbsp;&nbsp;
-												<a href="{{ url('app-admin/listings/categories/delete', $category->id) }}" class="btn btn-danger-alt btn tooltips" title="Delete this category"><i class="ti ti-trash"></i></a>
+												<!-- <a href="{{ url('app-admin/listings/categories/delete', $category->id) }}" class="btn btn-danger-alt btn tooltips" title="Delete this category"><i class="ti ti-trash"></i></a> -->
 											</td>
 										</tr>
 									@endforeach

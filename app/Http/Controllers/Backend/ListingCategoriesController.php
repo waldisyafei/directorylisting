@@ -40,7 +40,12 @@ class ListingCategoriesController extends Controller
         if (!Auth::user()->get()->can('can_create_category')) {
             return redirect()->back();
         }
-
+        
+        $categories = ListingCategory::count();
+        if ($categories > 6 ) {
+            return redirect()->back()->withErrors('Categories cannot be more than 6 categories.');
+        }
+        
         return view('backend.pages.listing.category.create');
     }
 

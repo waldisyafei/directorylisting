@@ -1,46 +1,44 @@
-@extends('backend.base')
+<?php $__env->startSection('title', 'Edit Category'); ?>
 
-@section('title', 'Edit Category')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 	<ol class="breadcrumb">
-	    <li class=""><a href="{{ url('app-admin/listings/categories') }}">Listings Categories</a></li>
+	    <li class=""><a href="<?php echo e(url('app-admin/listings/categories')); ?>">Listings Categories</a></li>
 	    <li>Edit Category</li>
 	</ol>
 	<div class="container-fluid">
 		<div class="row">
-			@if (Session::has('error'))
+			<?php if(Session::has('error')): ?>
 				<div class="col-md-12">
 					<div class="alert alert-dismissable alert-danger">
-						<i class="ti ti-check"></i>&nbsp; <strong>Oh snap!</strong> {{ Session::get('error') }}.
+						<i class="ti ti-check"></i>&nbsp; <strong>Oh snap!</strong> <?php echo e(Session::get('error')); ?>.
 						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 					</div>
 				</div>
-			@endif
-			@if (Session::has('success'))
+			<?php endif; ?>
+			<?php if(Session::has('success')): ?>
 				<div class="col-md-12">
 					<div class="alert alert-dismissable alert-success">
-						<i class="ti ti-check"></i>&nbsp; <strong>Well Done!</strong> {{ Session::get('success') }}.
+						<i class="ti ti-check"></i>&nbsp; <strong>Well Done!</strong> <?php echo e(Session::get('success')); ?>.
 						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 					</div>
 				</div>
-			@endif
-			@if ($errors->has())
+			<?php endif; ?>
+			<?php if($errors->has()): ?>
 				<div class="col-md-12">
 					<div class="alert alert-dismissable alert-danger">
 						<i class="ti ti-close"></i>&nbsp; <strong>Oh snap!</strong>
 						<ul>
-							@foreach ($errors->all() as $error)
-								<li>{{ $error }}</li>
-							@endforeach
+							<?php foreach($errors->all() as $error): ?>
+								<li><?php echo e($error); ?></li>
+							<?php endforeach; ?>
 						</ul>
 						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 					</div>
 				</div>
-			@endif
+			<?php endif; ?>
 
-			<form method="post" action="{{ url('app-admin/listings/categories/edit', $category->id) }}" class="form-horizontal" id="form-category">
-				<input type="hidden" name="_token" value="{{ csrf_token() }}">
+			<form method="post" action="<?php echo e(url('app-admin/listings/categories/edit', $category->id)); ?>" class="form-horizontal" id="form-category">
+				<input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
 				<div class="col-md-12">
 					<div class="panel panel-blue">
 						<div class="panel-heading">
@@ -50,7 +48,7 @@
 							<div class="form-group">
 								<label class="col-sm-2 control-label">Title</label>
 								<div class="col-sm-8">
-									<input type="text" name="title" value="{{ $category->title }}" class="form-control">
+									<input type="text" name="title" value="<?php echo e($category->title); ?>" class="form-control">
 								</div>
 							</div>
 							<!-- <div class="form-group">
@@ -58,13 +56,13 @@
 								<div class="col-xs-8">
 									<div class="radio">
 										<label>
-											<input type="radio" name="main_cat" class="is-main-cat" value="main"{!! $category->parent == 0 ? ' checked' : null !!}>
+											<input type="radio" name="main_cat" class="is-main-cat" value="main"<?php echo $category->parent == 0 ? ' checked' : null; ?>>
 											Main Category
 										</label>
 									</div>
 									<div class="radio">
 										<label>
-											<input type="radio" name="main_cat" class="is-main-cat" value="sub"{!! $category->parent > 0 ? ' checked' : null !!}>
+											<input type="radio" name="main_cat" class="is-main-cat" value="sub"<?php echo $category->parent > 0 ? ' checked' : null; ?>>
 											Sub Category
 										</label>
 									</div>
@@ -74,13 +72,13 @@
 								<label class="col-sm-2 control-label">Parent</label>
 								<div class="col-sm-8">
 									<select class="form-control" name="parent" autocomplete="off">
-										<option value="choose-category"{{ $category->parent == null ? ' selected' : null }}>-- SELECT CATEGORY --</option>
+										<option value="choose-category"<?php echo e($category->parent == null ? ' selected' : null); ?>>-- SELECT CATEGORY --</option>
 										<?php
 										$categories = \App\Models\ListingCategory::where('parent', 0)->get();
 										?>
-										@foreach ($categories as $cat)
-											<option value="{{ $cat->id }}"{!! $category->parent == $cat->id ? ' selected' : null !!}>{{ $cat->title }}</option>
-										@endforeach
+										<?php foreach($categories as $cat): ?>
+											<option value="<?php echo e($cat->id); ?>"<?php echo $category->parent == $cat->id ? ' selected' : null; ?>><?php echo e($cat->title); ?></option>
+										<?php endforeach; ?>
 									</select>
 								</div>
 							</div>
@@ -91,7 +89,7 @@
 						<div class="panel-footer">
 							<div class="row">
 								<div class="col-sm-8 col-sm-offset-2">
-									<a href="{{ url('account/listings') }}" class="btn-default btn">Cancel</a>&nbsp;&nbsp;&nbsp;
+									<a href="<?php echo e(url('account/listings')); ?>" class="btn-default btn">Cancel</a>&nbsp;&nbsp;&nbsp;
 									<button class="btn-primary btn">Update</button>
 								</div>
 							</div>
@@ -102,15 +100,15 @@
 			</form>
 		</div>
 	</div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('page-styles')
-@endsection
+<?php $__env->startSection('page-styles'); ?>
+<?php $__env->stopSection(); ?>
 
-@section('page-scripts')
-@endsection
+<?php $__env->startSection('page-scripts'); ?>
+<?php $__env->stopSection(); ?>
 
-@section('inline-script')
+<?php $__env->startSection('inline-script'); ?>
 	<script type="text/javascript">
 	$(function(){
 
@@ -131,9 +129,10 @@
 		});
 	});
 	</script>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('inline-style')
+<?php $__env->startSection('inline-style'); ?>
 <style type="text/css">
 </style>
-@stop
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('backend.base', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

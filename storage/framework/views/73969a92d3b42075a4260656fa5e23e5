@@ -44,13 +44,9 @@
                             <!-- Listing -->
                             <li class="<?php echo e(Request::is('app-admin/listings*') ? 'active open' : null); ?>"><a href="javascript:;"><i class="ti ti-layout-list-thumb"></i><span>Listings</span></a>
                                 <ul class="acc-menu" style="<?php echo e(Request::is('app-admin/listings*') ? 'display: block;' : null); ?>">
-                                    <li class="<?php echo e(Request::is('app-admin/listings/create') ? 'active' : null); ?>"><a href="<?php echo e(url('app-admin/listings/create')); ?>">Create New Non Customer Listing</a></li>
-                                    <li class="<?php echo e(Request::is('app-admin/listings/noncust') ? ' active' : null); ?>"><a href="<?php echo e(url('app-admin/listings/noncust')); ?>">Manage Non Customer Listing</a></li>
+                                    <!-- <li class="<?php echo e(Request::is('app-admin/listings/create') ? 'active' : null); ?>"><a href="<?php echo e(url('app-admin/listings/create')); ?>">Create New Non Customer Listing</a></li> -->
+                                    <!-- <li class="<?php echo e(Request::is('app-admin/listings/noncust') ? ' active' : null); ?>"><a href="<?php echo e(url('app-admin/listings/noncust')); ?>">Manage Non Customer Listing</a></li> -->
                                     <li class="<?php echo e(Request::is('app-admin/listings') ? ' active' : null); ?>"><a href="<?php echo e(url('app-admin/listings')); ?>">Listings Management</a></li>
-
-                                    <?php if(Auth::user()->get()->can('can_view_all_category')): ?>
-                                    <li class="<?php echo e(Request::is('app-admin/listings/categories*') ? 'active' : null); ?>"><a href="<?php echo e(url('app-admin/listings/categories')); ?>">Categories</a></li>
-                                    <?php endif; ?>
                                 </ul>
                             </li>
                         <?php endif; ?>
@@ -112,6 +108,9 @@
                                     <li class="<?php echo e(Request::is('app-admin/settings/listings') ? 'active' : null); ?>"><a href="<?php echo e(url('app-admin/settings/listings')); ?>">Listings</a></li>
                                     <li class="<?php echo e(Request::is('app-admin/settings/ads') ? 'active' : null); ?>"><a href="<?php echo e(url('app-admin/settings/ads')); ?>">Ads</a></li>
                                     <li class="<?php echo e(Request::is('app-admin/settings/ads-price') ? 'active' : null); ?>"><a href="<?php echo e(url('app-admin/settings/ads-price')); ?>">Ads Price</a></li>
+                                    <?php if(Auth::user()->get()->can('can_view_all_category')): ?>
+                                    <li class="<?php echo e(Request::is('app-admin/listings/categories*') ? 'active' : null); ?>"><a href="<?php echo e(url('app-admin/listings/categories')); ?>">Categories</a></li>
+                                    <?php endif; ?>
                                 </ul>
                             </li>
                         <?php endif; ?>
