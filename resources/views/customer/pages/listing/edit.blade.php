@@ -131,12 +131,12 @@
 									<input type="text" name="keywords" value="{{ $listing->keywords }}" class="form-control">
 								</div>
 							</div>
-							<div class="form-group">
+							<!-- <div class="form-group">
 								<label class="col-sm-2 control-label">Tags</label>
 								<div class="col-sm-8">
 									<input type="text" name="tags" value="{{ $listing->tags }}" class="form-control">
 								</div>
-							</div>
+							</div> -->
 							<div class="form-group">
 								<label class="col-sm-2 control-label">URL Website</label>
 								<div class="col-sm-8">

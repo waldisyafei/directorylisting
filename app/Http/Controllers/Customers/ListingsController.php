@@ -168,6 +168,7 @@ class ListingsController extends Controller
         $rules = [
             'title' => 'required|min:2|max:255',
             'sub_category' => 'required',
+            'keywords' => 'max:20',
             'content' => 'required|max:' . Setting::get('listings.content_length'),
             'review' => 'max:' . Setting::get('listings.content_length'),
             'custom_tab' => 'max:' . Setting::get('listings.content_length')

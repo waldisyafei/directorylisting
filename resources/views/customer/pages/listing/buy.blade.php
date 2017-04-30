@@ -67,7 +67,7 @@
 										</div>
 									</div>
 									<p class="listing-package-info"></p>
-									<button type="button" class="add-listing-entry btn tooltips" title="Add New Listing Slot"><i class="fa fa-plus"></i></button>
+									<!-- <button type="button" class="add-listing-entry btn tooltips" title="Add New Listing Slot"><i class="fa fa-plus"></i></button> -->
 									<button type="button" class="remove-listing-entry btn tooltips" title="Remove Slot"><i class="fa fa-close"></i></button>
 								</div>
 							</fieldset>

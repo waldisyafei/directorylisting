@@ -55,8 +55,8 @@
                             <!-- Ads -->
                             <li class="{{ Request::is('app-admin/ads*') ? 'active open' : null }}"><a href="javascript:;"><i class="ti ti-layout-accordion-list"></i><span>Ads</span></a>
                                 <ul class="acc-menu" style="{{ Request::is('app-admin/ads*') ? 'display: block;' : null }}">
-                                    <li class="{{ Request::is('app-admin/ads/create') ? 'active' : null }}"><a href="{{ url('app-admin/ads/create') }}">Create New Non Customer Ad</a></li>
-                                    <li class="{{ Request::is('app-admin/ads/noncust') ? ' active' : null }}"><a href="{{ url('app-admin/ads/noncust') }}">Manage Non Customer Ad</a></li>
+                                    <!-- <li class="{{ Request::is('app-admin/ads/create') ? 'active' : null }}"><a href="{{ url('app-admin/ads/create') }}">Create New Non Customer Ad</a></li>
+                                    <li class="{{ Request::is('app-admin/ads/noncust') ? ' active' : null }}"><a href="{{ url('app-admin/ads/noncust') }}">Manage Non Customer Ad</a></li> -->
                                     <li class="{{ Request::is('app-admin/ads') ? ' active' : null }}"><a href="{{ url('app-admin/ads') }}">Ads Management</a></li>
                                 </ul>
                             </li>
