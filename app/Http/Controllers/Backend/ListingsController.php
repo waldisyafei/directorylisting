@@ -12,6 +12,7 @@ use Auth;
 use Setting;
 use Storage;
 use Image;
+use Mail;
 use Session;
 use App\Models\ListingEdit;
 use App\Models\History;
@@ -57,7 +58,17 @@ class ListingsController extends Controller
         if ($listing) {
             $listing->status = 2;
 
+            if ($listing->user_category == 1 ){
+                $co_name = $listing->customer->name;        
+            } elseif ($listing->user_category == 2 ){
+                $co_name = $listing->customer->customer_name;
+            }else{
+                $co_name = $listing->customer->nonsub_name; 
+            }
+
             $listing->save();
+
+            $this->suspend_mail(['name' => $co_name, 'listing_name' => $listing->title, 'email' => $listing->pic_email]);
 
             return redirect('app-admin/listings')->with('success', 'Listing suspended successfully');
         }
@@ -445,5 +456,12 @@ class ListingsController extends Controller
         Session::put('listings', $listings);
 
         return redirect('account/listings/buy/complete');
+    }
+
+    public function suspend_mail($data){
+        Mail::send('backend.pages.listing.mail_suspend', $data, function($message) use ($data){
+            $message->to($data['email'], $data['name'])->subject('Klik Virtual -  Suspended Listing Notification');
+            $message->from('noreplay@klikvirtual.com', 'Noreplay - Klik Virtual');
+        });
     }
 }
