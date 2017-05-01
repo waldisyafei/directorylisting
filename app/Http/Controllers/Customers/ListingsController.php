@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Auth;
 use Validator;
+use App\Models\Invoice;
 use App\Models\Customer;
 use App\Models\Package;
 use App\Models\Listing;
@@ -352,17 +353,22 @@ class ListingsController extends Controller
             
             //$stop_date = Package::find($listing->package_id)->days;//dd($stop_date);
             //$listing->expired_date = date('Y-m-d H:i:s', strtotime($stop_date));//dd($listing->expired_date);
+            if(substr(Auth::customer()->get()->customer_id, 0,2) == '01'){
+                $id_listing = '01';
+            }else{
+                $id_listing = '02';
+            }
+            $listing->listing_id = $id_listing . strtoupper($this->generateListingID() . $listing->id);
+
+            $invoice = "#" . date('Ymdhis');
+            $listing->save();
             
-            $listing->save();
-
-            $listing->listing_id = strtoupper($this->generateListingID() . $listing->id);
-
-            $listing->save();
             $package_price = $listing->package->price;
             $disc = $listing->package->discount;
             $potongan = $disc / 100 * $package_price;
             $total = $package_price - $potongan;
-            create_billing($listing->customer_id, $listing->id, 'listing', $total, 2);
+            create_billing($listing->customer_id, $listing->id, 'listing', $total, 2, $invoice);
+            create_invoice($listing->customer_id, $listing->id, 'listing', $total, 2, $invoice);
 
             $listing_id[] = $listing->id;
         }

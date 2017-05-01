@@ -241,15 +241,23 @@ class AdsController extends Controller
             $ad->user_category = 2;
             $ad->address_id = Auth::customer()->get()->address_id;
             $ad->days = $adsRequest['days'];
+            
+            if(substr(Auth::customer()->get()->customer_id, 0,2) == '01'){
+                $id_ad = '03';
+            }else{
+                $id_ad = '04';
+            }
 
             if ($ad->save()) {
-                $ad->ad_id = '28' . date('Y') . date('m') . str_pad((string)$ad->id, 5, 0, STR_PAD_LEFT);
+                $invoice = "#" . date('Ymdhis');
+                $ad->ad_id = $id_ad . date('Y') . date('m') . str_pad((string)$ad->id, 5, 0, STR_PAD_LEFT);
                 $ad->save();
                 $price = Setting::get('ads.price_per_day') * $adsRequest['days'];
                 $discount = Setting::get('ads.price_discount');
                 $potongan = $discount / 100 * $price;
                 $total = $price - $potongan;
-                create_billing($ad->customer_id, $ad->id, 'ads', $total, 2);
+                create_billing($ad->customer_id, $ad->id, 'ads', $total, 2, $invoice);
+                create_invoice($ad->customer_id, $ad->id, 'ads', $total, 2, $invoice);
             }
             $ad_id[] = $ad->id;
         }

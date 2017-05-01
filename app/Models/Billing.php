@@ -30,4 +30,9 @@ class Billing extends Model
 
     	return $this->hasOne('App\Models\Ad', 'id', 'item_id');
     }
+
+    public function get_invoice()
+    {
+        return $this->hasOne('App\Models\Invoice', 'invoice_number', 'invoice');
+    }
 }
