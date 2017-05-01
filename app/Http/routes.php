@@ -179,6 +179,9 @@ Route::group(['prefix' => 'app-admin', 'middleware' => 'auth'], function() {
 		Route::get('listings', 'Backend\SettingsController@listings');
 		Route::post('listings', 'Backend\SettingsController@store_listings');
 
+		Route::get('content-lenght', 'Backend\SettingsController@content_lenght');
+		Route::post('content-lenght/{type}', 'Backend\SettingsController@store_content_lenght');
+
 		Route::get('ads', 'Backend\SettingsController@ads');
 		Route::post('ads', 'Backend\SettingsController@store_ads');
 

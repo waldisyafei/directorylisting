@@ -111,6 +111,7 @@
                                     <?php if(Auth::user()->get()->can('can_view_all_category')): ?>
                                     <li class="<?php echo e(Request::is('app-admin/listings/categories*') ? 'active' : null); ?>"><a href="<?php echo e(url('app-admin/listings/categories')); ?>">Categories</a></li>
                                     <?php endif; ?>
+                                    <li class="<?php echo e(Request::is('app-admin/settings/content-lenght') ? 'active' : null); ?>"><a href="<?php echo e(url('app-admin/settings/content-lenght')); ?>">Content Lenght</a></li>
                                 </ul>
                             </li>
                         <?php endif; ?>

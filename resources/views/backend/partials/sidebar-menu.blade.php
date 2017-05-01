@@ -111,6 +111,7 @@
                                     @if (Auth::user()->get()->can('can_view_all_category'))
                                     <li class="{{ Request::is('app-admin/listings/categories*') ? 'active' : null }}"><a href="{{ url('app-admin/listings/categories') }}">Categories</a></li>
                                     @endif
+                                    <li class="{{ Request::is('app-admin/settings/content-lenght') ? 'active' : null }}"><a href="{{ url('app-admin/settings/content-lenght') }}">Content Lenght</a></li>
                                 </ul>
                             </li>
                         @endif
