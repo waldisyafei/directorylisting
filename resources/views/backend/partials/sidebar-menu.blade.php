@@ -104,14 +104,15 @@
                             <li class="{{ Request::is('app-admin/settings*') ? 'active' : null }}"><a href="javascript:;"><i class="ti ti-settings"></i><span>System Settings</span></a>
                                 <ul class="acc-menu" style="{{ Request::is('app-admin/settings*') ? 'display: block;' : null }}">
                                     <li class="{{ Request::is('app-admin/settings/site') ? 'active' : null }}"><a href="{{ url('app-admin/settings/site') }}">Site</a></li>
-                                    <li class="{{ Request::is('app-admin/settings/packages') ? 'active' : null }}"><a href="{{ url('app-admin/settings/packages') }}">Packages</a></li>
-                                    <li class="{{ Request::is('app-admin/settings/listings') ? 'active' : null }}"><a href="{{ url('app-admin/settings/listings') }}">Listings</a></li>
-                                    <li class="{{ Request::is('app-admin/settings/ads') ? 'active' : null }}"><a href="{{ url('app-admin/settings/ads') }}">Ads</a></li>
-                                    <li class="{{ Request::is('app-admin/settings/ads-price') ? 'active' : null }}"><a href="{{ url('app-admin/settings/ads-price') }}">Ads Price</a></li>
+                                    <!-- <li class="{{ Request::is('app-admin/settings/packages') ? 'active' : null }}"><a href="{{ url('app-admin/settings/packages') }}">Packages</a></li> -->
+                                    <!-- <li class="{{ Request::is('app-admin/settings/listings') ? 'active' : null }}"><a href="{{ url('app-admin/settings/listings') }}">Listings</a></li>
+                                    <li class="{{ Request::is('app-admin/settings/ads') ? 'active' : null }}"><a href="{{ url('app-admin/settings/ads') }}">Ads</a></li> -->
+                                    <!-- <li class="{{ Request::is('app-admin/settings/ads-price') ? 'active' : null }}"><a href="{{ url('app-admin/settings/ads-price') }}">Ads Price</a></li> -->
                                     @if (Auth::user()->get()->can('can_view_all_category'))
                                     <li class="{{ Request::is('app-admin/listings/categories*') ? 'active' : null }}"><a href="{{ url('app-admin/listings/categories') }}">Categories</a></li>
                                     @endif
                                     <li class="{{ Request::is('app-admin/settings/content-lenght') ? 'active' : null }}"><a href="{{ url('app-admin/settings/content-lenght') }}">Content Lenght</a></li>
+                                    <li class="{{ Request::is('app-admin/settings/pricing-setup') ? 'active' : null }}"><a href="{{ url('app-admin/settings/pricing-setup') }}">Pricing Setup</a></li>
                                 </ul>
                             </li>
                         @endif

@@ -88,6 +88,13 @@ class SettingsController extends Controller
         return view('backend.pages.packages.list', ['packages' => $packages]);
     }
 
+    public function pricing_setup()
+    {
+        $packages = Package::orderBy('created_at', 'ASC')->paginate(15);
+
+        return view('backend.pages.settings.pricing_setup', ['packages' => $packages]);
+    }
+
     public function store_package(Request $request)
     {
         # code...

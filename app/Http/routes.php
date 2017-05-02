@@ -181,6 +181,9 @@ Route::group(['prefix' => 'app-admin', 'middleware' => 'auth'], function() {
 
 		Route::get('content-lenght', 'Backend\SettingsController@content_lenght');
 		Route::post('content-lenght/{type}', 'Backend\SettingsController@store_content_lenght');
+		
+		Route::get('pricing-setup', 'Backend\SettingsController@pricing_setup');
+		Route::post('pricing-setup', 'Backend\SettingsController@store_pricing_setup');
 
 		Route::get('ads', 'Backend\SettingsController@ads');
 		Route::post('ads', 'Backend\SettingsController@store_ads');
