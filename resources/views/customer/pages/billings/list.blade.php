@@ -48,7 +48,6 @@
 							<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
 								<thead>
 									<tr>
-										<th width="40">ID</th>
 										<th>Item Name</th>
 										<th>Iinvoice</th>
 										<th>Item Type</th>
@@ -61,7 +60,6 @@
 								<tbody>
 									@foreach ($billings as $billing)
 										<tr>
-											<td>{{ $billing->id }}</td>
 											<?php
 												if ($billing->item_type == 'listing') {
 													$items = App\Models\Listing::where('id', $billing->item_id)->select('title')->orderby('created_at', 'DESC')->get();
