@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Auth;
 use Validator;
+use App\Models\Address;
 use App\Models\Customer;
 use App\Models\Listing;
 use Carbon\Carbon;
@@ -54,33 +55,60 @@ class CustomersController extends Controller
     }
     public function update_info(Request $request, $id)
     {
-        $validator = Validator::make($request->all(),[
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users,email,'.$id,
-            'password' => 'required|confirmed|min:6',
-            ]);
+        
+        $rules = [
+            'customer_name' => 'required|max:100',
+            'address_1' => 'required|max:255',
+            'country' => 'required',
+            //'province' => 'required',
+            'city' => 'required',
+            'phone' => 'required|numeric',
+            'picphone' => 'required|numeric',
+            //'fax' => 'numeric',
+            //'picmobile1' => 'required|numeric',
+            //'picmobile2' => 'numeric',
+            'picemail' => 'required|max:255|unique:customers,pic_email,'.$id
+        ];
 
-        if ($validator->fails()) {
-            return redirect()->back()->withInput()->withErrors($validator);
+        $validation = Validator::make($request->all(), $rules);
+
+        if ($validation->fails()) {
+            return redirect()->back()->withInput()->withErrors($validation);
         }
-
-        /*if ($request->input('role') == 'choose-role' || $request->input('role') === null) {
-            return redirect()->back()->with('error', 'Please select role for this user');
-        }*/
 
         $customer = Customer::find($id);
-
         if ($customer) {
-            $customer->customer_name = $request->input('name');
-            $customer->pic_email = $request->input('email');
-            $customer->password = bcrypt($request->input('password'));
+            //$customer_count = (int)Customer::count();
+            //$customer->customer_id = '01'.date('Y').date('m') . str_pad((string)$customer_count, 4, 0, STR_PAD_LEFT);
+            $customer->customer_name = $request->input('customer_name');
+            $customer->phone = $request->input('phone');
+            //$customer->fax = $request->input('fax');
+            $customer->pic = $request->input('pic');
+            $customer->pic_phone = $request->input('picphone');
+            $customer->pic_mobile1 = $request->input('picmobile1');
+            //$customer->pic_mobile2 = $request->input('picmobile2');
+            $customer->pic_email = $request->input('picemail');
+
+            if ($request->has('password') && $request->input('password') != ''){
+                $customer->password = bcrypt($request->input('password'));
+            }
 
             if ($customer->save()) {
-                // Attach role to user
-                //$customer->roles()->attach($request->input('role'));
+                $address = Address::find($customer->address_id);
+                $address->address_1 = $request->input('address_1');
+                $address->address_2 = $request->input('address_2');
+                $address->city = $request->input('city');
+                $address->postcode = $request->input('postcode');
+                $address->country_id = $request->input('country');
+                //$address->zone_id = $request->input('province');
 
-                return redirect('account/edit_info')->with('success', 'User updated success.');
+                $address->save();
+
+                add_system_log(Auth::customer()->get()->id, '<a href="javascript:;" class="name">' . Auth::customer()->get()->name . '</a> updated customer <a href="javascript:;" class="name">' . $customer->customer_name . '</a>');
+                return redirect('account/edit_info/')->with('success', 'Account info updated success.');
             }
         }
+
+        return abort(404);
     }
 }
