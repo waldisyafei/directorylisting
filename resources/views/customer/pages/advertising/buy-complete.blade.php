@@ -48,7 +48,7 @@
 					                    <div class="pull-right">
 					                        <h1 class="text-primary text-right" style="font-weight: normal;">
 					                            INVOICE
-					                            <small style="display: block;">#10007819</small>
+					                            <small style="display: block;">{{$invoice}}</small>
 					                        </h1>
 					                    </div>
 					                </div>
@@ -70,7 +70,6 @@
 					                            </address>
 					                        </div>
 					                        <div class="pull-right">
-					                            <h3 class="text-muted">Info</h3>
 					                            <ul class="text-left list-unstyled">
 					                            	<?php $createdDate = date('d/m/Y'); ?>
 					                                <li><strong>Date:</strong> {{ date('d/m/Y') }}</li>

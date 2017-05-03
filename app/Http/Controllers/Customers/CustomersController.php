@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Auth;
+use Hash;
 use Validator;
 use App\Models\Address;
 use App\Models\Customer;
@@ -53,6 +54,44 @@ class CustomersController extends Controller
 
         return abort(404, 'Request not found');
     }
+
+    public function change_password()
+    {
+        $customer = Customer::find(Auth::customer()->get()->id);
+                    //var_dump($customer);die();
+
+        if ($customer) {
+            return view('customer.pages.account.change_password', ['customer' => $customer]);
+        }
+
+        return abort(404, 'Request not found');
+    }
+
+    public function update_change_password(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(),[
+            'old_password' => 'required',
+            'password' => 'required|confirmed|min:6',
+            ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withInput()->withErrors($validator);
+        }
+
+        $customer = Customer::find($id);
+
+        if (!Hash::check($request->input('old_password'), $customer->password))
+            return redirect()->back()->withInput()->withErrors('Existing password is not match');
+
+        if ($customer) {
+            $customer->password = bcrypt($request->input('password'));
+
+            if ($customer->save()) {
+                return redirect('account/change_password')->with('success', 'User\'s password  updated success.');
+            }
+        }
+    }
+
     public function update_info(Request $request, $id)
     {
         

@@ -237,8 +237,12 @@ Route::group(['prefix' => 'account', 'middleware' => 'authCustomer'], function()
 	// Index (Dashboard) of subscriber page
 	Route::get('/', 'Customers\CustomersController@index');
 	Route::get('listing_stats', 'Customers\ListingsController@statistics');
+
 	Route::get('edit_info', 'Customers\CustomersController@edit_info');
 	Route::post('edit_info/{id}', 'Customers\CustomersController@update_info');
+
+	Route::get('change_password', 'Customers\CustomersController@change_password');
+	Route::post('change_password/{id}', 'Customers\CustomersController@update_change_password');
 
 	Route::group(['prefix' => 'listings'], function(){
 		Route::get('/', 'Customers\ListingsController@index');

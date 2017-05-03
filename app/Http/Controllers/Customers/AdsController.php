@@ -266,8 +266,9 @@ class AdsController extends Controller
         foreach ($ad_id as $id) {
             $ads[] = Ad::find($id);
         }
+        $invoice = "#" . date('Ymdhis');
 
-        Session::put('ads', $ads);
+        Session::put(['ads' => $ads, 'invoice' => $invoice]);
 
         return redirect('account/ads/buy/complete');
     }
