@@ -277,12 +277,13 @@ class AdsController extends Controller
     {
         if (Session::has('ads')) {
             $ads = Session::get('ads');
+            $invoice = Session::get('invoice');
             //Session::forget('listings');
         } else {
             return redirect('account/ads');
         }
 
-        return view('customer.pages.advertising.buy-complete', array('ads' => $ads));
+        return view('customer.pages.advertising.buy-complete', array('ads' => $ads, 'invoice' => $invoice));
     }
 
     public function renew($id)

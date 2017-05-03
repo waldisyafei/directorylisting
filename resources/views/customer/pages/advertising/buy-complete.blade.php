@@ -73,8 +73,6 @@
 					                            <ul class="text-left list-unstyled">
 					                            	<?php $createdDate = date('d/m/Y'); ?>
 					                                <li><strong>Date:</strong> {{ date('d/m/Y') }}</li>
-					                                <li><strong>Due:</strong> {{ date('d/m/Y',  strtotime("+10 days")) }}</li>
-					                                <li><strong>Late Fee:</strong> 0.5%</li>
 					                            </ul>
 					                        </div>
 					                    </div>
