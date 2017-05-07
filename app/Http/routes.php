@@ -214,6 +214,7 @@ Route::group(['prefix' => 'app-admin', 'middleware' => 'auth'], function() {
 	});
 
 	Route::get('geo/getZone', 'Backend\BackendController@getZone');
+	Route::get('geo/getCity', 'Backend\BackendController@getCity');
 	
 });
 

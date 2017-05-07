@@ -110,9 +110,19 @@
 								</div>
 							</div> -->
 							<div class="form-group">
-								<label class="col-sm-2 control-label">City <small style="color: red;">*</small></label>
+								<label class="col-sm-2 control-label">City<small style="color: red;">*</small></label>
 								<div class="col-sm-4">
-									<input type="text" name="city" class="form-control" placeholder="City">
+									<select name="country">
+										<option<?php echo e(old('city') == '' ? ' selected' : null); ?> disabled>-- SELECT CITY--</option>
+										<?php foreach(App\Models\City::all() as $city): ?>
+											<?php 
+											if($city->id == 100) { ?>	
+											<option selected="selected" value="<?php echo e($city->id); ?>"<?php echo old('city') == $city->id ? ' selected' : null; ?>><?php echo e($city->name); ?></option>
+											<?php }else{ ?>
+											<option value="<?php echo e($city->id); ?>"<?php echo old('city') == $city->id ? ' selected' : null; ?>><?php echo e($country->name); ?></option>
+											<?php } ?>
+										<?php endforeach; ?>
+									</select>
 								</div>
 								<label for="picpassword-input" class="col-sm-2 control-label"></label>
 								<div class="col-sm-4">
@@ -202,6 +212,35 @@
 					country_id: thisVal
 				},
 				success: function(res) {
+					if (res.status === 'success') {
+						var output = '';
+						var results = res.results;
+						var inputProvince = $('select[name="province"]');
+
+						for (var i = 0; i < results.length; i++) {
+							output += '<option value="' + results[i].zone_id + '">' + results[i].name + '</option>';
+						}
+						inputProvince.find('option').remove();
+						inputProvince.append(output);
+					}
+				}
+			});
+		});
+
+		$('select[name="city"]').change(function(){
+			var thisEl = $(this);
+			var thisVal = thisEl.val();
+			console.log(thisVal);
+
+			$.ajax({
+				method: 'get',
+				url: '<?php echo e(url('app-admin/geo/getCity')); ?>',
+				data: {
+					_token: '<?php echo e(csrf_token()); ?>',
+					city: thisVal
+				},
+				success: function(res) {
+					console.log(res);
 					if (res.status === 'success') {
 						var output = '';
 						var results = res.results;

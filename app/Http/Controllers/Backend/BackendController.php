@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Country;
+use App\Models\City;
 
 class BackendController extends Controller
 {
@@ -30,5 +31,17 @@ class BackendController extends Controller
     		'status' => 'success',
     		'results' => $country->zones->toArray()
 		]);
+    }
+
+    public function getCity(Request $request)
+    {
+        $city_name = $request->input('city');
+
+        $city = City::where('name', 'LIKE', '%'.$city_name.'%')->first();
+
+        return response()->json([
+            'status' => 'success',
+            'results' => $city->toArray()
+        ]);
     }
 }

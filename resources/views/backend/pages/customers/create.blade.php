@@ -112,9 +112,19 @@
 								</div>
 							</div> -->
 							<div class="form-group">
-								<label class="col-sm-2 control-label">City <small style="color: red;">*</small></label>
+								<label class="col-sm-2 control-label">City<small style="color: red;">*</small></label>
 								<div class="col-sm-4">
-									<input type="text" name="city" class="form-control" placeholder="City">
+									<select name="country">
+										<option{{ old('city') == '' ? ' selected' : null }} disabled>-- SELECT CITY--</option>
+										@foreach (App\Models\City::all() as $city)
+											<?php 
+											if($city->id == 100) { ?>	
+											<option selected="selected" value="{{ $city->id }}"{!! old('city') == $city->id ? ' selected' : null !!}>{{ $city->name }}</option>
+											<?php }else{ ?>
+											<option value="{{ $city->id }}"{!! old('city') == $city->id ? ' selected' : null !!}>{{ $country->name }}</option>
+											<?php } ?>
+										@endforeach
+									</select>
 								</div>
 								<label for="picpassword-input" class="col-sm-2 control-label"></label>
 								<div class="col-sm-4">
@@ -204,6 +214,35 @@
 					country_id: thisVal
 				},
 				success: function(res) {
+					if (res.status === 'success') {
+						var output = '';
+						var results = res.results;
+						var inputProvince = $('select[name="province"]');
+
+						for (var i = 0; i < results.length; i++) {
+							output += '<option value="' + results[i].zone_id + '">' + results[i].name + '</option>';
+						}
+						inputProvince.find('option').remove();
+						inputProvince.append(output);
+					}
+				}
+			});
+		});
+
+		$('select[name="city"]').change(function(){
+			var thisEl = $(this);
+			var thisVal = thisEl.val();
+			console.log(thisVal);
+
+			$.ajax({
+				method: 'get',
+				url: '{{ url('app-admin/geo/getCity') }}',
+				data: {
+					_token: '{{ csrf_token() }}',
+					city: thisVal
+				},
+				success: function(res) {
+					console.log(res);
 					if (res.status === 'success') {
 						var output = '';
 						var results = res.results;
