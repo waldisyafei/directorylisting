@@ -53,7 +53,7 @@
 									<input type="text" name="title" value="{{ $category->title }}" class="form-control">
 								</div>
 							</div>
-							<div class="form-group">
+							<!-- <div class="form-group">
 								<label class="col-sm-2 control-label">Is Main Category?</label>
 								<div class="col-xs-8">
 									<div class="radio">
@@ -69,7 +69,7 @@
 										</label>
 									</div>
 								</div>
-							</div>
+							</div> -->
 							<div class="form-group" id="select-main-cat">
 								<label class="col-sm-2 control-label">Parent</label>
 								<div class="col-sm-8">

@@ -114,7 +114,7 @@ namespace Faker;
  * @property string $countryISOAlpha3
  * @property string $languageCode
  * @property string $currencyCode
- * @property boolean boolean
+ * @property boolean $boolean
  * @method boolean boolean($chanceOfGettingTrue = 50)
  *
  * @property int    $randomDigit
@@ -208,6 +208,8 @@ class Generator
     }
 
     /**
+     * @param string $formatter
+     *
      * @return Callable
      */
     public function getFormatter($formatter)
@@ -243,6 +245,8 @@ class Generator
 
     /**
      * @param string $attribute
+     *
+     * @return mixed
      */
     public function __get($attribute)
     {
@@ -252,6 +256,8 @@ class Generator
     /**
      * @param string $method
      * @param array $attributes
+     *
+     * @return mixed
      */
     public function __call($method, $attributes)
     {

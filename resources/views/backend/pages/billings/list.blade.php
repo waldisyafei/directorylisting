@@ -51,6 +51,7 @@
 										<th width="40">ID</th>
 										<th>Customer ID</th>
 										<th>Customer Name</th>
+										<th>Invoice</th>
 										<th>Item ID</th>
 										<th>Item Type</th>
 										<th>Created</th>
@@ -75,6 +76,7 @@
 												
 											?>
 											</td>
+											<td>{{ $billing->get_invoice->invoice_number == null ? '' : $billing->get_invoice->invoice_number }}</td>
 											<td>{{ $billing->item_id }}</td>
 											<td>{{ $billing->item_type }}</td>
 											<td>{{ date('d M Y H:i:s', strtotime($billing->created_at)) }}</td>

@@ -46,7 +46,9 @@
 					                    <div class="pull-right">
 					                        <h1 class="text-primary text-right" style="font-weight: normal;">
 					                            INVOICE
-					                            <small style="display: block;">#10007819</small>
+					                            <?php foreach($listings as $listing): ?>
+					                            <small style="display: block;"><?php echo e($listing->billing->get_invoice->invoice_number); ?></small>
+					                            <?php endforeach; ?>
 					                        </h1>
 					                    </div>
 					                </div>

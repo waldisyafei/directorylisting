@@ -70,9 +70,10 @@
 								<span class="vendor-name">{{ $item->customer->customer_name }}</span>
 								<p class="vendor-address">{{ $itemdress->address_1 }}, {{ $province->name }} {{ $itemdress->postcode }} <br>{{ $country }}</p>
 								<span class="vendor-phone"><i class="glyphicon glyphicon-earphone"></i> {{ $item->customer->phone }}</span>
+								<?php if($item->url != ''){ ?>
 								<a href="<?php echo !empty($item->url) ? $item->url : '#' ?>" target="_blank" class="vendor-site-link">VISIT WEBSITE <i class="glyphicon glyphicon-play pull-right"></i></a>
+								<?php } ?>
 								<span class="listing-goto-harga">HARGA: Rp <?php echo $item->price_from ? number_format($item->price_from, 0, ',', '.') : '0' ?></span>
-								<a href="<?php echo !empty($item->url) ? $item->url : '#' ?>" target="_blank" class="listing-goto-link">Produk ini dapat diperoleh di &raquo;</a>
 							</div>
 							<!-- <div class="vendor-btn">
 								<a href="javascript:;" class="grey-dark">DESKRIPSI</a>

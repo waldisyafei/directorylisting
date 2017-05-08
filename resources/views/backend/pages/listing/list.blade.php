@@ -27,9 +27,9 @@
 					</div>
 				@endif
 
-			<div class="action-menu col-md-12">
+			<!-- <div class="action-menu col-md-12">
 				<a class="btn btn-primary" href="{{ url('app-admin/listings/create') }}" role="button"><i class="ti ti-plus"></i> Add new Listing</a>
-			</div>
+			</div> -->
 		</div>
 		<!-- ./End Action menu -->
 		@endif
@@ -48,9 +48,10 @@
 								<thead>
 									<tr>
 										<th>Title</th>
+										<th>Company Name</th>
 										<th width="80">Image</th>
 										<th>Category</th>
-										<th>Created</th>
+										<!-- <th>Created</th> -->
 										<th>Updated</th>
 										<th>Status</th>
 										<th width="130">Actions</th>
@@ -66,9 +67,21 @@
 										?>
 										<tr>
 											<td><a href="{{ url('app-admin/listings/edit', $listing->id) }}">{{ $listing->title }}</a></td>
+											<td>
+											<?php //dd($billing->customer);
+												if ($listing->user_category == 1 ){
+													echo $listing->customer->name;		
+												} elseif ($listing->user_category == 2 ){
+													echo $listing->customer->customer_name;
+												}else{
+													echo $listing->customer->nonsub_name;	
+												}
+												
+											?>
+											</td>
 											<td class="text-center"><img class="img-thumbnail" src="{{ asset($img_entry) }}" width="70" height="70"></td>
 											<td>{{ $listing->listingCategory->title or null }}</td>
-											<td>{{ date('d M Y H:i', strtotime($listing->created_at)) }}</td>
+											<!-- <td>{{ date('d M Y H:i', strtotime($listing->created_at)) }}</td> -->
 											<td>{{ date('d M Y H:i', strtotime($listing->updated_at)) }}</td>
 											<td>
 												<?php $status = $listing->listingStatus->id; ?>

@@ -1,0 +1,3 @@
+Listing is suspended with following information :<br>
+Company name : <?php echo e($name); ?><br>
+Listing's Title : <?php echo e($listing_name); ?>

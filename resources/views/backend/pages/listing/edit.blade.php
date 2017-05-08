@@ -48,9 +48,36 @@
 						</div>
 						<div class="panel-body">
 							<div class="form-group">
+								<label class="col-sm-2 control-label">Company Name</label>
+								<div class="col-sm-8">
+								<?php //dd($billing->customer);
+									if ($listing->user_category == 1 ){
+										$co_name = $listing->customer->name;		
+									} elseif ($listing->user_category == 2 ){
+										$co_name = $listing->customer->customer_name;
+									}else{
+										$co_name = $listing->customer->nonsub_name;	
+									}	
+								?>
+									<input type="text" name="title" value="{{ $co_name }}" class="form-control" disabled>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">PIC Phone</label>
+								<div class="col-sm-8">
+									<input type="text" name="title" value="{{ $listing->customer->pic_phone }}" class="form-control" disabled>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">PIC Email</label>
+								<div class="col-sm-8">
+									<input type="text" name="title" value="{{ $listing->customer->pic_email }}" class="form-control" disabled>
+								</div>
+							</div>
+							<div class="form-group">
 								<label class="col-sm-2 control-label">Title</label>
 								<div class="col-sm-8">
-									<input type="text" name="title" value="{{ $listing->title }}" class="form-control">
+									<input type="text" name="title" value="{{ $listing->title }}" class="form-control" disabled>
 								</div>
 							</div>
 							<?php
@@ -60,7 +87,7 @@
 							<div class="form-group">
 								<label class="col-sm-2 control-label">Main Category</label>
 								<div class="col-sm-8">
-									<select class="form-control" name="category">
+									<select class="form-control" name="category"  disabled>
 										<option value="choose-category"{{ $listing->category == null ? ' selected' : null }} disabled>-- SELECT MAIN CATEGORY --</option>
 										@foreach ($categories as $category)
 											@if ($category->parent == 0)
@@ -75,7 +102,7 @@
 							<div class="form-group">
 								<label class="col-sm-2 control-label">Sub Category</label>
 								<div class="col-sm-8">
-									<select class="form-control" name="sub_category">
+									<select class="form-control" name="sub_category" disabled>
 										<option value="choose-category"{{ $listing->category == null ? ' selected' : null }}>-- SELECT SUB CATEGORY --</option>
 									</select>
 								</div>
@@ -99,14 +126,14 @@
 									<div role="tabpanel" class="tab-pane active" id="description" style="padding: 20px;">
 										<div class="form-group">
 											<div class="col-sm-10">
-												<textarea id="listing-content" name="content" rows="10">{!! $listing->content !!}</textarea>
+												<textarea id="listing-content" name="content" rows="10" disabled>{!! $listing->content !!}</textarea>
 											</div>
 										</div>
 									</div>
 									<div role="tabpanel" class="tab-pane" id="review" style="padding: 20px;">
 										<div class="form-group">
 											<div class="col-sm-10">
-												<textarea id="listing-review" name="review" rows="10">{!! $listing->review !!}</textarea>
+												<textarea id="listing-review" name="review" rows="10" disabled>{!! $listing->review !!}</textarea>
 											</div>
 										</div>
 									</div>
@@ -114,12 +141,12 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label">Custom Title</label>
 											<div class="col-sm-10">
-												<input type="text" name="custom_title" value="{!! $listing->custom_tab_title !!}" class="form-control">
+												<input type="text" name="custom_title" value="{!! $listing->custom_tab_title !!}" class="form-control" disabled>
 											</div>
 										</div>
 										<div class="form-group">
 											<div class="col-sm-10">
-												<textarea id="listing-custom" name="custom" rows="10">{!! $listing->custom_tab !!}</textarea>
+												<textarea id="listing-custom" name="custom" rows="10" disabled>{!! $listing->custom_tab !!}</textarea>
 											</div>
 										</div>
 									</div>
@@ -128,34 +155,34 @@
 							<div class="form-group">
 								<label class="col-sm-2 control-label">Keywords</label>
 								<div class="col-sm-8">
-									<input type="text" name="keywords" value="{{ $listing->keywords }}" class="form-control">
+									<input type="text" name="keywords" value="{{ $listing->keywords }}" class="form-control" disabled>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label">Tags</label>
 								<div class="col-sm-8">
-									<input type="text" name="tags" value="{{ $listing->tags }}" class="form-control">
+									<input type="text" name="tags" value="{{ $listing->tags }}" class="form-control" disabled>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label">URL Website</label>
 								<div class="col-sm-8">
-									<input type="text" name="url" value="{{ $listing->url }}" class="form-control">
+									<input type="text" name="url" value="{{ $listing->url }}" class="form-control" disabled>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label">Price Range</label>
 								<div class="col-sm-4">
-									<input type="text" name="price_from" value="{{ $listing->price_from }}" class="form-control">
+									<input type="text" name="price_from" value="{{ $listing->price_from }}" class="form-control" disabled>
 								</div>
 								<div class="col-sm-4">
-									<input type="text" name="price_to" value="{{ $listing->price_to }}" class="form-control">
+									<input type="text" name="price_to" value="{{ $listing->price_to }}" class="form-control" disabled>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label">Images</label>
 								<div class="col-sm-8">
-									<input type="file" name="image">
+									<input type="file" name="image" disabled>
 									<div class="images-list">
 										<div class="row">
 											<?php $images = json_decode($listing->assets); ?>
@@ -185,8 +212,9 @@
 						<div class="panel-footer">
 							<div class="row">
 								<div class="col-sm-8 col-sm-offset-2">
-									<a href="{{ url('account/listings') }}" class="btn-default btn">Cancel</a>&nbsp;&nbsp;&nbsp;
-									<button class="btn-primary btn">Update</button>
+									<a href="{{ url('app-admin/listings') }}" class="btn-default btn">Cancel</a>&nbsp;&nbsp;&nbsp;
+									<button class="btn-primary btn">Update</button>&nbsp;&nbsp;&nbsp;
+									<a href="{{ url('app-admin/listings/suspend', $listing->id) }}" class="btn btn-warning">Suspend</a>
 								</div>
 							</div>
 						</div>

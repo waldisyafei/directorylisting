@@ -80,6 +80,8 @@ Route::group(['prefix' => 'app-admin', 'middleware' => 'auth'], function() {
 		Route::post('edit/{id}', 'Backend\CustomersController@update');
 		Route::get('delete/{id}', 'Backend\CustomersController@destroy');
 		Route::get('profile/{id}', 'Backend\CustomersController@profile');
+		Route::get('export', 'Backend\CustomersController@export');
+		Route::get('mail', 'Backend\CustomersController@send_mail');
 	});
 
 	Route::group(['prefix' => 'roles'], function() {
@@ -177,6 +179,12 @@ Route::group(['prefix' => 'app-admin', 'middleware' => 'auth'], function() {
 		Route::get('listings', 'Backend\SettingsController@listings');
 		Route::post('listings', 'Backend\SettingsController@store_listings');
 
+		Route::get('content-lenght', 'Backend\SettingsController@content_lenght');
+		Route::post('content-lenght/{type}', 'Backend\SettingsController@store_content_lenght');
+		
+		Route::get('pricing-setup', 'Backend\SettingsController@pricing_setup');
+		Route::post('pricing-setup', 'Backend\SettingsController@store_pricing_setup');
+
 		Route::get('ads', 'Backend\SettingsController@ads');
 		Route::post('ads', 'Backend\SettingsController@store_ads');
 
@@ -206,6 +214,7 @@ Route::group(['prefix' => 'app-admin', 'middleware' => 'auth'], function() {
 	});
 
 	Route::get('geo/getZone', 'Backend\BackendController@getZone');
+	Route::get('geo/getCity', 'Backend\BackendController@getCity');
 	
 });
 
@@ -229,8 +238,12 @@ Route::group(['prefix' => 'account', 'middleware' => 'authCustomer'], function()
 	// Index (Dashboard) of subscriber page
 	Route::get('/', 'Customers\CustomersController@index');
 	Route::get('listing_stats', 'Customers\ListingsController@statistics');
+
 	Route::get('edit_info', 'Customers\CustomersController@edit_info');
 	Route::post('edit_info/{id}', 'Customers\CustomersController@update_info');
+
+	Route::get('change_password', 'Customers\CustomersController@change_password');
+	Route::post('change_password/{id}', 'Customers\CustomersController@update_change_password');
 
 	Route::group(['prefix' => 'listings'], function(){
 		Route::get('/', 'Customers\ListingsController@index');

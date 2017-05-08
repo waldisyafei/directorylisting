@@ -46,9 +46,8 @@
 							<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
 								<thead>
 									<tr>
-										<th width="40">ID</th>
 										<th>Item Name</th>
-										<th>Item ID</th>
+										<th>Iinvoice</th>
 										<th>Item Type</th>
 										<th>Amount</th>
 										<th>Created</th>
@@ -59,7 +58,6 @@
 								<tbody>
 									<?php foreach($billings as $billing): ?>
 										<tr>
-											<td><?php echo e($billing->id); ?></td>
 											<?php
 												if ($billing->item_type == 'listing') {
 													$items = App\Models\Listing::where('id', $billing->item_id)->select('title')->orderby('created_at', 'DESC')->get();
@@ -73,7 +71,7 @@
 													}
 												}
 											 ?>
-											<td><?php echo e($billing->item_id); ?></td>
+											<td><?php echo e($billing->get_invoice->invoice_number == null ? '' : $billing->get_invoice->invoice_number); ?></td>
 											<td><?php echo e($billing->item_type); ?></td>
 											<td>IDR <?php echo e(number_format($billing->amount, 0, ',', '.')); ?></td>
 											<td><?php echo e(date('d M Y H:i:s', strtotime($billing->created_at))); ?></td>

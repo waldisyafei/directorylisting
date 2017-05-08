@@ -12,6 +12,11 @@ class Ad extends Model
     	return $this->hasOne('\App\Models\Package', 'id', 'package_id');
     }
 
+    public function billing()
+    {
+        return $this->hasOne('\App\Models\Billing', 'item_id', 'ad_id');
+    }
+
     public function adStatus()
     {
         return $this->hasOne('App\Models\AdStatus', 'id', 'status');

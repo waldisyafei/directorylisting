@@ -76,11 +76,15 @@
 		                            </address>
 		                        </div>
 		                        <div class="pull-right">
-		                            <h3 class="text-muted">Info</h3>
+			                        <h1 class="text-primary text-right" style="font-weight: normal;">
+			                            INVOICE
+			                            <small style="display: block;">{{ $billing->get_invoice->invoice_number }}</small>
+			                        </h1>
+			                        <!-- <h3 class="text-muted">Info</h3> -->
 		                            <ul class="text-left list-unstyled">
 		                                <li><strong>Date:</strong> {{ date('d/M/Y', strtotime($billing->created_at)) }}</li>
 		                            </ul>
-		                        </div>
+			                    </div>
 		                    </div>
 		                </div>
 		                <div class="row mb-xl">
@@ -170,7 +174,13 @@
 			                		@if ($billing->confirm_message == '')
 			                		<div class="form-group">
 			                			<label for="">Confirm Message</label>
-										<textarea class="form-control" value="{{ $billing->confirm_message }}" rows="5" name="message"></textarea>
+			                			<?php 
+			                			if($billing->item_type == "listing")
+			                				$placeholder = "<Customer Name>, <Customer Rekening Number>, <Invoice ID>, <Transfer To BCA/Mandiri>, <Tgl Transfer (dd/mm/yyyy)>";
+			                			else
+			                				$placeholder = "<Customer Name>, <Customer Rekening Number>, <Invoice ID>, <Transfer To BCA/Mandiri>";
+			                			?>
+										<textarea class="form-control" value="{{ $billing->confirm_message }}" rows="5" name="message" placeholder="{{ $placeholder }}"></textarea>
 			                		</div>
 			                		@else
 			                		<div class="form-group">
